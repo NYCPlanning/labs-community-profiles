@@ -1,4 +1,8 @@
 .leaflet-container {
-  height: 500px;
+  height: calc(35vh);
   width: 100%;
+}
+
+.ui.selection.dropdown.visible, .ui.selection.dropdown.active {
+  z-index: 9999;
 }
