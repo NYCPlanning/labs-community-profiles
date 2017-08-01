@@ -12,7 +12,6 @@ const SQL = " \
   FROM support_admin_cdboundaries\
   ORDER BY boro, cd ASC\
 ";
-
 const ENDPOINT = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${SQL}&format=geojson`;
 
 export default Ember.Route.extend({ 

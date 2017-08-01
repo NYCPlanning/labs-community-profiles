@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {L} from 'ember-leaflet';
+import { L } from 'ember-leaflet';
 
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
