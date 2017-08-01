@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  lat: 45.519743,
-  lng: -122.680522,
+  lat: 40.7071266,
+  lng: -74,
   zoom: 10,
   actions: {
     handleClick(e) {
