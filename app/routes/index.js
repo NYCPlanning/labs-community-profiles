@@ -5,8 +5,8 @@ export default Ember.Route.extend({
     return this.modelFor('application');
   },
   actions: {
-    transitionToProfile(boro) {
-      this.transitionTo('profile', boro.boro, boro.borocd);
+    transitionToProfile(route) {
+      this.transitionTo('profile', route.boroname, route.borocd);
     }
   }
 });
