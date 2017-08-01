@@ -1,9 +1,11 @@
 <div class="ui container">
   {{#leaflet-map lat=40.7071266 lng=-74 zoom=10}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-    {{#each model.features as |feature|}}
-      {{geojson-layer geoJSON=feature onClick=(transition-to 'profile' (dasherize feature.properties.boroname) feature.properties.borocd)}}
-    {{/each}}
+    {{#geojson-layer geoJSON=model fillColor='orange' weight=1 onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
+      {{#tooltip-layer}}
+        <p>{{tooltip-text}}</p>
+      {{/tooltip-layer}}
+    {{/geojson-layer}}
   {{/leaflet-map}}
   {{outlet}}
 </div>
