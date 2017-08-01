@@ -6,6 +6,15 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 10,
   'tooltip-text': '',
+  style: Ember.computed('mapState.currentlySelected', function() {
+    return (geoJsonFeature) => {
+      if(geoJsonFeature.properties.borocd == this.get('mapState.currentlySelected')) {
+        return {
+          fillColor: 'purple'
+        }
+      }
+    }
+  }),
   actions: {
     handleClick(e) {
       const { boro, borocd } = e.layer.feature.properties;
