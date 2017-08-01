@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 const SQL = " \
   SELECT ST_Simplify(the_geom, 0.0005) AS the_geom, RIGHT(borocd::text, 2)::int as cd,\
     CASE\
@@ -16,11 +15,12 @@ const SQL = " \
 
 const ENDPOINT = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${SQL}&format=geojson`;
 
-export default Ember.Route.extend({
+export default Ember.Route.extend({ 
   model() {
     return fetch(ENDPOINT)
       .then(response => response.json());
   },
+
   actions: {
     transitionToProfile(boro) {
       this.transitionTo('profile', boro.boro, boro.borocd);

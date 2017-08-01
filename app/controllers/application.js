@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  mapState: Ember.inject.service(),
   lat: 40.7071266,
   lng: -74,
   zoom: 10,

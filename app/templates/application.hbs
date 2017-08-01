@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  {{#leaflet-map lat=lat lng=lng zoom=zoom}}
+  {{#leaflet-map bounds=mapState.bounds}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#geojson-layer geoJSON=model fillColor='orange' weight=1 onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
       {{#tooltip-layer}}
