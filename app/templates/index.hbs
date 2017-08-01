@@ -6,7 +6,7 @@ Search for District ID:
   <div class="menu">
     <div class="item" data-value="">All Items</div>
     {{#each model.features as |profile|}}
-      <div class="item" data-value="{{map-value mapper (hash borocd=profile.properties.borocd boro=(dasherize profile.properties.boroname))}}">{{profile.properties.borocd}}</div>
+      <div class="item" data-value="{{map-value mapper (hash boro=(dasherize profile.properties.boro) cd=profile.properties.cd)}}">{{profile.properties.boro}} {{profile.properties.cd}}</div>
     {{/each}}
   </div>
 {{/ui-dropdown}}
