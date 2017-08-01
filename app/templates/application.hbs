@@ -1,7 +1,11 @@
 <div class="ui container">
   {{#leaflet-map lat=40.7071266 lng=-74 zoom=10}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-    {{geojson-layer geoJSON=model fill='purple'}}
+    {{#geojson-layer geoJSON=model fillColor='orange' weight=1 onClick=(action "handleClick" cd) onMouseover=(action "handleMouseover")}}
+      {{#tooltip-layer}}
+        <p>{{tooltip-text}}</p>
+      {{/tooltip-layer}}
+    {{/geojson-layer}}
   {{/leaflet-map}}
   {{outlet}}
 </div>
