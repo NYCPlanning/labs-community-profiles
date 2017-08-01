@@ -18,6 +18,12 @@ const ENDPOINT = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${
 
 export default Ember.Route.extend({
   model() {
-    return $.getJSON(ENDPOINT);
+    return fetch(ENDPOINT)
+      .then(response => response.json());
+  },
+  actions: {
+    transitionToProfile(boro) {
+      this.transitionTo('profile', boro.boro, boro.borocd);
+    }
   }
 });
