@@ -6,8 +6,8 @@ export default Ember.Controller.extend({
   zoom: 10,
   actions: {
     handleClick(e) {
-      const { boro, cd } = e.layer.feature.properties;
-      this.get('target').transitionTo('profile', boro.dasherize(), cd);
+      const { boro, borocd } = e.layer.feature.properties;
+      this.transitionToRoute('profile', boro.dasherize(), borocd);
     },
 
     handleMouseover(e) {
