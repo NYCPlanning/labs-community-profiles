@@ -1,6 +1,19 @@
 import Ember from 'ember';
 
-const SQL = 'SELECT a.borocd AS borocd, b.boroname AS boroname, a.the_geom FROM ny_community_districts a INNER JOIN ny_boroughs b ON ST_Intersects(ST_Centroid(a.the_geom), b.the_geom)';
+const SQL = `
+  SELECT the_geom, RIGHT(borocd::text, 2)::int as cd,
+  	CASE
+    	WHEN LEFT(borocd::text, 1) = '1' THEN 'Manhattan'
+      WHEN LEFT(borocd::text, 1) = '2' THEN 'Bronx'
+      WHEN LEFT(borocd::text, 1) = '3' THEN 'Brooklyn'
+      WHEN LEFT(borocd::text, 1) = '4' THEN 'Queens'
+      WHEN LEFT(borocd::text, 1) = '5' THEN 'Staten Island'
+    END as boro,
+    borocd
+  FROM support_admin_cdboundaries
+  ORDER BY boro, cd ASC
+`;
+
 const ENDPOINT = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${SQL}&format=geojson`;
 
 export default Ember.Route.extend({
