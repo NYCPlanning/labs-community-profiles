@@ -22,7 +22,8 @@ export default Ember.Route.extend({
 
   actions: {
     transitionToProfile(boro) {
-      this.transitionTo('profile', boro.boro, boro.borocd);
+      this.get('controller').set('selected', boro);
+      this.transitionTo('profile', boro.value.dasherize(), boro.full);
     }
   }
 });
