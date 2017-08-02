@@ -29,15 +29,24 @@
   }}
     {{district.boro}} {{district.cd}}
   {{/power-select}}
-  {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
-    {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-    {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
-      {{#tooltip-layer}}
-        <p>{{tooltip-text}}</p>
-      {{/tooltip-layer}}
-    {{/geojson-layer}}
-  {{/leaflet-map}}
 
-  {{outlet}}
+<div class="grid-x">
+  {{#if mapState.currentlySelected}}
+    <div class="small-6 cell" id="general-statistics">
+    </div>
+  {{/if}}
+  <div class="auto cell">
+    {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
+      {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+      {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
+        {{#tooltip-layer}}
+          <p>{{tooltip-text}}</p>
+        {{/tooltip-layer}}
+      {{/geojson-layer}}
+    {{/leaflet-map}}
+  </div>
+</div>
+
+{{outlet}}
 
 </div>

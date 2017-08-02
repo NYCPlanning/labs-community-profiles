@@ -1,4 +1,12 @@
-<h1>{{model.boro}} Community District {{model.cd}}</h1>
+<h1>{{model.properties.boro}} Community District {{model.properties.cd}}</h1>
+
+{{#if mapState.currentlySelected}}
+  {{#ember-wormhole to="general-statistics"}}
+    All about {{model.properties.boro}}:<br/>
+    Crime: 0
+  {{/ember-wormhole}}
+{{/if}}
+
 {{land-use-map}}
 {{log model}}
 {{outlet}}
