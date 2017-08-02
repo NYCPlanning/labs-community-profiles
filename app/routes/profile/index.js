@@ -9,6 +9,7 @@ export default Ember.Route.extend({
     didTransition() {
       let { cd, boro, borocd } = this.controller.get('model.properties');
       let mapState = this.get('mapState');
+
       // seeing async issues - putting inside run loop to stagger
       Ember.run.next(this, () => {
         mapState.set('currentlySelected', { 

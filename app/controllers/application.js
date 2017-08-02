@@ -14,10 +14,12 @@ export default Ember.Controller.extend({
   options: Ember.computed('model.features.@each', function() {
     let features = this.get('model.features');
     return features.map(feature=> { 
+      let { cd, boro, borocd } = feature.properties;
       return { 
-        cd: `${feature.properties.boro} ${feature.properties.cd}`, 
-        boro: feature.properties.boro,
-        borocd: feature.properties.borocd,
+        cd,
+        boro,
+        borocd,
+        name: `${boro} ${cd}`,
       } 
     });
   }),
