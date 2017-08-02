@@ -7,11 +7,11 @@
       {{#power-select
         options=options
         selected=selected
-        searchField="name"
+        searchField="borocd"
         onchange=(route-action 'transitionToProfile')
         as |district|
       }}
-        {{district.name}}
+        {{district.boro}} {{district.cd}}
       {{/power-select}}
     </div>
   </div>
