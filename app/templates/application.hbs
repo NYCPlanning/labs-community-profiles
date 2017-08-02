@@ -29,7 +29,7 @@
   }}
     {{district.boro}} {{district.cd}}
   {{/power-select}}
-  {{#leaflet-map bounds=mapState.bounds}}
+  {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
       {{#tooltip-layer}}
