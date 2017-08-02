@@ -44,6 +44,7 @@
     "ember-source": "~2.14.0",
     "ember-transition-helper": "0.0.6",
     "ember-welcome-page": "^3.0.0",
+    "ember-wormhole": "^0.5.2",
     "foundation-sites": "^6.4.1",
     "leaflet": "^1.1.0",
     "loader.js": "^4.2.3"
