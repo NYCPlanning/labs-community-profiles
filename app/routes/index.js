@@ -11,5 +11,12 @@ export default Ember.Route.extend({
   afterModel(districts) {
     let mapState = this.get('mapState');
     mapState.set('bounds', L.geoJson(districts).getBounds());
+  },
+
+  actions: {
+    didTransition() {
+      let mapState = this.get('mapState');
+      mapState.set('currentlySelected', null);
+    }
   }
 });

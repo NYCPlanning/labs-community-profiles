@@ -11,7 +11,7 @@ export default Ember.Route.extend({
       let mapState = this.get('mapState');
 
       // seeing async issues - putting inside run loop to stagger
-      Ember.run.next(this, ()=> {
+      Ember.run.next(this, () => {
         mapState.set('currentlySelected', profile.properties.borocd);
       });
     }
