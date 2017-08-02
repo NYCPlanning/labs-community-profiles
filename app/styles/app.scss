@@ -1,7 +1,29 @@
-@import "settings";
+@charset 'UTF-8';
+
+//
+// Variables
+// --------------------------------------------------
+$dcp-orange: #d96b27;
+$a11y-orange: #ae561f;
+$dcp-yellow: #ffc861;
+$a11y-yellow: #ffeec1;
+
+//
+// Foundation
+// --------------------------------------------------
+@import 'settings';
 @import 'foundation-sites/foundation';
 @include foundation-everything;
 
+//
+// Modules
+// --------------------------------------------------
+@import 'modules/_m-labs-beta-notice';
+@import 'modules/_m-site-header';
+
+//
+// TODO: Consider moving everything to modules
+// --------------------------------------------------
 .leaflet-container {
   height: calc(50vh);
   width: 100%;

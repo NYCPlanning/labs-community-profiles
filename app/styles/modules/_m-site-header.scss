@@ -1,0 +1,49 @@
+// --------------------------------------------------
+// Module: Site Header
+// --------------------------------------------------
+
+$logo-height-small: rem-calc(24);
+$logo-height-medium: rem-calc(36);
+
+.site-header {
+
+  .branding {
+    padding-top: $global-margin;
+    padding-bottom: $global-margin;
+  }
+
+  .dcp-logo {
+    height: $logo-height-small;
+    float: left;
+    margin-right: $global-margin;
+
+    @include breakpoint(medium) {
+      height: $logo-height-medium;
+    }
+  }
+
+  .site-name {
+    font-size: $logo-height-small*0.8;
+    font-weight: $global-weight-bold;
+    line-height: 1.5;
+
+    @include breakpoint(medium) {
+      font-size: $logo-height-medium*0.8;
+    }
+  }
+
+  .menu {
+    a {
+      color: $dark-gray;
+      line-height: 1.5;
+      padding: (rem-calc(11)+$global-margin) rem-calc(20);
+      font-size:  rem-calc(14);
+      font-weight: $global-weight-bold;
+
+      &:hover {
+        background-color: $light-gray;
+        color: $black;
+      }
+    }
+  }
+}

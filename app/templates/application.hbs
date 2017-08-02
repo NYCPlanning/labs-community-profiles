@@ -1,10 +1,30 @@
-<div class="ui menu">
+<a class="show-on-focus" href="#main">Skip to main content</a>
+<a href="https://planninglabs.nyc/" class="labs-beta-notice">A beta project of NYC Planning Labs</a>
+<header role="banner" class="site-header">
+  <div class="grid-x grid-padding-x">
+    <div class="branding cell shrink large-auto">
+      <a class="dcp-link" href="http://www1.nyc.gov/site/planning/index.page"><img class="dcp-logo" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="NYC Planning"></a>
+      {{link-to 'Community Portal' 'index' classNames='site-name'}}
+    </div>
+    <div class="cell auto hide-for-large text-right">
+      <button class="responsive-nav-toggler" data-toggle="responsive-menu">Menu</button>
+    </div>
+    <div id="responsive-menu" class="cell large-shrink show-for-large" data-toggler=".show-for-large">
+      <nav role="navigation">
+        <ul class="menu">
+          <li><a href="https://github.com/NYCPlanning/labs-community-portal">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+{{!-- <div class="ui menu">
   <div class="item">
-    {{link-to 'Home' 'index'}}
   </div>
   <div class="right menu">
     <div class="item">
-{{!--       {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(route-action 'transitionToProfile') as |execute mapper|}}
+      {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(route-action 'transitionToProfile') as |execute mapper|}}
         <div class="default text">Districts</div>
         <i class="dropdown icon"></i>
         <div class="menu">
@@ -15,10 +35,11 @@
             </div>
           {{/each}}
         </div>
-      {{/ui-dropdown}} --}}
+      {{/ui-dropdown}}
     </div>
   </div>
-</div>
+</div> --}}
+
 {{#leaflet-map bounds=mapState.bounds}}
   {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
   {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
