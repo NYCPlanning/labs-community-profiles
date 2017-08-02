@@ -42,6 +42,10 @@ export default Ember.Controller.extend({
     handleMouseover(e) {
       const { boro, cd } = e.layer.feature.properties;
       this.set('tooltip-text', `${boro} ${cd}`)
+    },
+    handleMapLoad(e) {
+      let mapState = this.get('mapState');
+      mapState.set('mapInstance', e.target);
     }
   }
 });
