@@ -19,29 +19,16 @@
   </div>
 </header>
 
-{{!-- <div class="ui menu">
-  <div class="item">
-  </div>
-  <div class="right menu">
-    <div class="item">
-      {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(route-action 'transitionToProfile') as |execute mapper|}}
-        <div class="default text">Districts</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item" data-value="">All Items</div>
-          {{#each model.features as |profile|}}
-            <div class="item" data-value="{{map-value mapper (hash boro=(dasherize profile.properties.boro) borocd=profile.properties.borocd)}}">
-              {{profile.properties.boro}} {{profile.properties.cd}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-  </div>
-</div> --}}
-
 <div id="main">
-
+  {{#power-select
+    options=options
+    selected=selected
+    searchField="borocd"
+    onchange=(route-action 'transitionToProfile')
+    as |district|
+  }}
+    {{district.boro}} {{district.cd}}
+  {{/power-select}}
   {{#leaflet-map bounds=mapState.bounds}}
     {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
     {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}

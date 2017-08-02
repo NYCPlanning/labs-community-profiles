@@ -7,12 +7,15 @@ export default Ember.Route.extend({
   mapState: Ember.inject.service(),
   actions: {
     didTransition() {
-      let profile = this.controller.get('model');
+      let { cd, boro, borocd } = this.controller.get('model.properties');
       let mapState = this.get('mapState');
-
       // seeing async issues - putting inside run loop to stagger
       Ember.run.next(this, () => {
-        mapState.set('currentlySelected', profile.properties.borocd);
+        mapState.set('currentlySelected', { 
+          cd,
+          boro,
+          borocd,
+        });
       });
     }
   }
