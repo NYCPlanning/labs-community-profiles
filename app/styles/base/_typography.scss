@@ -1,0 +1,27 @@
+// --------------------------------------------------
+// Base: Typography
+// --------------------------------------------------
+
+//
+// Headings
+// --------------------------------------------------
+.header-xxlarge { @extend h1; }
+.header-xlarge {  @extend h2; }
+.header-large {   @extend h3; }
+.header-medium {  @extend h4; }
+.header-small {   @extend h5; }
+.header-tiny {    @extend h6; }
+
+h6,
+.header-tiny {
+  text-transform: uppercase;
+  font-weight: $global-weight-normal;
+  margin-bottom: 0.5em;
+}
+
+//
+// Typograhpy helper classes
+// --------------------------------------------------
+.nowrap {
+  white-space: nowrap;
+}

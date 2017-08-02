@@ -16,19 +16,17 @@ $a11y-yellow: #ffeec1;
 @include foundation-everything;
 
 //
+// Base
+// --------------------------------------------------
+@import 'base/_typography';
+
+//
+// Layouts
+// --------------------------------------------------
+@import 'layouts/_l-default';
+
+//
 // Modules
 // --------------------------------------------------
 @import 'modules/_m-labs-beta-notice';
 @import 'modules/_m-site-header';
-
-//
-// TODO: Consider moving everything to modules
-// --------------------------------------------------
-.leaflet-container {
-  height: calc(50vh);
-  width: 100%;
-}
-
-.ui.selection.dropdown.visible, .ui.selection.dropdown.active {
-  z-index: 9999;
-}

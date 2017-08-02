@@ -1,0 +1,23 @@
+// --------------------------------------------------
+// Layout default
+// --------------------------------------------------
+
+#main {
+}
+
+.section-padded {
+  padding: $global-margin 0;
+
+  @include breakpoint(large) {
+    padding: $global-margin*2 0;
+  }
+}
+
+.leaflet-container {
+  height: calc(50vh);
+  width: 100%;
+}
+
+.ui.selection.dropdown.visible, .ui.selection.dropdown.active {
+  z-index: 9999;
+}
