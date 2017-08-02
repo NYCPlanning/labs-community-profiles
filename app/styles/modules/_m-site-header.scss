@@ -46,4 +46,19 @@ $logo-height-medium: rem-calc(36);
       }
     }
   }
+
+  .responsive-nav-toggler {
+    color: $dark-gray;
+    background-color: $light-gray;
+    font-size:  rem-calc(14);
+    font-weight: $global-weight-bold;
+    line-height: $logo-height-small;
+    cursor: pointer;
+    margin: $global-margin/2 0;
+    padding: rem-calc(10) rem-calc(16);
+
+    @include breakpoint(medium) {
+      margin: $global-margin 0;
+    }
+  }
 }
