@@ -1,3 +1,7 @@
+@import "settings";
+@import 'foundation-sites/foundation';
+@include foundation-everything;
+
 .leaflet-container {
   height: calc(50vh);
   width: 100%;
