@@ -1,4 +1,4 @@
-const nabes_crosswalk = {
+const nabesCrosswalk = {
   101: [
     'Battery Park City',
     'Civic Center',
@@ -50,12 +50,12 @@ const nabes_crosswalk = {
     'Sutton Place',
     'Tudor City',
     'Turtle Bay',
-    ],
+  ],
   107: [
     'Lincoln Square',
     'Manhattan Valley',
     'Upper West Side',
-    ],
+  ],
   108: [
     'Carnegie Hill',
     'Lenox Hill',
@@ -70,17 +70,17 @@ const nabes_crosswalk = {
     'West Harlem',
   ],
   110: [
-    'Central Harlem'
+    'Central Harlem',
   ],
   111: [
     'East Harlem',
     'Harlem',
     'Randall&apos;s Island Park',
     'Wards Island Park',
-    ],
+  ],
   112: [
     'Inwood',
-    ' Washington Heights,'
+    ' Washington Heights',
   ],
   201: [
     'Melrose',
@@ -213,10 +213,14 @@ const nabes_crosswalk = {
     'Gowanus',
     'Park Slope',
     'Red Hook',
-    ],
+  ],
+  307: [
+    'Sunset Park',
+    'Windsor Terrace',
+  ],
   XXX: [
 
   ],
-}
+};
 
-export default nabes_crosswalk
+export default nabesCrosswalk;
