@@ -30,17 +30,9 @@ $a11y-yellow: #ffeec1;
 // --------------------------------------------------
 @import 'modules/_m-labs-beta-notice';
 @import 'modules/_m-site-header';
+@import 'modules/_m-ember-power-select';
 
-.ember-power-select-trigger {
-  width: 150px;
-}
-
+//
+// Land Use Map TODO: Move to Sass module
+// --------------------------------------------------
 @import 'land-use-map';
-
-// see http://www.ember-power-select.com/docs/styles for guidance on overriding
-
-// $ember-power-select-border-color: #64A5ED;
-// $ember-power-select-border-radius: 0;
-
-@import "ember-power-select";
-
