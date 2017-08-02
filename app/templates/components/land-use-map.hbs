@@ -1,0 +1,8 @@
+{{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false classNames='land-use-map'}}
+  {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+  {{#if mapState.landUseTemplate}}
+    {{tile-layer url=mapState.landUseTemplate}}
+  {{/if}}
+  {{geojson-layer geoJSON=mapState.geom style=geomStyle}}
+{{/leaflet-map}}
+{{yield}}
