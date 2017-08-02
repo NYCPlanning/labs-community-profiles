@@ -8,7 +8,7 @@ const buildTemplate = (layergroupid) => {
 const carto = {
   getTileTemplate() {
     const SQL = `
-      SELECT a.*, b.description as landuse_desc
+      SELECT a.the_geom_webmercator, b.description as landuse_desc
       FROM support_mappluto a
       LEFT JOIN support_landuse_lookup b
       ON a.landuse::integer = b.code
