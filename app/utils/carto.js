@@ -6,6 +6,19 @@ const buildTemplate = (layergroupid) => {
 }
 
 const carto = {
+  SQL(query) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'GET',
+        url: `https://${carto_domain}/user/${carto_user}/api/v2/sql?q=${query}&format=json`,
+        success(d) {
+          resolve(d.rows);
+        },
+      })
+        .fail(() => reject());
+    });
+  },
+
   getTileTemplate() {
     const SQL = `
       SELECT a.the_geom_webmercator, b.description as landuse_desc
