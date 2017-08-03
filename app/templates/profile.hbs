@@ -34,11 +34,18 @@
       </section>
 
       <section class="callout">
-        {{land-use-map}}
-        {{log model}}
-        {{outlet}}
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+              {{land-use-map}}
+            </div>
+            <div class="cell medium-6">
+              {{land-use-chart borocd=model.properties.borocd}}
+            </div>
+          </div>
+        </div>
       </section>
-
+      {{outlet}}
     </div>
   </div>
 </div>

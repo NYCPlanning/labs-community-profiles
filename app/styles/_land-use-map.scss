@@ -1,4 +1,9 @@
 .leaflet-container.land-use-map {
-  height: 300px;
-  width: 50%;
+  height: 400px;
+  width: 100%;
+}
+
+.chart>.label {
+  font-size: 11px;
+  fill: #575555
 }
