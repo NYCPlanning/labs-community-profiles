@@ -19,6 +19,7 @@
   </div>
 </header>
 
+
 <div id="main" class="grid-x">
   <div class="cell large-4"  id="cd-chooser">
     {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
@@ -38,7 +39,7 @@
         onchange=(route-action 'transitionToProfile')
         as |district|
       }}
-        {{district.boro}} {{district.cd}}
+        {{district.boro}} {{district.cd}} - {{district.neighborhoods}}
       {{/power-select}}
     </div>
   </div>

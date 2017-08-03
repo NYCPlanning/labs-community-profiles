@@ -14,13 +14,19 @@ export default Ember.Controller.extend({
   options: Ember.computed('model.features.@each', function() {
     let features = this.get('model.features');
     return features.map(feature=> { 
-      let { cd, boro, borocd } = feature.properties;
+      let { cd, boro, borocd, neighborhoods } = feature.properties;
+
+      if (neighborhoods) {
+        neighborhoods = neighborhoods.join(',  ');
+      }
+
       return { 
         cd,
         boro,
         borocd,
-        name: `${boro} ${cd}`,
-      } 
+        neighborhoods,
+        name: `${boro} ${cd} - ${neighborhoods}`,
+      };
     });
   }),
 
