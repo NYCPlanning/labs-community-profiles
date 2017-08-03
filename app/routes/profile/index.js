@@ -7,8 +7,12 @@ export default Ember.Route.extend({
   mapState: Ember.inject.service(),
   actions: {
     didTransition() {
-      let { cd, boro, borocd } = this.controller.get('model.properties');
+      let { cd, boro, borocd, neighborhoods } = this.controller.get('model.properties');
       let mapState = this.get('mapState');
+
+      if (neighborhoods) {
+        neighborhoods = neighborhoods.join(',  ');
+      }
 
       // reset Ember's internals on route change
       Ember.run.next(this, () => {
@@ -24,6 +28,7 @@ export default Ember.Route.extend({
           cd,
           boro,
           borocd,
+          neighborhoods,
         });
       });
     }
