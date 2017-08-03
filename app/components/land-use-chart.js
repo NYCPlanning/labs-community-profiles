@@ -74,28 +74,40 @@ const LandUseChart = Ember.Component.extend({
 
     const x = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.percent)])
-      .range([0, width / 2]);
+      .range([0, width]);
 
 
     svg.selectAll('.bar')
       .data(data)
       .enter().append('rect')
       .attr('class', 'bar')
-      .attr('x', width / 2)
+      .attr('x', 0)
       .attr('fill', d => landUseColors(d.landuse))
-      .attr('height', y.bandwidth())
+      .attr('height', y.bandwidth() - 12)
       .attr('y', d => y(d.landuse_desc))
-      .attr('width', d => x(d.percent));
+      .attr('width', d => x(d.percent))
+      .attr('rx', 2)
+      .attr('ry', 2);
 
     svg.selectAll('text')
       .data(data)
       .enter().append('text')
       .attr('class', 'label')
-      .attr('text-anchor', 'end')
-      .attr('alignment-baseline', 'middle')
-      .attr('x', (width / 2) - 8)
-      .attr('y', d => y(d.landuse_desc) + (y.bandwidth() / 2))
-      .text(d => d.landuse_desc);
+      .attr('text-anchor', 'left')
+      .attr('alignment-baseline', 'top')
+      .attr('x', 0)
+      .attr('y', d => y(d.landuse_desc) + 28)
+      .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+    // svg.selectAll('.percent')
+    //   .data(data)
+    //   .enter().append('text')
+    //   .attr('class', 'label percent')
+    //   .attr('text-anchor', 'left')
+    //   .attr('alignment-baseline', 'middle')
+    //   .attr('x', d => x(d.percent) + (width / 2) + 8)
+    //   .attr('y', d => y(d.landuse_desc) + (y.bandwidth() / 2))
+    //   .text(d => `${(d.percent * 100).toFixed(2)} %`);
   },
 });
 
