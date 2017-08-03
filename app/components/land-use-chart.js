@@ -2,36 +2,44 @@ import Ember from 'ember'; // eslint-disable-line
 import carto from '../utils/carto';
 import landUseColors from '../utils/landUseColors';
 
-const SQL = `
-  WITH lots AS (
-    SELECT a.the_geom, c.description as landuse_desc, c.code as landuse
-    FROM support_mappluto a
-    INNER JOIN support_landuse_lookup c
-          ON a.landuse::integer = c.code
-    INNER JOIN support_admin_cdboundaries b
-    ON ST_Contains(b.the_geom, a.the_geom)
-
-    AND b.borocd = '101'
-  ),
-  totalsm AS (
-    SELECT sum(ST_Area(the_geom::geography)) as total
-    FROM lots
-  )
-
-  SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
-  FROM lots, totalsm
-  GROUP BY landuse, landuse_desc, totalsm.total
-  ORDER BY percent DESC
-`;
-
 const LandUseChart = Ember.Component.extend({
   didInsertElement: function didInsertElement() {
     this.getData();
   },
 
+  borocd: '101',
+  sql: Ember.computed('borocd', function() {
+    let borocd = this.get('borocd');
+    let SQL = `
+      WITH lots AS (
+        SELECT a.the_geom, c.description as landuse_desc, c.code as landuse
+        FROM support_mappluto a
+        INNER JOIN support_landuse_lookup c
+              ON a.landuse::integer = c.code
+        INNER JOIN support_admin_cdboundaries b
+        ON ST_Contains(b.the_geom, a.the_geom)
+
+        AND b.borocd = '${borocd}'
+      ),
+      totalsm AS (
+        SELECT sum(ST_Area(the_geom::geography)) as total
+        FROM lots
+      )
+
+      SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
+      FROM lots, totalsm
+      GROUP BY landuse, landuse_desc, totalsm.total
+      ORDER BY percent DESC
+    `;
+
+    return SQL;
+  }),
+
   getData: function getData() {
     const self = this;
-    carto.SQL(SQL)
+    const sql = this.get('sql');
+
+    carto.SQL(sql)
       .then((data) => {
         console.log(data)
         self.set('data', data);
@@ -62,13 +70,15 @@ const LandUseChart = Ember.Component.extend({
 
     const y = d3.scaleBand()
       .domain(data.map(d => d.landuse_desc))
-      .range([height, 0])
+      .range([0, height])
       .paddingOuter(0.5)
       .paddingInner(0.2);
 
+    console.log('max',d3.max(data, d => d.percent));
+
     const x = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.percent)])
-      .range([width - 40, 40]);
+      .range([40, width - 40]);
 
 
     svg.selectAll('.bar')
