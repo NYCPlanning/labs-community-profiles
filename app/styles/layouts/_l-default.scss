@@ -45,7 +45,10 @@
 
 // #page-content is everything in main not in #cd-chooser
 #page-content {
+  padding-top: $global-margin;
+
   @include breakpoint(large) {
+    padding-top: $global-margin/2;
     overflow: auto
   }
 }
