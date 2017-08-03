@@ -2,25 +2,30 @@
 // Layout default
 // --------------------------------------------------
 
+//
+// Basic page layout
+// --------------------------------------------------
+
+// #main wraps everything except the header
 #main {
-}
-
-.section-padded {
-  padding: $global-margin 0;
-
   @include breakpoint(large) {
-    padding: $global-margin*2 0;
+    height: calc(100vh - 97px);
   }
 }
 
-.leaflet-container {
-  height: calc(50vh);
-  width: 100%;
-  z-index: 1;
-}
-
+// #cd-chooser contains the map and search
 #cd-chooser {
   position: relative;
+
+  .leaflet-container {
+    height: calc(50vh);
+    width: 100%;
+    z-index: 1;
+
+    @include breakpoint(large) {
+      height: 100%;
+    }
+  }
 }
 
 #cd-search {
@@ -30,14 +35,20 @@
   right: $global-margin;
   bottom: $global-margin*2;
   left: $global-margin;
+
+  @include breakpoint(large) {
+    top: $global-margin;
+    bottom: auto;
+    left: rem-calc(60);
+  }
 }
 
-#general-statistics {
-  padding: 1em;
+// #page-content is everything in main not in #cd-chooser
+#page-content {
+  padding-top: $global-margin;
+
+  @include breakpoint(large) {
+    padding-top: $global-margin/2;
+    overflow: auto
+  }
 }
-
-.ui.selection.dropdown.visible, .ui.selection.dropdown.active {
-  z-index: 9999;
-}
-
-
