@@ -1,10 +1,15 @@
 import Ember from 'ember'; // eslint-disable-line
+import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
+
 import carto from '../utils/carto';
 import landUseColors from '../utils/landUseColors';
 
-const LandUseChart = Ember.Component.extend({
-  didInsertElement: function didInsertElement() {
-    this.getData();
+const LandUseChart = Ember.Component.extend(ResizeAware, {
+  resizeWidthSensitive: true,
+  resizeHeightSensitive: true,
+
+  debouncedDidResize() {
+    this.createChart();
   },
 
   borocd: '',
@@ -42,8 +47,17 @@ const LandUseChart = Ember.Component.extend({
     carto.SQL(sql)
       .then((data) => {
         self.set('data', data);
-        self.createChart();
+        const svg = self.get('svg');
+        if (svg) {
+          self.updateChart();
+        } else {
+          self.createChart();
+        }
       });
+  },
+
+  didReceiveAttrs: function didReceiveAttrs() {
+    this.getData();
   },
 
   createChart: function createChart() {
@@ -59,12 +73,29 @@ const LandUseChart = Ember.Component.extend({
     const height = 400 - margin.top - margin.bottom;
     const width = elWidth - margin.left - margin.right;
 
-    const data = this.get('data');
+    let svg = this.get('svg');
 
-    const svg = d3.select(el.get(0)).append('svg')
-      .attr('class', 'chart')
+    if (!svg) {
+      svg = d3.select(el.get(0)).append('svg')
+        .attr('class', 'chart');
+    }
+
+    svg
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
+
+    this.set('svg', svg);
+    this.set('height', height);
+    this.set('width', width);
+
+    this.updateChart();
+  },
+
+  updateChart: function updateChart() {
+    const svg = this.get('svg');
+    const height = this.get('height');
+    const width = this.get('width');
+    const data = this.get('data');
 
     const y = d3.scaleBand()
       .domain(data.map(d => d.landuse_desc))
@@ -77,21 +108,29 @@ const LandUseChart = Ember.Component.extend({
       .range([0, width]);
 
 
-    svg.selectAll('.bar')
-      .data(data)
-      .enter().append('rect')
-      .attr('class', 'bar')
-      .attr('x', 0)
-      .attr('fill', d => landUseColors(d.landuse))
-      .attr('height', y.bandwidth() - 12)
-      .attr('y', d => y(d.landuse_desc))
-      .attr('width', d => x(d.percent))
-      .attr('rx', 2)
-      .attr('ry', 2);
+    const bars = svg.selectAll('.bar')
+      .data(data, d => d.landuse);
 
-    svg.selectAll('text')
-      .data(data)
-      .enter().append('text')
+    bars.enter()
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('fill', d => landUseColors(d.landuse))
+      .attr('x', 0)
+      .attr('height', y.bandwidth() - 12)
+      .attr('rx', 2)
+      .attr('ry', 2)
+      .attr('y', d => y(d.landuse_desc))
+      .attr('width', d => x(d.percent));
+
+
+    bars.transition().duration(300)
+      .attr('y', d => y(d.landuse_desc))
+      .attr('width', d => x(d.percent));
+
+    const labels = svg.selectAll('text')
+      .data(data, d => d.landuse);
+
+    labels.enter().append('text')
       .attr('class', 'label')
       .attr('text-anchor', 'left')
       .attr('alignment-baseline', 'top')
@@ -99,15 +138,9 @@ const LandUseChart = Ember.Component.extend({
       .attr('y', d => y(d.landuse_desc) + 28)
       .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
 
-    // svg.selectAll('.percent')
-    //   .data(data)
-    //   .enter().append('text')
-    //   .attr('class', 'label percent')
-    //   .attr('text-anchor', 'left')
-    //   .attr('alignment-baseline', 'middle')
-    //   .attr('x', d => x(d.percent) + (width / 2) + 8)
-    //   .attr('y', d => y(d.landuse_desc) + (y.bandwidth() / 2))
-    //   .text(d => `${(d.percent * 100).toFixed(2)} %`);
+    labels.transition().duration(300)
+      .attr('y', d => y(d.landuse_desc) + 28)
+      .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
   },
 });
 
