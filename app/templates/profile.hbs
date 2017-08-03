@@ -6,9 +6,11 @@
         <span class="boro">{{model.properties.boro}}</span>
         Community District {{model.properties.cd}}
       </h1>
+      <h3>
+        Top 3 needs:
+      </h3>
       <p>
-        All about {{model.properties.boro}}:<br/>
-        Crime: 0
+        {{model.properties.dataprofile.son_issue_1}}, {{model.properties.dataprofile.son_issue_2}}, {{model.properties.dataprofile.son_issue_3}}
       </p>
 
       <section class="callout">

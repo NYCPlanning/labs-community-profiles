@@ -16,7 +16,8 @@ export default Ember.Route.extend({
     return fetch(endpoint)
       .then(response => response.json())
       .then((json) => {
-        selectedDistrict.properties.dataprofile = json.rows[0];
+        const dataprofile = Ember.get(json, 'rows')[0];
+        Ember.set(selectedDistrict, 'properties.dataprofile', dataprofile);
         return selectedDistrict;
       });
   },
