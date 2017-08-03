@@ -1,6 +1,7 @@
+{{#initialize-foundation}}
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="cell">
+    <div class="cell" data-sticky-container>
 
       <h1 class="district-header">
         <span class="boro">{{model.properties.boro}}</span>
@@ -11,24 +12,47 @@
         Crime: 0
       </p>
 
-      <section class="callout">
-        <div class="grid-container">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+      <div class="sticky" data-sticky data-sticky-on="large" data-anchor="page-content">
+        <ul class="menu section-menu" data-magellan>
+          <li><a href="#first">First Arrival</a></li>
+          <li><a href="#second">Second Arrival</a></li>
+          <li><a href="#third">Third Arrival</a></li>
+        </ul>
+      </div>
+
+      <section id="first" data-magellan-target="first">
+        <h2 class="header-large">Section header</h2>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+            </div>
+          </div>
+        </div>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="callout">
-        <div class="grid-container">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+      <section id="second" data-magellan-target="second">
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -42,3 +66,4 @@
     </div>
   </div>
 </div>
+{{/initialize-foundation}}
