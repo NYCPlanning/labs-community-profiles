@@ -1,9 +1,10 @@
 import Ember from 'ember'; // eslint-disable-line
 import carto from '../utils/carto';
+import landUseColors from '../utils/landUseColors';
 
 const SQL = `
   WITH lots AS (
-    SELECT a.the_geom, c.description as landuse
+    SELECT a.the_geom, c.description as landuse_desc, c.code as landuse
     FROM support_mappluto a
     INNER JOIN support_landuse_lookup c
           ON a.landuse::integer = c.code
@@ -17,16 +18,14 @@ const SQL = `
     FROM lots
   )
 
-  SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse
+  SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
   FROM lots, totalsm
-  GROUP BY landuse, totalsm.total
+  GROUP BY landuse, landuse_desc, totalsm.total
   ORDER BY percent DESC
 `;
 
 const LandUseChart = Ember.Component.extend({
   didInsertElement: function didInsertElement() {
-    console.log('didInsertElement');
-    console.log(this);
     this.getData();
   },
 
@@ -34,7 +33,7 @@ const LandUseChart = Ember.Component.extend({
     const self = this;
     carto.SQL(SQL)
       .then((data) => {
-        console.log(data);
+        console.log(data)
         self.set('data', data);
         self.createChart();
       });
@@ -55,52 +54,43 @@ const LandUseChart = Ember.Component.extend({
     const data = this.get('data');
 
     const svg = d3.select(el).append('svg')
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .attr('style', 'background:#d8d8d8;')
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr('class', 'chart')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const y = d3.scaleBand()
-      .domain(data.map(d => d.landuse))
+      .domain(data.map(d => d.landuse_desc))
       .range([height, 0])
       .paddingOuter(0.5)
       .paddingInner(0.2);
 
     const x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.percent)])
-        .range([width - 40, 40]);
+      .domain([0, d3.max(data, d => d.percent)])
+      .range([width - 40, 40]);
 
 
+    svg.selectAll('.bar')
+      .data(data)
+      .enter().append('rect')
+      .attr('class', 'bar')
+      .attr('x', 0)
+      .attr('fill', d => landUseColors(d.landuse))
+      .attr('height', y.bandwidth())
+      .attr('y', d => y(d.landuse_desc))
+      .attr('width', d => x(d.percent));
 
-
-    const yAxis = d3.axisLeft(y);
-
-    svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-  .append("text")
-    .attr("class", "label")
-    .attr("transform", "translate(" + width + ",0)")
-    .attr("y", -5)
-    .style("text-anchor", "end")
-    .text("Frequency");
-
-svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-
-svg.selectAll(".bar")
-    .data(data)
-  .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", 0)
-    .attr("height", y.bandwidth())
-    .attr("y", function(d) { return y(d.landuse); })
-    .attr("width", function(d) { return x(d.percent); });
-    //this.set('chartSVG', svg);
+    svg.selectAll('text')
+      .data(data)
+      .enter().append('text')
+      .attr('class', 'label')
+      .attr('text-anchor', 'end')
+      .attr('alignment-baseline', 'middle')
+      .attr('x', -8)
+      .attr('y', d => y(d.landuse_desc) + (y.bandwidth() / 2))
+      .text(d => d.landuse_desc);
   },
-
 });
 
 export default LandUseChart;
