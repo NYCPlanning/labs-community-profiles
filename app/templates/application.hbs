@@ -19,10 +19,10 @@
   </div>
 </header>
 
-<div id="main">
 
-  <div id="cd-chooser">
-    {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
+<div id="main" class="grid-x">
+  <div class="cell large-4"  id="cd-chooser">
+    {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
       {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
       {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
         {{#tooltip-layer}}
@@ -39,11 +39,11 @@
         onchange=(route-action 'transitionToProfile')
         as |district|
       }}
-        {{district.boro}} {{district.cd}}
+        {{district.boro}} {{district.cd}} - {{district.neighborhoods}}
       {{/power-select}}
     </div>
   </div>
-
-  {{outlet}}
-
+  <div class="cell large-auto" id="page-content">
+    {{outlet}}
+  </div>
 </div>

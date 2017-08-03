@@ -16,7 +16,15 @@ export default Ember.Route.extend({
   actions: {
     didTransition() {
       let mapState = this.get('mapState');
+      let mapInstance = mapState.get('mapInstance');
+
       mapState.set('currentlySelected', null);
+
+      Ember.run.next(this, () => {
+        if(mapInstance) {
+          mapInstance.invalidateSize();
+        }
+      });
     }
   }
 });

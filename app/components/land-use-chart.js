@@ -7,10 +7,10 @@ const LandUseChart = Ember.Component.extend({
     this.getData();
   },
 
-  borocd: '101',
-  sql: Ember.computed('borocd', function() {
-    let borocd = this.get('borocd');
-    let SQL = `
+  borocd: '',
+  sql: Ember.computed('borocd', function sql() {
+    const borocd = this.get('borocd');
+    const SQL = `
       WITH lots AS (
         SELECT a.the_geom, c.description as landuse_desc, c.code as landuse
         FROM support_mappluto a
@@ -41,51 +41,47 @@ const LandUseChart = Ember.Component.extend({
 
     carto.SQL(sql)
       .then((data) => {
-        console.log(data)
         self.set('data', data);
         self.createChart();
       });
   },
 
   createChart: function createChart() {
-    const el = this.element;
+    const el = this.$();
+    const elWidth = el.width();
 
     const margin = {
-      top: 20,
-      right: 20,
-      bottom: 30,
-      left: 200,
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
     };
     const height = 400 - margin.top - margin.bottom;
-    const width = 400 - margin.left - margin.right;
+    const width = elWidth - margin.left - margin.right;
 
     const data = this.get('data');
 
-    const svg = d3.select(el).append('svg')
+    const svg = d3.select(el.get(0)).append('svg')
       .attr('class', 'chart')
       .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
+      .attr('height', height + margin.top + margin.bottom);
 
     const y = d3.scaleBand()
       .domain(data.map(d => d.landuse_desc))
       .range([0, height])
-      .paddingOuter(0.5)
+      .paddingOuter(0)
       .paddingInner(0.2);
-
-    console.log('max',d3.max(data, d => d.percent));
 
     const x = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.percent)])
-      .range([40, width - 40]);
+      .range([0, width / 2]);
 
 
     svg.selectAll('.bar')
       .data(data)
       .enter().append('rect')
       .attr('class', 'bar')
-      .attr('x', 0)
+      .attr('x', width / 2)
       .attr('fill', d => landUseColors(d.landuse))
       .attr('height', y.bandwidth())
       .attr('y', d => y(d.landuse_desc))
@@ -97,7 +93,7 @@ const LandUseChart = Ember.Component.extend({
       .attr('class', 'label')
       .attr('text-anchor', 'end')
       .attr('alignment-baseline', 'middle')
-      .attr('x', -8)
+      .attr('x', (width / 2) - 8)
       .attr('y', d => y(d.landuse_desc) + (y.bandwidth() / 2))
       .text(d => d.landuse_desc);
   },

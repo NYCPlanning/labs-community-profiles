@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
+
 const SQL = " \
   SELECT ST_Simplify(the_geom, 0.0005) AS the_geom, RIGHT(borocd::text, 2)::int as cd,\
     CASE\
@@ -14,10 +16,20 @@ const SQL = " \
 ";
 const ENDPOINT = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${SQL}&format=geojson`;
 
-export default Ember.Route.extend({ 
+export default Ember.Route.extend({
   model() {
     return fetch(ENDPOINT)
-      .then(response => response.json());
+      .then(response => response.json())
+      .then((geojson) => {
+        return { 
+          type: geojson.type,
+          features: geojson.features.map((feature) => {
+            let borocd = feature.properties.borocd;
+            feature.properties.neighborhoods = neighborhoodsCrosswalk[borocd];
+            return feature;
+          }),
+        };
+      });
   },
 
   actions: {
