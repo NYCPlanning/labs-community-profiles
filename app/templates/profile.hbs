@@ -7,11 +7,15 @@
         Community District {{model.properties.cd}}
       </h1>
       <h3>
-        Top 3 needs:
+        Needs:
       </h3>
-      <p>
-        {{model.properties.dataprofile.son_issue_1}}, {{model.properties.dataprofile.son_issue_2}}, {{model.properties.dataprofile.son_issue_3}}
-      </p>
+      <ul>
+        <li>{{model.properties.dataprofile.son_issue_1}}</li>  
+        <li>{{model.properties.dataprofile.son_issue_2}}</li>
+        <li>{{model.properties.dataprofile.son_issue_3}}</li>
+      </ul>
+
+      <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
 
       <section class="callout">
         <div class="grid-container">
