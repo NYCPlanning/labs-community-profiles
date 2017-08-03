@@ -2,30 +2,30 @@
 // Layout default
 // --------------------------------------------------
 
+//
+// Basic page layout
+// --------------------------------------------------
+
+// #main wraps everything except the header
 #main {
   @include breakpoint(large) {
     height: calc(100vh - 97px);
   }
 }
 
-#page-content {
-  @include breakpoint(large) {
-    overflow: auto
-  }
-}
-
-.leaflet-container {
-  height: calc(50vh);
-  width: 100%;
-  z-index: 1;
-
-  @include breakpoint(large) {
-    height: 100%;
-  }
-}
-
+// #cd-chooser contains the map and search
 #cd-chooser {
   position: relative;
+
+  .leaflet-container {
+    height: calc(50vh);
+    width: 100%;
+    z-index: 1;
+
+    @include breakpoint(large) {
+      height: 100%;
+    }
+  }
 }
 
 #cd-search {
@@ -43,10 +43,9 @@
   }
 }
 
-#general-statistics {
-  padding: 1em;
-}
-
-.ui.selection.dropdown.visible, .ui.selection.dropdown.active {
-  z-index: 9999;
+// #page-content is everything in main not in #cd-chooser
+#page-content {
+  @include breakpoint(large) {
+    overflow: auto
+  }
 }
