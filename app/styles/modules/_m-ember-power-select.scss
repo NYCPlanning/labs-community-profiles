@@ -20,6 +20,7 @@ $ember-power-select-number-of-visible-options: 9;
   width: 100%;
   max-width: $global-width - $global-margin*2;
   margin: 0 auto;
+  padding-right: rem-calc(28);
 }
 
 .ember-power-select-option {
@@ -44,4 +45,9 @@ $ember-power-select-number-of-visible-options: 9;
   .neighborhoods {
     display: none;
   }
+}
+
+.ember-power-select-status-icon {
+  border-width: 10px 7px 0 7px;
+  right: 8px;
 }
