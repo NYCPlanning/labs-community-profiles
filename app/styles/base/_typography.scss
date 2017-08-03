@@ -19,6 +19,15 @@ h6,
   margin-bottom: 0.5em;
 }
 
+.district-header {
+  .boro {
+    display: block;
+    font-weight: $global-weight-normal;
+    font-size: 0.75em;
+    line-height: 1;
+  }
+}
+
 //
 // Typograhpy helper classes
 // --------------------------------------------------
