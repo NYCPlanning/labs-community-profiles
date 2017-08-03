@@ -1,5 +1,3 @@
-<h1>{{model.properties.boro}} Community District {{model.properties.cd}}</h1>
-
 {{#if mapState.currentlySelected}}
   {{#ember-wormhole to="general-statistics"}}
     All about {{model.properties.boro}}:<br/>
@@ -7,6 +5,13 @@
   {{/ember-wormhole}}
 {{/if}}
 
-{{land-use-map}}
-{{log model}}
-{{outlet}}
+<div class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div class="cell section-padded">
+      <h1>{{model.boro}} Community District {{model.cd}}</h1>
+      {{land-use-map}}
+      {{log model}}
+      {{outlet}}
+    </div>
+  </div>
+</div>
