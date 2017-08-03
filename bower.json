@@ -1,6 +1,4 @@
 {
   "name": "labs-community-portal",
-  "dependencies": {
-    "semantic-ui": "^2.2.11"
-  }
+  "dependencies": {}
 }

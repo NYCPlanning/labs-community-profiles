@@ -1,0 +1,23 @@
+// --------------------------------------------------
+// Module: Ember Power Select
+// --------------------------------------------------
+
+// see http://www.ember-power-select.com/docs/styles for guidance on overriding
+
+$ember-power-select-background-color: $white;
+$ember-power-select-highlighted-background: $primary-color;
+$ember-power-select-selected-background: $dark-gray;
+$ember-power-select-border-color: $medium-gray;
+$ember-power-select-line-height: 1.5;
+$ember-power-select-option-padding: $global-margin;
+$ember-power-select-trigger-icon-color: $primary-color;
+$ember-power-select-number-of-visible-options: 9;
+
+@import '../ember-power-select';
+
+.ember-power-select-trigger {
+  font-size: 1.5rem;
+  width: 100%;
+  max-width: $global-width - $global-margin*2;
+  margin: 0 auto;
+}

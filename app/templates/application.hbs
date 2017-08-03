@@ -1,30 +1,49 @@
-<div class="ui menu">
-  <div class="item">
-    {{link-to 'Home' 'index'}}
-  </div>
-  <div class="right menu">
-    <div class="item">
-      {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(route-action 'transitionToProfile') as |execute mapper|}}
-        <div class="default text">Districts</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          <div class="item" data-value="">All Items</div>
-          {{#each model.features as |profile|}}
-            <div class="item" data-value="{{map-value mapper (hash boro=(dasherize profile.properties.boro) borocd=profile.properties.borocd)}}">
-              {{profile.properties.boro}} {{profile.properties.cd}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
+<a class="show-on-focus" href="#main">Skip to main content</a>
+<a href="https://planninglabs.nyc/" class="labs-beta-notice">A beta project of NYC Planning Labs</a>
+<header role="banner" class="site-header">
+  <div class="grid-x grid-padding-x">
+    <div class="branding cell shrink large-auto">
+      <a class="dcp-link" href="http://www1.nyc.gov/site/planning/index.page"><img class="dcp-logo" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="NYC Planning"></a>
+      {{link-to 'Community Portal' 'index' classNames='site-name'}}
+    </div>
+    <div class="cell auto hide-for-large text-right">
+      <button class="responsive-nav-toggler" data-toggle="responsive-menu">Menu</button>
+    </div>
+    <div id="responsive-menu" class="cell large-shrink show-for-large" data-toggler=".show-for-large">
+      <nav role="navigation">
+        <ul class="menu">
+          <li><a href="https://github.com/NYCPlanning/labs-community-portal">GitHub</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
+</header>
+
+<div id="main">
+
+  <div id="cd-chooser">
+    {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
+      {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+      {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
+        {{#tooltip-layer}}
+          <p>{{tooltip-text}}</p>
+        {{/tooltip-layer}}
+      {{/geojson-layer}}
+    {{/leaflet-map}}
+    <div id="cd-search">
+      {{#power-select
+        options=options
+        selected=selected
+        searchField="name"
+        placeholder="Enter a Community District or neighborhood..."
+        onchange=(route-action 'transitionToProfile')
+        as |district|
+      }}
+        {{district.boro}} {{district.cd}}
+      {{/power-select}}
+    </div>
+  </div>
+
+  {{outlet}}
+
 </div>
-{{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
-  {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-  {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
-    {{#tooltip-layer}}
-      <p>{{tooltip-text}}</p>
-    {{/tooltip-layer}}
-  {{/geojson-layer}}
-{{/leaflet-map}}
-{{outlet}}
