@@ -128,6 +128,8 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('y', d => y(d.landuse_desc))
       .attr('width', d => x(d.percent));
 
+    bars.exit().remove();
+
     const labels = svg.selectAll('text')
       .data(data, d => d.landuse);
 
@@ -136,12 +138,14 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('text-anchor', 'left')
       .attr('alignment-baseline', 'top')
       .attr('x', 0)
-      .attr('y', d => y(d.landuse_desc) + 28)
+      .attr('y', d => y(d.landuse_desc) + y.bandwidth())
       .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
 
     labels.transition().duration(300)
-      .attr('y', d => y(d.landuse_desc) + 28)
+      .attr('y', d => y(d.landuse_desc) + y.bandwidth())
       .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+    labels.exit().remove();
   },
 });
 
