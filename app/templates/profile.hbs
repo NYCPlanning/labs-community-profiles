@@ -1,4 +1,3 @@
-{{#initialize-foundation}}
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
     <div class="cell" data-sticky-container>
@@ -14,9 +13,8 @@
 
       {{#sticky-element top=97}}
         <ul class="menu section-menu" data-magellan>
-          <li><a href="#first">First Arrival</a></li>
-          <li><a href="#second">Second Arrival</a></li>
-          <li><a href="#third">Third Arrival</a></li>
+          <li>{{scroll-to href='#first' label='First Arrival'}}</li>
+          <li>{{scroll-to href='#second' label='Second Arrival'}}</li>
         </ul>
       {{/sticky-element}}
 
@@ -66,4 +64,3 @@
     </div>
   </div>
 </div>
-{{/initialize-foundation}}
