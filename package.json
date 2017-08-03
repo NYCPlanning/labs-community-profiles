@@ -45,6 +45,7 @@
     "ember-source": "~2.14.0",
     "ember-transition-helper": "0.0.6",
     "ember-welcome-page": "^3.0.0",
+    "ember-wormhole": "^0.5.2",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",

@@ -21,29 +21,37 @@
 
 <div id="main">
 
-  <div id="cd-chooser">
-    {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false}}
-      {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-      {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
-        {{#tooltip-layer}}
-          <p>{{tooltip-text}}</p>
-        {{/tooltip-layer}}
-      {{/geojson-layer}}
-    {{/leaflet-map}}
-    <div id="cd-search">
-      {{#power-select
-        options=options
-        selected=selected
-        searchField="name"
-        placeholder="Enter a Community District or neighborhood..."
-        onchange=(route-action 'transitionToProfile')
-        as |district|
-      }}
-        {{district.boro}} {{district.cd}}
-      {{/power-select}}
+  <div class="grid-x">
+    {{#if mapState.currentlySelected}}
+      <div class="small-6 cell padding" id="general-statistics">
+      </div>
+    {{/if}}
+    <div class="auto cell">
+      <div id="cd-chooser">
+        {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
+          {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
+          {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
+            {{#tooltip-layer}}
+              <p>{{tooltip-text}}</p>
+            {{/tooltip-layer}}
+          {{/geojson-layer}}
+        {{/leaflet-map}}
+        <div id="cd-search">
+          {{#power-select
+            options=options
+            selected=selected
+            searchField="name"
+            placeholder="Enter a Community District or neighborhood..."
+            onchange=(route-action 'transitionToProfile')
+            as |district|
+          }}
+            {{district.boro}} {{district.cd}}
+          {{/power-select}}
+        </div>
+      </div>
     </div>
   </div>
 
-  {{outlet}}
+{{outlet}}
 
 </div>

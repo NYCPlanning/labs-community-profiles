@@ -17,6 +17,6 @@ export default Ember.Route.extend({
     carto.getTileTemplate()
       .then(landUseTemplate => {
         mapState.set('landUseTemplate', landUseTemplate);
-      })
+      });
   }
 });
