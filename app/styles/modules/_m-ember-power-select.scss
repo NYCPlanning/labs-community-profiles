@@ -21,3 +21,27 @@ $ember-power-select-number-of-visible-options: 9;
   max-width: $global-width - $global-margin*2;
   margin: 0 auto;
 }
+
+.ember-power-select-option {
+  line-height: 1.2;
+  padding-top: $global-margin/2;
+  padding-bottom: $global-margin/2;
+
+  .neighborhoods {
+    font-size: rem-calc(12);
+    color: $dark-gray;
+  }
+}
+
+.ember-power-select-option[aria-current="true"] {
+
+  .neighborhoods {
+    color: $white;
+  }
+}
+
+.ember-power-select-selected-item {
+  .neighborhoods {
+    display: none;
+  }
+}
