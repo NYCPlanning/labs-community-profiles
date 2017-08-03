@@ -124,6 +124,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
 
 
     bars.transition().duration(300)
+      .attr('height', y.bandwidth() - 12)
       .attr('y', d => y(d.landuse_desc))
       .attr('width', d => x(d.percent));
 
