@@ -21,7 +21,6 @@
   {{/initialize-foundation}}
 </header>
 
-
 <div id="main" class="grid-x">
   <div class="cell large-4"  id="cd-chooser">
     {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
@@ -46,6 +45,12 @@
     </div>
   </div>
   <div class="cell large-auto" id="page-content">
+
     {{outlet}}
+
+    <footer class="site-footer text-center">
+      <p>Don't see the data you need? <a href="https://github.com/NYCPlanning/labs-community-portal/issues">File an issue</a> to let us know.</p>
+    </footer>
+
   </div>
 </div>
