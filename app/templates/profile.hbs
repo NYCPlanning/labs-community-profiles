@@ -7,8 +7,66 @@
           <span class="boro">{{model.properties.boro}}</span>
           Community District {{model.properties.cd}}
         </h1>
-        <p class="neighborhoods"><strong>Neighborhoods:</strong> {{model.properties.neighborhoods}}</p>
       </div>
+
+      {{log model.properties.dataprofile}}
+
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-5">
+            <h4 class="header-tiny"><strong>Neighborhoods</strong></h4>
+            <p><small>{{model.properties.neighborhoods}}</small></p>
+          </div>
+          <div class="cell medium-4">
+            <h4 class="header-tiny"><strong>Population</strong></h4>
+            <table class="small">
+              <thead>
+                <tr>
+                  <th class="text-center">2000<sup><a>?</a></sup></th>
+                  <th class="text-center">2010<sup><a>?</a></sup></th>
+                  <th class="text-center">2011-2015<sup><a>?</a></sup></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">
+                    {{model.properties.dataprofile.pop_2000}}
+                  </td>
+                  <td class="text-center">
+                    {{model.properties.dataprofile.pop_2010}}
+                    ({{model.properties.dataprofile.pop_change_00_10}})<!-- TODO: make this a percentage -->
+                  </td>
+                  <td class="text-center">
+                    {{model.properties.dataprofile.pop_11_15_acs}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cell medium-3">
+            <h4 class="header-tiny"><strong>Land Mass</strong></h4>
+            <table class="small">
+              <thead>
+                <tr>
+                  <th class="text-center">Square Miles</th>
+                  <th class="text-center">Acres</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">
+                    {{model.properties.dataprofile.area_sqmi}}
+                  </td>
+                  <td class="text-center">
+                    {{model.properties.dataprofile.acres}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
 
       <div class="section-menu">
         {{#sticky-element top=97}}
@@ -18,8 +76,6 @@
           </ul>
         {{/sticky-element}}
       </div>
-
-      {{log model.properties.dataprofile}}
 
       <section id="needs" class="page-section">
         <h3>Top 3 Community Needs</h3>
@@ -51,6 +107,21 @@
               </div>
               <div class="cell medium-6">
                 {{land-use-chart borocd=model.properties.borocd}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="" class="page-section">
+        <h3>Foo</h3>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-auto">
+                {{model.properties.dataprofile.unemployment_boro}}
+                {{model.properties.dataprofile.unemployment_cd}}
+                {{model.properties.dataprofile.unemployment_nyc}}
               </div>
             </div>
           </div>
