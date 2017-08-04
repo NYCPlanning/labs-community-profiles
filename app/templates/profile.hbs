@@ -8,6 +8,12 @@
           Community District {{model.properties.cd}}
         </h1>
         <p class="neighborhoods"><strong>Neighborhoods:</strong> {{model.properties.neighborhoods}}</p>
+        <h3>
+          Needs: <a href="#">?
+            {{#tooltip-on-element duration=50000 event='hover'}}
+              These are the top 3 issues which are derived from the Statements of Community District Needs that forms an integral part of the City’s budget process. Read the full Statement of Needs <a href="{{model.properties.dataprofile.cd_son_fy2018}}">here</a>.
+            {{/tooltip-on-element}}</a>
+        </h3>
       </div>
 
       <div class="page-nav">
