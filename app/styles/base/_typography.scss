@@ -20,11 +20,18 @@ h6,
 }
 
 .district-header {
+  .district {
+    margin-bottom: 0.25rem;
+  }
   .boro {
     display: block;
     font-weight: $global-weight-normal;
     font-size: 0.75em;
     line-height: 1;
+  }
+  .neighborhoods {
+    color: $dark-gray;
+    font-size: rem-calc(14);
   }
 }
 

@@ -2,64 +2,46 @@
   <div class="grid-x grid-padding-x">
     <div class="cell" data-sticky-container>
 
-      <h1 class="district-header">
-        <span class="boro">{{model.properties.boro}}</span>
-        Community District {{model.properties.cd}}
-      </h1>
-      <h3>
-        Top 3 Community Needs:
-      </h3>
-      <ul>
-        <li>{{model.properties.dataprofile.son_issue_1}}</li>  
-        <li>{{model.properties.dataprofile.son_issue_2}}</li>
-        <li>{{model.properties.dataprofile.son_issue_3}}</li>
-      </ul>
+      <div class="district-header">
+        <h1 class="district">
+          <span class="boro">{{model.properties.boro}}</span>
+          Community District {{model.properties.cd}}
+        </h1>
+        <p class="neighborhoods"><strong>Neighborhoods:</strong> {{model.properties.neighborhoods}}</p>
+      </div>
 
-      <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
-
-      <div class="grid-x grid-padding-x medium-up-2 large-up-4">
-        <div class="cell"><p><strong>Statistic:</strong> 42</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 92</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 128</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 8</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 16</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 1.3M</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 7,539</p></div>
+      <div class="page-nav">
+        {{#sticky-element top=97}}
+          <ul class="menu section-menu">
+            <li>{{scroll-to href='#needs' label='Needs'}}</li>
+            <li>{{scroll-to href='#land-use' label='Land Use'}}</li>
+          </ul>
+        {{/sticky-element}}
       </div>
 
 
-      {{#sticky-element top=97}}
-        <ul class="menu section-menu" data-magellan>
-          <li>{{scroll-to href='#first' label='First Arrival'}}</li>
-          <li>{{scroll-to href='#second' label='Second Arrival'}}</li>
-        </ul>
-      {{/sticky-element}}
-
-      <section id="first" data-magellan-target="first">
-        <h2 class="header-large">Section header</h2>
+      <section id="needs" class="page-section">
+        <h3>Top 3 Community Needs</h3>
         <div class="callout">
           <div class="grid-container">
             <div class="grid-x grid-padding-x">
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            </div>
-          </div>
-        </div>
-        <div class="callout">
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-              <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+              <div class="cell medium-auto">
+                <ul>
+                  <li>{{model.properties.dataprofile.son_issue_1}}</li>
+                  <li>{{model.properties.dataprofile.son_issue_2}}</li>
+                  <li>{{model.properties.dataprofile.son_issue_3}}</li>
+                </ul>
+              </div>
+              <div class="cell medium-auto">
+                <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="second" data-magellan-target="second">
+      <section id="land-use" class="page-section">
+        <h3>Land Use</h3>
         <div class="callout">
           <div class="grid-container">
             <div class="grid-x grid-padding-x">
