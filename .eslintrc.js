@@ -12,6 +12,7 @@ module.exports = {
   rules: {
   },
   globals: {
-   $: true
+   $: true,
+   d3: true,
   }
 };

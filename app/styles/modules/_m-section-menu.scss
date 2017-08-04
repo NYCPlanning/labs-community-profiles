@@ -6,3 +6,7 @@
   background-color: $light-gray;
   margin-bottom: $global-margin;
 }
+
+.sticky-element {
+   z-index: 999;
+}
