@@ -13,14 +13,14 @@ export default Ember.Controller.extend({
 
   options: Ember.computed('model.features.@each', function() {
     let features = this.get('model.features');
-    return features.map(feature=> { 
+    return features.map(feature=> {
       let { cd, boro, borocd, neighborhoods } = feature.properties;
 
       if (neighborhoods) {
         neighborhoods = neighborhoods.join(',  ');
       }
 
-      return { 
+      return {
         cd,
         boro,
         borocd,
@@ -42,8 +42,8 @@ export default Ember.Controller.extend({
 
   actions: {
     handleClick(e) {
-      const { boro, borocd } = e.layer.feature.properties;
-      this.transitionToRoute('profile', boro.dasherize(), borocd);
+      const { boro, cd } = e.layer.feature.properties;
+      this.transitionToRoute('profile', boro.dasherize(), cd);
     },
     handleMouseover(e) {
       const { boro, cd } = e.layer.feature.properties;

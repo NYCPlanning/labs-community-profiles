@@ -17,12 +17,35 @@
 
       <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
 
+      <div class="grid-x grid-padding-x medium-up-2 large-up-4">
+        <div class="cell"><p><strong>Statistic:</strong> 42</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 92</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 128</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 8</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 16</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 1.3M</p></div>
+        <div class="cell"><p><strong>Statistic:</strong> 7,539</p></div>
+      </div>
+
       <section class="callout">
         <div class="grid-container">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+          <div class="grid-x grid-padding-x align-middle">
+            <div class="cell medium-3 text-center">
+              <div class="stat">128</div>
+              <small>Days without merge conflict</small>
+            </div>
+            <div class="cell medium-3 text-center">
+              <div class="stat">42%</div>
+              <small>Ultimate Question</small>
+            </div>
+            <div class="cell medium-3">
+              <ul>
+                <li><a href="#">Download link <small>(PDF)</small></a></li>
+                <li><a href="#">Website URL</a></li>
+                <li><a href="#">I wish this was machine readable <small>(PDF)</small></a></li>
+                <li><a href="#">Another link</a></li>
+              </ul>
+            </div>
             <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
           </div>
         </div>
@@ -31,19 +54,17 @@
       <section class="callout">
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
+            <div class="cell medium-6">
+              {{land-use-map}}
+            </div>
+            <div class="cell medium-6">
+              {{land-use-chart borocd=model.properties.borocd}}
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="callout">
-        {{land-use-map}}
-        {{log model}}
-        {{outlet}}
-      </section>
+      {{outlet}}
 
     </div>
   </div>

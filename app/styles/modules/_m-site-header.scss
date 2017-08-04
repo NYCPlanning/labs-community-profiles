@@ -6,6 +6,9 @@ $logo-height-small: rem-calc(24);
 $logo-height-medium: rem-calc(36);
 
 .site-header {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
 
   .branding {
     padding-top: $global-margin;
