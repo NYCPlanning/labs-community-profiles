@@ -28,9 +28,12 @@ $a11y-yellow: #ffeec1;
 //
 // Modules
 // --------------------------------------------------
-@import 'modules/_m-labs-beta-notice';
-@import 'modules/_m-site-header';
 @import 'modules/_m-ember-power-select';
+@import 'modules/_m-ember-tooltip';
+@import 'modules/_m-labs-beta-notice';
+@import 'modules/_m-section-menu';
+@import 'modules/_m-section';
+@import 'modules/_m-site-header';
 
 //
 // Land Use Map TODO: Move to Sass module

@@ -1,0 +1,17 @@
+// --------------------------------------------------
+// Module: Section Menu
+// --------------------------------------------------
+
+.section-menu {
+  margin: $global-margin*2 0;
+
+  .menu {
+    font-size: $small-font-size;
+    font-weight: $global-weight-bold;
+    background-color: $light-gray;
+  }
+}
+
+.sticky-element {
+   z-index: 999;
+}

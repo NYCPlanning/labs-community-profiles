@@ -1,0 +1,13 @@
+// --------------------------------------------------
+// Module: Section
+// --------------------------------------------------
+
+.page-section {
+  margin-bottom: $global-margin*3;
+
+  @include breakpoint(medium) {
+    .cell :last-child {
+      margin-bottom: 0;
+    }
+  }
+}

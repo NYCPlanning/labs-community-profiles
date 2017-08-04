@@ -8,6 +8,9 @@
 
 // #main wraps everything except the header
 #main {
+  z-index: 1;
+  position: relative;
+  
   @include breakpoint(large) {
     height: calc(100vh - 97px);
   }

@@ -20,6 +20,8 @@ h6,
 }
 
 .district-header {
+  .district {
+  }
   .boro {
     display: block;
     font-weight: $global-weight-normal;
@@ -33,4 +35,20 @@ h6,
 // --------------------------------------------------
 .nowrap {
   white-space: nowrap;
+}
+
+.small-gray {
+  color: $dark-gray;
+  font-size: rem-calc(14);
+}
+
+table {
+
+  &.small {
+    font-size: $small-font-size;
+  }
+
+  &.width-auto {
+    width: auto;
+  }
 }

@@ -1,67 +1,147 @@
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="cell">
+    <div class="cell" data-sticky-container>
 
-      <h1 class="district-header">
-        <span class="boro">{{model.properties.boro}}</span>
-        Community District {{model.properties.cd}}
-      </h1>
-      <h3>
-        Needs:
-      </h3>
-      <ul>
-        <li>{{model.properties.dataprofile.son_issue_1}}</li>  
-        <li>{{model.properties.dataprofile.son_issue_2}}</li>
-        <li>{{model.properties.dataprofile.son_issue_3}}</li>
-      </ul>
-
-      <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
-
-      <div class="grid-x grid-padding-x medium-up-2 large-up-4">
-        <div class="cell"><p><strong>Statistic:</strong> 42</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 92</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 128</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 8</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 16</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 1.3M</p></div>
-        <div class="cell"><p><strong>Statistic:</strong> 7,539</p></div>
+      <div class="district-header">
+        <h1 class="district">
+          <span class="boro">{{model.properties.boro}}</span>
+          Community District {{model.properties.cd}}
+        </h1>
       </div>
 
-      <section class="callout">
-        <div class="grid-container">
-          <div class="grid-x grid-padding-x align-middle">
-            <div class="cell medium-3 text-center">
-              <div class="stat">128</div>
-              <small>Days without merge conflict</small>
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-5">
+            <h4 class="header-tiny"><strong>Neighborhoods</strong></h4>
+            <p><small>{{model.properties.neighborhoods}}</small></p>
+          </div>
+          <div class="cell medium-4">
+            <h4 class="header-tiny"><strong>Population</strong></h4>
+            <table class="small">
+              <thead>
+                <tr>
+                  <th class="text-center">2000<sup><a>?</a></sup></th>
+                  <th class="text-center">2010<sup><a>?</a></sup></th>
+                  <th class="text-center">2011-2015<sup><a>?</a></sup></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">
+                    {{numeral-format d.pop_2000 '0.0a'}}
+                  </td>
+                  <td class="text-center">
+                    {{numeral-format d.pop_2010 '0.0a'}}
+                    ({{numeral-format d.pop_change_00_10 '0%'}})
+                  </td>
+                  <td class="text-center">
+                    {{numeral-format d.pop_11_15_acs '0.0a'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="cell medium-3">
+            <h4 class="header-tiny"><strong>Land Mass</strong></h4>
+            <table class="small">
+              <thead>
+                <tr>
+                  <th class="text-center">Square Miles</th>
+                  <th class="text-center">Acres</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">
+                    {{d.area_sqmi}}
+                  </td>
+                  <td class="text-center">
+                    {{d.acres}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-menu">
+        {{#sticky-element top=97}}
+          <ul class="menu">
+            <li>{{scroll-to href='#needs' label='Needs'}}</li>
+            <li>{{scroll-to href='#land-use' label='Land Use'}}</li>
+            <li>{{scroll-to href='#key-indicators' label='Key Indicators'}}</li>
+          </ul>
+        {{/sticky-element}}
+      </div>
+
+      <section id="needs" class="page-section">
+        <h3>Top 3 Community Needs
+          <span>
+            {{fa-icon "info-circle"}}
+            {{#tooltip-on-element duration=50000 event='hover'}}
+              These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
+            {{/tooltip-on-element}}
+          </span>
+        </h3>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-auto">
+                <ul>
+                  <li>{{d.son_issue_1}}</li>
+                  <li>{{d.son_issue_2}}</li>
+                  <li>{{d.son_issue_3}}</li>
+                </ul>
+              </div>
+              <div class="cell medium-auto">
+                <a class="button" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
+              </div>
             </div>
-            <div class="cell medium-3 text-center">
-              <div class="stat">42%</div>
-              <small>Ultimate Question</small>
-            </div>
-            <div class="cell medium-3">
-              <ul>
-                <li><a href="#">Download link <small>(PDF)</small></a></li>
-                <li><a href="#">Website URL</a></li>
-                <li><a href="#">I wish this was machine readable <small>(PDF)</small></a></li>
-                <li><a href="#">Another link</a></li>
-              </ul>
-            </div>
-            <div class="cell medium-3"><img src="http://via.placeholder.com/400"></div>
           </div>
         </div>
       </section>
 
-      <section class="callout">
-        <div class="grid-container">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
-              {{land-use-map}}
-            </div>
-            <div class="cell medium-6">
-              {{land-use-chart borocd=model.properties.borocd}}
+      <section id="land-use" class="page-section">
+        <h3>Land Use</h3>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="cell medium-6">
+                {{land-use-map}}
+              </div>
+              <div class="cell medium-6">
+                {{land-use-chart borocd=model.properties.borocd}}
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <section id="key-indicators" class="page-section">
+        <h3>Key Indicators</h3>
+
+        <h4 class="header-tiny"><strong>Unemployment</strong></h4>
+        <div class="callout">
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x align-middle text-center">
+              <div class="cell medium-auto">
+                <h5>{{model.properties.boro}} CD {{model.properties.cd}}</h5>
+                <div class="stat">{{model.properties.dataprofile.unemployment_cd}}%</div>
+                <small>of the civilian labor force is unemployed</small>
+              </div>
+              <div class="cell medium-auto">
+                <h5>{{model.properties.boro}}</h5>
+                <div class="lead">{{d.unemployment_boro}}</div>
+              </div>
+              <div class="cell medium-auto">
+                <h5>NYC</h5>
+                <div class="lead">{{d.unemployment_nyc}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {{outlet}}
