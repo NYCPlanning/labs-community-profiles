@@ -1,13 +1,13 @@
-import Ember from 'ember';
-import config from './config/environment';
+import Ember from 'ember'; // eslint-disable-line
+import config from './config/environment'; // eslint-disable-line
 
 const Router = Ember.Router.extend({
   location: config.locationType,
-  rootURL: config.rootURL
+  rootURL: config.rootURL,
 });
 
-Router.map(function() {
-  this.route('profile', { path: '/:boro/:name' }, function() { });
+Router.map(function () { // eslint-disable-line
+  this.route('profile', { path: '/:boro/:cd' }, () => {});
 });
 
 export default Router;
