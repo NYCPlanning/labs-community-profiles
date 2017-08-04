@@ -10,15 +10,16 @@
         <p class="neighborhoods"><strong>Neighborhoods:</strong> {{model.properties.neighborhoods}}</p>
       </div>
 
-      <div class="page-nav">
+      <div class="section-menu">
         {{#sticky-element top=97}}
-          <ul class="menu section-menu">
+          <ul class="menu">
             <li>{{scroll-to href='#needs' label='Needs'}}</li>
             <li>{{scroll-to href='#land-use' label='Land Use'}}</li>
           </ul>
         {{/sticky-element}}
       </div>
 
+      {{log model.properties.dataprofile}}
 
       <section id="needs" class="page-section">
         <h3>Top 3 Community Needs</h3>

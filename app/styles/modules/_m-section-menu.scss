@@ -2,12 +2,14 @@
 // Module: Section Menu
 // --------------------------------------------------
 
-.page-nav {
-  margin: $global-margin*2 0;
-}
-
 .section-menu {
-  background-color: $light-gray;
+  margin: $global-margin*2 0;
+
+  .menu {
+    font-size: $small-font-size;
+    font-weight: $global-weight-bold;
+    background-color: $light-gray;
+  }
 }
 
 .sticky-element {
