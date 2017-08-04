@@ -23,7 +23,12 @@
 
 
 <div id="main" class="grid-x">
-  <div class="cell large-4"  id="cd-chooser">
+  {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9') as |map|}}
+    {{#map.source data=model as |source|}}
+      {{source.layer layerType='fill' paintOptions=(hash fill-color='#ae561f')}}
+    {{/map.source}}
+  {{/mapbox-gl}}
+  <div class="cell large-4" id="cd-chooser">
     {{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false onLoad=(action 'handleMapLoad')}}
       {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
       {{#geojson-layer geoJSON=model style=style onClick=(action "handleClick") onMouseover=(action "handleMouseover")}}
