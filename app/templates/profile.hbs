@@ -9,8 +9,6 @@
         </h1>
       </div>
 
-      {{log model.properties.dataprofile}}
-
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
           <div class="cell medium-5">
@@ -30,14 +28,14 @@
               <tbody>
                 <tr>
                   <td class="text-center">
-                    {{model.properties.dataprofile.pop_2000}}
+                    {{numeral-format d.pop_2000 '0.0a'}}
                   </td>
                   <td class="text-center">
-                    {{model.properties.dataprofile.pop_2010}}
-                    ({{model.properties.dataprofile.pop_change_00_10}})<!-- TODO: make this a percentage -->
+                    {{numeral-format d.pop_2010 '0.0a'}}
+                    ({{numeral-format d.pop_change_00_10 '0%'}})
                   </td>
                   <td class="text-center">
-                    {{model.properties.dataprofile.pop_11_15_acs}}
+                    {{numeral-format d.pop_11_15_acs '0.0a'}}
                   </td>
                 </tr>
               </tbody>
@@ -55,10 +53,10 @@
               <tbody>
                 <tr>
                   <td class="text-center">
-                    {{model.properties.dataprofile.area_sqmi}}
+                    {{d.area_sqmi}}
                   </td>
                   <td class="text-center">
-                    {{model.properties.dataprofile.acres}}
+                    {{d.acres}}
                   </td>
                 </tr>
               </tbody>
@@ -79,23 +77,25 @@
 
       <section id="needs" class="page-section">
         <h3>Top 3 Community Needs
-          <a href="#">?
-          {{#tooltip-on-element duration=50000 event='hover'}}
-            These are the top 3 issues which are derived from the Statements of Community District Needs that forms an integral part of the City’s budget process. Read the full Statement of Needs <a href="{{model.properties.dataprofile.cd_son_fy2018}}">here</a>.
-          {{/tooltip-on-element}}</a>
+          <span>
+            {{fa-icon "info-circle"}}
+            {{#tooltip-on-element duration=50000 event='hover'}}
+              These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
+            {{/tooltip-on-element}}
+          </span>
         </h3>
         <div class="callout">
           <div class="grid-container">
             <div class="grid-x grid-padding-x">
               <div class="cell medium-auto">
                 <ul>
-                  <li>{{model.properties.dataprofile.son_issue_1}}</li>
-                  <li>{{model.properties.dataprofile.son_issue_2}}</li>
-                  <li>{{model.properties.dataprofile.son_issue_3}}</li>
+                  <li>{{d.son_issue_1}}</li>
+                  <li>{{d.son_issue_2}}</li>
+                  <li>{{d.son_issue_3}}</li>
                 </ul>
               </div>
               <div class="cell medium-auto">
-                <a class="button" href="{{model.properties.dataprofile.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
+                <a class="button" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
               </div>
             </div>
           </div>
@@ -132,11 +132,11 @@
               </div>
               <div class="cell medium-auto">
                 <h5>{{model.properties.boro}}</h5>
-                <div class="lead">{{model.properties.dataprofile.unemployment_boro}}</div>
+                <div class="lead">{{d.unemployment_boro}}</div>
               </div>
               <div class="cell medium-auto">
                 <h5>NYC</h5>
-                <div class="lead">{{model.properties.dataprofile.unemployment_nyc}}</div>
+                <div class="lead">{{d.unemployment_nyc}}</div>
               </div>
             </div>
           </div>
