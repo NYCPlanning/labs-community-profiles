@@ -72,6 +72,7 @@
           <ul class="menu">
             <li>{{scroll-to href='#needs' label='Needs'}}</li>
             <li>{{scroll-to href='#land-use' label='Land Use'}}</li>
+            <li>{{scroll-to href='#key-indicators' label='Key Indicators'}}</li>
           </ul>
         {{/sticky-element}}
       </div>
@@ -117,19 +118,30 @@
         </div>
       </section>
 
-      <section id="" class="page-section">
-        <h3>Foo</h3>
+      <section id="key-indicators" class="page-section">
+        <h3>Key Indicators</h3>
+
+        <h4 class="header-tiny"><strong>Unemployment</strong></h4>
         <div class="callout">
           <div class="grid-container">
-            <div class="grid-x grid-padding-x">
+            <div class="grid-x grid-padding-x align-middle text-center">
               <div class="cell medium-auto">
-                {{model.properties.dataprofile.unemployment_boro}}
-                {{model.properties.dataprofile.unemployment_cd}}
-                {{model.properties.dataprofile.unemployment_nyc}}
+                <h5>{{model.properties.boro}} CD {{model.properties.cd}}</h5>
+                <div class="stat">{{model.properties.dataprofile.unemployment_cd}}%</div>
+                <small>of the civilian labor force is unemployed</small>
+              </div>
+              <div class="cell medium-auto">
+                <h5>{{model.properties.boro}}</h5>
+                <div class="lead">{{model.properties.dataprofile.unemployment_boro}}</div>
+              </div>
+              <div class="cell medium-auto">
+                <h5>NYC</h5>
+                <div class="lead">{{model.properties.dataprofile.unemployment_nyc}}</div>
               </div>
             </div>
           </div>
         </div>
+
       </section>
 
       {{outlet}}
