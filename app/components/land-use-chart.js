@@ -5,8 +5,12 @@ import carto from '../utils/carto';
 import landUseColors from '../utils/landUseColors';
 
 const LandUseChart = Ember.Component.extend(ResizeAware, {
+  classNameBindings: ['loading'],
+  classNames: ['land-use-chart'],
+
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
+  loading: false,
 
   debouncedDidResize() {
     this.createChart();
@@ -40,24 +44,19 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     return SQL;
   }),
 
-  getData: function getData() {
+  data: Ember.computed('sql', 'borocd', function() {
     const self = this;
     const sql = this.get('sql');
-
-    carto.SQL(sql)
+    this.set('loading', true);
+    return carto.SQL(sql)
       .then((data) => {
-        self.set('data', data);
-        const svg = self.get('svg');
-        if (svg) {
-          self.updateChart();
-        } else {
-          self.createChart();
-        }
+        this.set('loading', false);
+        return data;
       });
-  },
+  }),
 
-  didReceiveAttrs: function didReceiveAttrs() {
-    this.getData();
+  didRender() {
+    this.createChart();
   },
 
   createChart: function createChart() {
@@ -97,55 +96,57 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     const width = this.get('width');
     const data = this.get('data');
 
-    const y = d3.scaleBand()
-      .domain(data.map(d => d.landuse_desc))
-      .range([0, height])
-      .paddingOuter(0)
-      .paddingInner(0.2);
+    data.then((data) => {
+      const y = d3.scaleBand()
+        .domain(data.map(d => d.landuse_desc))
+        .range([0, height])
+        .paddingOuter(0)
+        .paddingInner(0.2);
 
-    const x = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.percent)])
-      .range([0, width]);
-
-
-    const bars = svg.selectAll('.bar')
-      .data(data, d => d.landuse);
-
-    bars.enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('fill', d => landUseColors(d.landuse))
-      .attr('x', 0)
-      .attr('height', y.bandwidth() - 12)
-      .attr('rx', 2)
-      .attr('ry', 2)
-      .attr('y', d => y(d.landuse_desc))
-      .attr('width', d => x(d.percent));
+      const x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.percent)])
+        .range([0, width]);
 
 
-    bars.transition().duration(300)
-      .attr('height', y.bandwidth() - 12)
-      .attr('y', d => y(d.landuse_desc))
-      .attr('width', d => x(d.percent));
+      const bars = svg.selectAll('.bar')
+        .data(data, d => d.landuse);
 
-    bars.exit().remove();
+      bars.enter()
+        .append('rect')
+        .attr('class', 'bar')
+        .attr('fill', d => landUseColors(d.landuse))
+        .attr('x', 0)
+        .attr('height', y.bandwidth() - 12)
+        .attr('rx', 2)
+        .attr('ry', 2)
+        .attr('y', d => y(d.landuse_desc))
+        .attr('width', d => x(d.percent));
 
-    const labels = svg.selectAll('text')
-      .data(data, d => d.landuse);
 
-    labels.enter().append('text')
-      .attr('class', 'label')
-      .attr('text-anchor', 'left')
-      .attr('alignment-baseline', 'top')
-      .attr('x', 0)
-      .attr('y', d => y(d.landuse_desc) + y.bandwidth())
-      .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+      bars.transition().duration(300)
+        .attr('height', y.bandwidth() - 12)
+        .attr('y', d => y(d.landuse_desc))
+        .attr('width', d => x(d.percent));
 
-    labels.transition().duration(300)
-      .attr('y', d => y(d.landuse_desc) + y.bandwidth())
-      .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+      bars.exit().remove();
 
-    labels.exit().remove();
+      const labels = svg.selectAll('text')
+        .data(data, d => d.landuse);
+
+      labels.enter().append('text')
+        .attr('class', 'label')
+        .attr('text-anchor', 'left')
+        .attr('alignment-baseline', 'top')
+        .attr('x', 0)
+        .attr('y', d => y(d.landuse_desc) + y.bandwidth())
+        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+      labels.transition().duration(300)
+        .attr('y', d => y(d.landuse_desc) + y.bandwidth())
+        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+      labels.exit().remove();
+    });
   },
 });
 
