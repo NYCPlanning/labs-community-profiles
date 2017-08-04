@@ -1,18 +1,18 @@
-const carto_user = 'cpp';
-const carto_domain = 'cartoprod.capitalplanning.nyc';
+const cartoUser = 'cpp';
+const cartoDomain = 'cartoprod.capitalplanning.nyc';
 
-const buildTemplate = (layergroupid) => {
-  return `https://${carto_domain}/user/${carto_user}/api/v1/map/${layergroupid}/{z}/{x}/{y}.png`;
-}
+const buildTemplate = (layergroupid) => { // eslint-disable-line
+  return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.png`;
+};
 
 const carto = {
-  SQL(query) {
+  SQL(query, type = 'json') {
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
-        url: `https://${carto_domain}/user/${carto_user}/api/v2/sql?q=${query}&format=json`,
+        url: `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${query}&format=${type}`,
         success(d) {
-          resolve(d.rows);
+          resolve(type === 'json' ? d.rows : d);
         },
       })
         .fail(() => reject());
@@ -95,16 +95,17 @@ const carto = {
     };
 
     return new Promise((resolve, reject) => {
-      fetch(`https://${carto_domain}/user/${carto_user}/api/v1/map`, {
+      fetch(`https://${cartoDomain}/user/${cartoUser}/api/v1/map`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
       })
+        .catch(err => reject(err))
         .then(response => response.json())
         .then((json) => { resolve(buildTemplate(json.layergroupid)); });
-    })
+    });
   },
 };
 
