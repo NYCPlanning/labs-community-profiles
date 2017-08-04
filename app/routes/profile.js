@@ -30,8 +30,17 @@ export default Ember.Route.extend({
   mapState: Ember.inject.service(),
   model(params) {
     const { boro, cd } = params;
-    return this.modelFor('application')
-      .features.find(district => district.properties.borocd === buildBorocd(boro, cd));
+    const borocd = buildBorocd(boro, cd);
+    const sql = `SELECT * FROM community_district_profiles WHERE borocd=${borocd}`;
+
+    const selectedDistrict = this.modelFor('application')
+      .features.find(district => district.properties.borocd === borocd);
+
+    return carto.SQL(sql, 'json')
+      .then((json) => {
+        Ember.set(selectedDistrict, 'properties.dataprofile', json[0]);
+        return selectedDistrict;
+      });
   },
   afterModel(profile) {
     const mapState = this.get('mapState');
