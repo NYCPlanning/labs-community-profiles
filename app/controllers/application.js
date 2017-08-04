@@ -32,12 +32,22 @@ export default Ember.Controller.extend({
 
   style: Ember.computed('mapState.currentlySelected', function() {
     return (geoJsonFeature) => {
-      if(geoJsonFeature.properties.borocd == this.get('mapState.currentlySelected.borocd')) {
+      if (geoJsonFeature.properties.borocd == this.get('mapState.currentlySelected.borocd')) {
         return {
-          fillColor: 'purple'
-        }
+          fillColor: '#ae561f',
+          fillOpacity: 0.2,
+          color: '#ae561f',
+          weight: 2,
+        };
       }
-    }
+
+      return {
+        fillOpacity: 0.01,
+        color: '#B95B21',
+        weight: 1,
+        opacity: 0.7,
+      };
+    };
   }),
 
   actions: {

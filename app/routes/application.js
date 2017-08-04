@@ -3,7 +3,7 @@ import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 import carto from '../utils/carto';
 
 const SQL = `
-  SELECT ST_Simplify(the_geom, 0.0005) AS the_geom, RIGHT(borocd::text, 2)::int as cd,
+  SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, RIGHT(borocd::text, 2)::int as cd,
     CASE
       WHEN LEFT(borocd::text, 1) = '1' THEN 'Manhattan'
       WHEN LEFT(borocd::text, 1) = '2' THEN 'Bronx'
