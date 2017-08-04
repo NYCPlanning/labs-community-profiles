@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from 'ember'; // eslint-disable-line
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
@@ -7,14 +7,15 @@ export default Ember.Controller.extend({
   zoom: 10,
   'tooltip-text': '',
 
-  selected: Ember.computed('mapState.currentlySelected', function() {
+  selected: Ember.computed('mapState.currentlySelected', function selected() {
     return this.get('mapState.currentlySelected');
   }),
 
-  options: Ember.computed('model.features.@each', function() {
-    let features = this.get('model.features');
-    return features.map(feature=> {
-      let { cd, boro, borocd, neighborhoods } = feature.properties;
+  options: Ember.computed('model.features.@each', function options() {
+    const features = this.get('model.features');
+    return features.map((feature) => {
+      const { cd, boro, borocd } = feature.properties;
+      let { neighborhoods } = feature.properties;
 
       if (neighborhoods) {
         neighborhoods = neighborhoods.join(',  ');
@@ -30,9 +31,9 @@ export default Ember.Controller.extend({
     });
   }),
 
-  style: Ember.computed('mapState.currentlySelected', function() {
+  style: Ember.computed('mapState.currentlySelected', function style() {
     return (geoJsonFeature) => {
-      if (geoJsonFeature.properties.borocd == this.get('mapState.currentlySelected.borocd')) {
+      if (geoJsonFeature.properties.borocd === this.get('mapState.currentlySelected.borocd')) {
         return {
           fillColor: '#ae561f',
           fillOpacity: 0.2,
@@ -57,11 +58,11 @@ export default Ember.Controller.extend({
     },
     handleMouseover(e) {
       const { boro, cd } = e.layer.feature.properties;
-      this.set('tooltip-text', `${boro} ${cd}`)
+      this.set('tooltip-text', `${boro} ${cd}`);
     },
     handleMapLoad(e) {
-      let mapState = this.get('mapState');
+      const mapState = this.get('mapState');
       mapState.set('mapInstance', e.target);
-    }
-  }
+    },
+  },
 });
