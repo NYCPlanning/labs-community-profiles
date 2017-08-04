@@ -3,7 +3,7 @@ import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 import carto from '../utils/carto';
 
 const SQL = `
-  SELECT ST_Simplify(the_geom, 0.0005) AS the_geom, RIGHT(borocd::text, 2)::int as cd,
+  SELECT ST_Simplify(the_geom, 0.0005) AS the_geom, borocd %25 100 as cd,
     CASE
       WHEN LEFT(borocd::text, 1) = '1' THEN 'Manhattan'
       WHEN LEFT(borocd::text, 1) = '2' THEN 'Bronx'
@@ -13,6 +13,7 @@ const SQL = `
     END as boro,
     borocd
   FROM support_admin_cdboundaries
+  WHERE borocd %25 100 < 20 
   ORDER BY boro, cd ASC
 `;
 
