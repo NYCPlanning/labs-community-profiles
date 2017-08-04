@@ -7,10 +7,11 @@ const buildTemplate = (layergroupid) => { // eslint-disable-line
 
 const carto = {
   SQL(query, type = 'json') {
+    const cleanedQuery = query.replace('\n', '');
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
-        url: `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${query}&format=${type}`,
+        url: `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${cleanedQuery}&format=${type}`,
         success(d) {
           resolve(type === 'json' ? d.rows : d);
         },
