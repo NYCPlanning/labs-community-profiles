@@ -20,9 +20,24 @@
             <table class="small">
               <thead>
                 <tr>
-                  <th class="text-center">2000<sup><a>?</a></sup></th>
-                  <th class="text-center">2010<sup><a>?</a></sup></th>
-                  <th class="text-center">2011-2015<sup><a>?</a></sup></th>
+                  <th class="text-center">2000<sup><a>
+                    ?
+                    {{#tooltip-on-element}}
+                      Decennial Census
+                    {{/tooltip-on-element}}
+                  </a></sup></th>
+                  <th class="text-center">2010<sup><a>
+                    ?
+                    {{#tooltip-on-element}}
+                      Decennial Census
+                    {{/tooltip-on-element}}
+                  </a></sup></th>
+                  <th class="text-center">2011-2015<sup><a>
+                    ?
+                    {{#tooltip-on-element}}
+                      American Community Survey (ACS)
+                    {{/tooltip-on-element}}
+                  </a></sup></th>
                 </tr>
               </thead>
               <tbody>
@@ -132,11 +147,11 @@
               </div>
               <div class="cell medium-auto">
                 <h5>{{model.properties.boro}}</h5>
-                <div class="lead">{{d.unemployment_boro}}</div>
+                <div class="lead">{{d.unemployment_boro}}%</div>
               </div>
               <div class="cell medium-auto">
                 <h5>NYC</h5>
-                <div class="lead">{{d.unemployment_nyc}}</div>
+                <div class="lead">{{d.unemployment_nyc}}%</div>
               </div>
             </div>
           </div>
