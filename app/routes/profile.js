@@ -32,16 +32,13 @@ export default Ember.Route.extend({
     const { boro, cd } = params;
     const borocd = buildBorocd(boro, cd);
     const sql = `SELECT * FROM community_district_profiles WHERE borocd=${borocd}`;
-    const endpoint = `https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?q=${sql}`;
 
     const selectedDistrict = this.modelFor('application')
       .features.find(district => district.properties.borocd === borocd);
 
-    return fetch(endpoint)
-      .then(response => response.json())
+    return carto.SQL(sql, 'json')
       .then((json) => {
-        const dataprofile = Ember.get(json, 'rows')[0];
-        Ember.set(selectedDistrict, 'properties.dataprofile', dataprofile);
+        Ember.set(selectedDistrict, 'properties.dataprofile', json[0]);
         return selectedDistrict;
       });
   },
