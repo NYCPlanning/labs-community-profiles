@@ -41,7 +41,7 @@
         onchange=(route-action 'transitionToProfile')
         as |district|
       }}
-        {{district.boro}} {{district.cd}} - {{district.neighborhoods}}
+        <strong class="district">{{district.boro}} {{district.cd}}</strong> <small class="neighborhoods">{{district.neighborhoods}}</small>
       {{/power-select}}
     </div>
   </div>
