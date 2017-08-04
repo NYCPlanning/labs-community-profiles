@@ -20,24 +20,30 @@
             <table class="small">
               <thead>
                 <tr>
-                  <th class="text-center">2000<sup><a>
-                    ?
-                    {{#tooltip-on-element}}
-                      Decennial Census
-                    {{/tooltip-on-element}}
-                  </a></sup></th>
-                  <th class="text-center">2010<sup><a>
-                    ?
-                    {{#tooltip-on-element}}
-                      Decennial Census
-                    {{/tooltip-on-element}}
-                  </a></sup></th>
-                  <th class="text-center">2011-2015<sup><a>
-                    ?
-                    {{#tooltip-on-element}}
-                      American Community Survey (ACS)
-                    {{/tooltip-on-element}}
-                  </a></sup></th>
+                  <th class="text-center">2000
+                    <sup><span>
+                      {{fa-icon "info-circle"}}
+                      {{#tooltip-on-element duration=50000 event='hover'}}
+                        Decennial Census
+                      {{/tooltip-on-element}}
+                    </span></sup>
+                  </th>
+                  <th class="text-center">2010
+                    <sup><span>
+                      {{fa-icon "info-circle"}}
+                      {{#tooltip-on-element duration=50000 event='hover'}}
+                        Decennial Census
+                      {{/tooltip-on-element}}
+                    </span></sup>
+                  </th>
+                  <th class="text-center">2011-2015
+                    <sup><span>
+                      {{fa-icon "info-circle"}}
+                      {{#tooltip-on-element duration=50000 event='hover'}}
+                        American Community Survey 5-year Estimates
+                      {{/tooltip-on-element}}
+                    </span></sup>
+                  </th>
                 </tr>
               </thead>
               <tbody>
