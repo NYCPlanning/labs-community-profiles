@@ -76,10 +76,12 @@
 
       <section id="needs" class="page-section">
         <h3>Top 3 Community Needs
-          <a href="#">?
-          {{#tooltip-on-element duration=50000 event='hover'}}
-            These are the top 3 issues which are derived from the Statements of Community District Needs that forms an integral part of the City’s budget process. Read the full Statement of Needs <a href="{{d.cd_son_fy2018}}">here</a>.
-          {{/tooltip-on-element}}</a>
+          <span>
+            {{fa-icon "info-circle"}}
+            {{#tooltip-on-element duration=50000 event='hover'}}
+              These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
+            {{/tooltip-on-element}}
+          </span>
         </h3>
         <div class="callout">
           <div class="grid-container">
