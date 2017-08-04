@@ -1,6 +1,11 @@
 .leaflet-container.land-use-map {
   height: 400px;
   width: 100%;
+  margin-bottom: $global-margin;
+
+  @include breakpoint(medium) {
+    margin-bottom: 0;
+  }
 }
 
 .chart>.label {
