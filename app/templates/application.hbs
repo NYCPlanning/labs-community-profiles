@@ -13,6 +13,7 @@
     <div id="responsive-menu" class="cell large-shrink show-for-large" data-toggler=".show-for-large">
       <nav role="navigation">
         <ul class="menu">
+          <li><a href="/about">About</a></li>
           <li><a href="https://github.com/NYCPlanning/labs-community-portal">GitHub</a></li>
         </ul>
       </nav>
@@ -20,7 +21,6 @@
   </div>
   {{/initialize-foundation}}
 </header>
-
 
 <div id="main" class="grid-x">
   <div class="cell large-4" id="cd-chooser">
@@ -65,6 +65,12 @@
     </div>
   </div>
   <div class="cell large-auto" id="page-content">
+
     {{outlet}}
+
+    <footer class="site-footer text-center">
+      <p>Don't see the data you need? <a href="https://github.com/NYCPlanning/labs-community-portal/issues">File an issue</a> to let us know.</p>
+    </footer>
+
   </div>
 </div>

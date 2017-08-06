@@ -1,6 +1,11 @@
 .leaflet-container.land-use-map {
   height: 400px;
   width: 100%;
+  margin-bottom: $global-margin;
+
+  @include breakpoint(medium) {
+    margin-bottom: 0;
+  }
 }
 
 .chart>.label {
@@ -57,10 +62,10 @@
 }
 
 @keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
+  0%, 80%, 100% {
     -webkit-transform: scale(0);
     transform: scale(0);
-  } 40% { 
+  } 40% {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
