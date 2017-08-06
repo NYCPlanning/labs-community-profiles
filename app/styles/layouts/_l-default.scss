@@ -20,7 +20,7 @@
 #cd-chooser {
   position: relative;
 
-  .leaflet-container {
+  .mapboxgl-map {
     height: calc(50vh);
     width: 100%;
     z-index: 1;
