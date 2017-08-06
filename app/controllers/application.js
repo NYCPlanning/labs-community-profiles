@@ -7,6 +7,39 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
+  cdLabels: {
+    layout: {
+      'text-field': '{cd}',
+      'symbol-placement': 'point',
+      'text-size': {
+        stops: [
+          [10, 14],
+          [12, 30],
+        ],
+      },
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+    },
+    paint: {
+      'text-color': 'rgba(66, 66, 66, 1)',
+    },
+  },
+
+  cdLabelsBoro: {
+    layout: {
+      'text-field': '{boro}',
+      'symbol-placement': 'point',
+      'text-size': 12,
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+      'text-offset': [0, -2.5],
+    },
+  },
+
   mouseoverLocation: null,
   'tooltip-text': '',
 
