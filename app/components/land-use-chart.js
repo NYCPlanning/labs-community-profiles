@@ -12,10 +12,6 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   resizeHeightSensitive: true,
   loading: false,
 
-  debouncedDidResize() {
-    this.createChart();
-  },
-
   borocd: '',
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');
@@ -45,18 +41,20 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   }),
 
   data: Ember.computed('sql', 'borocd', function() {
-    const self = this;
     const sql = this.get('sql');
-    this.set('loading', true);
     return carto.SQL(sql)
       .then((data) => {
-        this.set('loading', false);
         return data;
       });
   }),
 
   didRender() {
     this.createChart();
+  },
+
+  didUpdateAttrs() {
+    console.log('updating');
+    console.log(this.get('data'));
   },
 
   createChart: function createChart() {
