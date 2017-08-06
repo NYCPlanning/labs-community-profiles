@@ -51,12 +51,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   didRender() {
     this.createChart();
   },
-
-  didUpdateAttrs() {
-    console.log('updating');
-    console.log(this.get('data'));
-  },
-
+  
   createChart: function createChart() {
     const el = this.$();
     const elWidth = el.width();
