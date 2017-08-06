@@ -45,7 +45,7 @@ export default Ember.Route.extend({
   afterModel(profile) {
     const mapState = this.get('mapState');
     mapState.set('bounds', L.geoJson(profile.geometry).getBounds());
-    mapState.set('geom', profile.geometry);
+    mapState.set('geom', profile);
 
     carto.getTileTemplate()
       .then((landUseTemplate) => {
