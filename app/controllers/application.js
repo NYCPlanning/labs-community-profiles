@@ -43,13 +43,6 @@ export default Ember.Controller.extend({
   mouseoverLocation: null,
   'tooltip-text': '',
 
-  // transform into mbgl compatible
-  bounds: Ember.computed('mapState.bounds', function() {
-    const bounds = this.get('mapState.bounds');
-    const mapboxBounds = [[bounds.getSouthWest().lng, bounds.getSouthWest().lat], [bounds.getNorthEast().lng, bounds.getNorthEast().lat]];
-    return mapboxBounds;
-  }),
-
   selected: Ember.computed('mapState.currentlySelected', function selected() {
     return this.get('mapState.currentlySelected');
   }),

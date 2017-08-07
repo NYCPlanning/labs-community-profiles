@@ -31,7 +31,7 @@
         {{source.layer layerType='symbol' source='cds' layoutOptions=cdLabels.layout paintOptions=cdLabels.paint}}
       {{/map.source}}
 
-      {{map.call 'fitBounds' bounds}}
+      {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}
       {{map.on 'mouseout' (action 'handleMouseleave')}}

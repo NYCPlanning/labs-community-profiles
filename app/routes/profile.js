@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
+import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
@@ -44,7 +45,7 @@ export default Ember.Route.extend({
   },
   afterModel(profile) {
     const mapState = this.get('mapState');
-    mapState.set('bounds', L.geoJson(profile.geometry).getBounds());
+    mapState.set('bounds', bbox(profile.geometry));
     mapState.set('geom', profile);
 
     carto.getTileTemplate()

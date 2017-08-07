@@ -1,8 +1,9 @@
-{{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false minZoom=14 classNames='land-use-map'}}
-  {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-  {{#if mapState.landUseTemplate}}
-    {{tile-layer url=mapState.landUseTemplate}}
-  {{/if}}
-  {{geojson-layer geoJSON=mapState.geom style=geomStyle}}
-{{/leaflet-map}}
+{{log mapState.bounds}}
+{{#mapbox-gl id='lu-map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) as |map|}}
+  {{#map.source sourceId='pluto' options=rasterOptions as |source|}}
+    {{source.layer layerType='raster' source='pluto'}}
+  {{/map.source}}
+  {{map.call 'fitBounds' mapState.bounds}}
+
+{{/mapbox-gl}}
 {{yield}}
