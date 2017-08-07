@@ -12,8 +12,20 @@
   }
 }
 
-.header-note {
-  color: $dark-gray;
-  font-size: rem-calc(12);
-  margin-bottom: 0.5em;
+.section-header {
+
+  a {
+    color: $body-font-color;
+
+    .fa {
+      color: $light-gray;
+    }
+  }
+
+  a:hover {
+
+    .fa {
+      color: $dcp-orange;
+    }
+  }
 }
