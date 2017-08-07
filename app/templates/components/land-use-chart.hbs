@@ -1,5 +1,5 @@
-{{#if loading}}
-  <div class="spinner-wrapper">
+{{#if (is-pending data)}}
+  <div class="spinner-wrapper loading">
     <div class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
