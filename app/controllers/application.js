@@ -1,11 +1,54 @@
 import Ember from 'ember'; // eslint-disable-line
+import isCdLayer from '../utils/is-cd-layer';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
   lat: 40.7071266,
   lng: -74,
-  zoom: 10,
+  zoom: 9.2,
+
+  cdLabels: {
+    layout: {
+      'text-field': '{cd}',
+      'symbol-placement': 'point',
+      'text-size': {
+        stops: [
+          [10, 14],
+          [12, 30],
+        ],
+      },
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+    },
+    paint: {
+      'text-color': 'rgba(66, 66, 66, 1)',
+    },
+  },
+
+  cdLabelsBoro: {
+    layout: {
+      'text-field': '{boro}',
+      'symbol-placement': 'point',
+      'text-size': 12,
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+      'text-offset': [0, -2.5],
+    },
+  },
+
+  mouseoverLocation: null,
   'tooltip-text': '',
+
+  // transform into mbgl compatible
+  bounds: Ember.computed('mapState.bounds', function() {
+    const bounds = this.get('mapState.bounds');
+    const mapboxBounds = [[bounds.getSouthWest().lng, bounds.getSouthWest().lat], [bounds.getNorthEast().lng, bounds.getNorthEast().lat]];
+    return mapboxBounds;
+  }),
 
   selected: Ember.computed('mapState.currentlySelected', function selected() {
     return this.get('mapState.currentlySelected');
@@ -53,16 +96,30 @@ export default Ember.Controller.extend({
 
   actions: {
     handleClick(e) {
-      const { boro, cd } = e.layer.feature.properties;
+      const firstCD = e.target.queryRenderedFeatures(e.point)[0];
+      const { boro, cd } = firstCD.properties;
       this.transitionToRoute('profile', boro.dasherize(), cd);
     },
     handleMouseover(e) {
-      const { boro, cd } = e.layer.feature.properties;
-      this.set('tooltip-text', `${boro} ${cd}`);
+      const firstCD = e.target.queryRenderedFeatures(e.point, { layer: 'cds' })[0];
+
+      if (firstCD) {
+        if (isCdLayer(firstCD.layer.source)) {
+          e.target.getCanvas().style.cursor = 'pointer';
+          this.set('mouseoverLocation', e.point);
+          this.set('tooltip-text', `${firstCD.properties.boro} ${firstCD.properties.cd}`);
+        } else {
+          e.target.getCanvas().style.cursor = '';
+          this.set('mouseoverLocation', null);
+        }
+      }
+    },
+    handleMouseleave(e) {
+      this.set('mouseoverLocation', null);
     },
     handleMapLoad(e) {
       const mapState = this.get('mapState');
-      mapState.set('mapInstance', e.target);
+      mapState.set('mapInstance', e);
     },
   },
 });

@@ -14,14 +14,6 @@ export default Ember.Route.extend({
         neighborhoods = neighborhoods.join(',  ');
       }
 
-      // reset Ember's internals on route change
-      Ember.run.next(this, () => {
-        let mapInstance = this.get('mapState.mapInstance');
-        mapInstance.on('moveend', function() {
-          mapInstance.invalidateSize();
-        });
-      });
-
       // seeing async issues - putting inside run loop to stagger
       Ember.run.next(this, () => {
         mapState.set('currentlySelected', { 

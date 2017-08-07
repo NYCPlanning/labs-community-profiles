@@ -3,9 +3,6 @@ const DEFAULT_BOUNDS = [[40.690913, -74.077644], [40.856654, -73.832692]];
 
 import carto from '../utils/carto';
 
-
-
-
 export default Ember.Service.extend({
   init() {
     carto.getTileTemplate()

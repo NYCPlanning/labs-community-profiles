@@ -9,7 +9,7 @@ module.exports = function(defaults) {
         'foundationJs': 'all'
     },
     'ember-composable-helpers': {
-      only: ['pipe']
+      only: ['array']
     },
     fingerprint: {
       exclude: [

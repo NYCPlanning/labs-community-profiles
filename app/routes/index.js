@@ -19,12 +19,6 @@ export default Ember.Route.extend({
       let mapInstance = mapState.get('mapInstance');
 
       mapState.set('currentlySelected', null);
-
-      Ember.run.next(this, () => {
-        if(mapInstance) {
-          mapInstance.invalidateSize();
-        }
-      });
     }
   }
 });
