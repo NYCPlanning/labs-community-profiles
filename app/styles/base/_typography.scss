@@ -43,6 +43,15 @@ h6,
 }
 
 table {
+  margin-bottom: rem-calc(20);
+
+  @include breakpoint(medium) {
+    margin-bottom: rem-calc(30);
+  }
+
+  @include breakpoint(large) {
+    margin-bottom: rem-calc(40);
+  }
 
   &.small {
     font-size: $small-font-size;
@@ -51,4 +60,11 @@ table {
   &.width-auto {
     width: auto;
   }
+}
+
+//
+// Statistics
+// --------------------------------------------------
+.stat-header {
+  margin-bottom: 0.5em;
 }
