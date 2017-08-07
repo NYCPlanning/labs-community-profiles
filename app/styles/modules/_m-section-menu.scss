@@ -14,4 +14,8 @@
 
 .sticky-element {
    z-index: 999;
+
+   @include breakpoint(medium down) {
+     position: static !important;
+   }
 }
