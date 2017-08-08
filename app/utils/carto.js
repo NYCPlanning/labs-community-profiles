@@ -2,7 +2,7 @@ const cartoUser = 'cpp';
 const cartoDomain = 'cartoprod.capitalplanning.nyc';
 
 const buildTemplate = (layergroupid) => { // eslint-disable-line
-  return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.png`;
+  return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.mvt`;
 };
 
 const carto = {
