@@ -7,6 +7,20 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
+  cdSource: Ember.computed('model', function () {
+    return {
+      type: 'geojson',
+      data: this.get('model'),
+    };
+  }),
+
+  cdSelectedSource: Ember.computed('mapState', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.geom'),
+    };
+  }),
+
   cdLabelsBoro: {
     layout: {
       'text-field': '{boro}',
@@ -75,10 +89,6 @@ export default Ember.Controller.extend({
 
   mouseoverLocation: null,
   'tooltip-text': '',
-
-  selected: Ember.computed('mapState.currentlySelected', function selected() {
-    return this.get('mapState.currentlySelected');
-  }),
 
   options: Ember.computed('model.features.@each', function options() {
     const features = this.get('model.features');

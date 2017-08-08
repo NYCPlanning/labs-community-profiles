@@ -45,6 +45,13 @@ export default Ember.Component.extend({
     },
   },
 
+  cdSelectedSource: Ember.computed('mapState', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.geom'),
+    };
+  }),
+
   cdSelectedLayer: {
     id: 'cd-line',
     type: 'line',
