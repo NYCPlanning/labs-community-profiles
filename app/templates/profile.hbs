@@ -1,6 +1,6 @@
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="cell" data-sticky-container>
+    <div class="cell">
 
       <div class="district-header">
         <h1 class="district">
@@ -24,6 +24,8 @@
           </div>
         </div>
       </div>
+
+      {{log d}}
 
       <div class="section-menu">
         {{#sticky-element top=97}}
@@ -163,10 +165,16 @@
 
         <h4 class="header-tiny"><strong>Poverty</strong></h4>
         <div class="callout">
+          {{d.poverty_rate}}
+          {{d.poverty_rate_boro}}
+          {{d.poverty_rate_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Educational Attainment</strong></h4>
         <div class="callout">
+          {{d.pct_bach_deg}}
+          {{d.pct_bach_deg_boro}}
+          {{d.pct_bach_deg_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Unemployment</strong></h4>
@@ -192,22 +200,35 @@
 
         <h4 class="header-tiny"><strong>Crime Rate</strong></h4>
         <div class="callout">
+          {{d.crime_per_1000}}
+          {{d.crime_per_1000_boro}}
+          {{d.crime_per_1000_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Mean Commute to Work</strong></h4>
         <div class="callout">
+          {{d.mean_commute}}
+          {{d.mean_commute_boro}}
+          {{d.mean_commute_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Rent Burden</strong></h4>
         <div class="callout">
+          {{d.pct_hh_rent_burd}}
+          {{d.pct_hh_rent_burd_boro}}
+          {{d.pct_hh_rent_burd_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Street Cleanliness</strong></h4>
         <div class="callout">
+          {{d.pct_clean_strts}}
+          {{d.pct_clean_strts_boro}}
+          {{d.pct_clean_strts_nyc}}
         </div>
 
         <h4 class="header-tiny"><strong>Access to Parks</strong></h4>
         <div class="callout">
+          {{d.pct_served_parks}}
         </div>
 
         <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
