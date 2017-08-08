@@ -44,5 +44,18 @@ export default Ember.Component.extend({
       'fill-opacity': 1,
     },
   },
+
+  cdSelectedLayer: {
+    id: 'cd-line',
+    type: 'line',
+    source: 'currentlySelected',
+    paint: {
+      'line-width': 3,
+      'line-color': '#000',
+      'line-dasharray': [3, 2],
+      'line-opacity': 0.6,
+    },
+  },
+
   mapState: Ember.inject.service(),
 });

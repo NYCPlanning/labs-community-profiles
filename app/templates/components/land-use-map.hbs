@@ -1,9 +1,13 @@
-
+{{log mapState.bounds}}
 {{#mapbox-gl id='lu-map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) as |map|}}
   {{#map.source sourceId='pluto' options=rasterSourceOptions as |source|}}
     {{source.layer options=rasterLayerOptions}}
   {{/map.source}}
   {{map.call 'fitBounds' mapState.bounds}}
-
+  {{#if mapState.currentlySelected}}
+    {{#map.source data=mapState.geom sourceId='currentlySelected' as |source|}}
+      {{source.layer options=cdSelectedLayer}}
+    {{/map.source}}
+  {{/if}}
 {{/mapbox-gl}}
 {{yield}}

@@ -24,6 +24,7 @@
 
 <div id="main" class="grid-x">
   <div class="cell large-4" id="cd-chooser">
+    {{log mapState.bounds}}
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#map.source data=model sourceId='cds' as |source|}}
         {{source.layer options=cdFillLayer}}

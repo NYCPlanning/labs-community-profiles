@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
   cdSelectedLayer: {
     id: 'cd-selected',
     type: 'fill',
-    source: 'cds',
+    source: 'currentlySelected',
     paint: {
       'fill-color': '#ae561f',
       'fill-opacity': 0.2,
@@ -122,12 +122,14 @@ export default Ember.Controller.extend({
 
   actions: {
     handleClick(e) {
-      const firstCD = e.target.queryRenderedFeatures(e.point)[0];
+      const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
       const { boro, cd } = firstCD.properties;
-      this.transitionToRoute('profile', boro.dasherize(), cd);
+      if (boro) {
+        this.transitionToRoute('profile', boro.dasherize(), cd);
+      }
     },
     handleMouseover(e) {
-      const firstCD = e.target.queryRenderedFeatures(e.point, { layer: 'cds' })[0];
+      const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
