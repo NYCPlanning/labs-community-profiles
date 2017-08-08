@@ -1,7 +1,7 @@
-{{log mapState.bounds}}
+
 {{#mapbox-gl id='lu-map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) as |map|}}
-  {{#map.source sourceId='pluto' options=rasterOptions as |source|}}
-    {{source.layer layerType='raster' source='pluto'}}
+  {{#map.source sourceId='pluto' options=rasterSourceOptions as |source|}}
+    {{source.layer options=rasterLayerOptions}}
   {{/map.source}}
   {{map.call 'fitBounds' mapState.bounds}}
 

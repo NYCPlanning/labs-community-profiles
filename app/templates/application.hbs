@@ -26,9 +26,9 @@
   <div class="cell large-4" id="cd-chooser">
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#map.source data=model sourceId='cds' as |source|}}
-        {{source.layer layerType='fill' source='cds' paintOptions=(hash fill-opacity=0)}}
-        {{source.layer layerType='line' source='cds' paintOptions=(hash line-width=2 line-color='#ae561f')}}
-        {{source.layer layerType='symbol' source='cds' layoutOptions=cdLabels.layout paintOptions=cdLabels.paint}}
+        {{source.layer options=cdFillLayer}}
+        {{source.layer options=cdLineLayer}}
+        {{source.layer options=cdLabelLayer}}
       {{/map.source}}
 
       {{map.call 'fitBounds' mapState.bounds}}
@@ -38,9 +38,7 @@
 
       {{#if mapState.currentlySelected}}
         {{#map.source data=mapState.geom sourceId='currentlySelected' as |source|}}
-          {{source.layer  layerType='fill'
-                          source='currentlySelected'
-                          paintOptions=(hash fill-color='#ae561f' fill-opacity=0.2 fill-outline-color='#ae561f')}}
+          {{source.layer options=cdSelectedLayer}}
         {{/map.source}}
       {{/if}}
 

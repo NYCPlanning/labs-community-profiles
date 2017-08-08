@@ -7,7 +7,53 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
-  cdLabels: {
+  cdLabelsBoro: {
+    layout: {
+      'text-field': '{boro}',
+      'symbol-placement': 'point',
+      'text-size': 12,
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+      'text-offset': [0, -2.5],
+    },
+  },
+
+  cdFillLayer: {
+    id: 'cd-fill',
+    type: 'fill',
+    source: 'cds',
+    paint: {
+      'fill-opacity': 0,
+    },
+  },
+
+  cdLineLayer: {
+    id: 'cd-line',
+    type: 'line',
+    source: 'cds',
+    paint: {
+      'line-width': 2,
+      'line-color': '#ae561f',
+    },
+  },
+
+  cdSelectedLayer: {
+    id: 'cd-selected',
+    type: 'fill',
+    source: 'cds',
+    paint: {
+      'fill-color': '#ae561f',
+      'fill-opacity': 0.2,
+      'fill-outline-color': '#ae561f',
+    },
+  },
+
+  cdLabelLayer: {
+    id: 'cd-label',
+    type: 'symbol',
+    source: 'cds',
     layout: {
       'text-field': '{cd}',
       'symbol-placement': 'point',
@@ -24,19 +70,6 @@ export default Ember.Controller.extend({
     },
     paint: {
       'text-color': 'rgba(66, 66, 66, 1)',
-    },
-  },
-
-  cdLabelsBoro: {
-    layout: {
-      'text-field': '{boro}',
-      'symbol-placement': 'point',
-      'text-size': 12,
-      'icon-allow-overlap': false,
-      'icon-ignore-placement': false,
-      'icon-optional': false,
-      'symbol-avoid-edges': true,
-      'text-offset': [0, -2.5],
     },
   },
 
