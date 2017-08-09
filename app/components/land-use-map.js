@@ -5,6 +5,7 @@ export default Ember.Component.extend({
     style: 'mapbox://styles/mapbox/light-v9',
     zoom: 9,
     center: [-74, 40.7071],
+    scrollZoom: false,
   },
 
   vectorSource: Ember.computed('mapState.landUseTemplate', function () {
