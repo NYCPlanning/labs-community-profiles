@@ -1,6 +1,6 @@
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="cell" data-sticky-container>
+    <div class="cell">
 
       <div class="district-header">
         <h1 class="district">
@@ -11,120 +11,368 @@
 
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-5">
+          <div class="cell medium-6">
             <h4 class="header-tiny"><strong>Neighborhoods</strong></h4>
             <p><small>{{model.properties.neighborhoods}}</small></p>
           </div>
-          <div class="cell medium-4">
-            <h4 class="header-tiny"><strong>Population</strong></h4>
-            <table class="small">
-              <thead>
-                <tr>
-                  <th class="text-center">2000
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2010
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2011-2015
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        American Community Survey 5-year Estimates
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2000 '0.0a'}}
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2010 '0.0a'}}
-                    ({{numeral-format d.pop_change_00_10 '0%'}})
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_11_15_acs '0.0a'}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="cell medium-3">
-            <h4 class="header-tiny"><strong>Land Mass</strong></h4>
-            <table class="small">
-              <thead>
-                <tr>
-                  <th class="text-center">Square Miles</th>
-                  <th class="text-center">Acres</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{d.area_sqmi}}
-                  </td>
-                  <td class="text-center">
-                    {{d.acres}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="cell medium-6">
+            <h4 class="header-tiny"><strong>Community Board {{model.properties.cd}}</strong></h4>
+            <ul>
+              <li><a href="#">website</a></li>
+              <li><a href="#">email</a></li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <div class="section-menu">
+      <div class="section-menu hide-for-print">
         {{#sticky-element top=97}}
           <ul class="menu">
             <li>{{scroll-to href='#needs' label='Needs'}}</li>
-            <li>{{scroll-to href='#land-use' label='Land Use'}}</li>
-            <li>{{scroll-to href='#key-indicators' label='Key Indicators'}}</li>
+            <li>{{scroll-to href='#indicators' label='Indicators'}}</li>
+            <li>{{scroll-to href='#built-environment' label='Built Environment'}}</li>
+            <li>{{scroll-to href='#actions' label='Actions'}}</li>
+            <li>{{scroll-to href='#resources' label='Resources'}}</li>
           </ul>
         {{/sticky-element}}
       </div>
 
       <section id="needs" class="page-section">
-        <h3>Top 3 Pressing Issues
-          <span>
-            {{fa-icon "info-circle"}}
-            {{#tooltip-on-element duration=50000 event='hover'}}
-              These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
-            {{/tooltip-on-element}}
-          </span>
-        </h3>
-        <div class="callout">
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-              <div class="cell medium-auto">
+        <h3 class="section-header"><a href="#needs">Community Needs {{fa-icon "link"}}</a></h3>
+
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Top 3 Pressing Issues</strong>
+                <span>
+                  {{fa-icon "info-circle"}}
+                  {{#tooltip-on-element duration=50000 event='hover'}}
+                    These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
+                  {{/tooltip-on-element}}
+                </span>
+              </h4>
+              <div class="callout">
                 <ul>
                   <li>{{d.son_issue_1}}</li>
                   <li>{{d.son_issue_2}}</li>
                   <li>{{d.son_issue_3}}</li>
                 </ul>
+                <a class="button expanded" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Latest Statement of Needs <small>(PDF)</small></a>
               </div>
-              <div class="cell medium-auto">
-                <a class="button" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Download Full Statement of Needs</a>
+
+            </div>
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Needs Statements</strong></h4>
+              <div class="callout">
+                <ul>
+                  <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                  <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                  <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                  <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                  <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                </ul>
               </div>
+
             </div>
           </div>
         </div>
+
       </section>
 
-      <section id="land-use" class="page-section">
-        <h3>Land Use</h3>
+      <section id="indicators" class="page-section">
+        <h3 class="section-header"><a href="#indicators">Indicators {{fa-icon "link"}}</a></h3>
+
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6 xlarge-5">
+
+              <h4 class="header-tiny"><strong>Population</strong></h4>
+              <table class="small">
+                <thead>
+                  <tr>
+                    <th class="text-center">2000
+                      <sup><span>
+                        {{fa-icon "info-circle"}}
+                        {{#tooltip-on-element duration=50000 event='hover'}}
+                          Decennial Census
+                        {{/tooltip-on-element}}
+                      </span></sup>
+                    </th>
+                    <th class="text-center">2010
+                      <sup><span>
+                        {{fa-icon "info-circle"}}
+                        {{#tooltip-on-element duration=50000 event='hover'}}
+                          Decennial Census
+                        {{/tooltip-on-element}}
+                      </span></sup>
+                    </th>
+                    <th class="text-center">2011-2015
+                      <sup><span>
+                        {{fa-icon "info-circle"}}
+                        {{#tooltip-on-element duration=50000 event='hover'}}
+                          American Community Survey 5-year Estimates
+                        {{/tooltip-on-element}}
+                      </span></sup>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">
+                      {{numeral-format d.pop_2000 '0.0a'}}
+                    </td>
+                    <td class="text-center">
+                      {{numeral-format d.pop_2010 '0.0a'}}
+                      ({{numeral-format d.pop_change_00_10 '0%'}})
+                    </td>
+                    <td class="text-center">
+                      {{numeral-format d.pop_11_15_acs '0.0a'}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div class="cell medium-6 xlarge-5">
+
+              <h4 class="header-tiny"><strong>Land Mass</strong></h4>
+              <table class="small">
+                <thead>
+                  <tr>
+                    <th class="text-center">Square Miles</th>
+                    <th class="text-center">Acres</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">
+                      {{d.area_sqmi}}
+                    </td>
+                    <td class="text-center">
+                      {{d.acres}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div class="cell medium-8 xlarge-7">
+
+              <h4 class="header-tiny"><strong>Community Assets</strong></h4>
+              <table class="small">
+                <thead>
+                  <tr>
+                    <th class="text-center">Public Schools</th>
+                    <th class="text-center">Public Libraries</th>
+                    <th class="text-center">Hospitals and Clinics</th>
+                    <th class="text-center">Parks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">{{d.count_public_schools}}</td>
+                    <td class="text-center">{{d.count_libraries}}</td>
+                    <td class="text-center">{{d.count_hosp_clinic}}</td>
+                    <td class="text-center">{{d.count_parks}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Poverty</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.poverty_rate}}%</span>
+                <small class="stat-footer">of residents had incomes below the poverty level in the last 12 months</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.poverty_rate_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.poverty_rate_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Educational Attainment</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_bach_deg}}%</span>
+                <small class="stat-footer">of residents 25 years or older have earned a bachelor's degree or higher</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_bach_deg_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_bach_deg_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Unemployment</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.unemployment_cd}}%</span>
+                <small class="stat-footer">of the civilian labor force is unemployed</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.unemployment_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.unemployment_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Crime Rate</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.crime_per_1000}}</span>
+                <small class="stat-footer">major crimes were reported per 1,000 residents in 2016</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.crime_per_1000_boro}}</p>
+              <p><small><strong>NYC</strong></small><br />{{d.crime_per_1000_nyc}}</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Mean Commute to Work</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.mean_commute}}</span>
+                <small class="stat-footer">minutes</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.mean_commute_boro}}</p>
+              <p><small><strong>NYC</strong></small><br />{{d.mean_commute_nyc}}</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Rent Burden</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_hh_rent_burd}}%</span>
+                <small class="stat-footer">of households spend 35% or more of their income on rent</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_hh_rent_burd_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_hh_rent_burd_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Street Cleanliness</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_clean_strts}}%</span>
+                <small class="stat-footer">of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_clean_strts_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_clean_strts_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>Access to Parks</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_served_parks}}%</span>
+                <small class="stat-footer">of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>Citywide Target</strong></small><br />85%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
+        <div class="callout">
+        </div>
+
+      </section>
+
+      <section id="built-environment" class="page-section">
+        <h3 class="section-header"><a href="#built-environment">Built Environment {{fa-icon "link"}}</a></h3>
+
+        <h4 class="header-tiny"><strong>Land Use</strong></h4>
         <div class="callout">
           <div class="grid-container">
             <div class="grid-x grid-padding-x">
@@ -137,28 +385,78 @@
             </div>
           </div>
         </div>
+
+        <h4 class="header-tiny"><strong>Zoning</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="header-tiny"><strong>Facilities</strong></h4>
+        <div class="callout">
+        </div>
+
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Housing Pipeline</strong></h4>
+              <div class="callout">
+              </div>
+
+            </div>
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Capital Projects</strong></h4>
+              <div class="callout">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </section>
 
-      <section id="key-indicators" class="page-section">
-        <h3>Key Indicators</h3>
+      <section id="actions" class="page-section">
+        <h3 class="section-header"><a href="#actions">Actions {{fa-icon "link"}}</a></h3>
 
-        <h4 class="header-tiny"><strong>Unemployment</strong></h4>
-        <div class="callout">
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x align-middle text-center">
-              <div class="cell medium-auto">
-                <h5>{{model.properties.boro}} CD {{model.properties.cd}}</h5>
-                <div class="stat">{{model.properties.dataprofile.unemployment_cd}}%</div>
-                <small>of the civilian labor force is unemployed</small>
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>LUCATS Applications</strong></h4>
+              <div class="callout">
               </div>
-              <div class="cell medium-auto">
-                <h5>{{model.properties.boro}}</h5>
-                <div class="lead">{{d.unemployment_boro}}%</div>
+
+            </div>
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Neighborhood Studies</strong></h4>
+              <div class="callout">
               </div>
-              <div class="cell medium-auto">
-                <h5>NYC</h5>
-                <div class="lead">{{d.unemployment_nyc}}%</div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <section id="resources" class="page-section">
+        <h3 class="section-header"><a href="#resources">Resources {{fa-icon "link"}}</a></h3>
+
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Links to Static Maps (title?)</strong></h4>
+              <div class="callout">
               </div>
+
+            </div>
+            <div class="cell medium-6">
+
+              <h4 class="header-tiny"><strong>Download the Data</strong></h4>
+              <div class="callout">
+              </div>
+
             </div>
           </div>
         </div>

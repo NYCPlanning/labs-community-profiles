@@ -1,0 +1,52 @@
+// --------------------------------------------------
+// Print styles
+// --------------------------------------------------
+
+// Add the .hide-for-print class to element that should not print
+
+@media print {
+
+  a[href]:after {
+    word-wrap: break-word !important;
+  }
+
+  .button {
+    background-color: transparent !important;
+    border: 1px solid $medium-gray !important;
+  }
+
+  .branding {
+
+    a {
+      text-decoration: none !important;
+
+      &[href]:after {
+        content: '' !important;
+      }
+    }
+  }
+
+  #cd-chooser .mapboxgl-map {
+    height: 250px !important;
+
+    a[href]:after {
+      content: '' !important;
+    }
+  }
+
+  .section-header {
+
+    a {
+      text-decoration: none !important;
+    }
+
+    .fa {
+      display: none !important;
+    }
+  }
+
+  .mapboxgl-ctrl-logo {
+    display: none !important;
+  }
+
+}

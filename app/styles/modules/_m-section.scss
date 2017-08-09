@@ -6,8 +6,26 @@
   margin-bottom: $global-margin*3;
 
   @include breakpoint(medium) {
-    .cell > :last-child {
+    .cell > :last-child:not(table) {
       margin-bottom: 0;
+    }
+  }
+}
+
+.section-header {
+
+  a {
+    color: $body-font-color;
+
+    .fa {
+      color: $light-gray;
+    }
+  }
+
+  a:hover {
+
+    .fa {
+      color: $dcp-orange;
     }
   }
 }

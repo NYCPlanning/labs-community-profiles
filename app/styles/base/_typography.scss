@@ -42,13 +42,34 @@ h6,
   font-size: rem-calc(14);
 }
 
-table {
+table,
+.callout {
+  margin-bottom: rem-calc(20);
 
-  &.small {
-    font-size: $small-font-size;
+  @include breakpoint(medium) {
+    margin-bottom: rem-calc(30);
   }
 
-  &.width-auto {
-    width: auto;
+  @include breakpoint(large) {
+    margin-bottom: rem-calc(40);
   }
+}
+
+table.small {
+  font-size: $small-font-size;
+}
+
+table.width-auto {
+  width: auto;
+}
+
+//
+// Statistics
+// --------------------------------------------------
+.stat-header {
+  margin-bottom: 0.5em;
+}
+.stat-footer {
+  display: block;
+  line-height: 1.2;
 }
