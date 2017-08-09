@@ -1,14 +1,10 @@
-{{#if (await comparisonData)}}
-  {{yield (hash 
-    indicator=(component 'key-indicator' 
-      data=comparisonData
-      boro=boro
-      cd=cd
-      borocd=borocd
-      indicators=indicators
-    )
+{{yield (hash 
+  indicator=(component 'key-indicator' 
+    data=comparisonData
+    boro=boro
+    cd=cd
+    borocd=borocd
+    indicators=indicators
   )
-  }}
-{{else}}
-  Loading...
-{{/if}}
+)
+}}
