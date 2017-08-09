@@ -9,6 +9,19 @@
         </h1>
       </div>
 
+      {{#key-indicators indicators=columns 
+                        boro=d.boro 
+                        cd=d.cd 
+                        borocd=d.borocd as |data|}}
+        {{data.indicator column='poverty_rate'}}
+        {{data.indicator column='unemployment_cd'}}
+        {{data.indicator column='crime_per_1000'}}
+        {{data.indicator column='mean_commute'}}
+        {{data.indicator column='pct_hh_rent_burd'}}
+        {{data.indicator column='pct_clean_strts'}}
+        {{data.indicator column='pct_bach_deg'}}
+      {{/key-indicators}}
+
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
           <div class="cell medium-5">
@@ -132,7 +145,7 @@
                 {{land-use-map}}
               </div>
               <div class="cell medium-6">
-                {{land-use-chart borocd=model.properties.borocd}}
+                {{!-- {{land-use-chart borocd=model.properties.borocd}} --}}
               </div>
             </div>
           </div>
