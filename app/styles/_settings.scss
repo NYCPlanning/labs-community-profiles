@@ -96,7 +96,7 @@ $global-text-direction: ltr;
 $global-flexbox: true;
 $global-prototype-breakpoints: false;
 $global-color-pick-contrast-tolerance: 0;
-$print-transparent-backgrounds: true;
+$print-transparent-backgrounds: false;
 
 @include add-foundation-colors;
 
@@ -110,7 +110,7 @@ $breakpoints: (
   xlarge: 1200px,
   xxlarge: 1440px,
 );
-$print-breakpoint: large;
+$print-breakpoint: medium;
 $breakpoint-classes: (small medium large xlarge);
 
 // 3. The Grid
