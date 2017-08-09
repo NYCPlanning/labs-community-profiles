@@ -42,7 +42,8 @@ h6,
   font-size: rem-calc(14);
 }
 
-table {
+table,
+.callout {
   margin-bottom: rem-calc(20);
 
   @include breakpoint(medium) {
@@ -52,14 +53,14 @@ table {
   @include breakpoint(large) {
     margin-bottom: rem-calc(40);
   }
+}
 
-  &.small {
-    font-size: $small-font-size;
-  }
+table.small {
+  font-size: $small-font-size;
+}
 
-  &.width-auto {
-    width: auto;
-  }
+table.width-auto {
+  width: auto;
 }
 
 //
@@ -67,4 +68,8 @@ table {
 // --------------------------------------------------
 .stat-header {
   margin-bottom: 0.5em;
+}
+.stat-footer {
+  display: block;
+  line-height: 1.2;
 }
