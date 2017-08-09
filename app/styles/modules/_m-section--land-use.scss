@@ -54,6 +54,20 @@
   animation-delay: -0.16s;
 }
 
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  z-index: 9999;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
 @-webkit-keyframes sk-bouncedelay {
   0%, 80%, 100% { -webkit-transform: scale(0) }
   40% { -webkit-transform: scale(1.0) }
