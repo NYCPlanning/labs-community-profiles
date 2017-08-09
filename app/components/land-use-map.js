@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   vectorSource: Ember.computed('mapState.landUseTemplate', function () {
     return {
       type: 'vector',
-      tiles: ['http://localhost:3000/pluto/{z}/{x}/{y}/tile.mvt'],
+      tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.mvt'],
       minzoom: 14,
     };
   }),
@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   rasterSource: Ember.computed('mapState.landUseTemplate', function () {
     return {
       type: 'raster',
-      tiles: ['http://localhost:3000/pluto/{z}/{x}/{y}/tile.png'],
+      tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.png'],
       tileSize: 256,
       maxzoom: 14,
     };
@@ -28,9 +28,10 @@ export default Ember.Component.extend({
     id: 'landuse-vector',
     type: 'fill',
     source: 'pluto-vector',
-    'source-layer': 'layer0',
+    'source-layer': 'pluto',
     minzoom: 14,
     paint: {
+      'fill-outline-color': '#cdcdcd',
       'fill-color': {
         property: 'landuse',
         type: 'categorical',
@@ -85,15 +86,14 @@ export default Ember.Component.extend({
     handleMouseover(e) {
       const feature = e.target.queryRenderedFeatures(e.point, { layers: ['landuse-vector'] })[0];
 
-
       if (feature) {
-        const { landuse, address } = feature.properties;
+        const { descriptio, address } = feature.properties;
         e.target.getCanvas().style.cursor = 'pointer';
         this.set('mouseoverLocation', {
           x: e.point.x + 30,
           y: e.point.y,
         });
-        this.set('tooltip-text', `${address} ${landuse}`);
+        this.set('tooltip-text', `${address} ${descriptio}`);
       } else {
         e.target.getCanvas().style.cursor = '';
         this.set('mouseoverLocation', null);
