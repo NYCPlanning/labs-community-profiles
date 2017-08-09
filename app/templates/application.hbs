@@ -35,19 +35,10 @@
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}
       {{map.on 'mouseout' (action 'handleMouseleave')}}
-      {{log mapState}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
           {{source.layer layer=cdSelectedLayer}}
         {{/map.source}}
-      {{/if}}
-
-      {{#if mouseoverLocation}}
-        <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 100px;">
-          <div class="card-divider">
-            {{tooltip-text}}
-          </div>
-        </div>
       {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search">

@@ -12,7 +12,8 @@ module.exports = {
   rules: {
     'func-names': 0,
     'no-underscore-dangle': 0,
-    'prefer-rest-params': 0
+    'prefer-rest-params': 0,
+    'prefer-arrow-callback': 0,
   },
   globals: {
    $: true,

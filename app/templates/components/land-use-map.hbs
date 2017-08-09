@@ -1,15 +1,28 @@
 {{#mapbox-gl id='lu-map' initOptions=initOptions as |map|}}
   {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
-    {{source.layer layer=vectorLayer}}
+    {{source.layer layer=vectorLayer before='waterway-label'}}
   {{/map.source}}
+
   {{#map.source sourceId='pluto-raster' source=rasterSource as |source|}}
-    {{source.layer layer=rasterLayer}}
+    {{source.layer layer=rasterLayer before='waterway-label'}}
   {{/map.source}}
+
   {{map.call 'fitBounds' mapState.bounds}}
+  {{map.on 'mousemove' (action 'handleMouseover')}}
+  {{map.on 'mouseout' (action 'handleMouseleave')}}
+
   {{#if mapState.currentlySelected}}
     {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-      {{source.layer layer=cdSelectedLayer}}
+      {{source.layer layer=cdSelectedLayer before='waterway-label'}}
     {{/map.source}}
+  {{/if}}
+
+  {{#if mouseoverLocation}}
+    <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 180px;">
+      <div class="card-divider">
+        {{tooltip-text}}
+      </div>
+    </div>
   {{/if}}
 {{/mapbox-gl}}
 {{yield}}

@@ -144,11 +144,8 @@ export default Ember.Controller.extend({
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
           e.target.getCanvas().style.cursor = 'pointer';
-          this.set('mouseoverLocation', e.point);
-          this.set('tooltip-text', `${firstCD.properties.boro} ${firstCD.properties.cd}`);
         } else {
           e.target.getCanvas().style.cursor = '';
-          this.set('mouseoverLocation', null);
         }
       }
     },
