@@ -1,26 +1,21 @@
 <h4 class="header-tiny"><strong>{{name}}</strong></h4>
 <div class="callout">
-  <div class="grid-container">
-    <div class="grid-x grid-padding-x align-middle text-center">
-      <div class="cell medium-auto">
-        <h5>{{boro}} CD {{cd}}</h5>
-        <div class="stat">{{model.properties.dataprofile.unemployment_cd}}%</div>
-        <small>of the civilian labor force is unemployed</small>
-      </div>
-      <div class="cell medium-auto">
-        <h5>{{model.properties.boro}}</h5>
-        <div class="lead">{{d.unemployment_boro}}%</div>
-      </div>
-      <div class="cell medium-auto">
-        <h5>NYC</h5>
-        <div class="lead">{{d.unemployment_nyc}}%</div>
-      </div>
-      <div class="cell">
-        {{ranking-chart 
-            data=sortedData
-            rank=rankingIndex
-            column=column}}
-      </div>
+  <div class="grid-x grid-padding-x align-middle text-center">
+    <div class="cell medium-4 xlarge-3">
+      <p>
+        <span class="stat">{{numeral-format cd_stat '0.0'}}%</span>
+        <small class="stat-footer">{{yield}}</small>
+      </p>
+    </div>
+    <div class="cell medium-2">
+      {{#if boro_stat}}<p><small><strong>{{boro}} {{cd}}</strong></small><br />{{boro_stat}}%</p>{{/if}}
+      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}%</p>{{/if}}
+    </div>
+    <div class="cell auto">
+      {{ranking-chart 
+        data=sortedData
+        rank=rankingIndex
+        column=column}}
     </div>
   </div>
 </div>
