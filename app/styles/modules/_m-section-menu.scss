@@ -19,3 +19,7 @@
      position: static !important;
    }
 }
+
+.sticky-element--sticky {
+  box-shadow: -1.25rem 0 0 $light-gray, 1.25rem 0 0 $light-gray;
+}
