@@ -1,6 +1,6 @@
 <div class="grid-container">
   <div class="grid-x grid-padding-x">
-    <div class="cell" data-sticky-container>
+    <div class="cell">
 
       <div class="district-header">
         <h1 class="district">
@@ -86,7 +86,8 @@
 
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
+            <div class="cell medium-6 xlarge-5">
+
               <h4 class="header-tiny"><strong>Population</strong></h4>
               <table class="small">
                 <thead>
@@ -132,8 +133,10 @@
                   </tr>
                 </tbody>
               </table>
+
             </div>
-            <div class="cell medium-6">
+            <div class="cell medium-6 xlarge-5">
+
               <h4 class="header-tiny"><strong>Land Mass</strong></h4>
               <table class="small">
                 <thead>
@@ -153,61 +156,183 @@
                   </tr>
                 </tbody>
               </table>
+
+            </div>
+            <div class="cell medium-8 xlarge-7">
+
+              <h4 class="header-tiny"><strong>Community Assets</strong></h4>
+              <table class="small">
+                <thead>
+                  <tr>
+                    <th class="text-center">Public Schools</th>
+                    <th class="text-center">Public Libraries</th>
+                    <th class="text-center">Hospitals and Clinics</th>
+                    <th class="text-center">Parks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center">{{d.count_public_schools}}</td>
+                    <td class="text-center">{{d.count_libraries}}</td>
+                    <td class="text-center">{{d.count_hosp_clinic}}</td>
+                    <td class="text-center">{{d.count_parks}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
             </div>
           </div>
         </div>
 
-        <h4 class="header-tiny"><strong>Community Assets</strong></h4>
-        <div class="callout">
-        </div>
-
         <h4 class="header-tiny"><strong>Poverty</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.poverty_rate}}%</span>
+                <small class="stat-footer">of residents had incomes below the poverty level in the last 12 months</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.poverty_rate_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.poverty_rate_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Educational Attainment</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_bach_deg}}%</span>
+                <small class="stat-footer">of residents 25 years or older have earned a bachelor's degree or higher</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_bach_deg_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_bach_deg_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Unemployment</strong></h4>
         <div class="callout">
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x align-middle text-center">
-              <div class="cell medium-6">
-                <h5 class="stat-header">{{model.properties.boro}} CD {{model.properties.cd}}</h5>
-                <div class="stat">{{model.properties.dataprofile.unemployment_cd}}%</div>
-                <small>of the civilian labor force is unemployed</small>
-              </div>
-              <div class="cell medium-3">
-                <h5 class="stat-header">{{model.properties.boro}}</h5>
-                <div class="lead">{{d.unemployment_boro}}%</div>
-              </div>
-              <div class="cell medium-3">
-                <h5 class="stat-header">NYC</h5>
-                <div class="lead">{{d.unemployment_nyc}}%</div>
-              </div>
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.unemployment_cd}}%</span>
+                <small class="stat-footer">of the civilian labor force is unemployed</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.unemployment_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.unemployment_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
             </div>
           </div>
         </div>
 
         <h4 class="header-tiny"><strong>Crime Rate</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.crime_per_1000}}</span>
+                <small class="stat-footer">major crimes were reported per 1,000 residents in 2016</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.crime_per_1000_boro}}</p>
+              <p><small><strong>NYC</strong></small><br />{{d.crime_per_1000_nyc}}</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Mean Commute to Work</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.mean_commute}}</span>
+                <small class="stat-footer">minutes</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.mean_commute_boro}}</p>
+              <p><small><strong>NYC</strong></small><br />{{d.mean_commute_nyc}}</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Rent Burden</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_hh_rent_burd}}%</span>
+                <small class="stat-footer">of households spend 35% or more of their income on rent</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_hh_rent_burd_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_hh_rent_burd_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Street Cleanliness</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_clean_strts}}%</span>
+                <small class="stat-footer">of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_clean_strts_boro}}%</p>
+              <p><small><strong>NYC</strong></small><br />{{d.pct_clean_strts_nyc}}%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>Access to Parks</strong></h4>
         <div class="callout">
+          <div class="grid-x grid-padding-x align-middle text-center">
+            <div class="cell medium-4 xlarge-3">
+              <p>
+                <span class="stat">{{d.pct_served_parks}}%</span>
+                <small class="stat-footer">of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}</small>
+              </p>
+            </div>
+            <div class="cell medium-2">
+              <p><small><strong>Citywide Target</strong></small><br />85%</p>
+            </div>
+            <div class="cell auto">
+              <img src="http://via.placeholder.com/800x300&text=CHART" />
+            </div>
+          </div>
         </div>
 
         <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
