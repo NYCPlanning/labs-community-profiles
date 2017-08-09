@@ -58,14 +58,30 @@ div.tooltip {
   position: absolute;
   text-align: center;
   z-index: 9999;
-  width: 60px;
-  height: 28px;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
+  // height: 35px;
+  padding: 5px;
+  background: darkgray;
   border: 0px;
-  border-radius: 8px;
   pointer-events: none;
+}
+
+// .arrow-up {
+//   width: 0; 
+//   height: 0; 
+//   border-left: 5px solid transparent;
+//   border-right: 5px solid transparent;
+  
+//   border-bottom: 5px solid black;
+// }
+
+.tooltip:after {
+  content: '';
+  border: 10px solid transparent;
+  border-bottom-color: darkgray;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -10px;
 }
 
 @-webkit-keyframes sk-bouncedelay {
