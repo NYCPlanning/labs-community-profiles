@@ -14,10 +14,10 @@ export default Ember.Controller.extend({
     };
   }),
 
-  cdSelectedSource: Ember.computed('mapState', function () {
+  cdSelectedSource: Ember.computed('mapState.feature', function () {
     return {
       type: 'geojson',
-      data: this.get('mapState.geom'),
+      data: this.get('mapState.feature'),
     };
   }),
 
@@ -152,7 +152,7 @@ export default Ember.Controller.extend({
         }
       }
     },
-    handleMouseleave(e) {
+    handleMouseleave() {
       this.set('mouseoverLocation', null);
     },
     handleMapLoad(e) {

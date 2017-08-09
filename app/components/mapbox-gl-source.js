@@ -16,7 +16,6 @@ export default Ember.Component.extend({
     this._super();
 
     const { sourceId, source } = getProperties(this, 'sourceId', 'source');
-    console.log('adding source', sourceId, source);
     this.map.addSource(sourceId, source);
   },
 
@@ -31,5 +30,5 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this.map.removeSource(get(this, 'sourceId'));
-  }
+  },
 });

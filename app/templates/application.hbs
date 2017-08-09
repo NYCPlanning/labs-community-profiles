@@ -35,7 +35,7 @@
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}
       {{map.on 'mouseout' (action 'handleMouseleave')}}
-
+      {{log mapState}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
           {{source.layer layer=cdSelectedLayer}}

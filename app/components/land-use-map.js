@@ -1,28 +1,36 @@
 import Ember from 'ember'; // eslint-disable-line
 
 export default Ember.Component.extend({
-  lat: 40.7071266,
-  lng: -74,
-  zoom: 9.2,
-  geomStyle: {
-    fill: false,
-    color: '#000',
-    weight: 2,
-    dashArray: '8 5',
-    opacity: 0.6,
-  },
-  rasterSourceOptions: {
-    type: 'vector',
-    tiles: ['http://localhost:3000/maps/mylayer/{z}/{x}/{y}/tile.pbf'],
+  initOptions: {
+    style: 'mapbox://styles/mapbox/light-v9',
+    zoom: 9,
+    center: [-74, 40.7071],
   },
 
-  rasterLayerOptions: {
-    id: 'landuse',
+  vectorSource: Ember.computed('mapState.landUseTemplate', function () {
+    const vectorTemplate = this.get('mapState.landUseTemplate').replace('png', 'mvt');
+    return {
+      type: 'vector',
+      tiles: [vectorTemplate],
+      minzoom: 14,
+    };
+  }),
+
+  rasterSource: Ember.computed('mapState.landUseTemplate', function () {
+    return {
+      type: 'raster',
+      tiles: [this.get('mapState.landUseTemplate')],
+      tileSize: 256,
+      maxzoom: 14,
+    };
+  }),
+
+  vectorLayer: {
+    id: 'landuse-vector',
     type: 'fill',
-    source: 'pluto',
+    source: 'pluto-vector',
     'source-layer': 'layer0',
-    minzoom: 0,
-    maxzoom: 22,
+    minzoom: 14,
     paint: {
       'fill-color': {
         property: 'landuse',
@@ -45,10 +53,17 @@ export default Ember.Component.extend({
     },
   },
 
+  rasterLayer: {
+    id: 'landuse-raster',
+    type: 'raster',
+    source: 'pluto-raster',
+    maxzoom: 14,
+  },
+
   cdSelectedSource: Ember.computed('mapState', function () {
     return {
       type: 'geojson',
-      data: this.get('mapState.geom'),
+      data: this.get('mapState.feature'),
     };
   }),
 

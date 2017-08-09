@@ -43,10 +43,11 @@ export default Ember.Route.extend({
         return selectedDistrict;
       });
   },
-  afterModel(profile) {
+  afterModel(feature) {
+    console.log('afterModel', feature);
     const mapState = this.get('mapState');
-    mapState.set('bounds', bbox(profile.geometry));
-    mapState.set('geom', profile);
+    mapState.set('bounds', bbox(feature.geometry));
+    mapState.set('feature', feature);
 
     carto.getTileTemplate()
       .then((landUseTemplate) => {

@@ -1,6 +1,9 @@
-{{#mapbox-gl id='lu-map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) as |map|}}
-  {{#map.source sourceId='pluto' source=rasterSourceOptions as |source|}}
-    {{source.layer layer=rasterLayerOptions}}
+{{#mapbox-gl id='lu-map' initOptions=initOptions as |map|}}
+  {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
+    {{source.layer layer=vectorLayer}}
+  {{/map.source}}
+  {{#map.source sourceId='pluto-raster' source=rasterSource as |source|}}
+    {{source.layer layer=rasterLayer}}
   {{/map.source}}
   {{map.call 'fitBounds' mapState.bounds}}
   {{#if mapState.currentlySelected}}

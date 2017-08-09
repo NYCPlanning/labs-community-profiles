@@ -15,7 +15,6 @@ export default Ember.Component.extend({
 
     const { layer, before } = getProperties(this, 'layer', 'before');
 
-    console.log('adding layer', layer, before);
     this.map.addLayer(layer, before);
   },
 
@@ -23,5 +22,5 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this.map.removeLayer(this.layer.id);
-  }
+  },
 });
