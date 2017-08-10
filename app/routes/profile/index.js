@@ -23,6 +23,9 @@ export default Ember.Route.extend({
           neighborhoods,
         });
       });
-    }
-  }
+    },
+    error() {
+      return true;
+    },
+  },
 });
