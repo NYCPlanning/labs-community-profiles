@@ -44,7 +44,7 @@
     <div id="cd-search" class="hide-for-print">
       {{#power-select
         options=options
-        selected=selected
+        selected=mapState.currentlySelected
         searchField="name"
         placeholder="Enter a Community District or neighborhood..."
         onchange=(route-action 'transitionToProfile')

@@ -1,4 +1,6 @@
 {
   "name": "labs-community-portal",
-  "dependencies": {}
+  "dependencies": {
+    "d3": "~4.10.0"
+  }
 }
