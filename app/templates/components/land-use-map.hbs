@@ -1,8 +1,28 @@
-{{#leaflet-map bounds=mapState.bounds scrollWheelZoom=false minZoom=14 classNames='land-use-map'}}
-  {{tile-layer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"}}
-  {{#if mapState.landUseTemplate}}
-    {{tile-layer url=mapState.landUseTemplate}}
+{{#mapbox-gl id='lu-map' initOptions=initOptions as |map|}}
+  {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
+    {{source.layer layer=vectorLayer before='waterway-label'}}
+  {{/map.source}}
+
+  {{#map.source sourceId='pluto-raster' source=rasterSource as |source|}}
+    {{source.layer layer=rasterLayer before='waterway-label'}}
+  {{/map.source}}
+
+  {{map.call 'fitBounds' mapState.bounds}}
+  {{map.on 'mousemove' (action 'handleMouseover')}}
+  {{map.on 'mouseout' (action 'handleMouseleave')}}
+
+  {{#if mapState.currentlySelected}}
+    {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+      {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+    {{/map.source}}
   {{/if}}
-  {{geojson-layer geoJSON=mapState.geom style=geomStyle}}
-{{/leaflet-map}}
+
+  {{#if mouseoverLocation}}
+    <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 180px;">
+      <div class="card-section">
+        {{tooltip-text}}
+      </div>
+    </div>
+  {{/if}}
+{{/mapbox-gl}}
 {{yield}}
