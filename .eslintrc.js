@@ -14,6 +14,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'prefer-rest-params': 0,
     'prefer-arrow-callback': 0,
+    'no-extraneous-dependencies': 0
   },
   globals: {
    $: true,
