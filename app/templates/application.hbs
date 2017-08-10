@@ -1,5 +1,5 @@
 <a class="show-on-focus" href="#main">Skip to main content</a>
-<a href="https://planninglabs.nyc/" class="labs-beta-notice">A beta project of NYC Planning Labs</a>
+<a href="https://planninglabs.nyc/" class="labs-beta-notice hide-for-print">A beta project of NYC Planning Labs</a>
 <header role="banner" class="site-header">
   {{#initialize-foundation}}
   <div class="grid-x grid-padding-x">
@@ -8,9 +8,9 @@
       {{link-to 'Community Portal' 'index' classNames='site-name'}}
     </div>
     <div class="cell auto hide-for-large text-right">
-      <button class="responsive-nav-toggler" data-toggle="responsive-menu">Menu</button>
+      <button class="responsive-nav-toggler hide-for-print" data-toggle="responsive-menu">Menu</button>
     </div>
-    <div id="responsive-menu" class="cell large-shrink show-for-large" data-toggler=".show-for-large">
+    <div id="responsive-menu" class="cell large-shrink show-for-large hide-for-print" data-toggler=".show-for-large">
       <nav role="navigation">
         <ul class="menu">
           <li><a href="/about">About</a></li>
@@ -25,34 +25,23 @@
 <div id="main" class="grid-x">
   <div class="cell large-4" id="cd-chooser">
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
-      {{#map.source data=model sourceId='cds' as |source|}}
-        {{source.layer layerType='fill' source='cds' paintOptions=(hash fill-opacity=0)}}
-        {{source.layer layerType='line' source='cds' paintOptions=(hash line-width=2 line-color='#ae561f')}}
-        {{source.layer layerType='symbol' source='cds' layoutOptions=cdLabels.layout paintOptions=cdLabels.paint}}
+      {{#map.source sourceId='cds' source=cdSource as |source|}}
+        {{source.layer layer=cdFillLayer}}
+        {{source.layer layer=cdLineLayer}}
+        {{source.layer layer=cdLabelLayer}}
       {{/map.source}}
 
-      {{map.call 'fitBounds' bounds}}
+      {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}
       {{map.on 'mouseout' (action 'handleMouseleave')}}
-
       {{#if mapState.currentlySelected}}
-        {{#map.source data=mapState.geom sourceId='currentlySelected' as |source|}}
-          {{source.layer  layerType='fill'
-                          source='currentlySelected'
-                          paintOptions=(hash fill-color='#ae561f' fill-opacity=0.2 fill-outline-color='#ae561f')}}
+        {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+          {{source.layer layer=cdSelectedLayer}}
         {{/map.source}}
       {{/if}}
-
-      {{#if mouseoverLocation}}
-        <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 100px;">
-          <div class="card-divider">
-            {{tooltip-text}}
-          </div>
-        </div>
-      {{/if}}
     {{/mapbox-gl}}
-    <div id="cd-search">
+    <div id="cd-search" class="hide-for-print">
       {{#power-select
         options=options
         selected=selected
