@@ -184,156 +184,57 @@
           </div>
         </div>
 
-        <h4 class="header-tiny"><strong>Poverty</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.poverty_rate}}%</span>
-                <small class="stat-footer">of residents had incomes below the poverty level in the last 12 months</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.poverty_rate_boro}}%</p>
-              <p><small><strong>NYC</strong></small><br />{{d.poverty_rate_nyc}}%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Educational Attainment</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.pct_bach_deg}}%</span>
-                <small class="stat-footer">of residents 25 years or older have earned a bachelor's degree or higher</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_bach_deg_boro}}%</p>
-              <p><small><strong>NYC</strong></small><br />{{d.pct_bach_deg_nyc}}%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Unemployment</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.unemployment_cd}}%</span>
-                <small class="stat-footer">of the civilian labor force is unemployed</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.unemployment_boro}}%</p>
-              <p><small><strong>NYC</strong></small><br />{{d.unemployment_nyc}}%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Crime Rate</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.crime_per_1000}}</span>
-                <small class="stat-footer">major crimes were reported per 1,000 residents in 2016</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.crime_per_1000_boro}}</p>
-              <p><small><strong>NYC</strong></small><br />{{d.crime_per_1000_nyc}}</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Mean Commute to Work</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.mean_commute}}</span>
-                <small class="stat-footer">minutes</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.mean_commute_boro}}</p>
-              <p><small><strong>NYC</strong></small><br />{{d.mean_commute_nyc}}</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Rent Burden</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.pct_hh_rent_burd}}%</span>
-                <small class="stat-footer">of households spend 35% or more of their income on rent</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_hh_rent_burd_boro}}%</p>
-              <p><small><strong>NYC</strong></small><br />{{d.pct_hh_rent_burd_nyc}}%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Street Cleanliness</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.pct_clean_strts}}%</span>
-                <small class="stat-footer">of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>{{model.properties.boro}}</strong></small><br />{{d.pct_clean_strts_boro}}%</p>
-              <p><small><strong>NYC</strong></small><br />{{d.pct_clean_strts_nyc}}%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
-
-        <h4 class="header-tiny"><strong>Access to Parks</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x align-middle text-center">
-            <div class="cell medium-4 xlarge-3">
-              <p>
-                <span class="stat">{{d.pct_served_parks}}%</span>
-                <small class="stat-footer">of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}</small>
-              </p>
-            </div>
-            <div class="cell medium-2">
-              <p><small><strong>Citywide Target</strong></small><br />85%</p>
-            </div>
-            <div class="cell auto">
-              <img src="http://via.placeholder.com/800x300&text=CHART" />
-            </div>
-          </div>
-        </div>
+        {{#key-indicators indicators=columns 
+                          boro=model.properties.boro 
+                          cd=model.properties.cd 
+                          borocd=d.borocd as |data|}}
+          {{#data.indicator column='poverty_rate'
+                            cd_stat=d.poverty_rate
+                            boro_stat=d.poverty_rate_boro
+                            city_stat=d.poverty_rate_nyc}}
+            of residents had incomes below the poverty level in the last 12 months
+          {{/data.indicator}}
+          {{#data.indicator column='pct_bach_deg'
+                            cd_stat=d.pct_bach_deg
+                            boro_stat=d.pct_bach_deg_boro
+                            city_stat=d.pct_bach_deg_nyc}}
+            of residents 25 years or older have earned a bachelor's degree or higher
+          {{/data.indicator}}
+          {{#data.indicator column='unemployment_cd'
+                            cd_stat=d.unemployment_cd
+                            boro_stat=d.unemployment_boro
+                            city_stat=d.unemployment_nyc}}
+            of the civilian labor force is unemployed
+          {{/data.indicator}}
+          {{#data.indicator column='crime_per_1000'
+                            cd_stat=d.crime_per_1000
+                            boro_stat=d.crime_per_1000_boro
+                            city_stat=d.crime_per_1000_nyc}}
+            major crimes were reported per 1,000 residents in 2016
+          {{/data.indicator}}
+          {{#data.indicator column='mean_commute'
+                            cd_stat=d.mean_commute
+                            boro_stat=d.mean_commute_boro
+                            city_stat=d.mean_commute_nyc}}
+            minutes
+          {{/data.indicator}}
+          {{#data.indicator column='pct_hh_rent_burd'
+                            cd_stat=d.pct_hh_rent_burd
+                            boro_stat=d.pct_hh_rent_burd_boro
+                            city_stat=d.pct_hh_rent_burd_nyc}}
+            of households spend 35% or more of their income on rent
+          {{/data.indicator}}
+          {{#data.indicator column='pct_clean_strts'
+                            cd_stat=d.pct_clean_strts
+                            boro_stat=d.pct_clean_strts_boro
+                            city_stat=d.pct_clean_strts_nyc}}
+            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
+          {{/data.indicator}}
+          {{#data.indicator column='pct_clean_strts'
+                            cd_stat=d.pct_served_parks}}
+            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+          {{/data.indicator}}
+        {{/key-indicators}}
 
         <h4 class="header-tiny"><strong>[Policy Area]</strong></h4>
         <div class="callout">

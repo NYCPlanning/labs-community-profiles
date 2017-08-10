@@ -5,13 +5,17 @@ const buildTemplate = (layergroupid) => { // eslint-disable-line
   return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.png`;
 };
 
+const buildSqlUrl = (cleanedQuery, type = 'json') => {
+  return `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${cleanedQuery}&format=${type}`
+}
+
 const carto = {
   SQL(query, type = 'json') {
     const cleanedQuery = query.replace('\n', '');
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
-        url: `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${cleanedQuery}&format=${type}`,
+        url: buildSqlUrl(cleanedQuery, type),
         success(d) {
           resolve(type === 'json' ? d.rows : d);
         },
@@ -110,4 +114,5 @@ const carto = {
   },
 };
 
+export { buildSqlUrl };
 export default carto;
