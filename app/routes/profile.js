@@ -53,4 +53,9 @@ export default Ember.Route.extend({
         mapState.set('landUseTemplate', landUseTemplate);
       });
   },
+  actions: {
+    error() {
+      this.transitionTo('404');
+    }
+  }
 });
