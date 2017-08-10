@@ -12,16 +12,18 @@ const buildSqlUrl = (cleanedQuery, type = 'json') => {
 const carto = {
   SQL(query, type = 'json') {
     const cleanedQuery = query.replace('\n', '');
-    return new Promise((resolve, reject) => {
-      $.ajax({
-        type: 'GET',
-        url: buildSqlUrl(cleanedQuery, type),
-        success(d) {
-          resolve(type === 'json' ? d.rows : d);
-        },
+    const url = buildSqlUrl(cleanedQuery, type);
+
+    return fetch(url)
+      .then((response) => {
+        if(response.ok) {
+          return response.json();
+        }
+        throw new Error('Not found');
       })
-        .fail(() => reject());
-    });
+      .then((d) => {
+        return type === 'json' ? d.rows : d;
+      });
   },
 
   getTileTemplate() {
