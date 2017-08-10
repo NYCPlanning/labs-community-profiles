@@ -6,9 +6,10 @@ const Router = Ember.Router.extend({
   rootURL: config.rootURL,
 });
 
-Router.map(function () { // eslint-disable-line
+Router.map(function () {
+  // eslint-disable-line
   this.route('profile', { path: '/:boro/:cd' }, () => {});
-  this.route('404', { path: '/*path' });
+  this.route('not-found', { path: '/*path' });
 });
 
 export default Router;
