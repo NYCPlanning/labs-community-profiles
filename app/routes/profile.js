@@ -44,14 +44,8 @@ export default Ember.Route.extend({
       });
   },
   afterModel(feature) {
-    console.log('afterModel', feature);
     const mapState = this.get('mapState');
     mapState.set('bounds', bbox(feature.geometry));
     mapState.set('feature', feature);
-
-    carto.getTileTemplate()
-      .then((landUseTemplate) => {
-        mapState.set('landUseTemplate', landUseTemplate);
-      });
   },
 });

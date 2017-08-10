@@ -1,0 +1,25 @@
+{{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
+  {{#map.source sourceId='facilities' source=vectorSource as |source|}}
+    {{source.layer layer=pointsLayer before='waterway-label'}}
+    {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
+  {{/map.source}}
+
+  {{map.call 'fitBounds' mapState.bounds}}
+  {{map.on 'mousemove' (action 'handleMouseover')}}
+  {{map.on 'mouseout' (action 'handleMouseleave')}}
+
+  {{#if mapState.currentlySelected}}
+    {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+      {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+    {{/map.source}}
+  {{/if}}
+
+  {{#if mouseoverLocation}}
+    <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 180px;">
+      <div class="card-section">
+        {{tooltip-text}}
+      </div>
+    </div>
+  {{/if}}
+{{/mapbox-gl}}
+{{yield}}
