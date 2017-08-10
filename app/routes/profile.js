@@ -55,7 +55,7 @@ export default Ember.Route.extend({
   },
   actions: {
     error() {
-      this.transitionTo('404');
-    }
-  }
+      this.transitionTo('/not-found');
+    },
+  },
 });
