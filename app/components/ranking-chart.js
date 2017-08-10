@@ -77,7 +77,6 @@ export default Ember.Component.extend(ResizeAware, {
 
     Promise.all([data, rankPromise]).then(resolve => {
       const [data, rank] = resolve;
-      console.log(rank);
       const x = d3.scaleBand()
         .domain(data.map(d => d.borocd))
         .range([0, width])
@@ -107,7 +106,10 @@ export default Ember.Component.extend(ResizeAware, {
       const current = data[rank];
 
       const bars = svg.selectAll('.bar')
-        .data(data);
+        .data(data, function(d) {
+          console.log(d.is_selected);
+          return d.is_selected;
+        });
 
       bars.enter()
         .append('rect')
@@ -141,12 +143,13 @@ export default Ember.Component.extend(ResizeAware, {
             });
         })
         .on('mouseout', function(d, i) {
-          console.log(rank, i);
           const selector = `.bar-${d.borocd}`;
           svg.select(selector)
             .transition()
             .duration(10)
-            .attr('fill', isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray);
+            .attr('fill', function(d) {
+              return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
+            });
         });
 
       div
