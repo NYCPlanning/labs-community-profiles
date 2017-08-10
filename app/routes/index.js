@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { L } from 'ember-leaflet';
+import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
@@ -9,8 +9,8 @@ export default Ember.Route.extend({
   },
 
   afterModel(districts) {
-    let mapState = this.get('mapState');
-    mapState.set('bounds', L.geoJson(districts).getBounds());
+    const mapState = this.get('mapState');
+    mapState.set('bounds', bbox(districts));
   },
 
   actions: {
