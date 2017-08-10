@@ -10,9 +10,11 @@ export default Ember.Controller.extend({
     'mean_commute',
     'pct_hh_rent_burd',
     'pct_clean_strts',
-    'pct_bach_deg'],
+    'pct_bach_deg',
+    'pct_served_parks',
+  ],
 
-  d: Ember.computed('model', function() {
+  d: Ember.computed('model', function () {
     return this.get('model.properties.dataprofile');
   }),
 });

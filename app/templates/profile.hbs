@@ -184,9 +184,9 @@
           </div>
         </div>
 
-        {{#key-indicators indicators=columns 
-                          boro=model.properties.boro 
-                          cd=model.properties.cd 
+        {{#key-indicators indicators=columns
+                          boro=model.properties.boro
+                          cd=model.properties.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator column='poverty_rate'
                             cd_stat=d.poverty_rate
@@ -230,7 +230,7 @@
                             city_stat=d.pct_clean_strts_nyc}}
             of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
           {{/data.indicator}}
-          {{#data.indicator column='pct_clean_strts'
+          {{#data.indicator column='pct_served_parks'
                             cd_stat=d.pct_served_parks}}
             of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
           {{/data.indicator}}

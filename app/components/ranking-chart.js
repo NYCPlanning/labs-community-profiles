@@ -120,7 +120,7 @@ export default Ember.Component.extend(ResizeAware, {
         svg.select(selector)
           .transition()
           .duration(10)
-          .attr('fill', function(d) {
+          .attr('fill', function (d) {
             return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
           });
       };
@@ -129,14 +129,9 @@ export default Ember.Component.extend(ResizeAware, {
 
       // Join new data
       const bars = svg.selectAll('.bar')
-        .data(data, function(d) {
+        .data(data, function (d) {
           return d.borocd;
         });
-
-      // exit old elements
-      bars.exit()
-        .attr('fill', colors)
-        .remove();
 
       // update elements
       bars
@@ -166,7 +161,7 @@ export default Ember.Component.extend(ResizeAware, {
 
       div
         .text(() => `${current.boro_district}: ${percent(current[column])}%`)
-        .attr('style', function() {
+        .attr('style', function () {
           const midpoint = calculateMidpoint(this);
           return `left: ${x(current.borocd) - midpoint}px`;
         });
