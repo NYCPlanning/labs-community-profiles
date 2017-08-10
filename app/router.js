@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function () { // eslint-disable-line
   this.route('profile', { path: '/:boro/:cd' }, () => {});
+  this.route('404', { path: '/404' });
 });
 
 export default Router;
