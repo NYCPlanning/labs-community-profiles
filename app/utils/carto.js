@@ -26,62 +26,62 @@ const carto = {
 
   getTileTemplate() {
     const SQL = `
-      SELECT a.the_geom_webmercator, b.code as landuse, b.description as landuse_desc
+      SELECT a.the_geom_webmercator, landuse, b.description as landuse_desc
       FROM support_mappluto a
       LEFT JOIN support_landuse_lookup b
       ON a.landuse::integer = b.code
     `;
 
     const CartoCSS = `
-      #pluto15v1 {
+      #pluto {
        polygon-opacity: 0.8;
        line-width: .5;
        line-opacity: 1;
        polygon-fill: #000;
       }
 
-      #pluto15v1[landuse=1] {
+      #pluto[landuse='01'] {
        polygon-fill: #f4f455;
        line-color: #f4f455;
       }
-      #pluto15v1[landuse=2] {
+      #pluto[landuse='02'] {
        polygon-fill: #f7d496;
        line-color: #f7d496;
       }
-      #pluto15v1[landuse=3] {
+      #pluto[landuse='03'] {
        polygon-fill: #FF9900;
        line-color: #FF9900;
       }
-      #pluto15v1[landuse=4] {
+      #pluto[landuse='04'] {
        polygon-fill: #f7cabf;
       line-color: #f7cabf;
       }
-      #pluto15v1[landuse=5] {
+      #pluto[landuse='05'] {
        polygon-fill: #ea6661;
       line-color: #ea6661;
       }
-      #pluto15v1[landuse=6] {
+      #pluto[landuse='06'] {
        polygon-fill: #d36ff4;
       line-color: #d36ff4;
       }
-      #pluto15v1[landuse=7] {
+      #pluto[landuse='07'] {
        polygon-fill: #dac0e8;
       line-color: #dac0e8;
       }
-      #pluto15v1[landuse=8] {
+      #pluto[landuse='08'] {
        polygon-fill: #5CA2D1;
       line-color: #5CA2D1;
       }
-      #pluto15v1[landuse=9] {
+      #pluto[landuse='09'] {
        polygon-fill: #8ece7c;
       line-color: #8ece7c;
       }
-      #pluto15v1[landuse=10] {
+      #pluto[landuse='10'] {
        polygon-fill: #bab8b6;
       line-color: #bab8b6;
       }
 
-      #pluto15v1[landuse=11] {
+      #pluto[landuse='11'] {
        polygon-fill: #5f5f60;
       line-color: #5f5f60;
       }

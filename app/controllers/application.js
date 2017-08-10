@@ -7,7 +7,67 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
-  cdLabels: {
+  cdSource: Ember.computed('model', function () {
+    return {
+      type: 'geojson',
+      data: this.get('model'),
+    };
+  }),
+
+  cdSelectedSource: Ember.computed('mapState.feature', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.feature'),
+    };
+  }),
+
+  cdLabelsBoro: {
+    layout: {
+      'text-field': '{boro}',
+      'symbol-placement': 'point',
+      'text-size': 12,
+      'icon-allow-overlap': false,
+      'icon-ignore-placement': false,
+      'icon-optional': false,
+      'symbol-avoid-edges': true,
+      'text-offset': [0, -2.5],
+    },
+  },
+
+  cdFillLayer: {
+    id: 'cd-fill',
+    type: 'fill',
+    source: 'cds',
+    paint: {
+      'fill-opacity': 0,
+    },
+  },
+
+  cdLineLayer: {
+    id: 'cd-line',
+    type: 'line',
+    source: 'cds',
+    paint: {
+      'line-width': 2,
+      'line-color': '#ae561f',
+    },
+  },
+
+  cdSelectedLayer: {
+    id: 'cd-selected',
+    type: 'fill',
+    source: 'currentlySelected',
+    paint: {
+      'fill-color': '#ae561f',
+      'fill-opacity': 0.2,
+      'fill-outline-color': '#ae561f',
+    },
+  },
+
+  cdLabelLayer: {
+    id: 'cd-label',
+    type: 'symbol',
+    source: 'cds',
     layout: {
       'text-field': '{cd}',
       'symbol-placement': 'point',
@@ -27,32 +87,8 @@ export default Ember.Controller.extend({
     },
   },
 
-  cdLabelsBoro: {
-    layout: {
-      'text-field': '{boro}',
-      'symbol-placement': 'point',
-      'text-size': 12,
-      'icon-allow-overlap': false,
-      'icon-ignore-placement': false,
-      'icon-optional': false,
-      'symbol-avoid-edges': true,
-      'text-offset': [0, -2.5],
-    },
-  },
-
   mouseoverLocation: null,
   'tooltip-text': '',
-
-  // transform into mbgl compatible
-  bounds: Ember.computed('mapState.bounds', function() {
-    const bounds = this.get('mapState.bounds');
-    const mapboxBounds = [[bounds.getSouthWest().lng, bounds.getSouthWest().lat], [bounds.getNorthEast().lng, bounds.getNorthEast().lat]];
-    return mapboxBounds;
-  }),
-
-  selected: Ember.computed('mapState.currentlySelected', function selected() {
-    return this.get('mapState.currentlySelected');
-  }),
 
   options: Ember.computed('model.features.@each', function options() {
     const features = this.get('model.features');
@@ -96,25 +132,24 @@ export default Ember.Controller.extend({
 
   actions: {
     handleClick(e) {
-      const firstCD = e.target.queryRenderedFeatures(e.point)[0];
+      const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
       const { boro, cd } = firstCD.properties;
-      this.transitionToRoute('profile', boro.dasherize(), cd);
+      if (boro) {
+        this.transitionToRoute('profile', boro.dasherize(), cd);
+      }
     },
     handleMouseover(e) {
-      const firstCD = e.target.queryRenderedFeatures(e.point, { layer: 'cds' })[0];
+      const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
           e.target.getCanvas().style.cursor = 'pointer';
-          this.set('mouseoverLocation', e.point);
-          this.set('tooltip-text', `${firstCD.properties.boro} ${firstCD.properties.cd}`);
         } else {
           e.target.getCanvas().style.cursor = '';
-          this.set('mouseoverLocation', null);
         }
       }
     },
-    handleMouseleave(e) {
+    handleMouseleave() {
       this.set('mouseoverLocation', null);
     },
     handleMapLoad(e) {
