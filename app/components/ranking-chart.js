@@ -18,7 +18,7 @@ export default Ember.Component.extend(ResizeAware, {
     dcp_orange: '#de7d2c',
   },
 
-  height: 50,
+  height: 100,
   margin: {
     top: 0,
     right: 0,
@@ -45,12 +45,11 @@ export default Ember.Component.extend(ResizeAware, {
     if (!div) {
       div = d3.select(el.get(0)).append('div')
         .attr('class', 'tooltip')
-        .attr('style', 'opacity: 0;');
+        .attr('style', 'opacity: 1;');
     }
 
     div
-      .attr('class', 'tooltip')
-      .attr('style', 'opacity: 0;');
+      .attr('class', 'tooltip');
 
     svg
       .attr('width', width + margin.left + margin.right)
@@ -69,13 +68,12 @@ export default Ember.Component.extend(ResizeAware, {
     const div = this.get('tooltipDiv');
     const height = this.get('height');
     const width = this.get('width');
-    const borocd = this.get('borocd');
     const colorsHash = this.get('colors');
     const data = this.get('data');
     const column = this.get('column');
-    const rank = this.get('rank');
+    const rankPromise = this.get('rank');
 
-    Promise.all([data, rank]).then(resolve => {
+    Promise.all([data, rankPromise]).then(resolve => {
       const [data, rank] = resolve;
 
       const x = d3.scaleBand()
@@ -87,20 +85,31 @@ export default Ember.Component.extend(ResizeAware, {
         .domain([0, d3.max(data, d => d[column])])
         .range([0, height]);
 
-      const colors = (d, i) => {
-        return (i === rank) ? colorsHash.web_safe_orange : colorsHash.gray;
-      };
-
       const isCurrentlySelected = (i) => {
         return rank === i;
       };
+
+      const colors = (d, i) => {
+        return isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray;
+      };
+
+      const calculateMidpoint = (node) => {
+        return (node.getBoundingClientRect().width / 2) - Math.floor((x.bandwidth() / 2));
+      }
+
+      const percent = (number) => {
+        return numeral(number).format('0.0');
+      }
+
+      const currentlySelected = `.bar-index-${rank}`;
+      const current = data[rank];
 
       const bars = svg.selectAll('.bar')
         .data(data);
 
       bars.enter()
         .append('rect')
-        .attr('class', (d,i) => `bar bar-${d.borocd}`)
+        .attr('class', (d,i) => `bar bar-${d.borocd} bar-index-${i}`)
         .attr('fill', colors)
         .attr('y', d => height - y(d[column]))
         .attr('width', d => x.bandwidth() - 2)
@@ -116,30 +125,41 @@ export default Ember.Component.extend(ResizeAware, {
         .attr('x', d => x(d.borocd))
         .attr('height', height)
         .on('mouseover', function(d, i) {
-          const selector = `.bar-${d.borocd}`;
-          d3.selectAll(selector)
-            .transition()
-            .duration(10)
-            .attr('fill', colorsHash.dcp_orange);
+          // const selector = `.bar-${d.borocd}`;
+          // svg.select(selector)
+          //   .transition()
+          //   .duration(10)
+          //   .attr('fill', colorsHash.dcp_orange);
 
           div
-            // .transition()
-            // .duration(10)
-            .attr('style', 'opacity: 1;')
-            .attr('style', () => `left: ${x(d.borocd)}px`)
-            .text(() => `${d.boro_district}: ${numeral(d[column], '0.0')}%`);
+            .text(() => `${d.boro_district}: ${percent(d[column])}%`)
+            .attr('style', function() {
+              const midpoint = calculateMidpoint(this);
+              return `left: ${x(d.borocd) - midpoint}px`;
+            });
         })
         .on('mouseout', function(d, i) {
-          const selector = `.bar-${d.borocd}`;
-          d3.selectAll(selector)
-            .transition()
-            .duration(10)
-            .attr('fill', isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray);
+          // const selector = `.bar-${d.borocd}`;
+          // d3.selectAll(selector)
+          //   .transition()
+          //   .duration(10)
+          //   .attr('fill', isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray);
+        });
+
+      div
+        .text(() => `${current.boro_district}: ${percent(current[column])}%`)
+        .attr('style', function() {
+          const midpoint = calculateMidpoint(this);
+          return `left: ${x(current.borocd) - midpoint}px`;
         });
 
       svg.on('mouseout', function() {
         div
-          .attr('style', 'opacity: 0;');
+          .text(() => `${current.boro_district}: ${percent(current[column])}%`)
+          .attr('style', function() {
+            const midpoint = calculateMidpoint(this);
+            return `left: ${x(current.borocd) - midpoint}px`;
+          });
       });
 
       bars.transition().duration(300)
