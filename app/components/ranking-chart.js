@@ -11,6 +11,8 @@ export default Ember.Component.extend(ResizeAware, {
 
   data: [],
   column: '',
+  rank: 0,
+  ranked: null,
 
   colors: {
     gray: '#a8a8a8',
@@ -125,11 +127,11 @@ export default Ember.Component.extend(ResizeAware, {
         .attr('x', d => x(d.borocd))
         .attr('height', height)
         .on('mouseover', function(d, i) {
-          // const selector = `.bar-${d.borocd}`;
-          // svg.select(selector)
-          //   .transition()
-          //   .duration(10)
-          //   .attr('fill', colorsHash.dcp_orange);
+          const selector = `.bar-${d.borocd}`;
+          svg.select(selector)
+            .transition()
+            .duration(10)
+            .attr('fill', colorsHash.dcp_orange);
 
           div
             .text(() => `${d.boro_district}: ${percent(d[column])}%`)
@@ -139,11 +141,11 @@ export default Ember.Component.extend(ResizeAware, {
             });
         })
         .on('mouseout', function(d, i) {
-          // const selector = `.bar-${d.borocd}`;
-          // d3.selectAll(selector)
-          //   .transition()
-          //   .duration(10)
-          //   .attr('fill', isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray);
+          const selector = `.bar-${d.borocd}`;
+          svg.select(selector)
+            .transition()
+            .duration(10)
+            .attr('fill', isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray);
         });
 
       div
