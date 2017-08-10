@@ -8,14 +8,15 @@
       </p>
     </div>
     <div class="cell medium-2">
-      {{#if boro_stat}}<p><small><strong>{{boro}}</strong></small><br />{{boro_stat}}%</p>{{/if}}
-      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}%</p>{{/if}}
+      {{#if boro_stat}}<p><small><strong>{{boro}}</strong></small><br />{{boro_stat}}{{unit}}</p>{{/if}}
+      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}{{unit}}</p>{{/if}}
     </div>
     <div class="cell auto">
       {{ranking-chart
         data=sortedData
         ranked=borocd
-        column=column}}
+        column=column
+        unit=unit}}
     </div>
   </div>
 </div>

@@ -189,18 +189,21 @@
                           cd=model.properties.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator column='poverty_rate'
+                            unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
             of residents had incomes below the poverty level in the last 12 months
           {{/data.indicator}}
           {{#data.indicator column='pct_bach_deg'
+                            unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
             of residents 25 years or older have earned a bachelor's degree or higher
           {{/data.indicator}}
           {{#data.indicator column='unemployment_cd'
+                            unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
                             city_stat=d.unemployment_nyc}}
@@ -219,18 +222,21 @@
             minutes
           {{/data.indicator}}
           {{#data.indicator column='pct_hh_rent_burd'
+                            unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
                             city_stat=d.pct_hh_rent_burd_nyc}}
             of households spend 35% or more of their income on rent
           {{/data.indicator}}
           {{#data.indicator column='pct_clean_strts'
+                            unit='%'
                             cd_stat=d.pct_clean_strts
                             boro_stat=d.pct_clean_strts_boro
                             city_stat=d.pct_clean_strts_nyc}}
             of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
           {{/data.indicator}}
           {{#data.indicator column='pct_served_parks'
+                            unit='%'
                             cd_stat=d.pct_served_parks}}
             of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
           {{/data.indicator}}
