@@ -1,5 +1,5 @@
 <a class="show-on-focus" href="#main">Skip to main content</a>
-<a href="https://planninglabs.nyc/" class="labs-beta-notice">A beta project of NYC Planning Labs</a>
+<a href="https://planninglabs.nyc/" class="labs-beta-notice hide-for-print">A beta project of NYC Planning Labs</a>
 <header role="banner" class="site-header">
   {{#initialize-foundation}}
   <div class="grid-x grid-padding-x">
@@ -8,9 +8,9 @@
       {{link-to 'Community Portal' 'index' classNames='site-name'}}
     </div>
     <div class="cell auto hide-for-large text-right">
-      <button class="responsive-nav-toggler" data-toggle="responsive-menu">Menu</button>
+      <button class="responsive-nav-toggler hide-for-print" data-toggle="responsive-menu">Menu</button>
     </div>
-    <div id="responsive-menu" class="cell large-shrink show-for-large" data-toggler=".show-for-large">
+    <div id="responsive-menu" class="cell large-shrink show-for-large hide-for-print" data-toggler=".show-for-large">
       <nav role="navigation">
         <ul class="menu">
           <li><a href="/about">About</a></li>
@@ -52,7 +52,7 @@
         </div>
       {{/if}}
     {{/mapbox-gl}}
-    <div id="cd-search">
+    <div id="cd-search" class="hide-for-print">
       {{#power-select
         options=options
         selected=selected
