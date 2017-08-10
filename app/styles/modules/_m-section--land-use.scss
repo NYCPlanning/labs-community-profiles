@@ -58,21 +58,12 @@ div.tooltip {
   position: absolute;
   text-align: center;
   z-index: 9999;
-  // height: 35px;
-  padding: 5px;
+  padding: 5px 10px;
   background: darkgray;
   border: 0px;
   pointer-events: none;
+  white-space: nowrap;
 }
-
-// .arrow-up {
-//   width: 0; 
-//   height: 0; 
-//   border-left: 5px solid transparent;
-//   border-right: 5px solid transparent;
-  
-//   border-bottom: 5px solid black;
-// }
 
 .tooltip:after {
   content: '';
