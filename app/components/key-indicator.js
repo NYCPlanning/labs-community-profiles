@@ -16,12 +16,5 @@ export default Ember.Component.extend({
         return d;
       });
     });
-  }),
-
-  rankingIndex: computed('borocd', 'sortedData', function() {
-    const borocd = this.get('borocd');
-    return this.get('sortedData').then(sorted=> {
-      return sorted.findIndex(el=>el.borocd === borocd);
-    });
-  }),
+  })
 });

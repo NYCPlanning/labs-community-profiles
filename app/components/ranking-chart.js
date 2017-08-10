@@ -73,10 +73,9 @@ export default Ember.Component.extend(ResizeAware, {
     const colorsHash = this.get('colors');
     const data = this.get('data');
     const column = this.get('column');
-    const rankPromise = this.get('rank');
 
-    Promise.all([data, rankPromise]).then(resolve => {
-      const [data, rank] = resolve;
+    Promise.resolve(data).then(data => {
+      const rank = data.findIndex(d=>d.is_selected);
       const x = d3.scaleBand()
         .domain(data.map(d => d.borocd))
         .range([0, width])
@@ -86,12 +85,8 @@ export default Ember.Component.extend(ResizeAware, {
         .domain([0, d3.max(data, d => d[column])])
         .range([0, height]);
 
-      const isCurrentlySelected = (i) => {
-        return rank === i;
-      };
-
-      const colors = (d, i) => {
-        return isCurrentlySelected(i) ? colorsHash.web_safe_orange : colorsHash.gray;
+      const colors = (d) => {
+        return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
       };
 
       const calculateMidpoint = (node) => {
@@ -107,7 +102,6 @@ export default Ember.Component.extend(ResizeAware, {
 
       const bars = svg.selectAll('.bar')
         .data(data, function(d) {
-          console.log(d.is_selected);
           return d.is_selected;
         });
 
