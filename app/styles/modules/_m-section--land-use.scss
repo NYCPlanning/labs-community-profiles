@@ -1,4 +1,9 @@
+// --------------------------------------------------
+// Module: Land Use Section
+// --------------------------------------------------
+
 #lu-map {
+
   height: 400px;
   width: 100%;
   margin-bottom: $global-margin;
@@ -13,10 +18,6 @@
   fill: #575555
 }
 
-.loading {
-  background-color: rgba(255,255,255,0.8);
-}
-
 .land-use-chart {
   position: relative;
 }
@@ -25,33 +26,35 @@
   position: absolute;
   height: 100%;
   width: 100%;
+
+  &.loading {
+    background-color: rgba(255,255,255,0.8);
+  }
 }
 
 .spinner {
-  margin: 100px auto 0;
+  margin: calc(200px - 0.5rem) auto 0;
   width: 70px;
   text-align: center;
-}
 
-.spinner > div {
-  width: 18px;
-  height: 18px;
-  background-color: $dcp-orange;
+  & > div {
+    width: 1rem;
+    height: 1rem;
+    background-color: $dcp-orange;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
 
-  border-radius: 100%;
-  display: inline-block;
-  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-}
+  .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
 
-.spinner .bounce1 {
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
-}
-
-.spinner .bounce2 {
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
+  .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
 }
 
 @-webkit-keyframes sk-bouncedelay {
