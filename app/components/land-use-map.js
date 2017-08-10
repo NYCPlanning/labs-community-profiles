@@ -8,22 +8,18 @@ export default Ember.Component.extend({
     scrollZoom: false,
   },
 
-  vectorSource: Ember.computed('mapState.landUseTemplate', function () {
-    return {
-      type: 'vector',
-      tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.mvt'],
-      minzoom: 14,
-    };
-  }),
+  vectorSource: {
+    type: 'vector',
+    tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.mvt'],
+    minzoom: 14,
+  },
 
-  rasterSource: Ember.computed('mapState.landUseTemplate', function () {
-    return {
-      type: 'raster',
-      tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.png'],
-      tileSize: 256,
-      maxzoom: 14,
-    };
-  }),
+  rasterSource: {
+    type: 'raster',
+    tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.png'],
+    tileSize: 256,
+    maxzoom: 14,
+  },
 
   vectorLayer: {
     id: 'landuse-vector',
