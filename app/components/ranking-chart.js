@@ -77,7 +77,7 @@ export default Ember.Component.extend(ResizeAware, {
 
     Promise.all([data, rankPromise]).then(resolve => {
       const [data, rank] = resolve;
-
+      console.log(rank);
       const x = d3.scaleBand()
         .domain(data.map(d => d.borocd))
         .range([0, width])
@@ -141,6 +141,7 @@ export default Ember.Component.extend(ResizeAware, {
             });
         })
         .on('mouseout', function(d, i) {
+          console.log(rank, i);
           const selector = `.bar-${d.borocd}`;
           svg.select(selector)
             .transition()

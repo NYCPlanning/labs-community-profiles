@@ -1,4 +1,4 @@
-{{#mapbox-gl id='lu-map' initOptions=initOptions mapLoaded=(action 'handleMapLoaded') as |map|}}
+{{#mapbox-gl id='lu-map' initOptions=initOptions as |map|}}
   {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
     {{source.layer layer=vectorLayer before='waterway-label'}}
   {{/map.source}}
