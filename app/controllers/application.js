@@ -1,4 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
+import mapboxgl from 'mapbox-gl'; // eslint-disable-line
+
 import isCdLayer from '../utils/is-cd-layer';
 
 export default Ember.Controller.extend({
@@ -152,9 +154,11 @@ export default Ember.Controller.extend({
     handleMouseleave() {
       this.set('mouseoverLocation', null);
     },
-    handleMapLoad(e) {
+    handleMapLoad(map) {
+      map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
       const mapState = this.get('mapState');
-      mapState.set('mapInstance', e);
+      mapState.set('mapInstance', map);
     },
   },
 });

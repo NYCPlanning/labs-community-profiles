@@ -1,4 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
+import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 
 export default Ember.Component.extend({
   initOptions: {
@@ -80,6 +81,10 @@ export default Ember.Component.extend({
   'tooltip-text': '',
 
   actions: {
+    handleMapLoad(map) {
+      map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+    },
+
     handleMouseover(e) {
       const feature = e.target.queryRenderedFeatures(e.point, { layers: ['landuse-vector'] })[0];
 
