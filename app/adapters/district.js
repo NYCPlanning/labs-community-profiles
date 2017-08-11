@@ -23,6 +23,6 @@ export default DS.JSONAPIAdapter.extend({
     return key;
   },
   buildURL(modelName, id, snapshot, requestType, query) {
-    return buildSqlUrl(SQL);
+    return buildSqlUrl(SQL, 'geojson');
   },
 });

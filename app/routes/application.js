@@ -19,8 +19,20 @@ const SQL = `
 
 export default Ember.Route.extend({
   model() {
-    this.store.findAll('district');
-    return carto.SQL(SQL, 'geojson')
+    // return this.store.findAll('district')
+    //   .then(districts => ({
+    //     type: 'FeatureCollection',
+    //     features: districts.map((district) => {
+    //       const borocd = district.get('borocd');
+    //       const thisFeature = district;
+    //       thisFeature.neighborhoods = neighborhoodsCrosswalk[borocd];
+    //       return {
+    //         geometry: district.get('geometry'),
+    //         properties: district,
+    //       };
+    //     }),
+    //   }));
+    // return carto.SQL(SQL, 'geojson')
       .then(geojson => ({
         type: geojson.type,
         features: geojson.features.map((feature) => {
