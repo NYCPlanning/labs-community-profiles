@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
+  queryParams: ['section'],
 
   columns: [
     'poverty_rate',
@@ -14,7 +15,14 @@ export default Ember.Controller.extend({
     'pct_served_parks',
   ],
 
+  section: '',
+
   d: Ember.computed('model', function () {
     return this.get('model.properties.dataprofile');
   }),
+  actions: {
+    handleAfterScroll(href, evt) {
+      this.set('section', href.replace('#', ''));
+    },
+  },
 });
