@@ -3,19 +3,20 @@
   <div class="grid-x grid-padding-x align-middle text-center">
     <div class="cell medium-4 xlarge-3">
       <p>
-        <span class="stat">{{numeral-format cd_stat '0.0'}}%</span>
+        <span class="stat">{{numeral-format cd_stat '0.0'}}{{unit}}</span>
         <small class="stat-footer">{{yield}}</small>
       </p>
     </div>
     <div class="cell medium-2">
-      {{#if boro_stat}}<p><small><strong>{{boro}}</strong></small><br />{{boro_stat}}%</p>{{/if}}
-      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}%</p>{{/if}}
+      {{#if boro_stat}}<p><small><strong>{{boro}}</strong></small><br />{{boro_stat}}{{unit}}</p>{{/if}}
+      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}{{unit}}</p>{{/if}}
     </div>
     <div class="cell auto">
       {{ranking-chart
         data=sortedData
         ranked=borocd
-        column=column}}
+        column=column
+        unit=unit}}
     </div>
   </div>
 </div>
