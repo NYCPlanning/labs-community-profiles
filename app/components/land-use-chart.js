@@ -42,16 +42,13 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
 
   data: Ember.computed('sql', 'borocd', function() {
     const sql = this.get('sql');
-    return carto.SQL(sql)
-      .then((data) => {
-        return data;
-      });
+    return carto.SQL(sql);
   }),
 
   didRender() {
     this.createChart();
   },
-  
+
   createChart: function createChart() {
     const el = this.$();
     const elWidth = el.width();
