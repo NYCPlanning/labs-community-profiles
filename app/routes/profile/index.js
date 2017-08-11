@@ -35,5 +35,8 @@ export default Ember.Route.extend({
         });
       }
     },
+    willTransition() {
+      this.controllerFor('profile').set('section', '');
+    }
   },
 });
