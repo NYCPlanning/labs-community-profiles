@@ -5,10 +5,12 @@ export default Ember.Route.extend({
     return this.modelFor('profile');
   },
   mapState: Ember.inject.service(),
+  scroller: Ember.inject.service(),
   actions: {
     didTransition() {
       let { cd, boro, borocd, neighborhoods } = this.controller.get('model.properties');
       let mapState = this.get('mapState');
+      const scroller = this.get('scroller');
 
       if (neighborhoods) {
         neighborhoods = neighborhoods.join(',  ');
@@ -23,6 +25,15 @@ export default Ember.Route.extend({
           neighborhoods,
         });
       });
-    }
-  }
+      
+      const section = this.paramsFor('profile').section;
+      if (section) {
+        Ember.run.next(this, () => {
+          scroller.scrollVertical(`#${section}`, {
+            offset: -35,
+          });
+        });
+      }
+    },
+  },
 });
