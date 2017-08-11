@@ -29,6 +29,7 @@ $a11y-yellow: #ffeec1;
 //
 // Modules
 // --------------------------------------------------
+@import 'modules/_m-charts';
 @import 'modules/_m-ember-power-select';
 @import 'modules/_m-ember-tooltip';
 @import 'modules/_m-labs-beta-notice';
@@ -37,3 +38,4 @@ $a11y-yellow: #ffeec1;
 @import 'modules/_m-section';
 @import 'modules/_m-site-footer';
 @import 'modules/_m-site-header';
+@import 'modules/_m-spinner';
