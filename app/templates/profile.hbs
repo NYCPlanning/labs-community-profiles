@@ -28,11 +28,11 @@
       <div class="section-menu hide-for-print">
         {{#sticky-element top=97}}
           <ul class="menu">
-            <li>{{scroll-to href='#needs' label='Needs'}}</li>
-            <li>{{scroll-to href='#indicators' label='Indicators'}}</li>
-            <li>{{scroll-to href='#built-environment' label='Built Environment'}}</li>
-            <li>{{scroll-to href='#actions' label='Actions'}}</li>
-            <li>{{scroll-to href='#resources' label='Resources'}}</li>
+            <li>{{scroll-to offset=-35 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
           </ul>
         {{/sticky-element}}
       </div>
