@@ -32,7 +32,7 @@ export default Ember.Route.extend({
     //       };
     //     }),
     //   }));
-    // return carto.SQL(SQL, 'geojson')
+    return carto.SQL(SQL, 'geojson')
       .then(geojson => ({
         type: geojson.type,
         features: geojson.features.map((feature) => {
