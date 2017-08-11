@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   borocd: '',
   column: '',
   data: [],
+  unit: '',
 
   sortedData: computed('data', 'borocd', function() {
     const borocd = this.get('borocd');

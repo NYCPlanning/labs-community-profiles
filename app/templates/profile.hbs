@@ -28,17 +28,21 @@
       <div class="section-menu hide-for-print">
         {{#sticky-element top=97}}
           <ul class="menu">
-            <li>{{scroll-to href='#needs' label='Needs'}}</li>
-            <li>{{scroll-to href='#indicators' label='Indicators'}}</li>
-            <li>{{scroll-to href='#built-environment' label='Built Environment'}}</li>
-            <li>{{scroll-to href='#actions' label='Actions'}}</li>
-            <li>{{scroll-to href='#resources' label='Resources'}}</li>
+            <li>{{scroll-to offset=-35 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
+            <li>{{scroll-to offset=-35 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
           </ul>
         {{/sticky-element}}
       </div>
 
       <section id="needs" class="page-section">
-        <h3 class="section-header"><a href="#needs">Community Needs {{fa-icon "link"}}</a></h3>
+        <h3 class="section-header">
+          {{#scroll-to offset=-35 href='#needs' afterScroll='handleAfterScroll'}}
+            Community Needs {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
 
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
@@ -82,7 +86,11 @@
       </section>
 
       <section id="indicators" class="page-section">
-        <h3 class="section-header"><a href="#indicators">Indicators {{fa-icon "link"}}</a></h3>
+        <h3 class="section-header">
+          {{#scroll-to offset=-35 href='#indicators' afterScroll='handleAfterScroll'}}
+            Indicators {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
 
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
@@ -188,49 +196,63 @@
                           boro=model.properties.boro
                           cd=model.properties.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator column='poverty_rate'
+          {{#data.indicator name='Poverty'
+                            column='poverty_rate'
+                            unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
             of residents had incomes below the poverty level in the last 12 months
           {{/data.indicator}}
-          {{#data.indicator column='pct_bach_deg'
+          {{#data.indicator name='Educational Attainment'
+                            column='pct_bach_deg'
+                            unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
             of residents 25 years or older have earned a bachelor's degree or higher
           {{/data.indicator}}
-          {{#data.indicator column='unemployment_cd'
+          {{#data.indicator name='Unemployment'
+                            column='unemployment_cd'
+                            unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
                             city_stat=d.unemployment_nyc}}
             of the civilian labor force is unemployed
           {{/data.indicator}}
-          {{#data.indicator column='crime_per_1000'
+          {{#data.indicator name='Crime Rate'
+                            column='crime_per_1000'
                             cd_stat=d.crime_per_1000
                             boro_stat=d.crime_per_1000_boro
                             city_stat=d.crime_per_1000_nyc}}
             major crimes were reported per 1,000 residents in 2016
           {{/data.indicator}}
-          {{#data.indicator column='mean_commute'
+          {{#data.indicator name='Mean Commute to Work'
+                            column='mean_commute'
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
             minutes
           {{/data.indicator}}
-          {{#data.indicator column='pct_hh_rent_burd'
+          {{#data.indicator name='Rent Burden'
+                            column='pct_hh_rent_burd'
+                            unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
                             city_stat=d.pct_hh_rent_burd_nyc}}
             of households spend 35% or more of their income on rent
           {{/data.indicator}}
-          {{#data.indicator column='pct_clean_strts'
+          {{#data.indicator name='Street Cleanliness'
+                            column='pct_clean_strts'
+                            unit='%'
                             cd_stat=d.pct_clean_strts
                             boro_stat=d.pct_clean_strts_boro
                             city_stat=d.pct_clean_strts_nyc}}
             of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
           {{/data.indicator}}
-          {{#data.indicator column='pct_served_parks'
+          {{#data.indicator name='Access to Parks'
+                            column='pct_served_parks'
+                            unit='%'
                             cd_stat=d.pct_served_parks}}
             of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
           {{/data.indicator}}
@@ -271,7 +293,11 @@
       </section>
 
       <section id="built-environment" class="page-section">
-        <h3 class="section-header"><a href="#built-environment">Built Environment {{fa-icon "link"}}</a></h3>
+        <h3 class="section-header">
+          {{#scroll-to offset=-35 href='#built-environment' afterScroll='handleAfterScroll'}}
+            Built Environment {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
 
         <h4 class="header-tiny"><strong>Land Use</strong></h4>
         <div class="callout">
@@ -317,7 +343,11 @@
       </section>
 
       <section id="actions" class="page-section">
-        <h3 class="section-header"><a href="#actions">Actions {{fa-icon "link"}}</a></h3>
+        <h3 class="section-header">
+          {{#scroll-to offset=-35 href='#actions' afterScroll='handleAfterScroll'}}
+            Actions {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
 
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
@@ -341,7 +371,11 @@
       </section>
 
       <section id="resources" class="page-section">
-        <h3 class="section-header"><a href="#resources">Resources {{fa-icon "link"}}</a></h3>
+        <h3 class="section-header">
+          {{#scroll-to offset=-35 href='#resources' afterScroll='handleAfterScroll'}}
+            Resources {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
 
         <div class="grid-container">
           <div class="grid-x grid-padding-x">
