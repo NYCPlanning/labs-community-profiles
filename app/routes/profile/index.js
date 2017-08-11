@@ -18,14 +18,14 @@ export default Ember.Route.extend({
 
       // seeing async issues - putting inside run loop to stagger
       Ember.run.next(this, () => {
-        mapState.set('currentlySelected', { 
+        mapState.set('currentlySelected', {
           cd,
           boro,
           borocd,
           neighborhoods,
         });
       });
-      
+
       const section = this.paramsFor('profile').section;
       if (section) {
         Ember.run.next(this, () => {
@@ -37,6 +37,9 @@ export default Ember.Route.extend({
     },
     willTransition() {
       this.controllerFor('profile').set('section', '');
-    }
+    },
+    error() {
+      return true;
+    },
   },
 });
