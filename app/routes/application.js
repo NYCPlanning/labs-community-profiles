@@ -19,6 +19,7 @@ const SQL = `
 
 export default Ember.Route.extend({
   model() {
+    this.store.findAll('district');
     return carto.SQL(SQL, 'geojson')
       .then(geojson => ({
         type: geojson.type,
