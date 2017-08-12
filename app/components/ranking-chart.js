@@ -98,7 +98,6 @@ export default Ember.Component.extend(ResizeAware, {
         .range([0, height]);
 
       const colors = (d) => {
-        console.log(this);
         return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
       };
 
@@ -138,31 +137,31 @@ export default Ember.Component.extend(ResizeAware, {
       const current = data[rank];
 
       // Join new data
-      bars
+      const theseBars = bars
         .selectAll('.bar')
         .data(data, function (d) {
           return d.borocd;
         });
 
-      masks
+      const theseMasks = masks
         .selectAll('.bar')
         .data(data, function (d) {
           return d.borocd;
         });
 
       // update elements
-      bars
+      theseBars
         .attr('fill', colors)
         .attr('width', () => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd));
 
-      masks
+      theseMasks
         .attr('width', x.bandwidth())
         .attr('x', d => x(d.borocd))
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
 
-      bars.enter()
+      theseBars.enter()
         .append('rect')
         .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
         .attr('fill', colors)
@@ -171,7 +170,7 @@ export default Ember.Component.extend(ResizeAware, {
         .attr('x', d => x(d.borocd))
         .attr('height', d => y(d[column]))
 
-      masks.enter()
+      theseMasks.enter()
         .append('rect')
         .attr('class', 'mask')
         .attr('opacity', 0)
