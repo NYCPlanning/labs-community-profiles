@@ -47,11 +47,6 @@ export default Ember.Route.extend({
     const mapState = this.get('mapState');
     
     mapState.set('bounds', district.get('bounds'));
-
-    carto.getTileTemplate()
-      .then((landUseTemplate) => {
-        mapState.set('landUseTemplate', landUseTemplate);
-      });
   },
   actions: {
     error(error) {
