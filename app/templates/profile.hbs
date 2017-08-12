@@ -4,8 +4,8 @@
 
       <div class="district-header">
         <h1 class="district">
-          <span class="boro">{{model.properties.boro}}</span>
-          Community District {{model.properties.cd}}
+          <span class="boro">{{model.boro}}</span>
+          Community District {{model.cd}}
         </h1>
       </div>
 
@@ -13,10 +13,10 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6">
             <h4 class="header-tiny"><strong>Neighborhoods</strong></h4>
-            <p><small>{{model.properties.neighborhoods}}</small></p>
+            <p><small>{{model.neighborhoods}}</small></p>
           </div>
           <div class="cell medium-6">
-            <h4 class="header-tiny"><strong>Community Board {{model.properties.cd}}</strong></h4>
+            <h4 class="header-tiny"><strong>Community Board {{model.cd}}</strong></h4>
             <ul>
               <li><a href="#">website</a></li>
               <li><a href="#">email</a></li>
@@ -193,8 +193,8 @@
         </div>
 
         {{#key-indicators indicators=columns
-                          boro=model.properties.boro
-                          cd=model.properties.cd
+                          boro=model.boro
+                          cd=model.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator name='Poverty'
                             column='poverty_rate'
@@ -307,7 +307,7 @@
                 {{land-use-map}}
               </div>
               <div class="cell medium-6">
-                {{land-use-chart borocd=model.properties.borocd}}
+                {{land-use-chart borocd=model.borocd}}
               </div>
             </div>
           </div>
