@@ -1,7 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import isCdLayer from '../utils/is-cd-layer';
-import toGeojson from '../utils/to-geojson';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
@@ -9,10 +8,7 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
-  geojson: Ember.computed('mode', function() {
-    const districts = this.get('model');
-    return toGeojson(districts);
-  }),
+  geojson: {},
 
   cdSource: Ember.computed('geojson', function () {
     return {
