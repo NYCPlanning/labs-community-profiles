@@ -13,21 +13,12 @@ const colorsArray = [
   ['Administration of Government', '#CBCBD6'],
 ];
 
+const SQL = `
+  SELECT the_geom_webmercator, facname, facdomain, uid FROM facdb_facilities;
+`;
+
 export default Ember.Component.extend({
   borocd: '',
-
-  init() {
-    this._super(...arguments);
-
-    const SQL = `
-      SELECT the_geom_webmercator, facname, facdomain, uid FROM facdb_facilities;
-    `;
-
-    carto.getTileTemplate(SQL)
-      .then((facilitiesTemplate) => {
-        this.set('facilitiesTemplate', facilitiesTemplate);
-      });
-  },
 
   initOptions: {
     style: 'mapbox://styles/mapbox/light-v9',
@@ -37,10 +28,13 @@ export default Ember.Component.extend({
   },
 
   vectorSource: Ember.computed('facilitiesTemplate', function () {
-    return {
-      type: 'vector',
-      tiles: [this.get('facilitiesTemplate')],
-    };
+    return carto.getTileTemplate(SQL)
+      .then((facilitiesTemplate) => {
+        return {
+          type: 'vector',
+          tiles: [facilitiesTemplate],
+        };
+      });
   }),
 
   pointsLayer: {
@@ -97,10 +91,10 @@ export default Ember.Component.extend({
       });
   }),
 
-  cdSelectedSource: Ember.computed('mapState.feature', function () {
+  cdSelectedSource: Ember.computed('mapState.currentlySelected', function () {
     return {
       type: 'geojson',
-      data: this.get('mapState.feature'),
+      data: this.get('mapState.currentlySelected.geometry'),
     };
   }),
 
