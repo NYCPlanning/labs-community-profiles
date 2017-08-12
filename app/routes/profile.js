@@ -45,7 +45,7 @@ export default Ember.Route.extend({
   },
   afterModel(district) {
     const mapState = this.get('mapState');
-    mapState.set('bounds', bbox(district.get('geometry')));
+    mapState.set('bounds', district.get('bounds'));
 
     carto.getTileTemplate()
       .then((landUseTemplate) => {
