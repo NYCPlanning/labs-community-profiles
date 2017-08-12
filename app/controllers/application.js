@@ -1,7 +1,7 @@
 import Ember from 'ember'; // eslint-disable-line
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
-
 import isCdLayer from '../utils/is-cd-layer';
+import toGeojson from '../utils/to-geojson';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
@@ -9,17 +9,22 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
-  cdSource: Ember.computed('model', function () {
+  geojson: Ember.computed('mode', function() {
+    const districts = this.get('model');
+    return toGeojson(districts);
+  }),
+
+  cdSource: Ember.computed('geojson', function () {
     return {
       type: 'geojson',
-      data: this.get('model'),
+      data: this.get('geojson'),
     };
   }),
 
-  cdSelectedSource: Ember.computed('mapState.feature', function () {
+  cdSelectedSource: Ember.computed('mapState.currentlySelected.geometry', function () {
     return {
       type: 'geojson',
-      data: this.get('mapState.feature'),
+      data: this.get('mapState.currentlySelected.geometry'),
     };
   }),
 
@@ -92,15 +97,11 @@ export default Ember.Controller.extend({
   mouseoverLocation: null,
   'tooltip-text': '',
 
-  options: Ember.computed('model.features.@each', function options() {
-    const features = this.get('model.features');
+  options: Ember.computed('geojson', function options() {
+    const features = this.get('geojson.features');
     return features.map((feature) => {
-      const { cd, boro, borocd } = feature.properties;
-      let { neighborhoods } = feature.properties;
-
-      if (neighborhoods) {
-        neighborhoods = neighborhoods.join(',  ');
-      }
+      const { cd, boro, borocd, neighborhoods } = 
+        feature.properties.getProperties('cd', 'boro', 'borocd', 'neighborhoods');
 
       return {
         cd,
@@ -136,6 +137,8 @@ export default Ember.Controller.extend({
     handleClick(e) {
       const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
       const { boro, cd } = firstCD.properties;
+      console.log(firstCD);
+
       if (boro) {
         this.transitionToRoute('profile', boro.dasherize(), cd);
       }
