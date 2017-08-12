@@ -1,15 +1,9 @@
-import Ember from 'ember';
+import Ember from 'ember'; // eslint-disable-line
 const DEFAULT_BOUNDS = [[40.690913, -74.077644], [40.856654, -73.832692]];
 
-import carto from '../utils/carto';
 
 export default Ember.Service.extend({
-  init() {
-    carto.getTileTemplate()
-      .then(landUseTemplate => {
-        this.set('landUseTemplate', landUseTemplate);
-      });
-  },
+  init() {},
   bounds: DEFAULT_BOUNDS,
   currentlySelected: null,
   mapInstance: null,
