@@ -58,10 +58,10 @@ export default Ember.Component.extend({
     maxzoom: 14,
   },
 
-  cdSelectedSource: Ember.computed('mapState.feature', function () {
+  cdSelectedSource: Ember.computed('mapState.currentlySelected.geometry', function () {
     return {
       type: 'geojson',
-      data: this.get('mapState.feature'),
+      data: this.get('mapState.currentlySelected.geometry'),
     };
   }),
 

@@ -34,19 +34,18 @@ export default Ember.Route.extend({
     const borocd = buildBorocd(boro, cd);
     const sql = `SELECT * FROM community_district_profiles WHERE borocd=${borocd}`;
 
-    const selectedDistrict = this.modelFor('application')
-      .features.find(district => district.properties.borocd === borocd);
+    const selectedDistrict =
+      this.modelFor('application').findBy('borocd', borocd);
 
     return carto.SQL(sql, 'json')
       .then((json) => {
-        Ember.set(selectedDistrict, 'properties.dataprofile', json[0]);
+        selectedDistrict.set('dataprofile', json[0]);
         return selectedDistrict;
       });
   },
-  afterModel(feature) {
+  afterModel(district) {
     const mapState = this.get('mapState');
-    mapState.set('bounds', bbox(feature.geometry));
-    mapState.set('feature', feature);
+    mapState.set('bounds', bbox(district.get('geometry')));
 
     carto.getTileTemplate()
       .then((landUseTemplate) => {
@@ -54,7 +53,8 @@ export default Ember.Route.extend({
       });
   },
   actions: {
-    error() {
+    error(error) {
+      console.log(error);
       this.transitionTo('/not-found');
     },
   },
