@@ -4,7 +4,7 @@ import numeral from 'numeral';
 import d3 from 'd3';
 
 export default Ember.Component.extend(ResizeAware, {
-  classNames: ['land-use-chart'],
+  classNames: ['ranking-chart'],
 
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,

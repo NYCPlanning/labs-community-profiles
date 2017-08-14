@@ -1,0 +1,53 @@
+// --------------------------------------------------
+// Module: Spinner
+// --------------------------------------------------
+
+.spinner-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  &.loading {
+    background-color: rgba(255,255,255,0.8);
+  }
+}
+
+.spinner {
+  margin: calc(200px - 0.5rem) auto 0;
+  width: 70px;
+  text-align: center;
+
+  & > div {
+    width: 1rem;
+    height: 1rem;
+    background-color: $dcp-orange;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
