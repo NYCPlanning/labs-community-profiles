@@ -14,7 +14,13 @@ export default DS.Model.extend({
   }),
   neighborhoods: Ember.computed('borocd', function() {
     const borocd = this.get('borocd');
-    return neighborhoodsCrosswalk[borocd];
+    return neighborhoodsCrosswalk[borocd].join(', ');
   }),
   dataprofile: {},
+  name: Ember.computed('boro', 'cd', 'neighborhoods', function() {
+    const { boro, cd, neighborhoods } =
+      this.getProperties('boro', 'cd', 'neighborhoods');
+
+    return `${boro} ${cd} - ${neighborhoods}`;
+  }),
 });
