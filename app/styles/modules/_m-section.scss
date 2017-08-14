@@ -6,7 +6,7 @@
   margin-bottom: $global-margin*3;
 
   @include breakpoint(medium) {
-    .cell > :last-child:not(table) {
+    .cell > :last-child:not(table):not(.callout) {
       margin-bottom: 0;
     }
   }

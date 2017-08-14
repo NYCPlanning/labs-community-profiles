@@ -56,7 +56,7 @@ table,
 }
 
 table.small {
-  font-size: $small-font-size;
+  font-size: rem-calc(12);
 }
 
 table.width-auto {
