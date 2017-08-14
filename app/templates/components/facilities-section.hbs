@@ -2,10 +2,12 @@
   <div class="grid-x grid-padding-x align-middle">
     <div class="cell medium-6">
       {{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
-        {{#map.source sourceId='facilities' source=vectorSource as |source|}}
-          {{source.layer layer=pointsLayer before='waterway-label'}}
-          {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
-        {{/map.source}}
+        {{#with (await vectorSource) as |vSource|}}
+          {{#map.source sourceId='facilities' source=vSource as |source|}}
+            {{source.layer layer=pointsLayer before='waterway-label'}}
+            {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
+          {{/map.source}}
+        {{/with}}
 
         {{map.call 'fitBounds' mapState.bounds}}
         {{map.on 'mousemove' (action 'handleMouseover')}}

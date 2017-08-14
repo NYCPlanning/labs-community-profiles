@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
   section: '',
 
   d: Ember.computed('model', function () {
-    return this.get('model.properties.dataprofile');
+    return this.get('model.dataprofile');
   }),
   actions: {
     handleAfterScroll(href, evt) {

@@ -1,31 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  mapState: Ember.inject.service(),
+  scroller: Ember.inject.service(),
   model() {
     return this.modelFor('profile');
   },
-  mapState: Ember.inject.service(),
-  scroller: Ember.inject.service(),
+  afterModel(district) {
+    const mapState = this.get('mapState');
+
+    // seeing async issues - putting inside run loop to stagger
+    Ember.run.next(this, () => {
+      mapState.set('currentlySelected', district);
+    });
+  },
+
   actions: {
     didTransition() {
-      let { cd, boro, borocd, neighborhoods } = this.controller.get('model.properties');
-      let mapState = this.get('mapState');
       const scroller = this.get('scroller');
-
-      if (neighborhoods) {
-        neighborhoods = neighborhoods.join(',  ');
-      }
-
-      // seeing async issues - putting inside run loop to stagger
-      Ember.run.next(this, () => {
-        mapState.set('currentlySelected', {
-          cd,
-          boro,
-          borocd,
-          neighborhoods,
-        });
-      });
-
       const section = this.paramsFor('profile').section;
       if (section) {
         Ember.run.next(this, () => {
