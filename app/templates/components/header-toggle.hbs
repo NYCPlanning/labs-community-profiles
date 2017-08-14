@@ -1,0 +1,20 @@
+<header role="banner" class="site-header">
+  <div class="grid-x grid-padding-x">
+    <div class="branding cell shrink large-auto">
+      <a class="dcp-link" href="http://www1.nyc.gov/site/planning/index.page"><img class="dcp-logo" src="https://raw.githubusercontent.com/NYCPlanning/logo/master/dcp_logo_772.png" alt="NYC Planning"></a>
+      {{link-to 'Community District Profiles' 'index' classNames='site-name'}}
+    </div>
+    <div class="cell auto hide-for-large text-right">
+      <button {{action (mut closed) (not closed)}} class="responsive-nav-toggler hide-for-print" data-toggle="responsive-menu">Menu</button>
+    </div>
+    <div id="responsive-menu" class="cell large-shrink {{if closed 'show-for-large'}} hide-for-print" data-toggler=".show-for-large">
+      <nav role="navigation">
+        <ul class="menu">
+          <li><a href="/about">About</a></li>
+          <li><a href="https://github.com/NYCPlanning/labs-community-portal">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+{{yield}}
