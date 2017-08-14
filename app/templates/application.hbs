@@ -23,7 +23,7 @@
 </header>
 
 <div id="main" class="grid-x">
-  <div class="cell large-4" id="cd-chooser">
+  <div class="cell large-4 xlarge-3" id="cd-chooser">
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer}}
