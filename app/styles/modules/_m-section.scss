@@ -11,21 +11,3 @@
     }
   }
 }
-
-.section-header {
-
-  a {
-    color: $body-font-color;
-
-    .fa {
-      color: $medium-gray;
-    }
-  }
-
-  a:hover {
-
-    .fa {
-      color: $dcp-orange;
-    }
-  }
-}

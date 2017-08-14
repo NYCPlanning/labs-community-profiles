@@ -30,6 +30,30 @@ h6,
   }
 }
 
+.section-header {
+
+  a {
+    color: $body-font-color;
+
+    .fa {
+      color: $medium-gray;
+    }
+  }
+
+  a:hover {
+
+    .fa {
+      color: $dcp-orange;
+    }
+  }
+}
+
+.subsection-header {
+  @extend h5;
+  margin-bottom: 0.5em;
+}
+
+
 //
 // Typograhpy helper classes
 // --------------------------------------------------
