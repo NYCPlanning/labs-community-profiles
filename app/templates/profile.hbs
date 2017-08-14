@@ -133,7 +133,7 @@
                     </td>
                     <td class="text-center">
                       {{numeral-format d.pop_2010 '0.0a'}}
-                      ({{numeral-format d.pop_change_00_10 '0%'}})
+                      ({{numeral-format d.pop_change_00_10 '+0%'}})
                     </td>
                     <td class="text-center">
                       {{numeral-format d.pop_11_15_acs '0.0a'}}
@@ -156,10 +156,10 @@
                 <tbody>
                   <tr>
                     <td class="text-center">
-                      {{d.area_sqmi}}
+                      {{numeral-format d.area_sqmi '0.0'}}
                     </td>
                     <td class="text-center">
-                      {{d.acres}}
+                      {{numeral-format d.acres '0,0'}}
                     </td>
                   </tr>
                 </tbody>
