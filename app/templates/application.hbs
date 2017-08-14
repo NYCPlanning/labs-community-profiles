@@ -30,7 +30,6 @@
         {{source.layer layer=cdLineLayer}}
         {{source.layer layer=cdLabelLayer}}
       {{/map.source}}
-
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}
