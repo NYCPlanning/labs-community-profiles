@@ -41,6 +41,12 @@ export default Ember.Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
+    let bars = svg.append('g')
+      .attr('class', 'bars');
+
+    let masks = svg.append('g')
+      .attr('class', 'masks');
+
     let div = d3.select(el.get(0))
       .append('div')
       .attr('class', 'tooltip')
@@ -48,6 +54,8 @@ export default Ember.Component.extend(ResizeAware, {
 
     this.set('svg', svg);
     this.set('div', div);
+    this.set('bars', bars);
+    this.set('masks', masks);
 
     this._super(...arguments);
   },
@@ -70,8 +78,8 @@ export default Ember.Component.extend(ResizeAware, {
       const rank = data.findIndex(d => d.is_selected);
       const unit = this.get('unit');
 
-      const { svg, div } =
-        this.getProperties('svg', 'div');
+      const { svg, div, bars, masks } =
+        this.getProperties('svg', 'div', 'bars', 'masks');
 
       div
         .attr('class', 'tooltip');
@@ -129,27 +137,40 @@ export default Ember.Component.extend(ResizeAware, {
       const current = data[rank];
 
       // Join new data
-      const bars = svg.selectAll('.bar')
+      const theseBars = bars
+        .selectAll('.bar')
+        .data(data, function (d) {
+          return d.borocd;
+        });
+
+      const theseMasks = masks
+        .selectAll('.bar')
         .data(data, function (d) {
           return d.borocd;
         });
 
       // update elements
-      bars
+      theseBars
         .attr('fill', colors)
         .attr('width', () => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd));
 
-      bars.enter()
+      theseMasks
+        .attr('width', x.bandwidth())
+        .attr('x', d => x(d.borocd))
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut);
+
+      theseBars.enter()
         .append('rect')
-        .attr('class', (d,i) => `bar bar-${d.borocd} bar-index-${i}`)
+        .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
         .attr('fill', colors)
         .attr('y', d => height - y(d[column]))
         .attr('width', d => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd))
         .attr('height', d => y(d[column]))
 
-      bars.enter()
+      theseMasks.enter()
         .append('rect')
         .attr('class', 'mask')
         .attr('opacity', 0)
