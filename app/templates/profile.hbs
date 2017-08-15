@@ -5,11 +5,11 @@
       <h1>{{model.boro}} Community District {{model.cd}}</h1>
       <div class="section-menu hide-for-print">
         <ul class="menu">
-          <li>{{scroll-to offset=-200 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
         </ul>
       </div>
     </div>
@@ -21,64 +21,11 @@
           <h4 class="subsection-header"><strong>Neighborhoods</strong></h4>
           <p><small>{{model.neighborhoods}}</small></p>
         </div>
-        <div class="cell medium-6">
-          <h4 class="subsection-header"><strong>Community Board {{model.cd}}</strong></h4>
-          <ul>
-            <li><a href="#">website</a></li>
-            <li><a href="#">email</a></li>
-          </ul>
-        </div>
       </div>
-
-      <section id="needs" class="page-section">
-        <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#needs' afterScroll='handleAfterScroll'}}
-            Community Needs {{fa-icon "link"}}
-          {{/scroll-to}}
-        </h3>
-
-        <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Top 3 Pressing Issues</strong>
-              <span>
-                {{fa-icon "info-circle"}}
-                {{#tooltip-on-element duration=50000 event='hover'}}
-                  These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
-                {{/tooltip-on-element}}
-              </span>
-            </h4>
-            <div class="callout">
-              <ul>
-                <li>{{d.son_issue_1}}</li>
-                <li>{{d.son_issue_2}}</li>
-                <li>{{d.son_issue_3}}</li>
-              </ul>
-              <a class="button expanded" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Latest Statement of Needs <small>(PDF)</small></a>
-            </div>
-
-          </div>
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Needs Statements</strong></h4>
-            <div class="callout">
-              <ul>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
 
       <section id="indicators" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#indicators' afterScroll='handleAfterScroll'}}
+          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
             Indicators {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
@@ -283,7 +230,7 @@
 
       <section id="built-environment" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#built-environment' afterScroll='handleAfterScroll'}}
+          {{#scroll-to offset=-210 href='#built-environment' afterScroll='handleAfterScroll'}}
             Built Environment {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
@@ -328,9 +275,53 @@
 
       </section>
 
+      <section id="community-board" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#community-board' afterScroll='handleAfterScroll'}}
+            {{model.boro}} Community Board {{model.cd}} {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+
+        <p>
+          <a class="button small hollow" href="http://www1.nyc.gov/sicb3">{{fa-icon "external-link"}}&nbsp;<strong>www1.nyc.gov/sicb3</strong></a>
+          <a class="button small hollow" href="#">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+        </p>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-7">
+
+            <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
+            <div class="callout">
+              <p>These are the top 3 pressing issues identified by the Community Board in the latest <a href="#">Statement of Community District Needs</a>:</p>
+              <ul>
+                <li><strong>{{d.son_issue_1}}</strong></li>
+                <li><strong>{{d.son_issue_2}}</strong></li>
+                <li><strong>{{d.son_issue_3}}</strong></li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="cell medium-5">
+
+            <h4 class="subsection-header"><strong>Needs Statements</strong></h4>
+            <div class="callout">
+              <ul>
+                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
       <section id="actions" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#actions' afterScroll='handleAfterScroll'}}
+          {{#scroll-to offset=-210 href='#actions' afterScroll='handleAfterScroll'}}
             Actions {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
@@ -356,7 +347,7 @@
 
       <section id="resources" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#resources' afterScroll='handleAfterScroll'}}
+          {{#scroll-to offset=-210 href='#resources' afterScroll='handleAfterScroll'}}
             Resources {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
