@@ -91,10 +91,6 @@
 // #page-content is everything in main not in #cd-chooser
 #page-content {
   padding-top: $global-margin;
-
-  @include breakpoint(large) {
-    padding-top: rem-calc(117);
-  }
 }
 
 .district-header {
@@ -112,6 +108,12 @@
 
     @include breakpoint(xlarge) {
       left: 25%;
+    }
+  }
+
+  & + div {
+    @include breakpoint(large) {
+      padding-top: rem-calc(97);
     }
   }
 }
