@@ -1,8 +1,8 @@
 import Ember from 'ember'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
-import trackPage from '../mixins/track-page';
 
 export default Ember.Route.extend({
+  metrics: Ember.inject.service(),
   model() {
     return this.store.findAll('district');
   },
@@ -14,7 +14,16 @@ export default Ember.Route.extend({
 
   actions: {
     transitionToProfile(boro) {
+      const metrics = this.get('metrics');
+
+      metrics.trackEvent({
+        eventCategory: 'Navigation Map',
+        eventAction: 'Click',
+        eventLabel: `${boro} ${cd}`,
+        eventValue: borocd,
+      });
+      
       this.transitionTo('profile', boro.boro.dasherize(), boro.borocd % 100);
     },
   },
-}, trackPage);
+});
