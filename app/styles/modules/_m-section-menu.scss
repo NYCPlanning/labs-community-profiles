@@ -3,7 +3,6 @@
 // --------------------------------------------------
 
 .section-menu {
-  margin: 0 0 $global-margin*2;
 
   @include breakpoint(large) {
     margin-right: rem-calc(-20);
