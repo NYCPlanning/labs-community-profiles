@@ -22,8 +22,10 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    transitionToProfile(boro) {
-      this.transitionTo('profile', boro.boro.dasherize(), boro.borocd % 100);
+    transitionToProfile(district) {
+      const { boro, borocd } = district.getProperties('boro', 'borocd');
+
+      this.transitionTo('profile', boro.dasherize(), borocd % 100);
     },
   },
 });
