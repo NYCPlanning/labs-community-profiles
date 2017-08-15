@@ -31,6 +31,7 @@
 // #cd-chooser contains the map and search
 #cd-chooser {
   position: relative;
+  z-index: 1;
 
   &::after {
     @include breakpoint(large) {
@@ -96,6 +97,8 @@
 .district-header {
   background-color: $white;
   margin: 0 0 $global-margin;
+  position: relative;
+  z-index: 2;
 
   @include breakpoint(large) {
     position: fixed;
@@ -103,7 +106,6 @@
     right: 0;
     bottom: auto;
     left: 33.33333%;
-    z-index: 2;
     padding: rem-calc(5) rem-calc(20) 0;
 
     @include breakpoint(xlarge) {
@@ -114,6 +116,7 @@
 
 .district-content {
   position: relative;
+  z-index: 1;
 
   @include breakpoint(large) {
     top: rem-calc(97);
