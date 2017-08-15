@@ -27,9 +27,9 @@ export default Ember.Route.extend({
       const metrics = this.get('metrics');
 
       metrics.trackEvent({
-        eventCategory: 'Navigation Map',
+        eventCategory: 'Navigation Dropdown',
         eventAction: 'Click',
-        eventLabel: `${boro} ${cd}`,
+        eventLabel: `${boro} ${borocd % 100}`,
         eventValue: borocd,
       });
 
