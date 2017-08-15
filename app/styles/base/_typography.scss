@@ -83,6 +83,7 @@ table.width-auto {
   width: auto;
 }
 
+
 //
 // Statistics
 // --------------------------------------------------
@@ -98,4 +99,17 @@ table.width-auto {
 .boro-stat,
 .city-stat {
   margin-bottom: 0.5rem;
+}
+
+
+//
+// Legend
+// --------------------------------------------------
+.legend-dot {
+  height: 1em;
+  width: 1em;
+  border-radius: 100%;
+  display: inline-block;
+  border: 2px solid #333;
+  margin-bottom: -0.1em;
 }
