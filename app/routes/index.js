@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
+import trackPage from '../mixins/track-page';
 
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
@@ -22,4 +23,4 @@ export default Ember.Route.extend({
       mapState.set('currentlySelected', null);
     },
   },
-});
+}, trackPage);

@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
+  metrics: Ember.inject.service(),
   queryParams: ['section'],
 
   columns: [
@@ -22,6 +23,8 @@ export default Ember.Controller.extend({
   }),
   actions: {
     handleAfterScroll(href, evt) {
+      const metrics = this.get('metrics');
+
       this.set('section', href.replace('#', ''));
     },
   },

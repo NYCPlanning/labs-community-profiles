@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
+import trackPage from '../mixins/track-page';
 
 export default Ember.Route.extend({
   model() {
@@ -16,4 +17,4 @@ export default Ember.Route.extend({
       this.transitionTo('profile', boro.boro.dasherize(), boro.borocd % 100);
     },
   },
-});
+}, trackPage);
