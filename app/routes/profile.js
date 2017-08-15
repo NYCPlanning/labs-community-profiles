@@ -1,6 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
-import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
@@ -45,8 +44,9 @@ export default Ember.Route.extend({
   },
   afterModel(district) {
     const mapState = this.get('mapState');
-    
+
     mapState.set('bounds', district.get('bounds'));
+    mapState.set('centroid', district.get('centroid'));
   },
   actions: {
     error(error) {
