@@ -29,12 +29,10 @@ export default Ember.Component.extend({
 
   vectorSource: Ember.computed('facilitiesTemplate', function () {
     return carto.getTileTemplate(SQL)
-      .then((facilitiesTemplate) => {
-        return {
-          type: 'vector',
-          tiles: [facilitiesTemplate],
-        };
-      });
+      .then(facilitiesTemplate => ({
+        type: 'vector',
+        tiles: [facilitiesTemplate],
+      }));
   }),
 
   pointsLayer: {
@@ -67,7 +65,7 @@ export default Ember.Component.extend({
 
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');
-    const SQL = `
+    const joinSql = `
       SELECT facdomain, count(facdomain)
       FROM facdb_facilities a
       INNER JOIN support_admin_cdboundaries b
@@ -76,7 +74,7 @@ export default Ember.Component.extend({
       GROUP BY facdomain
     `;
 
-    return SQL;
+    return joinSql;
   }),
 
   data: Ember.computed('sql', 'borocd', function() {
@@ -96,6 +94,10 @@ export default Ember.Component.extend({
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
     };
+  }),
+
+  centroid: Ember.computed('mapState', function () {
+    return this.get('mapState.centroid');
   }),
 
   cdSelectedLayer: {

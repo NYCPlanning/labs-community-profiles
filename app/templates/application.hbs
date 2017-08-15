@@ -1,16 +1,14 @@
 <a class="show-on-focus" href="#main">Skip to main content</a>
-<a href="https://planninglabs.nyc/" class="labs-beta-notice hide-for-print">A beta project of NYC Planning Labs</a>
 {{header-toggle}}
 
 <div id="main" class="grid-x">
-  <div class="cell large-4" id="cd-chooser">
+  <div class="cell large-4 xlarge-3" id="cd-chooser">
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer}}
         {{source.layer layer=cdLineLayer}}
         {{source.layer layer=cdLabelLayer}}
       {{/map.source}}
-
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMouseover')}}

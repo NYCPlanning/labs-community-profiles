@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from 'ember'; // eslint-disable-line
 
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
@@ -22,7 +22,7 @@ export default Ember.Route.extend({
       if (section) {
         Ember.run.next(this, () => {
           scroller.scrollVertical(`#${section}`, {
-            offset: -35,
+            offset: -200,
           });
         });
       }

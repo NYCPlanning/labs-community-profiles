@@ -20,15 +20,35 @@ h6,
 }
 
 .district-header {
-  .district {
-  }
-  .boro {
-    display: block;
-    font-weight: $global-weight-normal;
-    font-size: 0.75em;
-    line-height: 1;
+
+  h1 {
+    margin-bottom: 0.5rem;
   }
 }
+
+.section-header {
+
+  a {
+    color: $body-font-color;
+
+    .fa {
+      color: $medium-gray;
+    }
+  }
+
+  a:hover {
+
+    .fa {
+      color: $dcp-orange;
+    }
+  }
+}
+
+.subsection-header {
+  @extend h5;
+  margin-bottom: 0.5em;
+}
+
 
 //
 // Typograhpy helper classes
@@ -56,7 +76,7 @@ table,
 }
 
 table.small {
-  font-size: $small-font-size;
+  font-size: rem-calc(12);
 }
 
 table.width-auto {
@@ -72,4 +92,10 @@ table.width-auto {
 .stat-footer {
   display: block;
   line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.boro-stat,
+.city-stat {
+  margin-bottom: 0.5rem;
 }
