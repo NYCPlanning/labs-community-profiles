@@ -94,22 +94,6 @@ export default Ember.Controller.extend({
   mouseoverLocation: null,
   'tooltip-text': '',
 
-  options: Ember.computed('geojson', function options() {
-    const features = this.get('geojson.features');
-    return features.map((feature) => {
-      const { cd, boro, borocd, neighborhoods } = 
-        feature.properties.getProperties('cd', 'boro', 'borocd', 'neighborhoods');
-
-      return {
-        cd,
-        boro,
-        borocd,
-        neighborhoods,
-        name: `${boro} ${cd} - ${neighborhoods}`,
-      };
-    });
-  }),
-
   style: Ember.computed('mapState.currentlySelected', function style() {
     return (geoJsonFeature) => {
       if (geoJsonFeature.properties.borocd === this.get('mapState.currentlySelected.borocd')) {
@@ -134,7 +118,7 @@ export default Ember.Controller.extend({
     handleClick(e) {
       const metrics = this.get('metrics');
       const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
-      const { boro, cd, borocd } = firstCD.properties;
+      const { boro, cd } = firstCD.properties;
 
       if (boro) {
         this.transitionToRoute('profile', boro.dasherize(), cd);

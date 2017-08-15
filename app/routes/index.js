@@ -1,6 +1,6 @@
-import Ember from 'ember';
-import bbox from 'npm:@turf/bbox'; // eslint-disable-line
+import Ember from 'ember'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
+import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
@@ -17,8 +17,7 @@ export default Ember.Route.extend({
 
   actions: {
     didTransition() {
-      let mapState = this.get('mapState');
-
+      const mapState = this.get('mapState');
       mapState.set('currentlySelected', null);
     },
   },

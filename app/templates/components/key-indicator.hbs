@@ -1,15 +1,13 @@
-<h4 class="header-tiny"><strong>{{name}}</strong></h4>
+<h4 class="subsection-header"><strong>{{name}}</strong></h4>
 <div class="callout">
-  <div class="grid-x grid-padding-x align-middle text-center">
-    <div class="cell medium-4 xlarge-3">
-      <p>
-        <span class="stat">{{numeral-format cd_stat '0.0'}}{{unit}}</span>
-        <small class="stat-footer">{{yield}}</small>
-      </p>
+  <div class="grid-x grid-padding-x align-middle">
+    <div class="cell small-7 large-4 xlarge-7 text-center">
+      <span class="stat">{{numeral-format cd_stat '0.0'}}{{unit}}</span>
+      <small class="stat-footer">{{yield}}</small>
     </div>
-    <div class="cell medium-2">
-      {{#if boro_stat}}<p><small><strong>{{boro}}</strong></small><br />{{boro_stat}}{{unit}}</p>{{/if}}
-      {{#if city_stat}}<p><small><strong>NYC</strong></small><br />{{city_stat}}{{unit}}</p>{{/if}}
+    <div class="cell small-5 large-3 xlarge-5 text-right large-text-left xlarge-text-right">
+      {{#if boro_stat}}<span class="boro-stat label">{{boro}}: <strong>{{boro_stat}}{{unit}}</strong></span>{{/if}}
+      {{#if city_stat}}<span class="city-stat label">NYC: <strong>{{city_stat}}{{unit}}</strong></span>{{/if}}
     </div>
     <div class="cell auto">
       {{ranking-chart
