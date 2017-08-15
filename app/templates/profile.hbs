@@ -2,10 +2,16 @@
   <div class="cell">
 
     <div class="district-header">
-      <h1 class="district">
-        <span class="boro">{{model.boro}}</span>
-        Community District {{model.cd}}
-      </h1>
+      <h1>{{model.boro}} Community District {{model.cd}}</h1>
+      <div class="section-menu hide-for-print">
+        <ul class="menu">
+          <li>{{scroll-to offset=-35 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-35 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-35 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-35 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-35 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
+        </ul>
+      </div>
     </div>
 
     <div class="grid-x grid-padding-x">
@@ -20,18 +26,6 @@
           <li><a href="#">email</a></li>
         </ul>
       </div>
-    </div>
-
-    <div class="section-menu hide-for-print">
-      {{#sticky-element top=97}}
-        <ul class="menu">
-          <li>{{scroll-to offset=-35 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-35 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-35 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-35 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-35 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
-        </ul>
-      {{/sticky-element}}
     </div>
 
     <section id="needs" class="page-section">

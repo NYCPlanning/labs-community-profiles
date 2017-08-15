@@ -3,23 +3,23 @@
 // --------------------------------------------------
 
 .section-menu {
-  margin: $global-margin*2 0;
+  margin: 0 0 $global-margin*2;
+
+  @include breakpoint(large) {
+    margin-right: rem-calc(-20);
+    margin-left: rem-calc(-20);
+    padding-right: rem-calc(6);
+    padding-left: rem-calc(6);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+  }
 
   .menu {
-    font-size: $small-font-size;
+    font-size: rem-calc(12);
     font-weight: $global-weight-bold;
     background-color: $light-gray;
+
+    @include breakpoint(xlarge) {
+      font-size: rem-calc(14);
+    }
   }
-}
-
-.sticky-element {
-   z-index: 999;
-
-   @include breakpoint(medium down) {
-     position: static !important;
-   }
-}
-
-.sticky-element--sticky {
-  box-shadow: -1.25rem 0 0 $light-gray, 1.25rem 0 0 $light-gray;
 }
