@@ -1,7 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
 import bbox from 'npm:@turf/bbox'; // eslint-disable-line
-import trackPage from '../mixins/track-page';
 
 import carto from '../utils/carto';
 
@@ -55,4 +54,4 @@ export default Ember.Route.extend({
       this.transitionTo('/not-found');
     },
   },
-}, trackPage);
+});
