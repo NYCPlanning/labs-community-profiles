@@ -3,6 +3,7 @@
 // --------------------------------------------------
 
 .section-menu {
+  background-color: $light-gray;
 
   @include breakpoint(large) {
     margin-right: rem-calc(-20);
@@ -15,7 +16,6 @@
   .menu {
     font-size: rem-calc(12);
     font-weight: $global-weight-bold;
-    background-color: $light-gray;
 
     @include breakpoint(xlarge) {
       font-size: rem-calc(14);
