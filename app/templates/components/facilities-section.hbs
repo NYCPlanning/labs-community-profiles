@@ -1,47 +1,45 @@
-<div class="grid-container">
-  <div class="grid-x grid-padding-x align-middle">
-    <div class="cell medium-6">
-      {{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
-        {{#with (await vectorSource) as |vSource|}}
-          {{#map.source sourceId='facilities' source=vSource as |source|}}
-            {{source.layer layer=pointsLayer before='waterway-label'}}
-            {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
-          {{/map.source}}
-        {{/with}}
+<div class="grid-x grid-padding-x align-middle">
+  <div class="cell medium-6">
+    {{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
+      {{#with (await vectorSource) as |vSource|}}
+        {{#map.source sourceId='facilities' source=vSource as |source|}}
+          {{source.layer layer=pointsLayer before='waterway-label'}}
+          {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
+        {{/map.source}}
+      {{/with}}
 
-        {{map.call 'fitBounds' mapState.bounds}}
-        {{map.on 'mousemove' (action 'handleMouseover')}}
-        {{map.on 'mouseout' (action 'handleMouseleave')}}
-        {{map.on 'click' (action 'handleClick')}}
+      {{map.call 'fitBounds' mapState.bounds}}
+      {{map.on 'mousemove' (action 'handleMouseover')}}
+      {{map.on 'mouseout' (action 'handleMouseleave')}}
+      {{map.on 'click' (action 'handleClick')}}
 
-        {{#if mapState.currentlySelected}}
-          {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-            {{source.layer layer=cdSelectedLayer before='waterway-label'}}
-          {{/map.source}}
-        {{/if}}
+      {{#if mapState.currentlySelected}}
+        {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+          {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+        {{/map.source}}
+      {{/if}}
 
-        {{#if mouseoverLocation}}
-          <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 180px;">
-            <div class="card-section">
-              {{tooltip-text}}
-            </div>
+      {{#if mouseoverLocation}}
+        <div class="map-popup card" style="pointer-events: none; position: absolute; top: {{mouseoverLocation.y}}px; left: {{mouseoverLocation.x}}px; z-index: 9999; width: 180px;">
+          <div class="card-section">
+            {{tooltip-text}}
           </div>
-        {{/if}}
-      {{/mapbox-gl}}
-    </div>
-    <div class="cell medium-6">
-      {{#each (await data) as |data|}}
-        <p class="grid-x">
-          <span class="legend-dot-wrapper cell small-2" style="color:{{data.color}};">
-            <span class="legend-dot" style="background-color:{{data.color}}"></span>
-            <strong>{{data.count}}</strong>
-          </span>
-          <small class="legend-dot-wrapper cell auto">{{data.facdomain}}</small>
-        </p>
-      {{/each}}
-      <hr/>
-      <p>View this area in the <a href="https://capitalplanning.nyc.gov/facilities/explorer#13.62/{{centroid.[1]}}/{{centroid.[0]}}" target="_blank">{{fa-icon "external-link"}} NYC Facilities Explorer</a></p>
-    </div>
+        </div>
+      {{/if}}
+    {{/mapbox-gl}}
   </div>
-  {{yield}}
+  <div class="cell medium-6">
+    {{#each (await data) as |data|}}
+      <p class="grid-x">
+        <span class="legend-dot-wrapper cell small-2" style="color:{{data.color}};">
+          <span class="legend-dot" style="background-color:{{data.color}}"></span>
+          <strong>{{data.count}}</strong>
+        </span>
+        <small class="legend-dot-wrapper cell auto">{{data.facdomain}}</small>
+      </p>
+    {{/each}}
+    <hr/>
+    <p>View this area in the <a href="https://capitalplanning.nyc.gov/facilities/explorer#13.62/{{centroid.[1]}}/{{centroid.[0]}}" target="_blank">{{fa-icon "external-link"}} NYC Facilities Explorer</a></p>
+  </div>
 </div>
+{{yield}}
