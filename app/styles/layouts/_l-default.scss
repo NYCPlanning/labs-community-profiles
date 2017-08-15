@@ -110,11 +110,14 @@
       left: 25%;
     }
   }
+}
 
-  & + div {
-    @include breakpoint(large) {
-      padding-top: rem-calc(97);
-    }
+.district-content {
+  position: relative;
+
+  @include breakpoint(large) {
+    top: rem-calc(97);
+    margin-bottom: rem-calc(97);
   }
 }
 
