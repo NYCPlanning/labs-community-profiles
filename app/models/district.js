@@ -1,7 +1,8 @@
-import Ember from 'ember';
-import DS from 'ember-data';
+import Ember from 'ember'; // eslint-disable-line
+import DS from 'ember-data'; // eslint-disable-line
 import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
-import bbox from 'npm:@turf/bbox';
+import bbox from 'npm:@turf/bbox' // eslint-disable-line
+import centroid from 'npm:@turf/centroid'; // eslint-disable-line
 
 export default DS.Model.extend({
   borocd: DS.attr('number'),
@@ -11,6 +12,10 @@ export default DS.Model.extend({
   bounds: Ember.computed('geometry', function() {
     const geometry = this.get('geometry');
     return bbox(geometry);
+  }),
+  centroid: Ember.computed('geometry', function() {
+    const geometry = this.get('geometry');
+    return centroid(geometry).geometry.coordinates;
   }),
   neighborhoods: Ember.computed('borocd', function() {
     const borocd = this.get('borocd');
