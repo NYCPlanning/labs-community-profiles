@@ -20,7 +20,7 @@ export default Ember.Component.extend(ResizeAware, {
     dcp_orange: '#de7d2c',
   },
 
-  height: 100,
+  height: 50,
   margin: {
     top: 0,
     right: 0,
