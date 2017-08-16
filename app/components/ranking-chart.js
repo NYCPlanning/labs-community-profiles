@@ -117,7 +117,9 @@ export default Ember.Component.extend(ResizeAware, {
           .attr('fill', colorsHash.dcp_orange);
 
         div
-          .text(() => `${d.boro_district}: ${percent(d[column])}${unit}`)
+          .html(function() {
+            return `${d.boro_district}` + ': <strong>' + `${percent(d[column])}${unit}` + '</strong>';
+          })
           .attr('style', function() {
             const midpoint = calculateMidpoint(this);
             return `left: ${x(d.borocd) - midpoint}px`;
@@ -182,7 +184,9 @@ export default Ember.Component.extend(ResizeAware, {
         .on('mouseout', handleMouseOut);
 
       div
-        .text(() => `${current.boro_district}: ${percent(current[column])}${unit}`)
+        .html(function() {
+          return `${current.boro_district}` + ': <strong>' + `${percent(current[column])}${unit}` + '</strong>';
+        })
         .attr('style', function () {
           const midpoint = calculateMidpoint(this);
           return `left: ${x(current.borocd) - midpoint}px`;
@@ -191,7 +195,9 @@ export default Ember.Component.extend(ResizeAware, {
       svg
         .on('mouseout', function() {
           div
-            .text(() => `${current.boro_district}: ${percent(current[column])}${unit}`)
+            .html(function() {
+              return `${current.boro_district}` + ': <strong>' + `${percent(current[column])}${unit}` + '</strong>';
+            })
             .attr('style', function() {
               const midpoint = calculateMidpoint(this);
               return `left: ${x(current.borocd) - midpoint}px`;
