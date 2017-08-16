@@ -18,11 +18,12 @@
 
 .tooltip {
   position: absolute;
+  top: 100%;
+  margin-top: 5px;
   text-align: center;
   z-index: 9999;
   padding: 5px 10px;
   background: $dark-gray;
-  border: 0px;
   pointer-events: none;
   white-space: nowrap;
   transition: left 0.1s;
@@ -30,10 +31,11 @@
 
 .tooltip:after {
   content: '';
-  border: 10px solid transparent;
+  border: 5px solid transparent;
   border-bottom-color: $dark-gray;
+  border-bottom-width: 5px;
   position: absolute;
   bottom: 100%;
   left: 50%;
-  margin-left: -10px;
+  margin-left: -5px;
 }
