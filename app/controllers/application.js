@@ -24,6 +24,13 @@ export default Ember.Controller.extend({
     };
   }),
 
+  cdCurrentAddressSource: Ember.computed('mapState.currentAddress.geometry', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.currentAddress.geometry'),
+    };
+  }),
+
   cdLabelsBoro: {
     layout: {
       'text-field': '{boro}',
@@ -34,6 +41,16 @@ export default Ember.Controller.extend({
       'icon-optional': false,
       'symbol-avoid-edges': true,
       'text-offset': [0, -2.5],
+    },
+  },
+
+  cdPointLayer: {
+    id: 'cd-circle',
+    type: 'circle',
+    source: 'currentAddress',
+    paint: {
+      'circle-radius': 3,
+      'circle-color': 'blue',
     },
   },
 

@@ -18,22 +18,24 @@
           {{source.layer layer=cdSelectedLayer}}
         {{/map.source}}
       {{/if}}
+
+      {{#if mapState.currentAddress}}
+        {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
+          {{source.layer layer=cdPointLayer}}
+        {{/map.source}}
+{{!--         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+          {{source.layer layer=cdSelectedLayer}}
+        {{/map.source}} --}}
+      {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
-      {{#power-select
-        options=model
-        selected=mapState.currentlySelected
-        searchField="name"
-        placeholder="District or Neighborhood..."
-        onchange=(route-action 'transitionToProfile')
-        as |district|
-      }}
-        <strong class="district">{{district.boro}} {{district.cd}}</strong> <small class="neighborhoods">{{district.neighborhoods}}</small>
-      {{/power-select}}
+      {{navigation-dropdown 
+          model=model
+          selected=mapState.currentlySelected
+          onchange=(route-action 'transitionToProfile')}}
     </div>
   </div>
   <div class="cell large-auto" id="page-content">
-
     {{outlet}}
 
     <footer class="site-footer text-center">
