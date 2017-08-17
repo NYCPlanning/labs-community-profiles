@@ -7,6 +7,8 @@
       {{/each}}
     </ul>
   </div>
-  <button class="button small hollow expanded" onclick={{action 'toggleList'}}>{{if showAll 'Show Less' 'Show All'}}</button>
+  {{#unless showAll}}
+    <button class="button small hollow expanded" onclick={{action 'toggleList'}}>Show All</button>
+  {{/unless}}
 </div>
 {{yield}}
