@@ -71,6 +71,8 @@
   },
   "private": true,
   "dependencies": {
-    "@turf/centroid": "^4.6.1"
+    "@turf/boolean-contains": "^4.6.1",
+    "@turf/centroid": "^4.6.1",
+    "@turf/inside": "^4.6.0"
   }
 }

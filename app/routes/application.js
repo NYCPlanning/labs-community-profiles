@@ -15,7 +15,6 @@ export default Ember.Route.extend({
     mapState.set('bounds', bbox(geojsonDistricts));
   },
 
-
   setupController(controller, districts) {
     this._super(controller, districts);
     controller.set('geojson', toGeojson(districts));
