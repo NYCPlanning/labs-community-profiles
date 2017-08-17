@@ -5,9 +5,9 @@
       <h1>{{model.boro}} Community District {{model.cd}}</h1>
       <div class="section-menu hide-for-print">
         <ul class="menu">
-          <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#community-board-perspectives' label='Community Board Perspectives' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
         </ul>
@@ -20,6 +20,81 @@
       <div class="neighborhoods-list">
         {{model.neighborhoods}}
       </div>
+
+      <section id="built-environment" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#built-environment' afterScroll='handleAfterScroll'}}
+            {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+
+        <h4 class="subsection-header"><strong>Community Assets</strong></h4>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
+              Public Schools
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
+              Public Libraries
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
+              Hospitals and Clinics
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
+              Parks
+            </div>
+          </div>
+        </div>
+
+        <h4 class="subsection-header"><strong>Land Use</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+              {{land-use-map}}
+            </div>
+            <div class="cell medium-6">
+              {{land-use-chart borocd=model.borocd}}
+            </div>
+          </div>
+        </div>
+
+        <h4 class="subsection-header"><strong>Zoning</strong></h4>
+        <div class="callout">
+        </div>
+
+        <h4 class="subsection-header"><strong>Facilities</strong></h4>
+        <div class="callout">
+          {{facilities-section borocd=model.borocd}}
+        </div>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-6">
+
+            <h4 class="subsection-header"><strong>Housing Pipeline</strong></h4>
+            <div class="callout">
+            </div>
+
+          </div>
+          <div class="cell medium-6">
+
+            <h4 class="subsection-header"><strong>Capital Projects</strong></h4>
+            <div class="callout">
+            </div>
+
+          </div>
+        </div>
+
+      </section>
 
       <section id="indicators" class="page-section">
         <h3 class="section-header">
@@ -169,124 +244,18 @@
           {{/data.indicator}}
         {{/key-indicators}}
 
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
       </section>
 
-      <section id="built-environment" class="page-section">
+      <section id="community-board-perspectives" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#built-environment' afterScroll='handleAfterScroll'}}
-            {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#community-board-perspectives' afterScroll='handleAfterScroll'}}
+            {{fa-icon "group"}} Community Board Perspectives {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
 
-        <h4 class="subsection-header"><strong>Community Assets</strong></h4>
-        <div class="grid-x grid-padding-x">
-          <div class="cell medium-3 large-6 xlarge-3">
-            <div class="callout text-center">
-              <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
-              Public Schools
-            </div>
-          </div>
-          <div class="cell medium-3 large-6 xlarge-3">
-            <div class="callout text-center">
-              <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
-              Public Libraries
-            </div>
-          </div>
-          <div class="cell medium-3 large-6 xlarge-3">
-            <div class="callout text-center">
-              <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
-              Hospitals and Clinics
-            </div>
-          </div>
-          <div class="cell medium-3 large-6 xlarge-3">
-            <div class="callout text-center">
-              <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
-              Parks
-            </div>
-          </div>
-        </div>
-
-        <h4 class="subsection-header"><strong>Land Use</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
-              {{land-use-map}}
-            </div>
-            <div class="cell medium-6">
-              {{land-use-chart borocd=model.borocd}}
-            </div>
-          </div>
-        </div>
-
-        <h4 class="subsection-header"><strong>Zoning</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>Facilities</strong></h4>
-        <div class="callout">
-          {{facilities-section borocd=model.borocd}}
-        </div>
-
-        <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Housing Pipeline</strong></h4>
-            <div class="callout">
-            </div>
-
-          </div>
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Capital Projects</strong></h4>
-            <div class="callout">
-            </div>
-
-          </div>
-        </div>
-
-      </section>
-
-      <section id="community-board" class="page-section">
-        <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#community-board' afterScroll='handleAfterScroll'}}
-            {{fa-icon "group"}} {{model.boro}} Community Board {{model.cd}} {{fa-icon "link"}}
-          {{/scroll-to}}
-        </h3>
-
+        <h4 class="subsection-header"><strong>{{model.boro}} Community Board {{model.cd}}</strong></h4>
         <p>
-          <a class="button small hollow" href="http://www1.nyc.gov/sicb3">{{fa-icon "external-link"}}&nbsp;<strong>www1.nyc.gov/sicb3</strong></a>
+          <a class="button small hollow" href="http://www1.nyc.gov/sicb3">{{fa-icon "external-link"}}&nbsp;<strong>website</strong></a>
           <a class="button small hollow" href="#">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
         </p>
 
@@ -295,7 +264,7 @@
 
             <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
             <div class="callout">
-              <p>These are the top 3 pressing issues identified by the Community Board in the latest <a href="#">Statement of Community District Needs</a>:</p>
+              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href="#">Statement of Community District Needs</a>:</p>
               <ul>
                 <li><strong>{{d.son_issue_1}}</strong></li>
                 <li><strong>{{d.son_issue_2}}</strong></li>
