@@ -6,6 +6,7 @@
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer}}
+        {{source.layer layer=cdHoveredLayer}}
         {{source.layer layer=cdLineLayer}}
         {{source.layer layer=cdLabelLayer}}
         {{source.layer layer=cdBoroLabelLayer}}

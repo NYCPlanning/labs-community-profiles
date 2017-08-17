@@ -8,6 +8,8 @@ export default Ember.Controller.extend({
   lng: -74,
   zoom: 9.2,
 
+  hoveredCD: '',
+
   geojson: {},
 
   cdSource: Ember.computed('geojson', function () {
@@ -88,10 +90,21 @@ export default Ember.Controller.extend({
     },
   },
 
+  cdHoveredLayer: {
+    id: 'cd-hovered',
+    type: 'fill',
+    source: 'cds',
+    paint: {
+      'fill-color': '#cdcdcd',
+      'fill-opacity': 0.5,
+    },
+    filter: ['==', 'borocd', 0],
+  },
+
   mouseoverLocation: null,
   'tooltip-text': '',
 
-  style: Ember.computed('mapState.currentlySelected', function style() {
+  style: Ember.computed('mapState.currentlySelected', function() {
     return (geoJsonFeature) => {
       if (geoJsonFeature.properties.borocd === this.get('mapState.currentlySelected.borocd')) {
         return {
@@ -121,13 +134,15 @@ export default Ember.Controller.extend({
       }
     },
     handleMouseover(e) {
-      const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
+      const map = e.target;
+      const firstCD = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
-          e.target.getCanvas().style.cursor = 'pointer';
+          map.setFilter('cd-hovered', ['==', 'borocd', firstCD.properties.borocd]);
+          map.getCanvas().style.cursor = 'pointer';
         } else {
-          e.target.getCanvas().style.cursor = '';
+          map.getCanvas().style.cursor = '';
         }
       }
     },
