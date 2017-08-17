@@ -107,9 +107,11 @@ li.list-item-padded {
 //
 // Scrollable Lists (e.g. Needs Statement Archive)
 // --------------------------------------------------
-.list-scroll {
-  max-height: 8.875em;
-  overflow: auto;
+.list-scroll-medium {
+  @include breakpoint(medium) {
+    max-height: 8.875em;
+    overflow: auto;
+  }
 }
 
 
