@@ -18,7 +18,6 @@ export default Ember.Route.extend({
 
   setupController(controller, districts) {
     this._super(controller, districts);
-    console.log('districts', districts);
     controller.set('geojson', toGeojson(districts));
   },
 
