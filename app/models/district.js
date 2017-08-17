@@ -3,10 +3,24 @@ import DS from 'ember-data'; // eslint-disable-line
 import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 import bbox from 'npm:@turf/bbox' // eslint-disable-line
 import centroid from 'npm:@turf/centroid'; // eslint-disable-line
+import numeral from 'npm:numeral';
+
+const acronymCrosswalk = {
+  'Bronx': 'BX',
+  'Brooklyn': 'BK',
+  'Manhattan': 'MN',
+  'Queens': 'QN',
+  'Staten Island': 'SI',
+};
 
 export default DS.Model.extend({
   borocd: DS.attr('number'),
   boro: DS.attr('string'),
+  borocdAcronym: Ember.computed('boro', function() {
+    const acronym = acronymCrosswalk[this.get('boro')];
+    const cd = numeral(this.get('cd')).format('00');
+    return `${acronym}${cd}`;
+  }),
   cd: DS.attr('string'),
   geometry: DS.attr(),
   bounds: Ember.computed('geometry', function() {

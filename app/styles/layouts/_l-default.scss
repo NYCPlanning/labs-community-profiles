@@ -6,6 +6,11 @@
 // Basic page layout
 // --------------------------------------------------
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .site-header {
   background-color: $white;
   position: relative;

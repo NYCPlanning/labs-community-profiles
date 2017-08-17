@@ -74,6 +74,7 @@
   "dependencies": {
     "@turf/boolean-contains": "^4.6.1",
     "@turf/centroid": "^4.6.1",
-    "@turf/inside": "^4.6.0"
+    "@turf/inside": "^4.6.0",
+    "numeral": "^2.0.6"
   }
 }

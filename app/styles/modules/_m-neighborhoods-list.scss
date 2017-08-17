@@ -1,0 +1,16 @@
+// --------------------------------------------------
+// Module: Neighborhoods List
+// --------------------------------------------------
+
+.neighborhoods-list {
+  font-size: rem-calc(12);
+  font-weight: $global-weight-bold;
+  margin: 0 0 1rem;
+
+  @include breakpoint(large) {
+    color: $white;
+    background-color: $dark-gray;
+    margin: -1.5rem rem-calc(-20) 1rem;
+    padding: 1rem rem-calc(20) 0.5rem;
+  }
+}
