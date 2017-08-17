@@ -97,12 +97,18 @@ table.width-auto {
   width: auto;
 }
 
+li.list-item-padded {
+  & + & {
+    margin-top: 0.5rem;
+  }
+}
+
 
 //
 // Scrollable Lists (e.g. Needs Statement Archive)
 // --------------------------------------------------
 .list-scroll {
-  max-height: 9em;
+  max-height: 8.875em;
   overflow: auto;
 }
 
