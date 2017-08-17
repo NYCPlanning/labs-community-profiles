@@ -75,6 +75,10 @@ h6,
 .lu-silver { color: $lu-silver; }
 .lu-gray { color: $lu-gray; }
 
+.text-small {
+  font-size: rem-calc(12);
+  line-height: 1.7;
+}
 
 table,
 .callout {
@@ -89,12 +93,17 @@ table,
   }
 }
 
-table.small {
-  font-size: rem-calc(12);
-}
-
 table.width-auto {
   width: auto;
+}
+
+
+//
+// Scrollable Lists (e.g. Needs Statement Archive)
+// --------------------------------------------------
+.list-scroll {
+  max-height: 9em;
+  overflow: auto;
 }
 
 
