@@ -8,6 +8,7 @@
         {{source.layer layer=cdFillLayer}}
         {{source.layer layer=cdLineLayer}}
         {{source.layer layer=cdLabelLayer}}
+        {{source.layer layer=cdBoroLabelLayer}}
       {{/map.source}}
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}

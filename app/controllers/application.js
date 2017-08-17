@@ -24,15 +24,16 @@ export default Ember.Controller.extend({
     };
   }),
 
-  cdLabelsBoro: {
+  cdBoroLabelLayer: {
+    id: 'cd-boro-label',
+    type: 'symbol',
+    source: 'cds',
+    minzoom: 11.5,
     layout: {
       'text-field': '{boro}',
+      'text-allow-overlap': true,
       'symbol-placement': 'point',
       'text-size': 12,
-      'icon-allow-overlap': false,
-      'icon-ignore-placement': false,
-      'icon-optional': false,
-      'symbol-avoid-edges': true,
       'text-offset': [0, -2.5],
     },
   },
@@ -73,6 +74,7 @@ export default Ember.Controller.extend({
     source: 'cds',
     layout: {
       'text-field': '{cd}',
+      'text-allow-overlap': true,
       'symbol-placement': 'point',
       'text-size': {
         stops: [
@@ -80,10 +82,6 @@ export default Ember.Controller.extend({
           [12, 30],
         ],
       },
-      'icon-allow-overlap': false,
-      'icon-ignore-placement': false,
-      'icon-optional': false,
-      'symbol-avoid-edges': true,
     },
     paint: {
       'text-color': 'rgba(66, 66, 66, 1)',
