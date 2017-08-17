@@ -103,29 +103,6 @@
             </table>
 
           </div>
-          <div class="cell medium-8 xlarge-7">
-
-            <h4 class="header-tiny"><strong>Community Assets</strong></h4>
-            <table class="small">
-              <thead>
-                <tr>
-                  <th class="text-center">Public Schools</th>
-                  <th class="text-center">Public Libraries</th>
-                  <th class="text-center">Hospitals and Clinics</th>
-                  <th class="text-center">Parks</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">{{d.count_public_schools}}</td>
-                  <td class="text-center">{{d.count_libraries}}</td>
-                  <td class="text-center">{{d.count_hosp_clinic}}</td>
-                  <td class="text-center">{{d.count_parks}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
         </div>
 
         {{#key-indicators class="key-indicators grid-x grid-padding-x" indicators=columns
@@ -234,6 +211,34 @@
             Built Environment {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
+
+        <h4 class="subsection-header"><strong>Community Assets</strong></h4>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
+              Public Schools
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
+              Public Libraries
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
+              Hospitals and Clinics
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
+              Parks
+            </div>
+          </div>
+        </div>
 
         <h4 class="subsection-header"><strong>Land Use</strong></h4>
         <div class="callout">

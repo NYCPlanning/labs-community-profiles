@@ -57,10 +57,24 @@ h6,
   white-space: nowrap;
 }
 
-.small-gray {
-  color: $dark-gray;
-  font-size: rem-calc(14);
-}
+.light-gray { color: $light-gray; }
+.medium-gray { color: $medium-gray; }
+.dark-gray { color: $dark-gray; }
+.dcp-orange { color: $dcp-orange; }
+
+// Land Use colors
+.lu-peach { color: $lu-peach; }
+.lu-yellow { color: $lu-yellow; }
+.lu-magenta { color: $lu-magenta; }
+.lu-red { color: $lu-red; }
+.lu-orange { color: $lu-orange; }
+.lu-pink { color: $lu-pink; }
+.lu-green { color: $lu-green; }
+.lu-blue { color: $lu-blue; }
+.lu-lavendar { color: $lu-lavendar; }
+.lu-silver { color: $lu-silver; }
+.lu-gray { color: $lu-gray; }
+
 
 table,
 .callout {
