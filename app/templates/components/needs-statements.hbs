@@ -1,0 +1,12 @@
+<h4 class="subsection-header"><strong>Needs Statement Archive</strong></h4>
+<div class="callout">
+  <div class="list-scroll">
+    <ul class="text-small">
+      {{#each (await truncatedYears) as |year|}}
+        <li><a href="{{downloadPath}}/{{year.path}}">{{year.name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+  <button class="button tiny expanded" onclick={{action 'toggleList'}}>{{if showAll 'Show Less' 'Show All'}}</button>
+</div>
+{{yield}}
