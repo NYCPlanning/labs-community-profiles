@@ -18,6 +18,15 @@
           {{source.layer layer=cdSelectedLayer}}
         {{/map.source}}
       {{/if}}
+
+      {{#if mapState.currentAddress}}
+        {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
+          {{source.layer layer=cdPointLayer}}
+        {{/map.source}}
+{{!--         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+          {{source.layer layer=cdSelectedLayer}}
+        {{/map.source}} --}}
+      {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
       {{navigation-dropdown 
