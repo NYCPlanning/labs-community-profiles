@@ -26,6 +26,13 @@ export default Ember.Controller.extend({
     };
   }),
 
+  cdHoveredSource: Ember.computed('mapState.currentlyHovered', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.currentlyHovered'),
+    };
+  }),
+
   cdBoroLabelLayer: {
     id: 'cd-boro-label',
     type: 'symbol',
@@ -110,12 +117,11 @@ export default Ember.Controller.extend({
   cdHoveredLayer: {
     id: 'cd-hovered',
     type: 'fill',
-    source: 'cds',
+    source: 'cd-hovered',
     paint: {
       'fill-color': '#cdcdcd',
       'fill-opacity': 0.5,
     },
-    filter: ['==', 'borocd', 0],
   },
 
   mouseoverLocation: null,
@@ -150,22 +156,23 @@ export default Ember.Controller.extend({
         this.transitionToRoute('profile', boro.dasherize(), cd);
       }
     },
-    handleMouseover(e) {
+    handleMousemove(e) {
       const map = e.target;
+      const mapState = this.get('mapState');
       const firstCD = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
-          map.setFilter('cd-hovered', ['==', 'borocd', firstCD.properties.borocd]);
+          mapState.set('currentlyHovered', firstCD);
           map.getCanvas().style.cursor = 'pointer';
-        } else {
-          map.getCanvas().style.cursor = '';
         }
+      } else {
+        this.set('mouseoverLocation', null);
+        mapState.set('currentlyHovered', null);
+        map.getCanvas().style.cursor = '';
       }
     },
-    handleMouseleave() {
-      this.set('mouseoverLocation', null);
-    },
+
     handleMapLoad(map) {
       map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
