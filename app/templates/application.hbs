@@ -4,15 +4,24 @@
 <div id="main" class="grid-x">
   <div class="cell large-4 xlarge-3" id="cd-chooser">
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
+
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer}}
         {{source.layer layer=cdLineLayer}}
         {{source.layer layer=cdLabelLayer}}
+        {{source.layer layer=cdBoroLabelLayer}}
       {{/map.source}}
+
+      {{#if mapState.currentlyHovered}}
+        {{#map.source sourceId='cd-hovered' source=cdHoveredSource as |source|}}
+          {{source.layer layer=cdHoveredLayer}}
+        {{/map.source}}
+      {{/if}}
+
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
-      {{map.on 'mousemove' (action 'handleMouseover')}}
-      {{map.on 'mouseout' (action 'handleMouseleave')}}
+      {{map.on 'mousemove' (action 'handleMousemove')}}
+      {{map.on 'mouseout' (action 'handleMouseout')}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
           {{source.layer layer=cdSelectedLayer}}
@@ -29,7 +38,7 @@
       {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
-      {{navigation-dropdown 
+      {{navigation-dropdown
           model=model
           selected=mapState.currentlySelected
           onchange=(route-action 'transitionToProfile')}}

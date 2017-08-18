@@ -14,7 +14,6 @@ export default Ember.Component.extend({
 
     return this.get('allStatements')
       .then(statements=> {
-        console.log(statements);
         return statements.tree
           .filter(statement => statement.type === 'blob')
           .filter(statement => statement.path.indexOf(district.get('borocdAcronym')) !== -1)
@@ -29,7 +28,6 @@ export default Ember.Component.extend({
 
   truncatedYears: Ember.computed('district', 'showAll', function() {
     return this.get('availableYears').then(years => {
-      console.log(years);
       if(this.get('showAll')) {
         return years;
       } else {
