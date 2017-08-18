@@ -21,6 +21,7 @@
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMousemove')}}
+      {{map.on 'mouseout' (action 'handleMouseout')}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
           {{source.layer layer=cdSelectedLayer}}

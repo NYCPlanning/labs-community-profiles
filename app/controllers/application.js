@@ -178,6 +178,11 @@ export default Ember.Controller.extend({
       }
     },
 
+    handleMouseout() {
+      const mapState = this.get('mapState');
+      mapState.set('currentlyHovered', null);
+    },
+
     handleMapLoad(map) {
       map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
