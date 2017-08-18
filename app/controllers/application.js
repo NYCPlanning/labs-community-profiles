@@ -159,11 +159,16 @@ export default Ember.Controller.extend({
     handleMousemove(e) {
       const map = e.target;
       const mapState = this.get('mapState');
+      const { currentlyHovered } = mapState;
       const firstCD = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
-          mapState.set('currentlyHovered', firstCD);
+          const borocd = firstCD.properties.borocd;
+          const prevBorocd = currentlyHovered ? currentlyHovered.properties.borocd : null;
+          if (!currentlyHovered || (borocd !== prevBorocd)) {
+            mapState.set('currentlyHovered', firstCD);
+          }
           map.getCanvas().style.cursor = 'pointer';
         }
       } else {

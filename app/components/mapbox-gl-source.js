@@ -13,6 +13,8 @@ export default Ember.Component.extend({
   source: {},
 
   init() {
+    console.log('init')
+
     this._super();
 
     const { sourceId, source } = getProperties(this, 'sourceId', 'source');
@@ -20,6 +22,7 @@ export default Ember.Component.extend({
   },
 
   didUpdateAttrs() {
+    console.log('setting data')
     this._super(...arguments);
 
     const { sourceId, source } = getProperties(this, 'sourceId', 'source');
@@ -27,6 +30,8 @@ export default Ember.Component.extend({
   },
 
   willDestroy() {
+    console.log('destory')
+
     this._super(...arguments);
 
     this.map.removeSource(get(this, 'sourceId'));
