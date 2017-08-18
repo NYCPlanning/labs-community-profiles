@@ -152,7 +152,7 @@ export default Ember.Controller.extend({
     handleClick(e) {
       const metrics = this.get('metrics');
       const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
-      const { boro, cd } = firstCD.properties;
+      const { boro, cd, borocd } = firstCD.properties;
 
       if (boro) {
         this.transitionToRoute('profile', boro.dasherize(), cd);
