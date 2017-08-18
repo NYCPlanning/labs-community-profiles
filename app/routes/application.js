@@ -3,8 +3,8 @@ import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
 
 export default Ember.Route.extend({
+  metrics: Ember.inject.service(),
   mapState: Ember.inject.service(),
-
   model() {
     return this.store.findAll('district');
   },
@@ -23,6 +23,15 @@ export default Ember.Route.extend({
   actions: {
     transitionToProfile(district) {
       const { boro, borocd } = district.getProperties('boro', 'borocd');
+      const metrics = this.get('metrics');
+
+      metrics.trackEvent({
+        eventCategory: 'Navigation Dropdown',
+        eventAction: 'Click',
+        eventLabel: `${boro} ${borocd % 100}`,
+        eventValue: borocd,
+      });
+
       const modelName = district.get('constructor.modelName');
       const mapState = this.get('mapState');
 

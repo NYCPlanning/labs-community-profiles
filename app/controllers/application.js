@@ -4,6 +4,7 @@ import isCdLayer from '../utils/is-cd-layer';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
+  metrics: Ember.inject.service(),
   lat: 40.7071266,
   lng: -74,
   zoom: 9.2,
@@ -149,12 +150,20 @@ export default Ember.Controller.extend({
 
   actions: {
     handleClick(e) {
+      const metrics = this.get('metrics');
       const firstCD = e.target.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
-      const { boro, cd } = firstCD.properties;
+      const { boro, cd, borocd } = firstCD.properties;
 
       if (boro) {
         this.transitionToRoute('profile', boro.dasherize(), cd);
       }
+
+      metrics.trackEvent({
+        eventCategory: 'Navigation Map',
+        eventAction: 'Click',
+        eventLabel: `${boro} ${cd}`,
+        eventValue: borocd,
+      });
     },
     handleMousemove(e) {
       const map = e.target;
