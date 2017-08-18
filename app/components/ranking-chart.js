@@ -116,6 +116,11 @@ export default Ember.Component.extend(ResizeAware, {
         return numeral(number).format('0.0');
       };
 
+      const tooltipTemplate = function(d) {
+        const selected = d || current;
+        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><div>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</div>`;
+      };
+
       const handleMouseOver = (d, i) => {
         const selector = `.bar-${d.borocd}`;
         svg.select(selector)
@@ -125,7 +130,7 @@ export default Ember.Component.extend(ResizeAware, {
 
         div
           .html(function() {
-            return `${d.boro_district}` + ': <strong>' + `${percent(d[column])}${unit}` + '</strong>';
+            return tooltipTemplate(d);
           })
           .attr('style', function() {
             const midpoint = calculateMidpoint(this);
@@ -214,9 +219,7 @@ export default Ember.Component.extend(ResizeAware, {
       }
 
       div
-        .html(function() {
-          return `${current.boro_district}` + ': <strong>' + `${percent(current[column])}${unit}` + '</strong>';
-        })
+        .html(tooltipTemplate)
         .attr('style', function () {
           const midpoint = calculateMidpoint(this);
           return `left: ${x(current.borocd) - midpoint}px`;
@@ -225,9 +228,7 @@ export default Ember.Component.extend(ResizeAware, {
       svg
         .on('mouseout', function() {
           div
-            .html(function() {
-              return `${current.boro_district}` + ': <strong>' + `${percent(current[column])}${unit}` + '</strong>';
-            })
+            .html(tooltipTemplate)
             .attr('style', function() {
               const midpoint = calculateMidpoint(this);
               return `left: ${x(current.borocd) - midpoint}px`;
