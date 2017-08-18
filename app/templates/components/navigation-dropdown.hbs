@@ -1,0 +1,11 @@
+{{#power-select
+  options=options
+  selected=selected
+  searchField="name"
+  placeholder="District or Neighborhood..."
+  onchange=onchange
+  oninput=(action 'handleSearch')
+  as |district|
+}}
+  <strong class="district">{{district.boro}} {{district.cd}}</strong> <small class="neighborhoods">{{district.neighborhoods}}</small>
+{{/power-select}}

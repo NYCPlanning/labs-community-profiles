@@ -20,26 +20,32 @@
           {{source.layer layer=cdSelectedLayer}}
         {{/map.source}}
       {{/if}}
+
+      {{#if mapState.currentAddress}}
+        {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
+          {{source.layer layer=cdPointLayer}}
+        {{/map.source}}
+{{!--         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+          {{source.layer layer=cdSelectedLayer}}
+        {{/map.source}} --}}
+      {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
-      {{#power-select
-        options=model
-        selected=mapState.currentlySelected
-        searchField="name"
-        placeholder="District or Neighborhood..."
-        onchange=(route-action 'transitionToProfile')
-        as |district|
-      }}
-        <strong class="district">{{district.boro}} {{district.cd}}</strong> <small class="neighborhoods">{{district.neighborhoods}}</small>
-      {{/power-select}}
+      {{navigation-dropdown 
+          model=model
+          selected=mapState.currentlySelected
+          onchange=(route-action 'transitionToProfile')}}
     </div>
   </div>
   <div class="cell large-auto" id="page-content">
-
     {{outlet}}
 
     <footer class="site-footer text-center">
-      <p>Don't see the data you need? <a href="https://github.com/NYCPlanning/labs-community-portal/issues">File an issue</a> to let us know.</p>
+      <p>
+        <strong style="display:block;margin-bottom:0.5rem;">Don't see the data you need? Have&nbsp;questions?</strong>
+        <a class="button small" href="https://github.com/NYCPlanning/labs-community-portal/issues">{{fa-icon "github"}}&nbsp;Add a GitHub Issue</a>
+        <a class="button small" href="mailto:PORTAL_DL@planning.nyc.gov">{{fa-icon "envelope"}}&nbsp;Send Us an Email</a>
+      </p>
     </footer>
 
   </div>

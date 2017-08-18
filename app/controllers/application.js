@@ -40,6 +40,23 @@ export default Ember.Controller.extend({
     },
   },
 
+  cdCurrentAddressSource: Ember.computed('mapState.currentAddress.geometry', function () {
+    return {
+      type: 'geojson',
+      data: this.get('mapState.currentAddress.geometry'),
+    };
+  }),
+
+  cdPointLayer: {
+    id: 'cd-circle',
+    type: 'circle',
+    source: 'currentAddress',
+    paint: {
+      'circle-radius': 3,
+      'circle-color': 'blue',
+    },
+  },
+
   cdFillLayer: {
     id: 'cd-fill',
     type: 'fill',
