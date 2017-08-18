@@ -254,9 +254,12 @@
         </h3>
 
         <h4 class="subsection-header"><strong>{{model.boro}} Community Board {{model.cd}}</strong></h4>
+
         <p>
-          <a class="button small hollow" href="http://www1.nyc.gov/sicb3">{{fa-icon "external-link"}}&nbsp;<strong>website</strong></a>
-          <a class="button small hollow" href="#">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+          <a class="button small hollow {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
+            {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
+          </a>
+          <a class="button small hollow {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
         </p>
 
         <div class="grid-x grid-padding-x">
