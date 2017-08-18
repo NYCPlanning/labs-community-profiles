@@ -103,12 +103,13 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x" indicators=columns
+        {{#key-indicators class="key-indicators grid-x grid-padding-x" 
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
                             column='poverty_rate'
+                            moe='moe_poverty_rate'
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
@@ -117,6 +118,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
+                            moe='moe_bach_deg'
                             unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
@@ -125,6 +127,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Unemployment'
                             column='unemployment_cd'
+                            moe='moe_unemployment_cd'
                             unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
@@ -133,6 +136,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
                             column='crime_per_1000'
+
                             cd_stat=d.crime_per_1000
                             boro_stat=d.crime_per_1000_boro
                             city_stat=d.crime_per_1000_nyc}}
@@ -140,6 +144,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
                             column='mean_commute'
+                            moe='moe_mean_commute'
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
@@ -147,6 +152,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
                             column='pct_hh_rent_burd'
+                            moe='moe_hh_rent_burd'
                             unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
