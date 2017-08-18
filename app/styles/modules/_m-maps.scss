@@ -1,9 +1,8 @@
 // --------------------------------------------------
-// Module: Land Use Section
+// Module: Maps
 // --------------------------------------------------
 
-#lu-map {
-
+.mapboxgl-map {
   height: 400px;
   width: 100%;
   margin-bottom: $global-margin;
@@ -11,4 +10,17 @@
   @include breakpoint(medium) {
     margin-bottom: 0;
   }
+}
+
+.mapboxgl-ctrl {
+
+  button {
+    border-radius: 0;
+  }
+}
+
+#facilities-map {
+}
+
+#lu-map {
 }

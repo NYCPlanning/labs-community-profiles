@@ -5,4 +5,5 @@ export default Ember.Service.extend({
   bounds: DEFAULT_BOUNDS,
   currentlySelected: null,
   mapInstance: null,
+  currentAddress: null,
 });

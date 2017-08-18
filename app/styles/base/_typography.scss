@@ -27,18 +27,20 @@ h6,
 }
 
 .section-header {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   a {
     color: $body-font-color;
 
-    .fa {
+    .fa-link {
       color: $medium-gray;
     }
   }
 
   a:hover {
 
-    .fa {
+    .fa-link {
       color: $dcp-orange;
     }
   }
@@ -57,9 +59,27 @@ h6,
   white-space: nowrap;
 }
 
-.small-gray {
-  color: $dark-gray;
-  font-size: rem-calc(14);
+.light-gray { color: $light-gray; }
+.medium-gray { color: $medium-gray; }
+.dark-gray { color: $dark-gray; }
+.dcp-orange { color: $dcp-orange; }
+
+// Land Use colors
+.lu-peach { color: $lu-peach; }
+.lu-yellow { color: $lu-yellow; }
+.lu-magenta { color: $lu-magenta; }
+.lu-red { color: $lu-red; }
+.lu-orange { color: $lu-orange; }
+.lu-pink { color: $lu-pink; }
+.lu-green { color: $lu-green; }
+.lu-blue { color: $lu-blue; }
+.lu-lavendar { color: $lu-lavendar; }
+.lu-silver { color: $lu-silver; }
+.lu-gray { color: $lu-gray; }
+
+.text-small {
+  font-size: rem-calc(12);
+  line-height: 1.7;
 }
 
 table,
@@ -75,13 +95,27 @@ table,
   }
 }
 
-table.small {
-  font-size: rem-calc(12);
-}
-
 table.width-auto {
   width: auto;
 }
+
+li.list-item-padded {
+  & + & {
+    margin-top: 0.5rem;
+  }
+}
+
+
+//
+// Scrollable Lists (e.g. Needs Statement Archive)
+// --------------------------------------------------
+.list-scroll-medium {
+  @include breakpoint(medium) {
+    max-height: 8.875em;
+    overflow: auto;
+  }
+}
+
 
 //
 // Statistics
@@ -98,4 +132,17 @@ table.width-auto {
 .boro-stat,
 .city-stat {
   margin-bottom: 0.5rem;
+}
+
+
+//
+// Legend
+// --------------------------------------------------
+.legend-dot {
+  height: 1em;
+  width: 1em;
+  border-radius: 100%;
+  display: inline-block;
+  border: 2px solid #333;
+  margin-bottom: -0.1em;
 }

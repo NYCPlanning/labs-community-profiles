@@ -5,81 +5,26 @@
       <h1>{{model.boro}} Community District {{model.cd}}</h1>
       <div class="section-menu hide-for-print">
         <ul class="menu">
-          <li>{{scroll-to offset=-200 href='#needs' label='Needs' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#actions' label='Actions' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-200 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#projects' label='Projects' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
         </ul>
       </div>
     </div>
 
     <div class="district-content">
 
-      <div class="grid-x grid-padding-x">
-        <div class="cell medium-6">
-          <h4 class="subsection-header"><strong>Neighborhoods</strong></h4>
-          <p><small>{{model.neighborhoods}}</small></p>
-        </div>
-        <div class="cell medium-6">
-          <h4 class="subsection-header"><strong>Community Board {{model.cd}}</strong></h4>
-          <ul>
-            <li><a href="#">website</a></li>
-            <li><a href="#">email</a></li>
-          </ul>
-        </div>
+      <!-- <h4 class="subsection-header"><strong>Neighborhoods</strong></h4> -->
+      <div class="neighborhoods-list">
+        {{model.neighborhoods}}
       </div>
-
-      <section id="needs" class="page-section">
-        <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#needs' afterScroll='handleAfterScroll'}}
-            Community Needs {{fa-icon "link"}}
-          {{/scroll-to}}
-        </h3>
-
-        <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Top 3 Pressing Issues</strong>
-              <span>
-                {{fa-icon "info-circle"}}
-                {{#tooltip-on-element duration=50000 event='hover'}}
-                  These are the top 3 issues identified by the community board in the latest Statement of Community District Needs.
-                {{/tooltip-on-element}}
-              </span>
-            </h4>
-            <div class="callout">
-              <ul>
-                <li>{{d.son_issue_1}}</li>
-                <li>{{d.son_issue_2}}</li>
-                <li>{{d.son_issue_3}}</li>
-              </ul>
-              <a class="button expanded" href="{{d.cd_son_fy2018}}" download="cd_son_fy2018.pdf">Latest Statement of Needs <small>(PDF)</small></a>
-            </div>
-
-          </div>
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Needs Statements</strong></h4>
-            <div class="callout">
-              <ul>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-                <li><a href="#">Statement of Needs MM/DD/YY</a></li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
-      </section>
 
       <section id="indicators" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#indicators' afterScroll='handleAfterScroll'}}
-            Indicators {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
+            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
 
@@ -87,7 +32,7 @@
           <div class="cell medium-6 xlarge-5">
 
             <h4 class="subsection-header"><strong>Population</strong></h4>
-            <table class="small">
+            <table class="text-small">
               <thead>
                 <tr>
                   <th class="text-center">2000
@@ -136,7 +81,7 @@
           <div class="cell medium-6 xlarge-5">
 
             <h4 class="subsection-header"><strong>Land Mass</strong></h4>
-            <table class="small">
+            <table class="text-small">
               <thead>
                 <tr>
                   <th class="text-center">Square Miles</th>
@@ -156,37 +101,15 @@
             </table>
 
           </div>
-          <div class="cell medium-8 xlarge-7">
-
-            <h4 class="header-tiny"><strong>Community Assets</strong></h4>
-            <table class="small">
-              <thead>
-                <tr>
-                  <th class="text-center">Public Schools</th>
-                  <th class="text-center">Public Libraries</th>
-                  <th class="text-center">Hospitals and Clinics</th>
-                  <th class="text-center">Parks</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">{{d.count_public_schools}}</td>
-                  <td class="text-center">{{d.count_libraries}}</td>
-                  <td class="text-center">{{d.count_hosp_clinic}}</td>
-                  <td class="text-center">{{d.count_parks}}</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x" indicators=columns
+        {{#key-indicators class="key-indicators grid-x grid-padding-x" 
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
                             column='poverty_rate'
+                            moe='moe_poverty_rate'
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
@@ -195,6 +118,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
+                            moe='moe_bach_deg'
                             unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
@@ -203,6 +127,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Unemployment'
                             column='unemployment_cd'
+                            moe='moe_unemployment_cd'
                             unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
@@ -211,6 +136,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
                             column='crime_per_1000'
+
                             cd_stat=d.crime_per_1000
                             boro_stat=d.crime_per_1000_boro
                             city_stat=d.crime_per_1000_nyc}}
@@ -218,6 +144,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
                             column='mean_commute'
+                            moe='moe_mean_commute'
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
@@ -225,6 +152,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
                             column='pct_hh_rent_burd'
+                            moe='moe_hh_rent_burd'
                             unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
@@ -247,46 +175,42 @@
           {{/data.indicator}}
         {{/key-indicators}}
 
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
-        <h4 class="subsection-header"><strong>[Policy Area]</strong></h4>
-        <div class="callout">
-        </div>
-
       </section>
 
       <section id="built-environment" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#built-environment' afterScroll='handleAfterScroll'}}
-            Built Environment {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#built-environment' afterScroll='handleAfterScroll'}}
+            {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
+
+        <h4 class="subsection-header"><strong>Community Assets</strong></h4>
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
+              Public Schools
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
+              Public Libraries
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
+              Hospitals and Clinics
+            </div>
+          </div>
+          <div class="cell medium-3 large-6 xlarge-3">
+            <div class="callout text-center">
+              <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
+              Parks
+            </div>
+          </div>
+        </div>
 
         <h4 class="subsection-header"><strong>Land Use</strong></h4>
         <div class="callout">
@@ -328,10 +252,47 @@
 
       </section>
 
-      <section id="actions" class="page-section">
+      <section id="community-board" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#actions' afterScroll='handleAfterScroll'}}
-            Actions {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#community-board' afterScroll='handleAfterScroll'}}
+            {{fa-icon "group"}} Community Board Perspectives {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+
+        <h4 class="subsection-header"><strong>{{model.boro}} Community Board {{model.cd}}</strong></h4>
+
+        <p>
+          <a class="button small hollow {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
+            {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
+          </a>
+          <a class="button small hollow {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+        </p>
+
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-7">
+
+            <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
+            <div class="callout">
+              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href="#">Statement of Community District Needs</a>:</p>
+              <ul>
+                <li><strong>{{d.son_issue_1}}</strong></li>
+                <li><strong>{{d.son_issue_2}}</strong></li>
+                <li><strong>{{d.son_issue_3}}</strong></li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="cell medium-5">
+            {{needs-statements district=model}}
+          </div>
+        </div>
+
+      </section>
+
+      <section id="projects" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#projects' afterScroll='handleAfterScroll'}}
+            {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
 
@@ -356,8 +317,8 @@
 
       <section id="resources" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-35 href='#resources' afterScroll='handleAfterScroll'}}
-            Resources {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#resources' afterScroll='handleAfterScroll'}}
+            {{fa-icon "files-o"}} Resources {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
 

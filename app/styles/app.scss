@@ -8,6 +8,18 @@ $a11y-orange: #ae561f;
 $dcp-yellow: #ffc861;
 $a11y-yellow: #ffeec1;
 
+$lu-peach: #FDD48D;
+$lu-yellow: #F2F618;
+$lu-magenta: #E362FB;
+$lu-red: #FC5B5B;
+$lu-orange: #FF9400;
+$lu-pink: #FFC8BD;
+$lu-green: #78D271;
+$lu-blue: #44A3D5;
+$lu-lavendar: #E0BEEB;
+$lu-silver: #BAB8B6;
+$lu-gray: #5F5F60;
+
 //
 // Foundation
 // --------------------------------------------------
@@ -32,9 +44,9 @@ $a11y-yellow: #ffeec1;
 @import 'modules/_m-charts';
 @import 'modules/_m-ember-power-select';
 @import 'modules/_m-ember-tooltip';
-@import 'modules/_m-section--facilities';
 @import 'modules/_m-labs-beta-notice';
-@import 'modules/_m-section--land-use';
+@import 'modules/_m-maps';
+@import 'modules/_m-neighborhoods-list';
 @import 'modules/_m-section-menu';
 @import 'modules/_m-site-footer';
 @import 'modules/_m-site-header';

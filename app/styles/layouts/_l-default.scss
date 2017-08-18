@@ -6,20 +6,10 @@
 // Basic page layout
 // --------------------------------------------------
 
-// html {
-//   overflow: hidden;
-// }
-//
-// html, body {
-//   width: 100%;
-//   height: 100%;
-//   overflow-x: hidden;
-//
-//   @include breakpoint(large) {
-//     height: 100%;
-//     overflow: hidden;
-//   }
-// }
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 .site-header {
   background-color: $white;
@@ -46,6 +36,22 @@
 // #cd-chooser contains the map and search
 #cd-chooser {
   position: relative;
+  z-index: 1;
+
+  &::after {
+    @include breakpoint(large) {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: auto;
+      background-color: rgba(0,0,0,0.1);
+      width: 4px;
+      height: 100%;
+    }
+  }
 
   .mapboxgl-map {
     height: calc(50vh);
@@ -96,6 +102,8 @@
 .district-header {
   background-color: $white;
   margin: 0 0 $global-margin;
+  position: relative;
+  z-index: 2;
 
   @include breakpoint(large) {
     position: fixed;
@@ -103,7 +111,6 @@
     right: 0;
     bottom: auto;
     left: 33.33333%;
-    z-index: 2;
     padding: rem-calc(5) rem-calc(20) 0;
 
     @include breakpoint(xlarge) {
@@ -114,6 +121,7 @@
 
 .district-content {
   position: relative;
+  z-index: 1;
 
   @include breakpoint(large) {
     top: rem-calc(97);

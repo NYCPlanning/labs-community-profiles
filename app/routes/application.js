@@ -15,7 +15,6 @@ export default Ember.Route.extend({
     mapState.set('bounds', bbox(geojsonDistricts));
   },
 
-
   setupController(controller, districts) {
     this._super(controller, districts);
     controller.set('geojson', toGeojson(districts));
@@ -32,6 +31,13 @@ export default Ember.Route.extend({
         eventLabel: `${boro} ${borocd % 100}`,
         eventValue: borocd,
       });
+
+      const modelName = district.get('constructor.modelName');
+      const mapState = this.get('mapState');
+
+      if(modelName === 'address') {
+        mapState.set('currentAddress', district);
+      }
 
       this.transitionTo('profile', boro.dasherize(), borocd % 100);
     },

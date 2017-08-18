@@ -44,6 +44,9 @@ export default Ember.Component.extend(ResizeAware, {
     let bars = svg.append('g')
       .attr('class', 'bars');
 
+    let moes = svg.append('g')
+      .attr('class', 'moes');
+
     let masks = svg.append('g')
       .attr('class', 'masks');
 
@@ -55,6 +58,7 @@ export default Ember.Component.extend(ResizeAware, {
     this.set('svg', svg);
     this.set('div', div);
     this.set('bars', bars);
+    this.set('moes', moes);
     this.set('masks', masks);
 
     this._super(...arguments);
@@ -75,11 +79,14 @@ export default Ember.Component.extend(ResizeAware, {
       const width = elWidth - margin.left - margin.right;
       const colorsHash = this.get('colors');
       const column = this.get('column');
+      const moe = this.get('moe');
       const rank = data.findIndex(d => d.is_selected);
       const unit = this.get('unit');
 
-      const { svg, div, bars, masks } =
-        this.getProperties('svg', 'div', 'bars', 'masks');
+      if(!data[0][column]) return;
+
+      const { svg, div, bars, masks, moes } =
+        this.getProperties('svg', 'div', 'bars', 'masks', 'moes');
 
       div
         .attr('class', 'tooltip');
@@ -94,7 +101,7 @@ export default Ember.Component.extend(ResizeAware, {
         .padding(0);
 
       const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d[column])])
+        .domain([0, d3.max(data, d => (d[column] + (d[moe] || 0)))])
         .range([0, height]);
 
       const colors = (d) => {
@@ -109,6 +116,11 @@ export default Ember.Component.extend(ResizeAware, {
         return numeral(number).format('0.0');
       };
 
+      const tooltipTemplate = function(d) {
+        const selected = d || current;
+        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><div>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</div>`;
+      };
+
       const handleMouseOver = (d, i) => {
         const selector = `.bar-${d.borocd}`;
         svg.select(selector)
@@ -117,7 +129,9 @@ export default Ember.Component.extend(ResizeAware, {
           .attr('fill', colorsHash.dcp_orange);
 
         div
-          .text(() => `${d.boro_district}: ${percent(d[column])}${unit}`)
+          .html(function() {
+            return tooltipTemplate(d);
+          })
           .attr('style', function() {
             const midpoint = calculateMidpoint(this);
             return `left: ${x(d.borocd) - midpoint}px`;
@@ -138,6 +152,12 @@ export default Ember.Component.extend(ResizeAware, {
 
       // Join new data
       const theseBars = bars
+        .selectAll('.bar')
+        .data(data, function (d) {
+          return d.borocd;
+        });
+
+      const theseMoes = moes
         .selectAll('.bar')
         .data(data, function (d) {
           return d.borocd;
@@ -168,7 +188,7 @@ export default Ember.Component.extend(ResizeAware, {
         .attr('y', d => height - y(d[column]))
         .attr('width', d => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd))
-        .attr('height', d => y(d[column]))
+        .attr('height', d => y(d[column]));
 
       theseMasks.enter()
         .append('rect')
@@ -181,8 +201,25 @@ export default Ember.Component.extend(ResizeAware, {
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
 
+      if(moe) {
+        theseMoes
+          .attr('fill', '#6eceff')
+          .attr('width', () => x.bandwidth() - 2)
+          .attr('x', d => x(d.borocd));
+
+        theseMoes.enter()
+          .append('rect')
+          .attr('class', (d, i) => `bar moe bar-${d.borocd} bar-index-${i}`)
+          .style('opacity', '0.5')
+          .attr('fill', '#6eceff')
+          .attr('y', d => height - (y(d[column]) + y(d[moe])))
+          .attr('width', d => x.bandwidth() - 2)
+          .attr('x', d => x(d.borocd))
+          .attr('height', d => y(d[moe]) * 2);
+      }
+
       div
-        .text(() => `${current.boro_district}: ${percent(current[column])}${unit}`)
+        .html(tooltipTemplate)
         .attr('style', function () {
           const midpoint = calculateMidpoint(this);
           return `left: ${x(current.borocd) - midpoint}px`;
@@ -191,7 +228,7 @@ export default Ember.Component.extend(ResizeAware, {
       svg
         .on('mouseout', function() {
           div
-            .text(() => `${current.boro_district}: ${percent(current[column])}${unit}`)
+            .html(tooltipTemplate)
             .attr('style', function() {
               const midpoint = calculateMidpoint(this);
               return `left: ${x(current.borocd) - midpoint}px`;
