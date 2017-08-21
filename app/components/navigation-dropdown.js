@@ -6,6 +6,7 @@ const DEBOUNCE_MS = 250;
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   searchTerms: '',
+  placeholder: 'Search',
   options: Ember.computed('model', 'addresses', function() {
     const districts = this.get('model');
     const addressesPromise = this.get('addresses');
