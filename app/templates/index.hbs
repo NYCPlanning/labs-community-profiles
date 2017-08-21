@@ -4,6 +4,11 @@
     <div class="cell">
       <h1><small>Welcome to NYC Department of&nbsp;City&nbsp;Planning’s</small><br>Community District&nbsp;Profiles!</h1>
       <p class="lead">This is your gateway to data, maps, and other resources describing New York City’s 59 community districts. Choose a Community District profile by clicking on the map, or by searching for a Community District or neighborhood. Each profile page provides District-specific information on the built environment, socio&#8209;economic indicators, ongoing projects and community perspectives. It also includes a wealth of data and resources that can be easily downloaded and exported into different formats for your use.</p>
+      {{navigation-dropdown
+          model=model
+          placeholder='Search for a District, Neighborhood, or Address...'
+          selected=mapState.currentlySelected
+          onchange=(route-action 'transitionToProfile')}}
     </div>
     <div class="cell medium-4">
       <h2 class="header-large">{{fa-icon 'search'}}&nbsp;&nbsp;Explore</h2>
