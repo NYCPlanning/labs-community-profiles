@@ -15,8 +15,6 @@
     </div>
 
     <div class="district-content">
-
-      <!-- <h4 class="subsection-header"><strong>Neighborhoods</strong></h4> -->
       <div class="neighborhoods-list">
         {{model.neighborhoods}}
       </div>
@@ -103,7 +101,7 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x" 
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}

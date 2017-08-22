@@ -1,11 +1,9 @@
 import Ember from 'ember';
 import carto from '../utils/carto';
 import { task } from 'ember-concurrency';
-import RSVP from 'rsvp';
-
-const WAIT_HERE_FOREVER = Ember.RSVP.defer().promise;
 
 export default Ember.Component.extend({
+  shouldRender: false,
   borocd: '',
   indicators: ['borocd'],
   coalescedIndicators: Ember.A([]),
@@ -24,16 +22,11 @@ export default Ember.Component.extend({
       FROM community_district_profiles`;
   }),
 
-  comparisonData: task(function* (indicators) {
+  comparisonData: Ember.computed('sql', function() {
     const sql = this.get('sql');
     return carto.SQL(sql, 'json')
       .then((json) => {
         return json;
       });
   }),
-
-  // the task should ao
-  // didRender() {
-  //   this.get('comparisonData').perform(this.get('indicators'));
-  // },
 });
