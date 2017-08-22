@@ -25,7 +25,23 @@
             {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-
+        <svg class="chart-legend" width="80" height="100">
+          <g class="callouts">
+            <text x="22" y="5.7" font-size="5">
+              Margin of Error
+            </text>
+            <text x="22" y="28" font-size="5">
+              Estimate
+            </text>
+            <line x1="8" y1="4.8" x2="20" y2="4.8" stroke-width=".5" stroke="black"></line>
+            <line x1="8" y1="26" x2="20" y2="26" stroke-width=".5" stroke="black"></line>
+          </g>
+          <g class="bars">
+            <rect class="bar bar-203 bar-index-0" fill="rgb(168, 168, 168)" y="4.8" width="5.828389830508475" x="0" height="48.1359649122807"></rect></g>
+          <g class="moes">
+            <rect class="bar moe bar-203 bar-index-0" fill="#6eceff" y="0" width="5.828389830508475" x="0" height="10" style="opacity: 0.5;"></rect>
+          </g>
+        </svg>
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 xlarge-5">
 
@@ -101,7 +117,8 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  indicators=columns
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  
+                          indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
