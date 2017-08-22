@@ -16,6 +16,14 @@
   }
 }
 
+.chart-legend {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  margin-top: 8px;
+}
+
 .tooltip {
   position: absolute;
   top: 100%;
@@ -39,3 +47,5 @@
   left: 50%;
   margin-left: -5px;
 }
+
+
