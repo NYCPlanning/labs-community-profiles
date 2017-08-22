@@ -349,7 +349,9 @@
 
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">
-            </div>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Download the Indicators Data</strong></a>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_facilities a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Facilities Data</strong></a>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Pluto Data</strong></a></div>
 
           </div>
         </div>
