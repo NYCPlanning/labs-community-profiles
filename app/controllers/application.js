@@ -20,6 +20,11 @@ export default Ember.Controller.extend({
     };
   }),
 
+  cdLabelSource: {
+    type: 'geojson',
+    data: '/data/cd_label.geojson',
+  },
+
   cdSelectedSource: Ember.computed('mapState.currentlySelected.geometry', function () {
     return {
       type: 'geojson',
@@ -33,20 +38,6 @@ export default Ember.Controller.extend({
       data: this.get('mapState.currentlyHovered'),
     };
   }),
-
-  cdBoroLabelLayer: {
-    id: 'cd-boro-label',
-    type: 'symbol',
-    source: 'cds',
-    minzoom: 11.5,
-    layout: {
-      'text-field': '{boro}',
-      'text-allow-overlap': true,
-      'symbol-placement': 'point',
-      'text-size': 12,
-      'text-offset': [0, -2.5],
-    },
-  },
 
   cdCurrentAddressSource: Ember.computed('mapState.currentAddress.geometry', function () {
     return {
@@ -70,7 +61,18 @@ export default Ember.Controller.extend({
     type: 'fill',
     source: 'cds',
     paint: {
-      'fill-opacity': 0,
+      'fill-opacity': 0.2,
+      'fill-color': {
+        property: 'boro',
+        type: 'categorical',
+        stops: [
+          ['Manhattan', 'steelblue'],
+          ['Bronx', 'yellow'],
+          ['Brooklyn', 'orange'],
+          ['Queens', 'purple'],
+          ['Staten Island', 'green'],
+        ],
+      },
     },
   },
 
@@ -79,7 +81,7 @@ export default Ember.Controller.extend({
     type: 'line',
     source: 'cds',
     paint: {
-      'line-width': 2,
+      'line-width': 1,
       'line-color': '#ae561f',
     },
   },
@@ -98,20 +100,34 @@ export default Ember.Controller.extend({
   cdLabelLayer: {
     id: 'cd-label',
     type: 'symbol',
-    source: 'cds',
+    source: 'cdLabel',
     layout: {
       'text-field': '{cd}',
       'text-allow-overlap': true,
       'symbol-placement': 'point',
       'text-size': {
         stops: [
-          [10, 14],
+          [10, 10],
           [12, 30],
         ],
       },
     },
     paint: {
       'text-color': 'rgba(66, 66, 66, 1)',
+    },
+  },
+
+  cdBoroLabelLayer: {
+    id: 'cd-boro-label',
+    type: 'symbol',
+    source: 'cdLabel',
+    minzoom: 11.5,
+    layout: {
+      'text-field': '{boroname}',
+      'text-allow-overlap': true,
+      'symbol-placement': 'point',
+      'text-size': 12,
+      'text-offset': [0, -2.5],
     },
   },
 
