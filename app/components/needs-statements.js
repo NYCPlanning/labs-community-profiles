@@ -20,7 +20,8 @@ export default Ember.Component.extend({
           .map(statement => {
             statement.name = stripDirectory(statement.path);
             return statement;
-          });
+          })
+          .reverse();
       });
   }),
 
