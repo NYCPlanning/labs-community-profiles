@@ -21,6 +21,10 @@ export default DS.Model.extend({
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
+  boroAcronym: Ember.computed('boro', function() {
+    const acronym = acronymCrosswalk[this.get('boro')];
+    return `${acronym}`;
+  }),
   cd: DS.attr('string'),
   geometry: DS.attr(),
   bounds: Ember.computed('geometry', function() {

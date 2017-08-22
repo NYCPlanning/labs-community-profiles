@@ -103,7 +103,7 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x" 
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
@@ -299,10 +299,10 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6">
 
-            <h4 class="subsection-header"><strong>LUCATS Applications</strong></h4>
+            <h4 class="subsection-header"><strong>Land Use Applications</strong></h4>
             <div class="callout">
+              {{lucats-list district=model}}
             </div>
-
           </div>
           <div class="cell medium-6">
 
