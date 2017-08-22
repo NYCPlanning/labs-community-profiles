@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   column: '',
   data: [],
   unit: '',
+  outliers: [],
 
   sortedData: computed('data', 'borocd', function() {
     const borocd = this.get('borocd');
@@ -16,6 +17,9 @@ export default Ember.Component.extend({
       return data.sortBy(`${this.get('column')}`).reverse().map(d => {
         d.is_selected = (borocd === d.borocd) ? true : false;
         return d;
+      })
+      .filter(d => {
+        return !(this.get('outliers').includes(d.borocd));
       });
     });
   }),
