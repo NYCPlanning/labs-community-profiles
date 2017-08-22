@@ -104,6 +104,8 @@ export default Ember.Component.extend(ResizeAware, {
         .domain([0, d3.max(data, d => (d[column] + (d[moe] || 0)))])
         .range([0, height]);
 
+      const moeColor = '#6eceff';
+
       const colors = (d) => {
         return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
       };
@@ -118,7 +120,7 @@ export default Ember.Component.extend(ResizeAware, {
 
       const tooltipTemplate = function(d) {
         const selected = d || current;
-        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><div>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</div>`;
+        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><div class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</div>`;
       };
 
       const handleMouseOver = (d, i) => {
@@ -203,7 +205,7 @@ export default Ember.Component.extend(ResizeAware, {
 
       if(moe) {
         theseMoes
-          .attr('fill', '#6eceff')
+          .attr('fill', moeColor)
           .attr('width', () => x.bandwidth() - 2)
           .attr('x', d => x(d.borocd));
 
@@ -211,7 +213,7 @@ export default Ember.Component.extend(ResizeAware, {
           .append('rect')
           .attr('class', (d, i) => `bar moe bar-${d.borocd} bar-index-${i}`)
           .style('opacity', '0.5')
-          .attr('fill', '#6eceff')
+          .attr('fill', moeColor)
           .attr('y', d => height - (y(d[column]) + y(d[moe])))
           .attr('width', d => x.bandwidth() - 2)
           .attr('x', d => x(d.borocd))
