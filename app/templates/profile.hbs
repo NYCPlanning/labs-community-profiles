@@ -288,11 +288,11 @@
 
             <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
             <div class="callout">
-              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href="#">Statement of Community District Needs</a>:</p>
+              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
               <ul>
-                <li><strong>{{d.son_issue_1}}</strong></li>
-                <li><strong>{{d.son_issue_2}}</strong></li>
-                <li><strong>{{d.son_issue_3}}</strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
               </ul>
             </div>
 
