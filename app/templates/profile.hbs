@@ -15,7 +15,6 @@
     </div>
 
     <div class="district-content">
-
       <div class="neighborhoods-list">
         {{model.neighborhoods}}
       </div>
@@ -118,7 +117,8 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x" 
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  
+                          indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
