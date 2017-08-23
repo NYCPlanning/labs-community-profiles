@@ -17,11 +17,26 @@
 }
 
 .chart-legend {
+  font-size: rem-calc(12);
+  font-weight: $global-weight-normal;
   display: block;
-  position: absolute;
-  right: 0;
-  top: 10px;
-  margin-top: 8px;
+  padding-top: 0.5rem;
+
+  @include breakpoint(medium) {
+    float: right;
+  }
+
+  span {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+  }
+  .estimate {
+    background-color: #A8A8A8;
+  }
+  .moe {
+    border-top: 0.375em solid #ACE8FF;
+  }
 }
 
 .moe-text {
