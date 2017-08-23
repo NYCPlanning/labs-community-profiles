@@ -1,9 +1,10 @@
-Showing first 20 land use applications. <a href = "http://a030-lucats.nyc.gov/lucats/DirectULURPCD.aspx?Boro={{district.boroAcronym}}&CD={{district.cd}}">View all on LUCATS</a>
-{{#each (await projects) as |project|}}
-  <li class="list-item-padded">
-    <a href = "http://a030-lucats.nyc.gov/lucats/ULURPRecord.aspx?ULURPOnly={{project.landUseId}}">
-      {{project.projectName}} </a> <br/> <span style="font-size: 11px"> {{project.landUseReceivedDate}} | {{project.location}}</span>
-
-  </li>
-{{/each}}
+<ul class="no-bullet xlarge-2-column">
+  {{#each (await projects) as |project|}}
+    <li class="list-item-padded">
+      <a href = "http://a030-lucats.nyc.gov/lucats/ULURPRecord.aspx?ULURPOnly={{project.landUseId}}">{{fa-icon "external-link"}}&nbsp;<strong>{{project.projectName}}</strong></a>
+      <small class="list--link-meta">{{project.landUseReceivedDate}} | {{project.location}}</small>
+    </li>
+  {{/each}}
+</ul>
+<a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/DirectULURPCD.aspx?Boro={{district.boroAcronym}}&CD={{district.cd}}">View all on LUCATS</a>
 {{yield}}
