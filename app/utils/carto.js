@@ -1,3 +1,5 @@
+import fetch from 'fetch';
+
 const cartoUser = 'cpp';
 const cartoDomain = 'cartoprod.capitalplanning.nyc';
 
