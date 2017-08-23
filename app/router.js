@@ -23,6 +23,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function () {  // eslint-disable-line
   this.route('profile', { path: '/:boro/:cd' }, () => {});
+  this.route('about', { path: '/about' }, () => {});
   this.route('not-found', { path: '/*path' });
 });
 
