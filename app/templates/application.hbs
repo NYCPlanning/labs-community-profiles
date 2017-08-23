@@ -6,15 +6,18 @@
     {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
 
       {{#map.source sourceId='cds' source=cdSource as |source|}}
-        {{source.layer layer=cdFillLayer}}
-        {{source.layer layer=cdLineLayer}}
-        {{source.layer layer=cdLabelLayer}}
-        {{source.layer layer=cdBoroLabelLayer}}
+        {{source.layer layer=cdFillLayer before='admin-2-boundaries-dispute'}}
+        {{source.layer layer=cdLineLayer before='admin-2-boundaries-dispute'}}
+      {{/map.source}}
+
+      {{#map.source sourceId='cdLabel' source=cdLabelSource as |source|}}
+        {{source.layer layer=cdLabelLayer before='admin-2-boundaries-dispute'}}
+        {{source.layer layer=cdBoroLabelLayer before='admin-2-boundaries-dispute'}}
       {{/map.source}}
 
       {{#if mapState.currentlyHovered}}
         {{#map.source sourceId='cd-hovered' source=cdHoveredSource as |source|}}
-          {{source.layer layer=cdHoveredLayer}}
+          {{source.layer layer=cdHoveredLayer before='admin-2-boundaries-dispute'}}
         {{/map.source}}
       {{/if}}
 
@@ -24,17 +27,14 @@
       {{map.on 'mouseout' (action 'handleMouseout')}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-          {{source.layer layer=cdSelectedLayer}}
+          {{source.layer layer=cdSelectedLayer before='admin-2-boundaries-dispute'}}
         {{/map.source}}
       {{/if}}
 
       {{#if mapState.currentAddress}}
         {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
-          {{source.layer layer=cdPointLayer}}
+          {{source.layer layer=cdPointLayer before='admin-2-boundaries-dispute'}}
         {{/map.source}}
-{{!--         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-          {{source.layer layer=cdSelectedLayer}}
-        {{/map.source}} --}}
       {{/if}}
     {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
@@ -50,8 +50,10 @@
     <footer class="site-footer text-center">
       <p>
         <strong style="display:block;margin-bottom:0.5rem;">Don't see the data you need? Have&nbsp;questions?</strong>
-        <a class="button small" href="https://github.com/NYCPlanning/labs-community-portal/issues">{{fa-icon "github"}}&nbsp;Add a GitHub Issue</a>
-        <a class="button small" href="mailto:PORTAL_DL@planning.nyc.gov">{{fa-icon "envelope"}}&nbsp;Send Us an Email</a>
+        <a class="button" href="mailto:PORTAL_DL@planning.nyc.gov">{{fa-icon "envelope"}}&nbsp;Send Us an Email</a>
+        <p>
+          <a href="https://github.com/NYCPlanning/labs-community-portal/issues">{{fa-icon "github"}}&nbsp;Add a GitHub Issue</a>
+        </p>
       </p>
     </footer>
 

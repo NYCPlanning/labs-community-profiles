@@ -2,6 +2,7 @@ import Ember from 'ember'; // eslint-disable-line
 import DS from 'ember-data'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson'; // eslint-disable-line
 import isIntersecting from 'npm:@turf/inside'; // eslint-disable-line
+import District from '../models/district';
 
 export default DS.Model.extend({
   district: Ember.computed('geometry', function() {

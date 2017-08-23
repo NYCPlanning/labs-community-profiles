@@ -14,6 +14,11 @@ export default Ember.Controller.extend({
     'pct_clean_strts',
     'pct_bach_deg',
     'pct_served_parks',
+    'moe_poverty_rate',
+    'moe_bach_deg',
+    'moe_unemployment_cd',
+    'moe_mean_commute',
+    'moe_hh_rent_burd',
   ],
 
   section: '',

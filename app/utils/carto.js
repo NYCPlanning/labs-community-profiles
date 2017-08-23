@@ -1,3 +1,6 @@
+import fetch from 'fetch';
+import { Promise } from 'rsvp';
+
 const cartoUser = 'cpp';
 const cartoDomain = 'cartoprod.capitalplanning.nyc';
 

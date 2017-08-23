@@ -19,8 +19,17 @@
   }
 }
 
+.map-popup {
+  pointer-events: none; 
+  position: absolute; 
+  z-index: 9999; 
+  width: 180px;
+}
+
 #facilities-map {
 }
 
 #lu-map {
 }
+
+

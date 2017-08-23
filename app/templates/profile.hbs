@@ -15,8 +15,6 @@
     </div>
 
     <div class="district-content">
-
-      <!-- <h4 class="subsection-header"><strong>Neighborhoods</strong></h4> -->
       <div class="neighborhoods-list">
         {{model.neighborhoods}}
       </div>
@@ -27,7 +25,23 @@
             {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-
+        <svg class="chart-legend" width="80" height="100">
+          <g class="callouts">
+            <text x="22" y="5.7" font-size="5">
+              Margin of Error
+            </text>
+            <text x="22" y="28" font-size="5">
+              Estimate
+            </text>
+            <line x1="8" y1="4.8" x2="20" y2="4.8" stroke-width=".5" stroke="black"></line>
+            <line x1="8" y1="26" x2="20" y2="26" stroke-width=".5" stroke="black"></line>
+          </g>
+          <g class="bars">
+            <rect class="bar bar-203 bar-index-0" fill="rgb(168, 168, 168)" y="4.8" width="5.828389830508475" x="0" height="48.1359649122807"></rect></g>
+          <g class="moes">
+            <rect class="bar moe bar-203 bar-index-0" fill="#6eceff" y="0" width="5.828389830508475" x="0" height="10" style="opacity: 0.5;"></rect>
+          </g>
+        </svg>
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 xlarge-5">
 
@@ -104,21 +118,24 @@
         </div>
 
         {{#key-indicators class="key-indicators grid-x grid-padding-x"
+                          indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
                             column='poverty_rate'
                             moe='moe_poverty_rate'
+                            tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents had incomes below the poverty level in the last 12 months
+            of residents have incomes below the poverty level
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
                             moe='moe_bach_deg'
+                            tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
@@ -128,6 +145,7 @@
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Unemployment'
                             column='unemployment_cd'
                             moe='moe_unemployment_cd'
+                            tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
@@ -136,7 +154,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
                             column='crime_per_1000'
-
+                            tip='NYPD Complaint Data, 2016'
                             cd_stat=d.crime_per_1000
                             boro_stat=d.crime_per_1000_boro
                             city_stat=d.crime_per_1000_nyc}}
@@ -145,6 +163,7 @@
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
                             column='mean_commute'
                             moe='moe_mean_commute'
+                            tip=d.acs_tooltip
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
@@ -153,6 +172,7 @@
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
                             column='pct_hh_rent_burd'
                             moe='moe_hh_rent_burd'
+                            tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
@@ -162,6 +182,7 @@
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
                             column='pct_clean_strts'
                             unit='%'
+                            tip='New York City Department of Sanitation, 2017'
                             cd_stat=d.pct_clean_strts
                             boro_stat=d.pct_clean_strts_boro
                             city_stat=d.pct_clean_strts_nyc}}
@@ -170,6 +191,7 @@
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
                             column='pct_served_parks'
                             unit='%'
+                            tip='New York City Department of Parks & Recreation, 2016'
                             cd_stat=d.pct_served_parks}}
             of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
           {{/data.indicator}}
@@ -183,6 +205,22 @@
             {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
+
+        <h4 class="subsection-header"><strong>Land Use</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+              {{land-use-map}}
+            </div>
+            <div class="cell medium-6">
+              {{land-use-chart borocd=model.borocd}}
+            </div>
+          </div>
+        </div>
+
+        <h4 class="subsection-header"><strong>Zoning</strong></h4>
+        <div class="callout">
+        </div>
 
         <h4 class="subsection-header"><strong>Community Assets</strong></h4>
         <div class="grid-x grid-padding-x">
@@ -212,44 +250,10 @@
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Land Use</strong></h4>
-        <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
-              {{land-use-map}}
-            </div>
-            <div class="cell medium-6">
-              {{land-use-chart borocd=model.borocd}}
-            </div>
-          </div>
-        </div>
-
-        <h4 class="subsection-header"><strong>Zoning</strong></h4>
-        <div class="callout">
-        </div>
-
         <h4 class="subsection-header"><strong>Facilities</strong></h4>
         <div class="callout">
           {{facilities-section borocd=model.borocd}}
         </div>
-
-        <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Housing Pipeline</strong></h4>
-            <div class="callout">
-            </div>
-
-          </div>
-          <div class="cell medium-6">
-
-            <h4 class="subsection-header"><strong>Capital Projects</strong></h4>
-            <div class="callout">
-            </div>
-
-          </div>
-        </div>
-
       </section>
 
       <section id="community-board" class="page-section">
@@ -273,11 +277,11 @@
 
             <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
             <div class="callout">
-              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href="#">Statement of Community District Needs</a>:</p>
+              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
               <ul>
-                <li><strong>{{d.son_issue_1}}</strong></li>
-                <li><strong>{{d.son_issue_2}}</strong></li>
-                <li><strong>{{d.son_issue_3}}</strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
+                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
               </ul>
             </div>
 
@@ -335,7 +339,9 @@
 
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">
-            </div>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Download the Indicators Data</strong></a>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_facilities a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Facilities Data</strong></a>
+              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Pluto Data</strong></a></div>
 
           </div>
         </div>
