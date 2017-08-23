@@ -121,7 +121,7 @@ export default Ember.Component.extend(ResizeAware, {
 
       const tooltipTemplate = function(d) {
         const selected = d || current;
-        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><div class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</div>`;
+        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><span class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</span>`;
       };
 
       const handleMouseOver = (d, i) => {
