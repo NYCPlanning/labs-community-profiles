@@ -97,6 +97,10 @@ html, body {
 // #page-content is everything in main not in #cd-chooser
 #page-content {
   padding-top: $global-margin;
+
+  @include breakpoint(large) {
+    min-height: calc(100vh - 97px);
+  }
 }
 
 .district-header {
