@@ -1,4 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
+import { Promise } from 'rsvp';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import numeral from 'numeral';
 import d3 from 'd3';

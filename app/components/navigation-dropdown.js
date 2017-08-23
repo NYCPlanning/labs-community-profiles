@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { Promise } from 'rsvp';
 import { task, timeout } from 'ember-concurrency';
 
 const DEBOUNCE_MS = 250;
