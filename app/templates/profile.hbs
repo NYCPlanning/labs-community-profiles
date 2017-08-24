@@ -122,15 +122,48 @@
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
-                            column='poverty_rate'
-                            moe='moe_poverty_rate'
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
+                            column='pct_hh_rent_burd'
+                            moe='moe_hh_rent_burd'
                             tip=d.acs_tooltip
                             unit='%'
-                            cd_stat=d.poverty_rate
-                            boro_stat=d.poverty_rate_boro
-                            city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the poverty level
+                            cd_stat=d.pct_hh_rent_burd
+                            boro_stat=d.pct_hh_rent_burd_boro
+                            city_stat=d.pct_hh_rent_burd_nyc}}
+            of households spend 35% or more of their income on rent
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
+                            column='pct_served_parks'
+                            unit='%'
+                            tip='New York City Department of Parks & Recreation, 2016'
+                            cd_stat=d.pct_served_parks}}
+            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
+                            column='mean_commute'
+                            moe='moe_mean_commute'
+                            tip=d.acs_tooltip
+                            cd_stat=d.mean_commute
+                            boro_stat=d.mean_commute_boro
+                            city_stat=d.mean_commute_nyc}}
+            minutes
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
+                            column='pct_clean_strts'
+                            unit='%'
+                            tip='New York City Department of Sanitation, 2017'
+                            cd_stat=d.pct_clean_strts
+                            boro_stat=d.pct_clean_strts_boro
+                            city_stat=d.pct_clean_strts_nyc}}
+            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
+                            column='crime_per_1000'
+                            tip='NYPD Complaint Data, 2016'
+                            cd_stat=d.crime_per_1000
+                            boro_stat=d.crime_per_1000_boro
+                            city_stat=d.crime_per_1000_nyc}}
+            major crimes were reported per 1,000 residents in 2016
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -152,48 +185,15 @@
                             city_stat=d.unemployment_nyc}}
             of the civilian labor force is unemployed
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
-                            column='crime_per_1000'
-                            tip='NYPD Complaint Data, 2016'
-                            cd_stat=d.crime_per_1000
-                            boro_stat=d.crime_per_1000_boro
-                            city_stat=d.crime_per_1000_nyc}}
-            major crimes were reported per 1,000 residents in 2016
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
-                            column='mean_commute'
-                            moe='moe_mean_commute'
-                            tip=d.acs_tooltip
-                            cd_stat=d.mean_commute
-                            boro_stat=d.mean_commute_boro
-                            city_stat=d.mean_commute_nyc}}
-            minutes
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
-                            column='pct_hh_rent_burd'
-                            moe='moe_hh_rent_burd'
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
+                            column='poverty_rate'
+                            moe='moe_poverty_rate'
                             tip=d.acs_tooltip
                             unit='%'
-                            cd_stat=d.pct_hh_rent_burd
-                            boro_stat=d.pct_hh_rent_burd_boro
-                            city_stat=d.pct_hh_rent_burd_nyc}}
-            of households spend 35% or more of their income on rent
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
-                            column='pct_clean_strts'
-                            unit='%'
-                            tip='New York City Department of Sanitation, 2017'
-                            cd_stat=d.pct_clean_strts
-                            boro_stat=d.pct_clean_strts_boro
-                            city_stat=d.pct_clean_strts_nyc}}
-            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
-                            column='pct_served_parks'
-                            unit='%'
-                            tip='New York City Department of Parks & Recreation, 2016'
-                            cd_stat=d.pct_served_parks}}
-            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+                            cd_stat=d.poverty_rate
+                            boro_stat=d.poverty_rate_boro
+                            city_stat=d.poverty_rate_nyc}}
+            of residents have incomes below the poverty level
           {{/data.indicator}}
         {{/key-indicators}}
 
