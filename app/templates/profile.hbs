@@ -24,24 +24,13 @@
           {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
             {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
           {{/scroll-to}}
+          <span class="chart-legend">
+            <span class="estimate"></span>&nbsp;Estimate
+            &nbsp;
+            <span class="moe"></span>&nbsp;Margin of Error
+          </span>
         </h3>
-        <svg class="chart-legend" width="80" height="100">
-          <g class="callouts">
-            <text x="22" y="5.7" font-size="5">
-              Margin of Error
-            </text>
-            <text x="22" y="28" font-size="5">
-              Estimate
-            </text>
-            <line x1="8" y1="4.8" x2="20" y2="4.8" stroke-width=".5" stroke="black"></line>
-            <line x1="8" y1="26" x2="20" y2="26" stroke-width=".5" stroke="black"></line>
-          </g>
-          <g class="bars">
-            <rect class="bar bar-203 bar-index-0" fill="rgb(168, 168, 168)" y="4.8" width="5.828389830508475" x="0" height="48.1359649122807"></rect></g>
-          <g class="moes">
-            <rect class="bar moe bar-203 bar-index-0" fill="#6eceff" y="0" width="5.828389830508475" x="0" height="10" style="opacity: 0.5;"></rect>
-          </g>
-        </svg>
+
         <div class="grid-x grid-padding-x">
           <div class="cell medium-8 large-12 xlarge-7">
 
@@ -299,15 +288,14 @@
             <h4 class="subsection-header"><strong>Census Data Tables {{info-tooltip tip="Public Use Microdata Areas (PUMAS) approximate Community Districts, allowing for aggregation of census data.  See the Comparison Map for more info."}}</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">CD/PUMA Comparison Map</a></li>
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">2010 Census Summary</a></li>
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Demographic Profile</a></li>
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Social Profile</a></li>
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Economic Profile</a></li>
-                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Housing Profile</a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">{{fa-icon "file-pdf-o"}} <strong>2010 Census Summary</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Demographic Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Social Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Economic Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Housing Profile</strong></a></li>
               </ul>
             </div>
-
           </div>
           <div class="cell medium-5 xlarge-4">
 
