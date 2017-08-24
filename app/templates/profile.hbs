@@ -32,76 +32,48 @@
         </h3>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6 xlarge-5">
+          <div class="cell medium-8 large-12 xlarge-7">
 
             <h4 class="subsection-header"><strong>Population</strong></h4>
-            <table class="text-small">
-              <thead>
-                <tr>
-                  <th class="text-center">2000
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2010
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2011-2015
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        American Community Survey 5-year Estimates
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2000 '0.0a'}}
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2010 '0.0a'}}
-                    ({{numeral-format d.pop_change_00_10 '+0%'}})
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_11_15_acs '0.0a'}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="callout">
+              <div class="grid-x grid-margin-x align-middle">
+                <div class="cell small-6 large-4 text-center">
+                  <span class="stat">{{numeral-format d.pop_2000 '0.0a'}}</span>
+                  <span class="stat-footer">2000 Census</span>
+                </div>
+                <div class="cell small-6 large-4 text-center">
+                  <span class="stat">{{numeral-format d.pop_2010 '0.0a'}}</span>
+                  <span class="stat-footer">2010 Census <small class="dark-gray">({{numeral-format d.pop_change_00_10 '+0%'}})</small></span>
+                </div>
+                <div class="cell small-12 large-4 text-center cell-divider--population">
+                  <span class="lead">
+                    {{#if d.shared_puma}}
+                      N/A
+                    {{else}}
+                      {{numeral-format d.pop_11_15_acs '0.0a'}}
+                    {{/if}}
+                  </span>
+                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates"}}</small>
+                </div>
+              </div>
+            </div>
 
           </div>
-          <div class="cell medium-6 xlarge-5">
+          <div class="cell medium-4 large-12 xlarge-5">
 
             <h4 class="subsection-header"><strong>Land Mass</strong></h4>
-            <table class="text-small">
-              <thead>
-                <tr>
-                  <th class="text-center">Square Miles</th>
-                  <th class="text-center">Acres</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{numeral-format d.area_sqmi '0.0'}}
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.acres '0,0'}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="callout">
+              <div class="grid-x grid-padding-x align-middle">
+                <div class="cell small-6 medium-12 large-6 text-center">
+                  <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
+                  <span class="stat-footer">Square Miles</span>
+                </div>
+                <div class="cell small-6 medium-12 large-6 text-center">
+                  <span class="stat">{{numeral-format d.acres '0,0'}}</span>
+                  <span class="stat-footer">Acres</span>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
