@@ -1,4 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
+import fetch from 'fetch'; // eslint-disable-line
 
 export default Ember.Component.extend({
   district: null,
@@ -8,6 +9,13 @@ export default Ember.Component.extend({
     const URL = `https://lucats.planninglabs.nyc/cdprojects/${boro}/${cd}`;
 
     return fetch(URL)
-      .then(d => d.json());
+      .then(data => data.json())
+      .then((data) => {
+        data.forEach((d) => {
+          d.projectName = d.projectName !== '' ? d.projectName : 'Unnamed Project'; // eslint-disable-line
+        });
+
+        return data;
+      });
   }),
 });
