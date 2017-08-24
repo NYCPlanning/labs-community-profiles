@@ -1,0 +1,18 @@
+{{#if (await projects) as |resolvedProjects|}}
+  {{#if resolvedProjects.length}}
+    <ul class="no-bullet xlarge-2-column">
+    {{#each resolvedProjects as |project|}}
+      <li class="list-item-padded">
+        <a href = "http://a030-lucats.nyc.gov/lucats/PrintULURP.aspx?ULURP={{project.landUseId}}">{{fa-icon "external-link"}}&nbsp;<strong>{{project.projectName}}</strong></a>
+        <small class="list--link-meta">{{project.landUseReceivedDate}} | {{project.location}}</small>
+      </li>
+    {{/each}}
+    </ul>
+    <a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/DirectULURPCD.aspx?Boro={{district.boroAcronym}}&CD={{district.cd}}">View all on LUCATS</a>
+  {{/if}}
+  {{else}}
+  <p class="text-center" style="padding: 60px 0;">No applications found.</p>
+  <a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx">Search LUCATS</a>
+
+{{/if}}
+{{yield}}

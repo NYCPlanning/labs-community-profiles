@@ -53,10 +53,29 @@ h6,
 
 
 //
+// CSS Columns
+// --------------------------------------------------
+.large-2-column {
+  @include breakpoint(large) {
+    column-count: 2;
+  }
+}
+
+.xlarge-2-column {
+  @include breakpoint(xlarge) {
+    column-count: 2;
+  }
+}
+
+
+//
 // Typograhpy helper classes
 // --------------------------------------------------
 .nowrap {
   white-space: nowrap;
+}
+.no-margin {
+  margin: 0 !important;
 }
 
 .light-gray { color: $light-gray; }
@@ -99,10 +118,19 @@ table.width-auto {
   width: auto;
 }
 
+li {
+  break-inside: avoid;
+}
+
 li.list-item-padded {
   & + & {
     margin-top: 0.5rem;
   }
+}
+
+.list--link-meta {
+  display: block;
+  color: $dark-gray;
 }
 
 

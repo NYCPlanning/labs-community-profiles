@@ -227,25 +227,25 @@
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
-              Public Schools
+              Public Schools {{info-tooltip tip='Public elementary, middle, high, and special education schools. Public schools identified may serve multiple Community Districts'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
-              Public Libraries
+              Public Libraries {{info-tooltip tip='Libraries operated by NYPL, QPL, BPL and academic institutions'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
-              Hospitals and Clinics
+              Hospitals and Clinics {{info-tooltip tip='Urgent care hospitals, diagnostic and treatment centers, and school-based health facilities'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
-              Parks
+              Parks {{info-tooltip tip='Properties operated by NYC Parks, NYC DOT, NYS Office of Parks, Recreation and Historic Preservation, NYS Dept. of Conservation, and City-State corporations and trusts'}}
             </div>
           </div>
         </div>
@@ -301,14 +301,15 @@
         </h3>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
+          <div class="cell medium-6 large-8 xlarge-7">
 
-            <h4 class="subsection-header"><strong>LUCATS Applications</strong></h4>
+            <h4 class="subsection-header"><strong>Recent Land Use Applications</strong></h4>
             <div class="callout">
+              {{lucats-list district=model}}
             </div>
 
           </div>
-          <div class="cell medium-6">
+          <div class="cell medium-6 large-4 xlarge-5">
 
             <h4 class="subsection-header"><strong>Neighborhood Studies</strong></h4>
             <div class="callout">
@@ -329,8 +330,16 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-7 xlarge-8">
 
-            <h4 class="subsection-header"><strong>Links to Static Maps (title?)</strong></h4>
+            <h4 class="subsection-header"><strong>Census Data Tables {{info-tooltip tip="Public Use Microdata Areas (PUMAS) approximate Community Districts, allowing for aggregation of census data.  See the Comparison Map for more info."}}</strong></h4>
             <div class="callout">
+              <ul class="no-bullet">
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">CD/PUMA Comparison Map</a></li>
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">2010 Census Summary</a></li>
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Demographic Profile</a></li>
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Social Profile</a></li>
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Economic Profile</a></li>
+                <li class="list-item-padded">{{fa-icon "file-pdf-o"}} <a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">PUMA Housing Profile</a></li>
+              </ul>
             </div>
 
           </div>
