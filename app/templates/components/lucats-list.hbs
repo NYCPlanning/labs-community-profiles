@@ -3,7 +3,7 @@
     <ul class="no-bullet xlarge-2-column">
     {{#each resolvedProjects as |project|}}
       <li class="list-item-padded">
-        <a href = "http://a030-lucats.nyc.gov/lucats/PrintULURP.aspx?ULURP={{project.landUseId}}">{{fa-icon "external-link"}}&nbsp;<strong>{{project.projectName}}</strong></a>
+        <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{project.landUseId}}">{{fa-icon "external-link"}}&nbsp;<strong>{{project.projectName}}</strong></a>
         <small class="list--link-meta">{{project.landUseReceivedDate}} | {{project.location}}</small>
       </li>
     {{/each}}
