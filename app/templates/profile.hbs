@@ -267,11 +267,16 @@
             <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
             <div class="callout">
               <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
+              {{log noSON}}
+              {{#if noSON}}
+                <p>This community board did not provide a statement of needs.</p>
+              {{else}}
               <ul>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
               </ul>
+              {{/if}}
             </div>
 
           </div>
