@@ -16,7 +16,10 @@ module.exports = function(defaults) {
         'images/marker-icon.png',
         'images/marker-shadow.png'
       ]
-    }
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

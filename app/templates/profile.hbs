@@ -24,113 +24,107 @@
           {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
             {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
           {{/scroll-to}}
+          <span class="chart-legend">
+            <span class="estimate"></span>&nbsp;Estimate
+            &nbsp;
+            <span class="moe"></span>&nbsp;Margin of Error
+          </span>
         </h3>
-        <svg class="chart-legend" width="80" height="100">
-          <g class="callouts">
-            <text x="22" y="5.7" font-size="5">
-              Margin of Error
-            </text>
-            <text x="22" y="28" font-size="5">
-              Estimate
-            </text>
-            <line x1="8" y1="4.8" x2="20" y2="4.8" stroke-width=".5" stroke="black"></line>
-            <line x1="8" y1="26" x2="20" y2="26" stroke-width=".5" stroke="black"></line>
-          </g>
-          <g class="bars">
-            <rect class="bar bar-203 bar-index-0" fill="rgb(168, 168, 168)" y="4.8" width="5.828389830508475" x="0" height="48.1359649122807"></rect></g>
-          <g class="moes">
-            <rect class="bar moe bar-203 bar-index-0" fill="#6eceff" y="0" width="5.828389830508475" x="0" height="10" style="opacity: 0.5;"></rect>
-          </g>
-        </svg>
+
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6 xlarge-5">
+          <div class="cell medium-8 large-12 xlarge-7">
 
             <h4 class="subsection-header"><strong>Population</strong></h4>
-            <table class="text-small">
-              <thead>
-                <tr>
-                  <th class="text-center">2000
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2010
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        Decennial Census
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                  <th class="text-center">2011-2015
-                    <sup><span>
-                      {{fa-icon "info-circle"}}
-                      {{#tooltip-on-element duration=50000 event='hover'}}
-                        American Community Survey 5-year Estimates
-                      {{/tooltip-on-element}}
-                    </span></sup>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2000 '0.0a'}}
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_2010 '0.0a'}}
-                    ({{numeral-format d.pop_change_00_10 '+0%'}})
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.pop_11_15_acs '0.0a'}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="callout">
+              <div class="grid-x grid-margin-x align-middle">
+                <div class="cell small-6 large-4 text-center">
+                  <span class="stat">{{numeral-format d.pop_2000 '0.0a'}}</span>
+                  <span class="stat-footer">2000 Census</span>
+                </div>
+                <div class="cell small-6 large-4 text-center">
+                  <span class="stat">{{numeral-format d.pop_2010 '0.0a'}}</span>
+                  <span class="stat-footer">2010 Census <small class="dark-gray">({{numeral-format d.pop_change_00_10 '+0%'}})</small></span>
+                </div>
+                <div class="cell small-12 large-4 text-center cell-divider--population">
+                  <span class="lead">
+                    {{#if d.shared_puma}}
+                      N/A
+                    {{else}}
+                      {{numeral-format d.pop_11_15_acs '0.0a'}}
+                    {{/if}}
+                  </span>
+                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates"}}</small>
+                </div>
+              </div>
+            </div>
 
           </div>
-          <div class="cell medium-6 xlarge-5">
+          <div class="cell medium-4 large-12 xlarge-5">
 
             <h4 class="subsection-header"><strong>Land Mass</strong></h4>
-            <table class="text-small">
-              <thead>
-                <tr>
-                  <th class="text-center">Square Miles</th>
-                  <th class="text-center">Acres</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">
-                    {{numeral-format d.area_sqmi '0.0'}}
-                  </td>
-                  <td class="text-center">
-                    {{numeral-format d.acres '0,0'}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="callout">
+              <div class="grid-x grid-padding-x align-middle">
+                <div class="cell small-6 medium-12 large-6 text-center">
+                  <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
+                  <span class="stat-footer">Square Miles</span>
+                </div>
+                <div class="cell small-6 medium-12 large-6 text-center">
+                  <span class="stat">{{numeral-format d.acres '0,0'}}</span>
+                  <span class="stat-footer">Acres</span>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"
                           indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
-                            column='poverty_rate'
-                            moe='moe_poverty_rate'
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
+                            column='pct_hh_rent_burd'
+                            moe='moe_hh_rent_burd'
                             tip=d.acs_tooltip
                             unit='%'
-                            cd_stat=d.poverty_rate
-                            boro_stat=d.poverty_rate_boro
-                            city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the poverty level
+                            cd_stat=d.pct_hh_rent_burd
+                            boro_stat=d.pct_hh_rent_burd_boro
+                            city_stat=d.pct_hh_rent_burd_nyc}}
+            of households spend 35% or more of their income on rent
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
+                            column='pct_served_parks'
+                            unit='%'
+                            tip='New York City Department of Parks & Recreation, 2016'
+                            cd_stat=d.pct_served_parks}}
+            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
+                            column='mean_commute'
+                            moe='moe_mean_commute'
+                            tip=d.acs_tooltip
+                            cd_stat=d.mean_commute
+                            boro_stat=d.mean_commute_boro
+                            city_stat=d.mean_commute_nyc}}
+            minutes
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
+                            column='pct_clean_strts'
+                            unit='%'
+                            tip='New York City Department of Sanitation, 2017'
+                            cd_stat=d.pct_clean_strts
+                            boro_stat=d.pct_clean_strts_boro
+                            city_stat=d.pct_clean_strts_nyc}}
+            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
+                            column='crime_per_1000'
+                            tip='NYPD Complaint Data, 2016'
+                            cd_stat=d.crime_per_1000
+                            boro_stat=d.crime_per_1000_boro
+                            city_stat=d.crime_per_1000_nyc}}
+            major crimes were reported per 1,000 residents in 2016
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -152,48 +146,15 @@
                             city_stat=d.unemployment_nyc}}
             of the civilian labor force is unemployed
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
-                            column='crime_per_1000'
-                            tip='NYPD Complaint Data, 2016'
-                            cd_stat=d.crime_per_1000
-                            boro_stat=d.crime_per_1000_boro
-                            city_stat=d.crime_per_1000_nyc}}
-            major crimes were reported per 1,000 residents in 2016
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
-                            column='mean_commute'
-                            moe='moe_mean_commute'
-                            tip=d.acs_tooltip
-                            cd_stat=d.mean_commute
-                            boro_stat=d.mean_commute_boro
-                            city_stat=d.mean_commute_nyc}}
-            minutes
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
-                            column='pct_hh_rent_burd'
-                            moe='moe_hh_rent_burd'
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
+                            column='poverty_rate'
+                            moe='moe_poverty_rate'
                             tip=d.acs_tooltip
                             unit='%'
-                            cd_stat=d.pct_hh_rent_burd
-                            boro_stat=d.pct_hh_rent_burd_boro
-                            city_stat=d.pct_hh_rent_burd_nyc}}
-            of households spend 35% or more of their income on rent
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
-                            column='pct_clean_strts'
-                            unit='%'
-                            tip='New York City Department of Sanitation, 2017'
-                            cd_stat=d.pct_clean_strts
-                            boro_stat=d.pct_clean_strts_boro
-                            city_stat=d.pct_clean_strts_nyc}}
-            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
-          {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
-                            column='pct_served_parks'
-                            unit='%'
-                            tip='New York City Department of Parks & Recreation, 2016'
-                            cd_stat=d.pct_served_parks}}
-            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+                            cd_stat=d.poverty_rate
+                            boro_stat=d.poverty_rate_boro
+                            city_stat=d.poverty_rate_nyc}}
+            of residents have incomes below the poverty level
           {{/data.indicator}}
         {{/key-indicators}}
 
@@ -227,25 +188,25 @@
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-blue">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
-              Public Schools
+              Public Schools {{info-tooltip tip='Public elementary, middle, high, and special education schools. Public schools identified may serve multiple Community Districts'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-red">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
-              Public Libraries
+              Public Libraries {{info-tooltip tip='Libraries operated by NYPL, QPL, BPL and academic institutions'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-magenta">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
-              Hospitals and Clinics
+              Hospitals and Clinics {{info-tooltip tip='Urgent care hospitals, diagnostic and treatment centers, and school-based health facilities'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="lu-green">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
-              Parks
+              Parks {{info-tooltip tip='Properties operated by NYC Parks, NYC DOT, NYS Office of Parks, Recreation and Historic Preservation, NYS Dept. of Conservation, and City-State corporations and trusts'}}
             </div>
           </div>
         </div>
@@ -278,11 +239,16 @@
             <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
             <div class="callout">
               <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
+              {{log noSON}}
+              {{#if noSON}}
+                <p>This community board did not provide a statement of needs.</p>
+              {{else}}
               <ul>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
                 <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
               </ul>
+              {{/if}}
             </div>
 
           </div>
@@ -301,17 +267,19 @@
         </h3>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
+          <div class="cell medium-6 large-8 xlarge-7">
 
-            <h4 class="subsection-header"><strong>LUCATS Applications</strong></h4>
+            <h4 class="subsection-header"><strong>Recent Land Use Applications</strong></h4>
             <div class="callout">
+              {{lucats-list district=model}}
             </div>
 
           </div>
-          <div class="cell medium-6">
+          <div class="cell medium-6 large-4 xlarge-5">
 
-            <h4 class="subsection-header"><strong>Neighborhood Studies</strong></h4>
+            <h4 class="subsection-header"><strong>Neighborhood Studies & Plans</strong></h4>
             <div class="callout">
+              {{studies-and-plans district=model}}
             </div>
 
           </div>
@@ -327,20 +295,28 @@
         </h3>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6">
+          <div class="cell medium-7 xlarge-8">
 
-            <h4 class="subsection-header"><strong>Links to Static Maps (title?)</strong></h4>
+            <h4 class="subsection-header"><strong>Census Data Tables {{info-tooltip tip="Public Use Microdata Areas (PUMAS) approximate Community Districts, allowing for aggregation of census data.  See the Comparison Map for more info."}}</strong></h4>
             <div class="callout">
+              <ul class="no-bullet">
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">{{fa-icon "file-pdf-o"}} <strong>2010 Census Summary</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Demographic Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Social Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Economic Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Housing Profile</strong></a></li>
+              </ul>
             </div>
-
           </div>
-          <div class="cell medium-6">
+          <div class="cell medium-5 xlarge-4">
 
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">
-              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Download the Indicators Data</strong></a>
-              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_facilities a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Facilities Data</strong></a>
-              <a class="button small" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Download the Pluto Data</strong></a></div>
+              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Indicators Data</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_facilities a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Facilities Data</strong> <small>(Shapefile)</small></a>
+              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Pluto Data</strong> <small>(Shapefile)</small></a>
+            </div>
 
           </div>
         </div>

@@ -1,10 +1,13 @@
-import Ember from 'ember';
+import Ember from 'ember'; // eslint-disable-line
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
   metrics: Ember.inject.service(),
   queryParams: ['section'],
-
+  noSON: Ember.computed('model', function () {
+    const d = this.get('model.dataprofile');
+    return d.son_issue_1.length === 0 && d.son_issue_2.length === 0 && d.son_issue_3.length === 0;
+  }),
   columns: [
     'poverty_rate',
     'unemployment_cd',
@@ -27,9 +30,7 @@ export default Ember.Controller.extend({
     return this.get('model.dataprofile');
   }),
   actions: {
-    handleAfterScroll(href, evt) {
-      const metrics = this.get('metrics');
-
+    handleAfterScroll(href) {
       this.set('section', href.replace('#', ''));
     },
   },

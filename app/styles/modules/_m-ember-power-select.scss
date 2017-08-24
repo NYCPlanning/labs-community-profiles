@@ -18,8 +18,6 @@ $ember-power-select-number-of-visible-options: 9;
 .ember-power-select-trigger {
   font-size: 1.5rem;
   width: 100%;
-  max-width: $global-width - $global-margin*2;
-  margin: 0 auto;
   padding-right: rem-calc(28);
 }
 
