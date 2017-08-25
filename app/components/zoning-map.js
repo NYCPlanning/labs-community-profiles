@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Ember from 'ember'; // eslint-disable-line
 import FacilitiesSection from '../components/facilities-section';
 import carto from '../utils/carto';
 
-const SQL = 'SELECT *, LEFT(overlay, 2) as primaryzone FROM support_zoning_co UNION ALL SELECT *, LEFT(zonedist, 2) as primaryzone FROM support_zoning_zd';
+const SQL = 'SELECT *, LEFT(zonedist, 2) as primaryzone FROM support_zoning_zd';
 const zdConfig = {
   id: 'zoning',
   type: 'fill',
@@ -14,32 +14,32 @@ const zdConfig = {
       type: 'categorical',
       stops: [
         ['BP', '#EEEEEE'],
-        ['C1', '#FDBDBB'],
-        ['C2', '#FDBDBB'],
-        ['C3', '#FDBDBB'],
-        ['C4', '#FDBDBB'],
-        ['C5', '#FDBDBB'],
-        ['C6', '#FDBDBB'],
-        ['C7', '#FDBDBB'],
-        ['C8', '#FDBDBB'],
+        ['C1', '#ffb2b0'],
+        ['C2', '#ff9997'],
+        ['C3', '#ff7f7e'],
+        ['C4', '#ff6665'],
+        ['C5', '#ff4c4b'],
+        ['C6', '#ff3332'],
+        ['C7', '#ff1919'],
+        ['C8', '#ff0000'],
         ['M1', '#B7D6FD'],
         ['M2', '#EDB7FD'],
         ['M3', '#EDB7FD'],
         ['PA', '#E7FDDC'],
-        ['R1', '#FDFDDC'],
-        ['R2', '#FDFDDC'],
-        ['R3', '#FDFDDC'],
-        ['R4', '#FDFDDC'],
-        ['R5', '#FDFDDC'],
-        ['R6', '#FDE7BD'],
-        ['R7', '#FDE7BD'],
-        ['R8', '#FDE7BD'],
-        ['R9', '#FDE7BD'],
+        ['R1', '#fdffb0'],
+        ['R2', '#fcff9a'],
+        ['R3', '#fbff84'],
+        ['R4', '#faff6e'],
+        ['R5', '#faff58'],
+        ['R6', '#f9ff42'],
+        ['R7', '#f8ff2c'],
+        ['R8', '#f7ff16'],
+        ['R9', '#f6ff00'],
       ],
     },
-    'fill-opacity': 0.6,
+    'fill-opacity': 0.4,
     'fill-antialias': true,
-    'fill-outline-color': 'rgba(0, 0, 0, 1)',
+    'fill-outline-color': '#444',
   },
 };
 
@@ -81,29 +81,6 @@ export default FacilitiesSection.extend({
   }),
   pointsLayer: zdConfig,
   zoningLabelsLayer: zdLabelConfig,
-  sql: Ember.computed('borocd', function sql() {
-    const borocd = this.get('borocd');
-    const joinSql = `
-      SELECT COUNT(primaryzone), primaryzone FROM
-      (${SQL}) a
-      GROUP BY primaryzone
-      ORDER BY count DESC
-      LIMIT 7;
-    `;
-
-    return joinSql;
-  }),
-  data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql)
-      .then((data) => { // eslint-disable-line
-        return data.map((d) => {
-          const dWithColor = d;
-          dWithColor.color = zdConfig.paint['fill-color'].stops.find(el => el[0] === d.primaryzone)[1];
-          return dWithColor;
-        });
-      });
-  }),
   actions: {
     handleMouseover(e) {
       const feature = e.target.queryRenderedFeatures(e.point, { layers: ['zoning'] })[0];

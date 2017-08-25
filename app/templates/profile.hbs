@@ -117,7 +117,7 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x"                  
+        {{#key-indicators class="key-indicators grid-x grid-padding-x"
                           indicators=columns
                           boro=model.boro
                           cd=model.cd
@@ -220,7 +220,14 @@
 
         <h4 class="subsection-header"><strong>Zoning</strong></h4>
         <div class="callout">
-          {{zoning-map borocd=model.borocd}}
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+              {{zoning-map borocd=model.borocd}}
+            </div>
+            <div class="cell medium-6">
+              {{zoning-chart borocd=model.borocd}}
+            </div>
+          </div>
         </div>
 
         <h4 class="subsection-header"><strong>Community Assets</strong></h4>
