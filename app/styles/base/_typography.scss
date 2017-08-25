@@ -8,6 +8,15 @@ p {
   }
 }
 
+.section-header-description {
+  font-size: rem-calc(12);
+  margin-top: -2rem;
+  padding-bottom: 1rem;
+
+  @include breakpoint(xlarge) {
+    max-width: 65em;
+  }
+}
 
 //
 // Headings
