@@ -1,0 +1,13 @@
+{{log plans}}
+{{#if (await plans) as |resolvedPlans|}}
+    <ul class="no-bullet">
+    {{#each resolvedPlans as |plan|}}
+      {{log plan}}
+      <li class="list-item-padded">
+        <a href = "{{plan.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{plan.name}}</strong></a>
+        <small class="list--link-meta">Sponsored by {{plan.sponsor}} | Status: {{plan.currentstatus}}</small>
+      </li>
+    {{/each}}
+    </ul>
+{{/if}}
+{{yield}}

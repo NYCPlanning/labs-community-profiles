@@ -2,7 +2,6 @@
   {{#if resolvedStudies.length}}
     <ul class="no-bullet">
     {{#each resolvedStudies as |study|}}
-      {{log study}}
       <li class="list-item-padded">
         <a href = "{{study.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{study.name}}</strong></a>
       </li>
