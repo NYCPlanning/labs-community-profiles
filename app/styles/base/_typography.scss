@@ -5,6 +5,10 @@
 p {
   @include breakpoint(xlarge) {
     max-width: 45em;
+
+    .site-footer & {
+      max-width: none;
+    }
   }
 }
 
