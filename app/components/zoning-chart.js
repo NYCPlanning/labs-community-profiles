@@ -4,11 +4,11 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 import carto from '../utils/carto';
 
 const colors = function(zonedist) {
-  if (zonedist === 'R') return '#f6ff00';
-  if (zonedist === 'M') return '#EDB7FD';
-  if (zonedist === 'C') return '#ff0000';
-  if (zonedist === 'P') return '#E7FDDC';
-  return '#EEEEEE';
+  if (zonedist === 'R') return '#F3F88F';
+  if (zonedist === 'M') return '#F8B7FB';
+  if (zonedist === 'C') return '#FF8E8E';
+  if (zonedist === 'P') return '#B5E6B9';
+  return '#BCBCBB';
 };
 
 const descriptions = function(zonedist) {
@@ -149,12 +149,15 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
         .text((d) => {
           const description = descriptions(d.zonedist);
-          `${description} | ${(d.percent * 100).toFixed(2)}%`
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`
         });
 
       labels.transition().duration(300)
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
-        .text(d => `${d.zonedist} | ${(d.percent * 100).toFixed(2)}%`);
+        .text((d) => {
+          const description = descriptions(d.zonedist);
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`
+        });
 
       labels.exit().remove();
     });
