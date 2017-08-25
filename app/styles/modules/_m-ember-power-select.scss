@@ -32,7 +32,9 @@ $ember-power-select-number-of-visible-options: 9;
   }
 }
 
+.ember-power-select-option[aria-selected="true"],
 .ember-power-select-option[aria-current="true"] {
+  color: $white;
 
   .neighborhoods {
     color: $white;
