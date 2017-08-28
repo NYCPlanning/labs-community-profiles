@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   },
 
   vectorSource: Ember.computed('facilitiesTemplate', function () {
-    return carto.getTileTemplate(SQL)
+    return carto.getVectorTileTemplate([SQL])
       .then(facilitiesTemplate => ({
         type: 'vector',
         tiles: [facilitiesTemplate],
