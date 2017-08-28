@@ -1,5 +1,5 @@
-import fetch from 'fetch';
-import { Promise } from 'rsvp';
+import fetch from 'fetch'; // eslint-disable-line
+import { Promise } from 'rsvp'; // eslint-disable-line
 
 const cartoUser = 'cpp';
 const cartoDomain = 'cartoprod.capitalplanning.nyc';
@@ -8,9 +8,9 @@ const buildTemplate = (layergroupid, type) => { // eslint-disable-line
   return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.${type}`;
 };
 
-const buildSqlUrl = (cleanedQuery, type = 'json') => {
-  return `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${cleanedQuery}&format=${type}`
-}
+const buildSqlUrl = (cleanedQuery, type = 'json') => { // eslint-disable-line
+  return `https://${cartoDomain}/user/${cartoUser}/api/v2/sql?q=${cleanedQuery}&format=${type}`;
+};
 
 const carto = {
   SQL(query, type = 'json') {
@@ -19,27 +19,30 @@ const carto = {
 
     return fetch(url)
       .then((response) => {
-        if(response.ok) {
+        if (response.ok) {
           return response.json();
         }
         throw new Error('Not found');
       })
-      .then((d) => {
+      .then((d) => { // eslint-disable-line
         return type === 'json' ? d.rows : d;
       });
   },
 
-  getTileTemplate(SQL, CartoCSS = '#layer { polygon-fill: #FFF; }') {
+  getVectorTileTemplate(SQLArray) {
+    const CartoCSS = '#layer { polygon-fill: #FFF; }';
+    const layers = SQLArray.map(sql => ({
+      type: 'mapnik',
+      options: {
+        cartocss_version: '2.1.1',
+        cartocss: CartoCSS,
+        sql,
+      },
+    }));
+
     const params = {
       version: '1.3.0',
-      layers: [{
-        type: 'mapnik',
-        options: {
-          cartocss_version: '2.1.1',
-          cartocss: CartoCSS,
-          sql: SQL,
-        },
-      }],
+      layers,
     };
 
     return new Promise((resolve, reject) => {
@@ -52,7 +55,10 @@ const carto = {
       })
         .catch(err => reject(err))
         .then(response => response.json())
-        .then((json) => { resolve(buildTemplate(json.layergroupid, 'mvt')); });
+        .then((json) => {
+          console.log(buildTemplate(json.layergroupid, 'mvt'));
+          resolve(buildTemplate(json.layergroupid, 'mvt'));
+        });
     });
   },
 };
