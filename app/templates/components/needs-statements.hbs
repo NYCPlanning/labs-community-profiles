@@ -1,14 +1,12 @@
-<h4 class="subsection-header"><strong>Needs Statement Archive</strong></h4>
-<div class="callout">
-  <div class="list-scroll-medium">
-    <ul class="no-bullet">
-      {{#each (await truncatedYears) as |year|}}
-        <li class="list-item-padded"><a href="{{downloadPath}}/{{year.path}}">{{fa-icon "file-pdf-o"}}&nbsp;<strong>{{year.name}}</strong></a></li>
-      {{/each}}
-    </ul>
-  </div>
+<div class="needs-statements">
+  <h6>Needs Statement Archive:</h6>
+  <ul class="no-bullet">
+    {{#each (await truncatedYears) as |year|}}
+      <li class="list-item-padded"><a href="{{downloadPath}}/{{year.path}}">{{fa-icon "file-pdf-o"}}&nbsp;<strong>{{year.name}}</strong></a></li>
+    {{/each}}
+  </ul>
   {{#unless showAll}}
-    <button class="button small hollow expanded" onclick={{action 'toggleList'}}>Show All</button>
+    <button class="button small hollow no-margin" onclick={{action 'toggleList'}}>Show All Needs Statements</button>
   {{/unless}}
 </div>
 {{yield}}

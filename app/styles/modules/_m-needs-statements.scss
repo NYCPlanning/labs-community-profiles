@@ -1,0 +1,39 @@
+// --------------------------------------------------
+// Module: Needs Statements
+// --------------------------------------------------
+
+.needs-statements {
+
+  @include breakpoint(xlarge) {
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 0.375rem;
+
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background-color: rgba(0,0,0,.5);
+        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    }
+  }
+
+  li:first-child {
+    a::after {
+      content: 'LATEST';
+      color: $dark-gray;
+      background-color: $light-gray;
+      font-size: rem-calc(10);
+      font-weight: $global-weight-bold;
+      display: inline-block;
+      margin-left: rem-calc(6);
+      padding: 0 0.375em;
+    }
+  }
+}

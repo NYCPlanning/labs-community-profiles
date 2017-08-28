@@ -98,6 +98,10 @@ h6,
   margin: 0 !important;
 }
 
+.title-case {
+  text-transform: capitalize;
+}
+
 .light-gray { color: $light-gray; }
 .medium-gray { color: $medium-gray; }
 .dark-gray { color: $dark-gray; }
@@ -151,17 +155,6 @@ li.list-item-padded {
 .list--link-meta {
   display: block;
   color: $dark-gray;
-}
-
-
-//
-// Scrollable Lists (e.g. Needs Statement Archive)
-// --------------------------------------------------
-.list-scroll-medium {
-  @include breakpoint(medium) {
-    max-height: 8.875em;
-    overflow: auto;
-  }
 }
 
 

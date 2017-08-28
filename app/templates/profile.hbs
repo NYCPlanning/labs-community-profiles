@@ -265,36 +265,42 @@
         </h3>
         <p class="section-header-description">Community Boards are an integral part in the City of New York’s governance. To contact your community board use the information below or to learn more about issues affecting your district, view the most recent Statement of Community District Needs. NYC Charter mandates that Community Boards annually prepare Statements of Community District Needs to provide a context for their budget priorities.</p>
 
-        <h4 class="subsection-header"><strong>{{model.boro}} Community Board {{model.cd}}</strong></h4>
-
-        <p>
-          <a class="button small hollow {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
-            {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
-          </a>
-          <a class="button small hollow {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
-        </p>
-
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-7">
+          <div class="cell medium-3">
 
-            <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
-            <div class="callout">
-              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
-              {{log noSON}}
-              {{#if noSON}}
-                <p>This community board did not provide a statement of needs.</p>
-              {{else}}
-              <ul>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
-              </ul>
-              {{/if}}
-            </div>
+            <h4 class="subsection-header"><strong>{{model.boro}} Community Board&nbsp;{{model.cd}}</strong></h4>
+            <p>
+              <a class="button small hollow expanded {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
+                {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
+              </a>
+              <a class="button small hollow expanded {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+            </p>
 
           </div>
-          <div class="cell medium-5">
-            {{needs-statements district=model}}
+          <div class="cell medium-9">
+
+            <h4 class="subsection-header"><strong>Statement of Community District Needs</strong></h4>
+            <div class="callout">
+              <div class="grid-x grid-margin-x">
+                <div class="cell xlarge-6">
+                  <p>These are the top 3 pressing issues perceived and identified by {{model.boro}} Community Board&nbsp;{{model.cd}} in the latest needs statement:</p>
+                  {{log noSON}}
+                  {{#if noSON}}
+                    <p>This community board did not provide a statement of needs.</p>
+                  {{else}}
+                  <ul>
+                    <li class="list-item-padded"><strong class="title-case header-medium"><!-- <a href={{d.cd_son_fy2018}}> -->{{d.son_issue_1}}<!-- </a> --></strong></li>
+                    <li class="list-item-padded"><strong class="title-case header-medium"><!-- <a href={{d.cd_son_fy2018}}> -->{{d.son_issue_2}}<!-- </a> --></strong></li>
+                    <li class="list-item-padded"><strong class="title-case header-medium"><!-- <a href={{d.cd_son_fy2018}}> -->{{d.son_issue_3}}<!-- </a> --></strong></li>
+                  </ul>
+                  {{/if}}
+                </div>
+                <div class="cell xlarge-6 relative">
+                  {{needs-statements district=model}}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
