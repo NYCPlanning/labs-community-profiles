@@ -7,6 +7,7 @@
         <ul class="menu">
           <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#resiliency' label='Resiliency' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#projects' label='Projects' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
@@ -232,6 +233,28 @@
         <div class="callout">
           {{facilities-section borocd=model.borocd}}
         </div>
+      </section>
+
+      <section id="resiliency" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#resiliency' afterScroll='handleAfterScroll'}}
+            {{fa-icon "tint"}} Waterfront Resiliency {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+        <p class="section-header-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <h4 class="subsection-header"><strong>Floodplain</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x">
+            <div class="cell medium-6">
+              waterfront-map
+            </div>
+            <div class="cell medium-6">
+              waterfront-chart
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <section id="community-board" class="page-section">
