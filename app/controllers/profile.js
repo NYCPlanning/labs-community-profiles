@@ -22,6 +22,8 @@ export default Ember.Controller.extend({
     'moe_unemployment_cd',
     'moe_mean_commute',
     'moe_hh_rent_burd',
+    'under18_rate',
+    'over65_rate',
   ],
 
   section: '',
