@@ -83,6 +83,7 @@ export default Ember.Component.extend(ResizeAware, {
       const moe = this.get('moe');
       const rank = data.findIndex(d => d.is_selected);
       const unit = this.get('unit');
+      const numeral_format = this.get('numeral_format');
 
       if(!data[0][column]) return;
 
@@ -116,7 +117,7 @@ export default Ember.Component.extend(ResizeAware, {
       };
 
       const percent = (number) => {
-        return numeral(number).format('0.0');
+        return numeral(number).format(numeral_format);
       };
 
       const tooltipTemplate = function(d) {
