@@ -48,3 +48,17 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
+## MapPLUTO Floodplain Lookup
+
+WITH floodplain_2015 as (
+  SELECT the_geom FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+)
+
+SELECT
+a.bbl,
+ST_Intersects( a.the_geom , cdprofiles_floodplain_2050.the_geom ) as floodplain_2050,
+EXISTS(
+  SELECT 1 FROM floodplain_2015 b WHERE ST_INtersects(a.the_geom, b.the_geom)
+) as floodplain_2015
+FROM support_mappluto a, cdprofiles_floodplain_2050
