@@ -19,7 +19,7 @@ const pfirm15Layer = {
         ['AE', '#52C4EE'],
       ],
     },
-    'fill-opacity': 0.75,
+    'fill-opacity': 0.3,
     'fill-antialias': true,
   },
 };
@@ -31,7 +31,7 @@ const floodplain2050Layer = {
   type: 'fill',
   paint: {
     'fill-color': 'orange',
-    'fill-opacity': 0.4,
+    'fill-opacity': 0.3,
     'fill-antialias': true,
   },
 };
@@ -47,6 +47,19 @@ export default FacilitiesSection.extend({
   }),
   pfirm15Layer,
   floodplain2050Layer,
+
+  rasterSource: {
+    type: 'raster',
+    tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.png'],
+    tileSize: 256,
+  },
+
+  rasterLayer: {
+    id: 'landuse-raster',
+    type: 'raster',
+    source: 'pluto-raster',
+  },
+
   // actions: {
   //   handleMouseover(e) {
   //     const feature = e.target.queryRenderedFeatures(e.point, { layers: ['zoning'] })[0];

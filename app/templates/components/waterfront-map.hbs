@@ -1,5 +1,7 @@
 {{#mapbox-gl id='resiliency-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
   {{#with (await vectorSource) as |vSource|}}
+
+
     {{#map.source sourceId='floodzones' source=vSource as |source|}}
       {{log vSource}}
       {{source.layer layer=floodplain2050Layer before='waterway-label'}}
