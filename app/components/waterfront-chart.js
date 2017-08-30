@@ -2,7 +2,6 @@ import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 
 import carto from '../utils/carto';
-import landUseColors from '../utils/landUseColors';
 
 const LandUseChart = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -11,15 +10,13 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
-
+  property: '',
   borocd: '',
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');
     const SQL = `
       SELECT
         building_typology,
-        totalbuildings,
-        totalunitsres,
         SUM(numbldgs) as numbldgs,
         SUM(unitsres) as unitsres,
         ROUND(SUM(numbldgs)::numeric / totalbuildings, 4) AS numbldgs_pct,
@@ -86,13 +83,14 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   updateChart: function updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
+    const property = this.get('property');
 
     const el = this.$();
     const elWidth = el.width();
 
     const margin = {
       top: 0,
-      right: 0,
+      right: 50,
       bottom: 0,
       left: 0,
     };
@@ -104,7 +102,10 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     data.then((rawData) => {
-      console.log('rawData', rawData)
+      rawData.sort(function(a, b) {
+        return a[property] < b[property];
+      });
+
       const y = d3.scaleBand()
         .domain(rawData.map(d => d.building_typology))
         .range([0, height])
@@ -112,23 +113,38 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         .paddingInner(0.1);
 
       const x = d3.scaleLinear()
-        .domain([0, d3.max(rawData, d => d.unitsres)])
+        .domain([0, d3.max(rawData, d => d[property])])
         .range([0, width]);
 
-      const typeLabels = svg.selectAll('.label')
+      const typeLabels = svg.selectAll('.typelabel')
         .data(rawData, d => d.building_typology);
 
       typeLabels.enter().append('text')
-        .attr('class', 'label')
+        .attr('class', 'label typelabel')
         .attr('text-anchor', 'left')
         .attr('alignment-baseline', 'top')
         .attr('x', 0);
 
       typeLabels.transition().duration(300)
         .attr('y', d => y(d.building_typology) + y.bandwidth() + -3)
-        .text(d => `${d.building_typology} | ${(d.unitsres_pct * 100).toFixed(1)} %`);
+        .text(d => `${d.building_typology} | ${(d[`${property}_pct`] * 100).toFixed(1)} %`);
 
       typeLabels.exit().remove();
+
+      const barLabels = svg.selectAll('.barlabel')
+        .data(rawData, d => d.building_typology);
+
+      barLabels.enter().append('text')
+        .attr('class', 'label barlabel')
+        .attr('text-anchor', 'left')
+        .attr('alignment-baseline', 'top');
+
+      barLabels.transition().duration(300)
+        .attr('x', d => x(d[property]) + 6)
+        .attr('y', d => y(d.building_typology) + (y.bandwidth() / 2) + -2)
+        .text(d => `${d[property]}`);
+
+      barLabels.exit().remove();
 
       const buildingsbars = svg.selectAll('.buildingsbar')
         .data(rawData, d => d.building_typology);
@@ -140,15 +156,12 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         .attr('x', 0)
         .attr('height', y.bandwidth() - 14)
         .attr('rx', 2)
-        .attr('ry', 2)
-        .attr('y', d => y(d.building_typology))
-        .attr('width', d => x(d.unitsres));
-
+        .attr('ry', 2);
 
       buildingsbars.transition().duration(300)
         .attr('height', y.bandwidth() - 14)
         .attr('y', d => y(d.building_typology))
-        .attr('width', d => x(d.unitsres));
+        .attr('width', d => x(d[property]));
 
       buildingsbars.exit().remove();
     });

@@ -1,12 +1,13 @@
 {{#mapbox-gl id='resiliency-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
   {{#with (await vectorSource) as |vSource|}}
 
-
     {{#map.source sourceId='floodzones' source=vSource as |source|}}
       {{log vSource}}
       {{source.layer layer=floodplain2050Layer before='waterway-label'}}
       {{source.layer layer=pfirm15Layer before='waterway-label'}}
     {{/map.source}}
+
+    {{map.call 'fitBounds' mapState.bounds}}
 
     {{#if mapState.currentlySelected}}
       {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
@@ -14,15 +15,6 @@
       {{/map.source}}
     {{/if}}
   {{/with}}
-<<<<<<< Updated upstream
 
-  {{map.call 'fitBounds' mapState.bounds}}
-  {{map.on 'mousemove' (action 'handleMouseover')}}
-  {{map.on 'mouseout' (action 'handleMouseleave')}}
-
-  {{hover-tooltip mouse=mouseoverLocation text=tooltip-text}}
-=======
-  {{map.call 'fitBounds' mapState.bounds}}
->>>>>>> Stashed changes
 {{/mapbox-gl}}
 {{yield}}

@@ -14,6 +14,11 @@
     font-size: rem-calc(11);
     fill: #575555
   }
+
+  & > .barlabel {
+    font-size: rem-calc(15);
+    fill: #575555
+  }
 }
 
 .chart-legend {
