@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
   columns: [
     'poverty_rate',
     'unemployment_cd',
-    'crime_per_1000',
+    'crime_count',
     'mean_commute',
     'pct_hh_rent_burd',
     'pct_clean_strts',
@@ -22,6 +22,10 @@ export default Ember.Controller.extend({
     'moe_unemployment_cd',
     'moe_mean_commute',
     'moe_hh_rent_burd',
+    'lep_rate',
+    'moe_lep_rate',
+    'under18_rate',
+    'over65_rate',
   ],
 
   section: '',
