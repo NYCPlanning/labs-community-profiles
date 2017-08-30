@@ -341,12 +341,12 @@
             {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The following section contains information on current and approved land use plans and proposals, ongoing or concluded neighborhood studies, and 197-a plans for each district. To view a full list of land use applications in your district or to learn more about the application process click on the link below to explore LUCATS. To learn about community-based planning visit the <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page">DCP website</a>.</p>
+        <p class="section-header-description">The following section contains information on current and approved land use plans and proposals, ongoing or concluded neighborhood studies, and 197-a plans for each district. Learn more about the land use application process on the <a gref="http://a030-lucats.nyc.gov/lucats/ULURP_Search.aspx">LUCATS website</a>, and more about community-based planning on the <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page">DCP website</a>.</p>
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-8 xlarge-7">
 
-            <h4 class="subsection-header"><strong>Recent Land Use Applications</strong></h4>
+            <h4 class="subsection-header"><strong>Recent Land Use Applications {{info-tooltip tip="LUCATS (Land Use and CEQR Application Tracking System) is the Department of City Planning’s web application for selecting and viewing active and/or completed land use and CEQR application records."}}</strong></h4>
             <div class="callout">
               {{lucats-list district=model}}
             </div>
