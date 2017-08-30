@@ -14,9 +14,11 @@ export default RankingChart.extend({
 
   tooltip(d, current) {
     const selected = current || d;
-    const { cd_tot_bldgs, current_fp_bldg } = selected;
+    const { column, overlayColumn } = this.getProperties('column', 'overlayColumn');
+    const denominator = selected[column];
+    const numerator = selected[overlayColumn];
     const percent = this.get('percent');
-    return `${selected.boro_district}: <strong>${percent(current_fp_bldg / cd_tot_bldgs * 100)}%</strong> <span class='moe-text'>of buildings in floodplain</span>`;
+    return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of buildings in floodplain</span>`;
   },
 
   drawChart(el, data) {
@@ -46,7 +48,7 @@ export default RankingChart.extend({
       .attr('height', d => y(d[overlayColumn]));
   },
   sql: Ember.computed('borocd', function() {
-    const { column, overlayColumn } = 
+    const { column, overlayColumn } =
       this.getProperties('column', 'overlayColumn');
 
     return `SELECT ${column}, ${overlayColumn || 1},
