@@ -273,19 +273,19 @@
         <p class="section-header-description"> The maps and charts below provide detailed information regarding the people and built environment in NYC’s floodplain. This information helps the City and community members better understand a neighborhood’s risk and key characteristics that influence the ability of a neighborhood to adapt.  For more information on flood hazards and City Planning’s resiliency work program, please visit the <a href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a> and <a href="https://nyc.gov/resilientneighborhoods">nyc.gov/resilientneighborhoods</a>.</p>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6 large-12 xlarge-6">
+          <div class="cell xlarge-6">
             <h4 class="subsection-header"><strong>Floodplain Map</strong></h4>
             <div class="callout">
               {{waterfront-map}}
             </div>
           </div>
-          <div class="cell medium-3">
+          <div class="cell medium-6 xlarge-3">
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{waterfront-chart property='numbldgs' borocd=model.borocd}}
             </div>
           </div>
-          <div class="cell medium-3">
+          <div class="cell medium-6 xlarge-3">
             <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
             <div class="callout">
               {{waterfront-chart property='unitsres' borocd=model.borocd}}
