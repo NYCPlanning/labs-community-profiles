@@ -3,6 +3,22 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 
 import carto from '../utils/carto';
 
+function getColor(group) {
+  const colorMap = {
+    '1-2 family attached/semi-detached': '#f4f455',
+    '1-2 family detached': '#f4f455',
+    'Small Apartment Buildings': '#f7d496',
+    'Commercial-only buildings': '#ea6661',
+    'Other Building Types': '#5f5f60',
+    'Big apartment buildings': '#FF9900',
+    'Small mixed-use buildings': '#f7cabf',
+    'Big mixed-use buildings': '#f7cabf',
+    'Manufacturing buildings': '#d36ff4',
+  };
+
+  return colorMap[group];
+}
+
 const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['relative'],
@@ -47,13 +63,19 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
       ORDER BY SUM(${property}) DESC
     `;
 
-    console.log(SQL)
     return SQL;
   }),
 
   data: Ember.computed('sql', 'borocd', function() {
     const sql = this.get('sql');
-    return carto.SQL(sql);
+    return carto.SQL(sql)
+      .then((data) => {
+        return data.map((d) => {
+          const colorAdded = d;
+          colorAdded.color = getColor(d.group);
+          return d;
+        });
+      });
   }),
 });
 

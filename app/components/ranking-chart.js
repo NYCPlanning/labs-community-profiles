@@ -5,6 +5,27 @@ import numeral from 'numeral';
 import d3 from 'd3';
 
 export default Ember.Component.extend(ResizeAware, {
+  init() {
+    this._super(...arguments);
+
+    const numeral_format = this.get('numeral_format');
+    const percent = (number) => {
+      return numeral(number).format(numeral_format);
+    };
+    const defaultTooltip = (d, current) => {
+      const selected = current || d;
+      const percent = this.get('percent');
+      const { column, unit, moe } = this.getProperties('column', 'unit', 'moe');
+      return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><span class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</span>`;
+    };
+    const tooltip = this.get('tooltip') || defaultTooltip;
+
+    this.setProperties({
+      percent,
+      tooltip,
+    });
+  },
+
   classNames: ['ranking-chart'],
 
   resizeWidthSensitive: true,
@@ -14,6 +35,8 @@ export default Ember.Component.extend(ResizeAware, {
   column: '',
   rank: 0,
   ranked: null,
+  unit: '',
+  numeral_format: '0.0',
 
   colors: {
     gray: '#a8a8a8',
@@ -69,174 +92,175 @@ export default Ember.Component.extend(ResizeAware, {
     this.didRender();
   },
 
-  didRender() {
-    const el = this.$();
+  drawChart(el, data) {
     const elWidth = el.width();
-    const dataPromise = this.get('data');
 
-    Promise.resolve(dataPromise).then((data) => {
-      const margin = this.get('margin');
-      const height = this.get('height') - margin.top - margin.bottom;
-      const width = elWidth - margin.left - margin.right;
-      const colorsHash = this.get('colors');
-      const column = this.get('column');
-      const moe = this.get('moe');
-      const rank = data.findIndex(d => d.is_selected);
-      const unit = this.get('unit');
+    const margin = this.get('margin');
+    const height = this.get('height') - margin.top - margin.bottom;
+    const width = elWidth - margin.left - margin.right;
+    const colorsHash = this.get('colors');
+    const column = this.get('column');
+    const moe = this.get('moe');
+    const rank = data.findIndex(d => d.is_selected);
+    const unit = this.get('unit');
+    const current = data[rank];
+    if(!data[0][column]) return;
 
-      if(!data[0][column]) return;
+    const { svg, div, bars, masks, moes } =
+      this.getProperties('svg', 'div', 'bars', 'masks', 'moes');
 
-      const { svg, div, bars, masks, moes } =
-        this.getProperties('svg', 'div', 'bars', 'masks', 'moes');
+    div
+      .attr('class', 'tooltip');
+
+    svg
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom);
+
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.borocd))
+      .range([0, width])
+      .padding(0);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => (d[column] + (d[moe] || 0)))])
+      .range([0, height]);
+
+    const moeColor = '#6eceff';
+    const numeral_format = this.get('numeral_format');
+
+    const colors = (d) => {
+      return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
+    };
+
+    const calculateMidpoint = (node) => {
+      return (node.getBoundingClientRect().width / 2) - Math.floor((x.bandwidth() / 2));
+    };
+
+    const tooltipTemplate = this.get('tooltip').bind(this, current);
+
+    const handleMouseOver = (d, i) => {
+      const selector = `.bar-${d.borocd}`;
+      svg.select(selector)
+        .transition()
+        .duration(10)
+        .attr('fill', colorsHash.dcp_orange);
 
       div
-        .attr('class', 'tooltip');
-
-      svg
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom);
-
-      const x = d3.scaleBand()
-        .domain(data.map(d => d.borocd))
-        .range([0, width])
-        .padding(0);
-
-      const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => (d[column] + (d[moe] || 0)))])
-        .range([0, height]);
-
-      const moeColor = '#6eceff';
-
-      const colors = (d) => {
-        return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
-      };
-
-      const calculateMidpoint = (node) => {
-        return (node.getBoundingClientRect().width / 2) - Math.floor((x.bandwidth() / 2));
-      };
-
-      const percent = (number) => {
-        return numeral(number).format('0.0');
-      };
-
-      const tooltipTemplate = function(d) {
-        const selected = d || current;
-        return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><span class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</span>`;
-      };
-
-      const handleMouseOver = (d, i) => {
-        const selector = `.bar-${d.borocd}`;
-        svg.select(selector)
-          .transition()
-          .duration(10)
-          .attr('fill', colorsHash.dcp_orange);
-
-        div
-          .html(function() {
-            return tooltipTemplate(d);
-          })
-          .attr('style', function() {
-            const midpoint = calculateMidpoint(this);
-            return `left: ${x(d.borocd) - midpoint}px`;
-          });
-      };
-
-      const handleMouseOut = (d, i) => {
-        const selector = `.bar-${d.borocd}`;
-        svg.select(selector)
-          .transition()
-          .duration(10)
-          .attr('fill', function (d) {
-            return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
-          });
-      };
-
-      const current = data[rank];
-
-      // Join new data
-      const theseBars = bars
-        .selectAll('.bar')
-        .data(data, function (d) {
-          return d.borocd;
+        .html(function() {
+          return tooltipTemplate(d)
+        })
+        .attr('style', function() {
+          const midpoint = calculateMidpoint(this);
+          return `left: ${x(d.borocd) - midpoint}px`;
         });
+    };
 
-      const theseMoes = moes
-        .selectAll('.bar')
-        .data(data, function (d) {
-          return d.borocd;
+    const handleMouseOut = (d, i) => {
+      const selector = `.bar-${d.borocd}`;
+      svg.select(selector)
+        .transition()
+        .duration(10)
+        .attr('fill', function (d) {
+          return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
         });
+    };
 
-      const theseMasks = masks
-        .selectAll('.bar')
-        .data(data, function (d) {
-          return d.borocd;
-        });
+    // Join new data
+    const theseBars = bars
+      .selectAll('.bar')
+      .data(data, function (d) {
+        return d.borocd;
+      });
 
-      // update elements
-      theseBars
-        .attr('fill', colors)
+    const theseMoes = moes
+      .selectAll('.moe')
+      .data(data, function (d) {
+        return d.borocd;
+      });
+
+    const theseMasks = masks
+      .selectAll('.mask')
+      .data(data, function (d) {
+        return d.borocd;
+      });
+
+    // update elements
+    theseBars
+      .attr('fill', colors)
+      .attr('width', () => x.bandwidth() - 2)
+      .attr('x', d => x(d.borocd));
+
+    theseMasks
+      .attr('width', x.bandwidth())
+      .attr('x', d => x(d.borocd))
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut);
+
+    theseBars.enter()
+      .append('rect')
+      .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
+      .attr('fill', colors)
+      .attr('y', d => height - y(d[column]))
+      .attr('width', d => x.bandwidth() - 2)
+      .attr('x', d => x(d.borocd))
+      .attr('height', d => y(d[column]));
+
+    theseMasks.enter()
+      .append('rect')
+      .attr('class', 'mask')
+      .attr('opacity', 0)
+      .attr('y', 0)
+      .attr('width', x.bandwidth())
+      .attr('x', d => x(d.borocd))
+      .attr('height', height)
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut);
+
+    if(moe) {
+      theseMoes
+        .attr('fill', moeColor)
         .attr('width', () => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd));
 
-      theseMasks
-        .attr('width', x.bandwidth())
-        .attr('x', d => x(d.borocd))
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut);
-
-      theseBars.enter()
+      theseMoes.enter()
         .append('rect')
-        .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
-        .attr('fill', colors)
-        .attr('y', d => height - y(d[column]))
+        .attr('class', (d, i) => `bar moe bar-${d.borocd} bar-index-${i}`)
+        .style('opacity', '0.5')
+        .attr('fill', moeColor)
+        .attr('y', d => height - (y(d[column]) + y(d[moe])))
         .attr('width', d => x.bandwidth() - 2)
         .attr('x', d => x(d.borocd))
-        .attr('height', d => y(d[column]));
+        .attr('height', d => y(d[moe]) * 2);
+    }
 
-      theseMasks.enter()
-        .append('rect')
-        .attr('class', 'mask')
-        .attr('opacity', 0)
-        .attr('y', 0)
-        .attr('width', x.bandwidth())
-        .attr('x', d => x(d.borocd))
-        .attr('height', height)
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut);
+    div
+      .html(tooltipTemplate)
+      .attr('style', function () {
+        const midpoint = calculateMidpoint(this);
+        return `left: ${x(current.borocd) - midpoint}px`;
+      });
 
-      if(moe) {
-        theseMoes
-          .attr('fill', moeColor)
-          .attr('width', () => x.bandwidth() - 2)
-          .attr('x', d => x(d.borocd));
+    svg
+      .on('mouseout', function() {
+        div
+          .html(tooltipTemplate)
+          .attr('style', function() {
+            const midpoint = calculateMidpoint(this);
+            return `left: ${x(current.borocd) - midpoint}px`;
+          });
+      });
 
-        theseMoes.enter()
-          .append('rect')
-          .attr('class', (d, i) => `bar moe bar-${d.borocd} bar-index-${i}`)
-          .style('opacity', '0.5')
-          .attr('fill', moeColor)
-          .attr('y', d => height - (y(d[column]) + y(d[moe])))
-          .attr('width', d => x.bandwidth() - 2)
-          .attr('x', d => x(d.borocd))
-          .attr('height', d => y(d[moe]) * 2);
-      }
-
-      div
-        .html(tooltipTemplate)
-        .attr('style', function () {
-          const midpoint = calculateMidpoint(this);
-          return `left: ${x(current.borocd) - midpoint}px`;
-        });
-
-      svg
-        .on('mouseout', function() {
-          div
-            .html(tooltipTemplate)
-            .attr('style', function() {
-              const midpoint = calculateMidpoint(this);
-              return `left: ${x(current.borocd) - midpoint}px`;
-            });
-        });
+    this.setProperties({
+      x,
+      y,
+      handleMouseOut,
+      handleMouseOver,
     });
+  },
+
+  didRender() {
+    const dataPromise = this.get('data');
+    const el = this.$();
+    Promise.resolve(dataPromise).then(this.drawChart.bind(this, el));
   },
 });

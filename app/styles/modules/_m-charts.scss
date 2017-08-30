@@ -36,11 +36,14 @@
     width: 0.5em;
     height: 1em;
   }
-  .estimate {
+  .estimate, .total {
     background-color: #A8A8A8;
   }
   .moe {
     border-top: 0.375em solid #ACE8FF;
+  }
+  .percent {
+    border-bottom: 0.375em solid #ACE8FF;
   }
 }
 
