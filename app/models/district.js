@@ -30,6 +30,18 @@ export default DS.Model.extend({
     const acronym = acronymCrosswalk[this.get('boro')];
     return `${acronym}`;
   }),
+  boroAcronymLowerCase: Ember.computed('boro', function() {
+    const acronym = acronymCrosswalk[this.get('boro')].toLowerCase();
+    return `${acronym}`;
+  }),
+  healthProfileLink: Ember.computed('boro', function() {
+    const boroAcronymLowerCase = this.get('boroAcronymLowerCase');
+    let cd = this.get('cd');
+    if(boroAcronymLowerCase === 'si' || boroAcronymLowerCase === 'qn') {
+      cd = numeral(cd).format('00');
+    }
+    return `https://www1.nyc.gov/assets/doh/downloads/pdf/data/2015chp-${boroAcronymLowerCase}${cd}.pdf`;
+  }),
   cd: DS.attr('string'),
   geometry: DS.attr(),
   bounds: Ember.computed('geometry', function() {
