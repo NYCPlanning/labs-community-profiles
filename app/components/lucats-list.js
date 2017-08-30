@@ -11,7 +11,11 @@ export default Ember.Component.extend({
     return fetch(URL)
       .then(data => data.json())
       .then((data) => {
-        data.forEach((d) => {
+        data.active.forEach((d) => {
+          d.projectName = d.projectName !== '' ? d.projectName : 'Unnamed Project'; // eslint-disable-line
+        });
+
+        data.completed.forEach((d) => {
           d.projectName = d.projectName !== '' ? d.projectName : 'Unnamed Project'; // eslint-disable-line
         });
 
