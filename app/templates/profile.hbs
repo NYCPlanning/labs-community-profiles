@@ -92,6 +92,24 @@
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Age 18 & Under'
+                            column='under18_rate'
+                            tip=d.acs_tooltip
+                            unit='%'
+                            cd_stat=d.under18_rate
+                            boro_stat=d.under18_rate_boro
+                            city_stat=d.under18_rate_nyc}}
+            of residents are under the age of 18
+          {{/data.indicator}}
+          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Age 65 & Over'
+                            column='over65_rate'
+                            tip=d.acs_tooltip
+                            unit='%'
+                            cd_stat=d.over65_rate
+                            boro_stat=d.over65_rate_boro
+                            city_stat=d.over65_rate_nyc}}
+            of residents are over the age of 65
+          {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
                             column='pct_hh_rent_burd'
                             moe='moe_hh_rent_burd'
@@ -128,12 +146,13 @@
             of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY&nbsp;2016
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
-                            column='crime_per_1000'
+                            column='crime_count'
                             tip='NYPD Complaint Data, 2016'
-                            cd_stat=d.crime_per_1000
-                            boro_stat=d.crime_per_1000_boro
-                            city_stat=d.crime_per_1000_nyc}}
-            major crimes were reported per 1,000 residents in&nbsp;2016
+                            cd_stat=d.crime_count
+                            numeral_format=0
+                            boro_stat=d.crime_count_boro
+                            city_stat=d.crime_count_nyc}}
+            major crimes were reported in&nbsp;2016
           {{/data.indicator}}
           {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
                             column='pct_bach_deg'
