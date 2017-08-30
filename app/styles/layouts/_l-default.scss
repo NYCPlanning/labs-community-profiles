@@ -183,6 +183,41 @@ html, body {
   }
 }
 
+.indicator-grid {
+  @include xy-grid();
+  @include xy-gutters($callout-padding*2, margin, right left, true);
+
+  .indicator-cell--stat {
+    @include xy-cell-static(7, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(4, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(6, true, $callout-padding*2);
+    }
+  }
+
+  .indicator-cell--borocity {
+    @include xy-cell-static(5, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(3, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(6, true, $callout-padding*2);
+    }
+  }
+
+  .indicator-cell--chart {
+    @include xy-cell-static(12, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(5, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(12, true, $callout-padding*2);
+    }
+  }
+}
+
 
 //
 // Layout helper classes
