@@ -24,9 +24,6 @@ export default Ember.Component.extend({
 
   comparisonData: Ember.computed('sql', function() {
     const sql = this.get('sql');
-    return carto.SQL(sql, 'json')
-      .then((json) => {
-        return json;
-      });
+    return carto.SQL(sql, 'json');
   }),
 });

@@ -312,12 +312,39 @@
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{building-type-chart property='numbldgs' borocd=model.borocd}}
+              <hr>
+              <div class="text-center">
+                <span class="chart-legend">
+                  <span class="total"></span>&nbsp;Total Buildings
+                  &nbsp;
+                  <span class="percent"></span>&nbsp;Buildings in Floodplain
+                </span>
+              </div>
+              {{ranking-chart-plus
+                  column='cd_tot_bldgs'
+                  overlayColumn='current_fp_bldg'
+                  numeral_format='0,0'
+                  borocd=model.borocd}}
             </div>
           </div>
           <div class="cell large-4">
             <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
             <div class="callout">
               {{building-type-chart property='unitsres' borocd=model.borocd}}
+              <hr>
+              <div class="text-center">
+                <span class="chart-legend">
+                  <span class="total"></span>&nbsp;Total Units
+                  &nbsp;
+                  <span class="percent"></span>&nbsp;Units in Floodplain
+                </span>
+              </div>
+              {{ranking-chart-plus
+                  column='cd_tot_resunits'
+                  overlayColumn='current_fp_resunits'
+                  numeral_format='0,0'
+                  borocd=model.borocd
+                  unit='units'}}
             </div>
           </div>
           <div class="cell large-4">
