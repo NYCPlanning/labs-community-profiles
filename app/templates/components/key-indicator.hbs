@@ -6,8 +6,8 @@
       <small class="stat-footer">{{yield}}</small>
     </div>
     <div class="cell small-5 large-3 xlarge-5 text-right large-text-left xlarge-text-right">
-      {{#if boro_stat}}<span class="boro-stat label">{{boro}}: <strong>{{boro_stat}}{{unit}}</strong></span>{{/if}}
-      {{#if city_stat}}<span class="city-stat label">NYC: <strong>{{city_stat}}{{unit}}</strong></span>{{/if}}
+      {{#if boro_stat}}<span class="boro-stat label">{{boro}}: <strong>{{numeral-format boro_stat numeral_format}}{{unit}}</strong></span>{{/if}}
+      {{#if city_stat}}<span class="city-stat label">NYC: <strong>{{numeral-format city_stat numeral_format}}{{unit}}</strong></span>{{/if}}
     </div>
     <div class="cell auto">
       {{ranking-chart
