@@ -1,7 +1,7 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 
-const HorizontalBar = Ember.Component.extend({
+const HorizontalBar = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['horizontal-bar'],
 
@@ -63,20 +63,23 @@ const HorizontalBar = Ember.Component.extend({
         .domain([0, d3.max(rawData, d => d.value)])
         .range([0, width]);
 
-      const typeLabels = svg.selectAll('.typelabel')
+      const groupLabels = svg.selectAll('.typelabel')
         .data(rawData, d => d.group);
 
-      typeLabels.enter().append('text')
+      groupLabels.enter().append('text')
         .attr('class', 'label typelabel')
         .attr('text-anchor', 'left')
         .attr('alignment-baseline', 'top')
         .attr('x', 0);
 
-      typeLabels.transition().duration(300)
+      groupLabels.transition().duration(300)
         .attr('y', d => y(d.group) + y.bandwidth() + -3)
-        .text(d => `${d.group} | ${(d.value_pct * 100).toFixed(1)} %`);
+        .text((d) => {
+          if (d.value_pct) return `${d.group} | ${(d.value_pct * 100).toFixed(1)} %`;
+          return `${d.group}`;
+        });
 
-      typeLabels.exit().remove();
+      groupLabels.exit().remove();
 
       const barLabels = svg.selectAll('.barlabel')
         .data(rawData, d => d.group);
@@ -93,24 +96,27 @@ const HorizontalBar = Ember.Component.extend({
 
       barLabels.exit().remove();
 
-      const buildingsbars = svg.selectAll('.buildingsbar')
+      const bars = svg.selectAll('.buildingsbar')
         .data(rawData, d => d.group);
 
-      buildingsbars.enter()
+      bars.enter()
         .append('rect')
         .attr('class', 'buildingsbar')
-        .attr('fill', '#A8A8A8')
+        .attr('fill', (d) => {
+          if (d.color) return d.color;
+          return '#A8A8A8';
+        })
         .attr('x', 0)
         .attr('height', y.bandwidth() - 14)
         .attr('rx', 2)
         .attr('ry', 2);
 
-      buildingsbars.transition().duration(300)
+      bars.transition().duration(300)
         .attr('height', y.bandwidth() - 14)
         .attr('y', d => y(d.group))
         .attr('width', d => x(d.value));
 
-      buildingsbars.exit().remove();
+      bars.exit().remove();
     });
   },
 });
