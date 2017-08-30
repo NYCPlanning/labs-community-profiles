@@ -73,7 +73,7 @@ const zdLabelConfig = {
 
 export default FacilitiesSection.extend({
   vectorSource: Ember.computed('zoningTemplate', function () {
-    return carto.getTileTemplate(SQL)
+    return carto.getVectorTileTemplate([SQL])
       .then(zoningTemplate => ({
         type: 'vector',
         tiles: [zoningTemplate],
