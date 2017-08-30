@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   column: '',
   data: [],
   unit: '',
+  numeral_format: '0.0',
 
   sortedData: computed('data', 'borocd', function() {
     const borocd = this.get('borocd');

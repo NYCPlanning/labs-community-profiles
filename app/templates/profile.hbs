@@ -87,12 +87,30 @@
           </div>
         </div>
 
-        {{#key-indicators class="key-indicators grid-x grid-padding-x"
+        {{#key-indicators class="key-indicators"
                           indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Rent Burden'
+          {{#data.indicator class="indicator" name='Age 18 & Under'
+                            column='under18_rate'
+                            tip=d.acs_tooltip
+                            unit='%'
+                            cd_stat=d.under18_rate
+                            boro_stat=d.under18_rate_boro
+                            city_stat=d.under18_rate_nyc}}
+            of residents are under the age&nbsp;of&nbsp;18
+          {{/data.indicator}}
+          {{#data.indicator class="indicator" name='Age 65 & Over'
+                            column='over65_rate'
+                            tip=d.acs_tooltip
+                            unit='%'
+                            cd_stat=d.over65_rate
+                            boro_stat=d.over65_rate_boro
+                            city_stat=d.over65_rate_nyc}}
+            of residents are over the age&nbsp;of&nbsp;65
+          {{/data.indicator}}
+          {{#data.indicator class="indicator" name='Rent Burden'
                             column='pct_hh_rent_burd'
                             moe='moe_hh_rent_burd'
                             tip=d.acs_tooltip
@@ -100,16 +118,16 @@
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
                             city_stat=d.pct_hh_rent_burd_nyc}}
-            of households spend 35% or more of their income on rent
+            of households spend 35% or more of their income on&nbsp;rent
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Access to Parks'
+          {{#data.indicator class="indicator" name='Access to Parks'
                             column='pct_served_parks'
                             unit='%'
-                            tip='New York City Department of Parks & Recreation, 2016'
+                            tip='New York City Department of Parks & Recreation, 2016. DPR considers walking distance to be 1/4 mile for parks less than 6 acres, and 1/2 mile for larger parks and pools.'
                             cd_stat=d.pct_served_parks}}
-            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a> {{fa-icon "info-circle"}}
+            of residents live within <a href="https://www.nycgovparks.org/planning-and-building/planning/walk-to-a-park">walking distance of a park or open space</a>
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Mean Commute to Work'
+          {{#data.indicator class="indicator" name='Mean Commute to Work'
                             column='mean_commute'
                             moe='moe_mean_commute'
                             tip=d.acs_tooltip
@@ -118,24 +136,25 @@
                             city_stat=d.mean_commute_nyc}}
             minutes
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Street Cleanliness'
+          {{#data.indicator class="indicator" name='Street Cleanliness'
                             column='pct_clean_strts'
                             unit='%'
                             tip='New York City Department of Sanitation, 2017'
                             cd_stat=d.pct_clean_strts
                             boro_stat=d.pct_clean_strts_boro
                             city_stat=d.pct_clean_strts_nyc}}
-            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY 2016
+            of streets were rated "acceptable"on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page">Street Cleanliness Scorecard</a> in FY&nbsp;2016
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Crime Rate'
-                            column='crime_per_1000'
+          {{#data.indicator class="indicator" name='Crime Rate'
+                            column='crime_count'
                             tip='NYPD Complaint Data, 2016'
-                            cd_stat=d.crime_per_1000
-                            boro_stat=d.crime_per_1000_boro
-                            city_stat=d.crime_per_1000_nyc}}
-            major crimes were reported per 1,000 residents in 2016
+                            cd_stat=d.crime_count
+                            numeral_format=0
+                            boro_stat=d.crime_count_boro
+                            city_stat=d.crime_count_nyc}}
+            major crimes were reported in&nbsp;2016
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Educational Attainment'
+          {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
                             moe='moe_bach_deg'
                             tip=d.acs_tooltip
@@ -143,9 +162,19 @@
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
-            of residents 25 years or older have earned a bachelor's degree or higher
+            of residents 25 years or older have earned a bachelor's degree or&nbsp;higher
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Unemployment'
+          {{#data.indicator class="indicator" name='Limited English Proficiency'
+                            column='lep_rate'
+                            moe='moe_lep_rate'
+                            tip=d.acs_tooltip
+                            unit='%'
+                            cd_stat=d.lep_rate
+                            boro_stat=d.lep_rate_boro
+                            city_stat=d.lep_rate_nyc}}
+            of residents self-identify as having limited English&nbsp;proficiency
+          {{/data.indicator}}
+          {{#data.indicator class="indicator" name='Unemployment'
                             column='unemployment_cd'
                             moe='moe_unemployment_cd'
                             tip=d.acs_tooltip
@@ -155,7 +184,7 @@
                             city_stat=d.unemployment_nyc}}
             of the civilian labor force is unemployed
           {{/data.indicator}}
-          {{#data.indicator class="indicator cell medium-6 large-12 xlarge-6" name='Poverty'
+          {{#data.indicator class="indicator" name='Poverty'
                             column='poverty_rate'
                             moe='moe_poverty_rate'
                             tip=d.acs_tooltip
@@ -163,7 +192,7 @@
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the poverty level
+            of residents have incomes below the poverty&nbsp;level
           {{/data.indicator}}
         {{/key-indicators}}
 
@@ -273,37 +302,42 @@
         </h3>
         <p class="section-header-description">Community Boards are an integral part in the City of New York’s governance. To contact your community board use the information below or to learn more about issues affecting your district, view the most recent Statement of Community District Needs. NYC Charter mandates that Community Boards annually prepare Statements of Community District Needs to provide a context for their budget priorities.</p>
 
-        <h4 class="subsection-header"><strong>{{model.boro}} Community Board {{model.cd}}</strong></h4>
-
-        {{log model.dataprofile}}
-        <p>
-          <a class="button small hollow {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
-            {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
-          </a>
-          <a class="button small hollow {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
-        </p>
-
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-7">
+          <div class="cell medium-3">
 
-            <h4 class="subsection-header"><strong>Perceived Issues</strong></h4>
-            <div class="callout">
-              <p>These are the top 3 pressing issues identified by {{model.boro}} Community Board {{model.cd}} in the latest <a href={{d.cd_son_fy2018}}>Statement of Community District Needs</a>:</p>
-              {{log noSON}}
-              {{#if noSON}}
-                <p>This community board did not provide a statement of needs.</p>
-              {{else}}
-              <ul>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_1}}</a></strong></li>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_2}}</a></strong></li>
-                <li><strong><a href={{d.cd_son_fy2018}}>{{d.son_issue_3}}</a></strong></li>
-              </ul>
-              {{/if}}
-            </div>
+            <h4 class="subsection-header"><strong>{{model.boro}} Community Board&nbsp;{{model.cd}}</strong></h4>
+            <p>
+              <a class="button small hollow expanded {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}">
+                {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
+              </a>
+              <a class="button small hollow expanded {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+            </p>
 
           </div>
-          <div class="cell medium-5">
-            {{needs-statements district=model}}
+          <div class="cell medium-9">
+
+            <h4 class="subsection-header"><strong>Statement of Community District Needs</strong></h4>
+            <div class="callout">
+              <div class="grid-x grid-margin-x">
+                <div class="cell xlarge-6">
+                  <p>These are the top 3 pressing issues perceived and identified by {{model.boro}} Community Board&nbsp;{{model.cd}} in the latest needs statement:</p>
+                  {{log noSON}}
+                  {{#if noSON}}
+                    <p>This community board did not provide a statement of needs.</p>
+                  {{else}}
+                  <ul>
+                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_1}}</strong></li>
+                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_2}}</strong></li>
+                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_3}}</strong></li>
+                  </ul>
+                  {{/if}}
+                </div>
+                <div class="cell xlarge-6 relative">
+                  {{needs-statements district=model}}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -315,12 +349,12 @@
             {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The following section contains information on current and approved land use plans and proposals, ongoing or concluded neighborhood studies, and 197-a plans for each district. To view a full list of land use applications in your district or to learn more about the application process click on the link below to explore LUCATS. To learn about community-based planning visit the <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page">DCP website</a>.</p>
+        <p class="section-header-description">The following section contains information on current and approved land use plans and proposals, ongoing or concluded neighborhood studies, and 197-a plans for each district. Learn more about the land use application process on the <a gref="http://a030-lucats.nyc.gov/lucats/ULURP_Search.aspx">LUCATS website</a>, and more about community-based planning on the <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page">DCP website</a>.</p>
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-8 xlarge-7">
 
-            <h4 class="subsection-header"><strong>Recent Land Use Applications</strong></h4>
+            <h4 class="subsection-header"><strong>Recent Land Use Applications {{info-tooltip tip="LUCATS (Land Use and CEQR Application Tracking System) is the Department of City Planning’s web application for selecting and viewing active and/or completed land use and CEQR application records."}}</strong></h4>
             <div class="callout">
               {{lucats-list district=model}}
             </div>
