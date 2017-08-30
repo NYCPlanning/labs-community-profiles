@@ -103,7 +103,6 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     data.then((rawData) => {
-      console.log(rawData);
 
       const y = d3.scaleBand()
         .domain(rawData.map(d => d.zonedist))

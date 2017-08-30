@@ -2,7 +2,6 @@
   {{#with (await vectorSource) as |vSource|}}
 
     {{#map.source sourceId='floodzones' source=vSource as |source|}}
-      {{log vSource}}
       {{source.layer layer=floodplain2050Layer before='waterway-label'}}
       {{source.layer layer=pfirm15Layer before='waterway-label'}}
     {{/map.source}}

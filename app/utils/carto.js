@@ -56,7 +56,6 @@ const carto = {
         .catch(err => reject(err))
         .then(response => response.json())
         .then((json) => {
-          console.log(buildTemplate(json.layergroupid, 'mvt'));
           resolve(buildTemplate(json.layergroupid, 'mvt'));
         });
     });
