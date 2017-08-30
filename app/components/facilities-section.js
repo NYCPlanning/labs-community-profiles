@@ -96,7 +96,7 @@ export default Ember.Component.extend({
     };
   }),
 
-  centroid: Ember.computed('mapState', function () {
+  centroid: Ember.computed('mapState.currentlySelected', function () {
     return this.get('mapState.centroid');
   }),
 
