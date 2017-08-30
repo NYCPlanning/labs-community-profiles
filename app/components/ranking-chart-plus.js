@@ -18,7 +18,7 @@ export default RankingChart.extend({
     const denominator = selected[column];
     const numerator = selected[overlayColumn];
     const percent = this.get('percent');
-    return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of buildings in floodplain</span>`;
+    return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of ${this.get('unit') || 'buildings'} in floodplain</span>`;
   },
 
   drawChart(el, data) {
