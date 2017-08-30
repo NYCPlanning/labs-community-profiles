@@ -4,7 +4,7 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 import carto from '../utils/carto';
 
 const BuildingAgeChart = Ember.Component.extend(ResizeAware, {
-  classNames: ['building-age-chart'],
+  classNames: ['relative'],
   borocd: '',
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');

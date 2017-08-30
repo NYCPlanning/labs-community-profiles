@@ -5,7 +5,7 @@ import carto from '../utils/carto';
 
 const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
-  classNames: ['land-use-chart'],
+  classNames: ['relative'],
 
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,

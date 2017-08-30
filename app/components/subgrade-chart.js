@@ -4,7 +4,7 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 import carto from '../utils/carto';
 
 const LandUseChart = Ember.Component.extend(ResizeAware, {
-  classNames: ['subgrade-space-chart'],
+  classNames: ['relative'],
   borocd: '',
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');

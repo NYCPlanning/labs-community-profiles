@@ -5,6 +5,7 @@ const HorizontalBar = Ember.Component.extend({
   classNameBindings: ['loading'],
   classNames: ['horizontal-bar'],
 
+  height: 400,
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
@@ -44,7 +45,7 @@ const HorizontalBar = Ember.Component.extend({
       bottom: 0,
       left: 0,
     };
-    const height = 400 - margin.top - margin.bottom;
+    const height = this.get('height') - margin.top - margin.bottom;
     const width = elWidth - margin.left - margin.right;
 
     svg
