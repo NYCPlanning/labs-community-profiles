@@ -2,7 +2,11 @@
     <ul class="no-bullet">
     {{#each resolvedPlans as |plan|}}
       <li class="list-item-padded">
-        <a href = "{{plan.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{plan.name}}</strong></a>
+        {{#if plan.url}}
+          <a href = "{{plan.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{plan.name}}</strong></a>
+        {{else}}
+          <strong>{{plan.name}}</strong>
+        {{/if}}
         <small class="list--link-meta">Sponsored by {{plan.sponsor}} | Status: {{plan.currentstatus}}</small>
       </li>
     {{/each}}
