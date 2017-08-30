@@ -66,7 +66,7 @@ export default RankingChart.extend({
     const sql = this.get('sql');
     const borocd = this.get('borocd');
     return carto.SQL(sql, 'json').then(data => {
-      return data.sortBy(this.get('column')).reverse().map(d => {
+      return data.sortBy(this.get('overlayColumn')).reverse().map(d => {
         d.is_selected = (borocd === d.borocd) ? true : false;
         return d;
       });
