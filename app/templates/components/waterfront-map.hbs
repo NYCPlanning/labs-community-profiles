@@ -14,11 +14,15 @@
       {{/map.source}}
     {{/if}}
   {{/with}}
+<<<<<<< Updated upstream
 
   {{map.call 'fitBounds' mapState.bounds}}
   {{map.on 'mousemove' (action 'handleMouseover')}}
   {{map.on 'mouseout' (action 'handleMouseleave')}}
 
   {{hover-tooltip mouse=mouseoverLocation text=tooltip-text}}
+=======
+  {{map.call 'fitBounds' mapState.bounds}}
+>>>>>>> Stashed changes
 {{/mapbox-gl}}
 {{yield}}

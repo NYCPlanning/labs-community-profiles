@@ -241,16 +241,32 @@
             {{fa-icon "tint"}} Waterfront Resiliency {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="section-header-description"></p>
 
-        <h4 class="subsection-header"><strong>Floodplain</strong></h4>
+        <div class="grid-x grid-padding-x">
+          <h4 class="subsection-header"><strong>Floodplain</strong></h4>
+          <div class="cell medium-6 large-12 xlarge-6">
+            <div class="callout">
+              <div class="grid-x grid-padding-x">
+                <div class="cell medium-6">
+                  {{waterfront-map}}
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="callout">
           <div class="grid-x grid-padding-x">
             <div class="cell medium-6">
+<<<<<<< Updated upstream
               {{waterfront-map}}
             </div>
             <div class="cell medium-6">
               {{waterfront-chart}}
+=======
+              {{waterfront-chart borocd=model.borocd}}
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>
