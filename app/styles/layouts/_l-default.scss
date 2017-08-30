@@ -171,14 +171,14 @@ html, body {
 
     @include breakpoint(xlarge) {
       @include xy-cell(6);
+
+      .stat-footer {
+        min-height: 3.5em;
+      }
     }
 
     @include breakpoint(90em) {
       @include xy-cell-static($size:4, $gutter-output:true, $gutters:40px);
-    }
-
-    .stat-footer {
-      min-height: 3.5em;
     }
   }
 }
