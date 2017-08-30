@@ -151,6 +151,75 @@ html, body {
 
 
 //
+// Key Indicators
+// --------------------------------------------------
+
+.key-indicators {
+  @include xy-grid();
+  @include xy-gutters($grid-margin-gutters, margin, right left, true);
+
+  .indicator {
+    @include xy-cell(12);
+
+    @include breakpoint(medium) {
+      @include xy-cell(6);
+    }
+
+    @include breakpoint(large) {
+      @include xy-cell(12);
+    }
+
+    @include breakpoint(xlarge) {
+      @include xy-cell(6);
+    }
+
+    @include breakpoint(90em) {
+      @include xy-cell-static($size:4, $gutter-output:true, $gutters:40px);
+    }
+
+    .stat-footer {
+      min-height: 3.5em;
+    }
+  }
+}
+
+.indicator-grid {
+  @include xy-grid();
+  @include xy-gutters($callout-padding*2, margin, right left, true);
+
+  .indicator-cell--stat {
+    @include xy-cell-static(7, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(4, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(6, true, $callout-padding*2);
+    }
+  }
+
+  .indicator-cell--borocity {
+    @include xy-cell-static(5, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(3, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(6, true, $callout-padding*2);
+    }
+  }
+
+  .indicator-cell--chart {
+    @include xy-cell-static(12, true, $callout-padding*2);
+    @include breakpoint(large) {
+      @include xy-cell-static(5, true, $callout-padding*2);
+    }
+    @include breakpoint(xlarge) {
+      @include xy-cell-static(12, true, $callout-padding*2);
+    }
+  }
+}
+
+
+//
 // Layout helper classes
 // --------------------------------------------------
 .relative {
