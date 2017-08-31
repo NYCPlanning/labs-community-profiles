@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import ScrollToTop from '../mixins/scroll-to-top';
+import SetMapBounds from '../mixins/set-map-bounds';
 
-export default Ember.Route.extend(ScrollToTop, {
+export default Ember.Route.extend(SetMapBounds, {
+  model() {
+    return this.modelFor('application');
+  },
 });
