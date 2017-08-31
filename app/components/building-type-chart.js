@@ -9,7 +9,7 @@ function getColor(group) {
     '1-2 family detached': '#f4f455',
     'Small Apartment Buildings': '#f7d496',
     'Commercial-only buildings': '#ea6661',
-    'Other Building Types': '#5f5f60',
+    'Unknown Building Types': '#5f5f60',
     'Big apartment buildings': '#FF9900',
     'Small mixed-use buildings': '#f7cabf',
     'Big mixed-use buildings': '#f7cabf',
@@ -48,7 +48,7 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
           WHEN (unitsres = 0 AND numfloors < 5) AND factryarea > 0 THEN 'Manufacturing buildings'
           WHEN (unitsres >= 6 AND numfloors > 4) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Big apartment buildings'
           WHEN (UnitsRes >= 6 AND NumFloors > 4) AND (ComArea > 0 OR OfficeArea > 0 OR RetailArea > 0) AND FactryArea = 0 THEN 'Big mixed-use buildings'
-          ELSE 'Other Building Types'
+          ELSE 'Unknown Building Types'
         END AS building_typology,
         SUM (${property}) OVER () as propertytotal
         FROM support_mappluto a
