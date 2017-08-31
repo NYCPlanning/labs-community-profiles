@@ -10,7 +10,7 @@ const BuildingAgeChart = Ember.Component.extend(ResizeAware, {
     const borocd = this.get('borocd');
     const SQL = `
     SELECT
-      count(building_age) as value, building_age as group,
+      sum(numbldgs) as value, building_age as group,
       ROUND(count(building_age)::numeric / totalbuildings, 4) AS value_pct
     FROM (
       SELECT
@@ -21,6 +21,7 @@ const BuildingAgeChart = Ember.Component.extend(ResizeAware, {
         WHEN yearbuilt >= 2013 THEN '2013-Present'
         ELSE 'Unknown'
       END AS building_age,
+      numbldgs,
       SUM (numbldgs) OVER () as totalbuildings
       FROM support_mappluto a
       INNER JOIN support_admin_cdboundaries b
