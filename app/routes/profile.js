@@ -70,8 +70,10 @@ export default Ember.Route.extend({
   afterModel(district) {
     const mapState = this.get('mapState');
 
-    mapState.set('bounds', district.get('bounds'));
-    mapState.set('centroid', district.get('centroid'));
+    mapState.setProperties({
+      bounds: district.get('bounds'),
+      centroid: district.get('centroid'),
+    });
   },
   setupController(controller, district) {
     this._super(...arguments);
