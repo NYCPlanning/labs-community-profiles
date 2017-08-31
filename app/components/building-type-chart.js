@@ -5,15 +5,13 @@ import carto from '../utils/carto';
 
 function getColor(group) {
   const colorMap = {
-    '1-2 family attached/semi-detached': '#f4f455',
-    '1-2 family detached': '#f4f455',
+    '1-2 Family': '#f4f455',
     'Small Apartment Buildings': '#f7d496',
-    'Commercial-only buildings': '#ea6661',
-    'Unknown Building Types': '#5f5f60',
-    'Big apartment buildings': '#FF9900',
-    'Small mixed-use buildings': '#f7cabf',
-    'Big mixed-use buildings': '#f7cabf',
-    'Manufacturing buildings': '#d36ff4',
+    'Commercial Buildings': '#ea6661',
+    'Big Apartment Buildings': '#FF9900',
+    'Mixed-use Apartment Buildings': '#f7cabf',
+    'Manufacturing Buildings': '#d36ff4',
+    'Public facilities, utilities and other buildings': '#5CA2D1',
   };
 
   return colorMap[group];
@@ -40,15 +38,14 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
         SELECT
           ${property},
         CASE
-          WHEN (unitsres < 3 AND unitsres > 0) AND (proxcode = '0' OR proxcode = '1') THEN '1-2 family detached'
-          WHEN (unitsres < 3 AND unitsres > 0) AND (proxcode = '2' OR proxcode = '3') THEN '1-2 family attached/semi-detached'
+
+          WHEN (unitsres < 3 AND unitsres > 0) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN '1-2 Family'
           WHEN (unitsres < 6 AND unitsres > 2) AND (numfloors < 5) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Small Apartment Buildings'
-          WHEN (unitsres < 6 AND unitsres > 2) AND (comarea > 0 OR officearea > 0 OR retailarea > 0 OR factryarea > 0) THEN 'Small mixed-use buildings'
-          WHEN (unitsres = 0 AND numfloors < 5) AND (comarea > 0 OR officearea > 0 OR retailarea > 0) AND factryarea = 0 THEN 'Commercial-only buildings'
-          WHEN (unitsres = 0 AND numfloors < 5) AND factryarea > 0 THEN 'Manufacturing buildings'
-          WHEN (unitsres >= 6 AND numfloors > 4) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Big apartment buildings'
-          WHEN (UnitsRes >= 6 AND NumFloors > 4) AND (ComArea > 0 OR OfficeArea > 0 OR RetailArea > 0) AND FactryArea = 0 THEN 'Big mixed-use buildings'
-          ELSE 'Unknown Building Types'
+          WHEN (unitsres >= 6 AND numfloors >= 5) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Big Apartment Buildings'
+          WHEN (unitsres > 2) AND (comarea > 0 OR officearea > 0 OR retailarea > 0 OR factryarea > 0) THEN 'Mixed-Use Apartment Buildings'
+          WHEN (unitsres = 0) AND (comarea > 0 OR officearea > 0 OR retailarea > 0) AND factryarea = 0 THEN 'Commercial Buildings'
+          WHEN (unitsres = 0) AND factryarea > 0 THEN 'Manufacturing Buildings'
+          ELSE 'Public facilities, utilities and other buildings'
         END AS building_typology,
         SUM (${property}) OVER () as propertytotal
         FROM support_mappluto a
