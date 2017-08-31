@@ -225,3 +225,40 @@ html, body {
 .relative {
   position: relative;
 }
+
+
+//
+// Grid helper classes
+// --------------------------------------------------
+.cell-xlarge-padded-left {
+  @include breakpoint(xlarge) {
+    padding-left: $callout-padding;
+  }
+}
+
+.cell-large-down-padded-top {
+  @include breakpoint(large down) {
+    padding-top: $callout-padding;
+  }
+}
+
+
+//
+// Floodplain Table
+// --------------------------------------------------
+.floodplain-table-container {
+  @include breakpoint(xlarge) {
+    max-height: 400px;
+    overflow-y: scroll;
+
+    // &::-webkit-scrollbar {
+    //     -webkit-appearance: none;
+    //     width: 6px;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     border-radius: 3px;
+    //     background-color: rgba(0,0,0,.5);
+    //     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+    // }
+  }
+}

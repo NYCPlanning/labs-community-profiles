@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
+import { Promise } from 'rsvp';
 
 import carto from '../utils/carto';
 
@@ -69,7 +70,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     this.updateChart();
   },
 
-  createChart: function createChart() {
+  createChart() {
     let svg = this.get('svg');
 
     if (!svg) {
@@ -82,7 +83,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     this.updateChart();
   },
 
-  updateChart: function updateChart() {
+  updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
 
@@ -102,21 +103,20 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    data.then((rawData) => {
-
+    if (data) {
       const y = d3.scaleBand()
-        .domain(rawData.map(d => d.zonedist))
+        .domain(data.map(d => d.zonedist))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.2);
 
       const x = d3.scaleLinear()
-        .domain([0, d3.max(rawData, d => d.percent)])
+        .domain([0, d3.max(data, d => d.percent)])
         .range([0, width]);
 
 
       const bars = svg.selectAll('.bar')
-        .data(rawData, d => d.zonedist);
+        .data(data, d => d.zonedist);
 
       bars.enter()
         .append('rect')
@@ -138,7 +138,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       bars.exit().remove();
 
       const labels = svg.selectAll('text')
-        .data(rawData, d => d.zonedist);
+        .data(data, d => d.zonedist);
 
       labels.enter().append('text')
         .attr('class', 'label')
@@ -159,7 +159,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         });
 
       labels.exit().remove();
-    });
+    };
   },
 });
 
