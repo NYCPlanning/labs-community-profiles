@@ -9,6 +9,11 @@ export default Ember.Component.extend({
     scrollZoom: false,
   },
 
+  fitBoundsOptions: {
+    linear: true,
+    duration: 0,
+  },
+
   vectorSource: {
     type: 'vector',
     tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.mvt'],

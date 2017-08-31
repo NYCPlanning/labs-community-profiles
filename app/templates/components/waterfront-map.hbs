@@ -6,7 +6,7 @@
       {{source.layer layer=pfirm15Layer before='aeroway-polygon'}}
     {{/map.source}}
 
-    {{map.call 'fitBounds' mapState.bounds}}
+    {{map.call 'fitBounds' mapState.bounds fitBoundsOptions}}
 
     {{#if mapState.currentlySelected}}
       {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
