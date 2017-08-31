@@ -15,11 +15,11 @@ const pfirm15Layer = {
       property: 'fld_zone',
       type: 'categorical',
       stops: [
-        ['VE', '#52ABC4'],
-        ['AE', '#52C4EE'],
+        ['VE', '#8ac7e5'],
+        ['AE', '#8ac7e5'],
       ],
     },
-    'fill-opacity': 0.3,
+    'fill-opacity': 0.7,
     'fill-antialias': true,
   },
 };
@@ -30,8 +30,8 @@ const floodplain2050Layer = {
   'source-layer': 'layer1',
   type: 'fill',
   paint: {
-    'fill-color': 'orange',
-    'fill-opacity': 0.3,
+    'fill-color': '#ffd080',
+    'fill-opacity': 0.7,
     'fill-antialias': true,
   },
 };

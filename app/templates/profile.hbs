@@ -272,41 +272,76 @@
         </h3>
         <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise. For more information on flood hazards and City Planning’s resiliency work program, please visit the <a href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a> and <a href="https://nyc.gov/resilientneighborhoods">nyc.gov/resilientneighborhoods</a>.</p>
 
-        <div class="grid-x grid-padding-x">
-          <div class="cell xlarge-6">
-            <div class="callout">
+        <h4 class="subsection-header"><strong>Current &amp; 2050s Floodplain</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell xlarge-6">
               {{waterfront-map}}
             </div>
-          </div>
-          <div class="cell xlarge-6">
-            <h4 class="subsection-header"><strong>Population in Floodplain</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-margin-x align-middle">
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.current_fp_pop '0.0a'}}</span>
-                  <span class="stat-footer">Current Floodplain<br /><small class="dark-gray">2010 Census</small></span>
-                </div>
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.future_fp_pop '0.0a'}}</span>
-                  <span class="stat-footer">2050s Floodplain<br /><small class="dark-gray">2010 Census</small></span>
-                </div>
+            <div class="cell xlarge-6 cell-xlarge-padded-left cell-large-down-padded-top">
+              <div class="floodplain-table-container">
+                <table class="text-small no-margin">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th style="background-color: #A4CED2;">Current Floodplain</th>
+                      <th style="background-color: #FFDA9B;">2050s Floodplain</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Population</strong></td>
+                      <td>{{numeral-format d.current_fp_pop '0.0a'}}</td>
+                      <td>{{numeral-format d.future_fp_pop '0.0a'}}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Land Mass</strong></td>
+                      <td>{{numeral-format d.current_fp_area '0.000'}} Square Miles</td>
+                      <td>{{numeral-format d.future_fp_area '0.000'}} Square Miles</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Household Income</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Tenure (owner/renter)</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Percent with Mortgage</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Rent Burden</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Cost Burden</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Poverty</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong></strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>
+        </div>
 
-            <h4 class="subsection-header"><strong>Land Mass in Floodplain</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-margin-x align-middle">
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.current_fp_area '0.000'}}</span>
-                  <span class="stat-footer">Square Miles in Current Floodplain</span>
-                </div>
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.future_fp_area '0.000'}}</span>
-                  <span class="stat-footer">Square Miles in 2050s Floodplain</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="grid-x grid-padding-x">
           <div class="cell large-4">
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
