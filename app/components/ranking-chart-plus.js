@@ -12,13 +12,19 @@ export default RankingChart.extend({
     this.set('curr', curr);
   },
 
+  colors: {
+    gray: '#dddddd',
+    web_safe_orange: '#a24c0e',
+    dcp_orange: '#de7d2c',
+  },
+
   tooltip(d, current) {
     const selected = current || d;
     const { column, overlayColumn } = this.getProperties('column', 'overlayColumn');
     const denominator = selected[column];
     const numerator = selected[overlayColumn];
     const percent = this.get('percent');
-    return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of ${this.get('unit') || 'buildings'} in floodplain</span>`;
+    return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of ${this.get('unit') || 'buildings'} are in floodplain</span>`;
   },
 
   drawChart(el, data) {
@@ -33,14 +39,14 @@ export default RankingChart.extend({
       });
 
     theseBars
-      .attr('fill', '#9DCFDC')
+      .attr('fill', '#60acbf')
       .attr('width', () => x.bandwidth() - 2)
       .attr('x', d => x(d.borocd));
 
     theseBars.enter()
       .append('rect')
       .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
-      .attr('fill', '#9DCFDC')
+      .attr('fill', '#60acbf')
       .attr('style', 'pointer-events: none;')
       .attr('y', d => height - y(d[overlayColumn]))
       .attr('width', d => x.bandwidth() - 2)

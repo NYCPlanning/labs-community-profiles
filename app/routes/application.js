@@ -1,18 +1,13 @@
 import Ember from 'ember'; // eslint-disable-line
 import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
+import SetMapBounds from '../mixins/set-map-bounds';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(SetMapBounds, {
   metrics: Ember.inject.service(),
   mapState: Ember.inject.service(),
   model() {
     return this.store.findAll('district');
-  },
-
-  afterModel(districts) {
-    const mapState = this.get('mapState');
-    const geojsonDistricts = toGeojson(districts);
-    mapState.set('bounds', bbox(geojsonDistricts));
   },
 
   setupController(controller, districts) {
