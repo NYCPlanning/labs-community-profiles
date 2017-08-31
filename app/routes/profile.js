@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
+import ScrollToTop from '../mixins/scroll-to-top';
 
 import carto from '../utils/carto';
 
@@ -26,7 +27,7 @@ function buildBorocd(boro, cd) {
   return borocode + parseInt(cd, 10);
 }
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ScrollToTop, {
   mapState: Ember.inject.service(),
   model(params) {
     const { boro, cd } = params;
