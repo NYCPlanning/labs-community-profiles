@@ -10,6 +10,8 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   resizeHeightSensitive: true,
   loading: false,
 
+  data: [],
+
   didRender() {
     this.createChart();
   },
@@ -52,7 +54,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    data.then((rawData) => {
+    Promise.resolve(data).then((rawData) => {
       const y = d3.scaleBand()
         .domain(rawData.map(d => d.group))
         .range([0, height])
