@@ -49,4 +49,4 @@ A tile microservice that serves vector and raster tiles for NYC PLUTO data.  It 
 
 ## Device Testing
 We use BrowserStack (free for open source projects) to do device testing.
-![https://www.browserstack.com/images/layout/browserstack-logo-600x315.png]
+<img src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="200">
