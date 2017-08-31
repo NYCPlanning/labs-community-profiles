@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
+import numeral from 'numeral';
 
 const HorizontalBar = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -94,7 +95,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
       barLabels.transition().duration(300)
         .attr('x', d => x(d.value) + 6)
         .attr('y', d => y(d.group) + (y.bandwidth() / 2) + -2)
-        .text(d => `${d.value}`);
+        .text(d => `${numeral(d.value).format('0,0')}`);
 
       barLabels.exit().remove();
 
