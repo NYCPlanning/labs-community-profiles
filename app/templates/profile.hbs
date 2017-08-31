@@ -343,17 +343,19 @@
 
         <div class="grid-x grid-padding-x">
           <div class="cell large-4">
-            <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout">
+            <h4 class="subsection-header"><strong>Buildings {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
+            <div class="callout text-center">
+              <p>
+                <span class="stat">{{numeral-format d.current_fp_bldg '0,0'}}</span>
+                <span class="stat-footer">buildings are in the current floodplain</span>
+              </p>
               {{building-type-chart property='numbldgs' borocd=model.borocd}}
               <hr>
-              <div class="text-center">
-                <span class="chart-legend">
-                  <span class="total"></span>&nbsp;Total Buildings
-                  &nbsp;
-                  <span class="percent"></span>&nbsp;Buildings in Floodplain
-                </span>
-              </div>
+              <span class="chart-legend">
+                <span class="nobreak"><span class="total"></span> Total Buildings</span>
+                &nbsp;
+                <span class="nobreak"><span class="percent"></span> Within Floodplain</span>
+              </span>
               {{ranking-chart-plus
                   column='cd_tot_bldgs'
                   overlayColumn='current_fp_bldg'
@@ -362,17 +364,19 @@
             </div>
           </div>
           <div class="cell large-4">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
-            <div class="callout">
+            <h4 class="subsection-header"><strong>Dwelling Units {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <div class="callout text-center">
+              <p>
+                <span class="stat">{{numeral-format d.current_fp_resunits '0,0'}}</span>
+                <span class="stat-footer">dwelling units are in the current floodplain</span>
+              </p>
               {{building-type-chart property='unitsres' borocd=model.borocd}}
               <hr>
-              <div class="text-center">
-                <span class="chart-legend">
-                  <span class="total"></span>&nbsp;Total Units
-                  &nbsp;
-                  <span class="percent"></span>&nbsp;Units in Floodplain
-                </span>
-              </div>
+              <span class="chart-legend">
+                <span class="nobreak"><span class="total"></span>&nbsp;Total Units</span>
+                &nbsp;
+                <span class="nobreak"><span class="percent"></span>&nbsp;Within Floodplain</span>
+              </span>
               {{ranking-chart-plus
                   column='cd_tot_resunits'
                   overlayColumn='current_fp_resunits'
