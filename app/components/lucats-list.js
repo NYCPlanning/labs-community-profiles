@@ -4,7 +4,8 @@ import fetch from 'fetch'; // eslint-disable-line
 export default Ember.Component.extend({
   district: null,
   projects: Ember.computed('district', function() {
-    const boro = this.get('district.boro').toLowerCase();
+    // remove space in 'staten island'
+    const boro = this.get('district.boro').replace(/\s+/g, '').toLowerCase();
     const cd = this.get('district.cd');
     const URL = `https://lucats.planninglabs.nyc/urlurp/cd/${boro}/${cd}.json`;
 
