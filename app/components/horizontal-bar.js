@@ -10,6 +10,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
+  barLabel: true,
 
   data: [],
 
@@ -38,13 +39,14 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   updateChart: function updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
+    const barLabel = this.get('barLabel');
 
     const el = this.$();
     const elWidth = el.width();
 
     const margin = {
       top: 0,
-      right: 50,
+      right: barLabel ? 50 : 0,
       bottom: 0,
       left: 0,
     };
@@ -95,7 +97,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
       barLabels.transition().duration(300)
         .attr('x', d => x(d.value) + 6)
         .attr('y', d => y(d.group) + (y.bandwidth() / 2) + -2)
-        .text(d => `${numeral(d.value).format('0,0')}`);
+        .text(d => barLabel ? `${numeral(d.value).format('0,0')}` : '');
 
       barLabels.exit().remove();
 

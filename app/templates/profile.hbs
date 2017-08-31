@@ -31,17 +31,10 @@
           <div class="cell medium-8 xlarge-9">
             <p class="section-header-description">The data below provides a snapshot of key economic, demographic, social, land area public service indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, Borough and City averages are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
           </div>
-          <div class="cell medium-4 xlarge-3 medium-text-right">
-            <span class="chart-legend">
-              <span class="estimate"></span>&nbsp;Estimate
-              &nbsp;
-              <span class="moe"></span>&nbsp;Margin of Error
-            </span>
-          </div>
         </div>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-8 large-12 xlarge-7">
+          <div class="cell medium-6 large-12 xlarge-7">
 
             <h4 class="subsection-header"><strong>Population</strong></h4>
             <div class="callout">
@@ -67,28 +60,51 @@
               </div>
             </div>
 
-          </div>
-          <div class="cell medium-4 large-12 xlarge-5">
+            <div class="grid-x grid-padding-x">
+              <div class="cell large-4">
 
-            <h4 class="subsection-header"><strong>Land Mass</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-padding-x align-middle">
-                <div class="cell small-6 medium-12 large-6 text-center">
-                  <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
-                  <span class="stat-footer">Square Miles</span>
+                <h4 class="subsection-header"><strong>Land Mass</strong></h4>
+                <div class="callout text-center">
+                  <div class="grid-x grid-padding-x">
+                    <div class="cell small-6 large-12">
+                      <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
+                      <span class="stat-footer">Square Miles</span>
+                    </div>
+                    <div class="cell small-6 large-12">
+                      <span class="stat">XX</span>
+                      <span class="stat-footer">Per Sq Mi</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="cell small-6 medium-12 large-6 text-center">
-                  <span class="stat">{{numeral-format d.acres '0,0'}}</span>
-                  <span class="stat-footer">Acres</span>
+
+              </div>
+              <div class="cell large-8">
+
+                <h4 class="subsection-header"><strong>Racial Breakdown</strong></h4>
+                <div class="callout">
+                  {{horizontal-bar data=racialProfile height=150 barLabel=false}}
                 </div>
+
               </div>
             </div>
+
+          </div>
+          <div class="cell medium-6 large-7 xlarge-5">
+
+            <h4 class="subsection-header"><strong>Population by Age</strong></h4>
+            <div class="callout">
+              <img src="http://via.placeholder.com/300x300?text=300pxTall" style="width:100%;height:300px;">
+            </div>
+
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Racial Breakdown</strong></h4>
-        <div class="callout">
-          {{horizontal-bar data=racialProfile height=150}}
+        <div class="text-right">
+          <span class="chart-legend">
+            <span class="estimate"></span>&nbsp;Estimate
+            &nbsp;
+            <span class="moe"></span>&nbsp;Margin of Error
+          </span>
         </div>
 
         {{#key-indicators class="key-indicators"
