@@ -30,7 +30,7 @@ const floodplain2050Layer = {
   'source-layer': 'layer1',
   type: 'fill',
   paint: {
-    'fill-color': '#D9DDA9',
+    'fill-color': '#EDCD85',
     'fill-opacity': 1,
     'fill-antialias': true,
   },
