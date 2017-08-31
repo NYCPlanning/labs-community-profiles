@@ -236,8 +236,20 @@ html, body {
   }
 }
 
+.cell-medium-padded-left {
+  @include breakpoint(medium) {
+    padding-left: $callout-padding;
+  }
+}
+
 .cell-large-down-padded-top {
   @include breakpoint(large down) {
+    padding-top: $callout-padding;
+  }
+}
+
+.cell-small-only-padded-top{
+  @include breakpoint(small only) {
     padding-top: $callout-padding;
   }
 }

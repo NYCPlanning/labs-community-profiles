@@ -228,11 +228,11 @@
 
         <h4 class="subsection-header"><strong>Land Use</strong></h4>
         <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell medium-6 large-7">
               {{land-use-map}}
             </div>
-            <div class="cell medium-6">
+            <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
               {{land-use-chart borocd=model.borocd}}
             </div>
           </div>
@@ -240,17 +240,22 @@
 
         <h4 class="subsection-header"><strong>Zoning</strong></h4>
         <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell medium-6 large-7">
               {{zoning-map borocd=model.borocd}}
             </div>
-            <div class="cell medium-6">
+            <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
               {{zoning-chart
                   borocd=model.borocd
                   data=zoningData.value
                   loading=zoningData.isRunning}}
             </div>
           </div>
+        </div>
+
+        <h4 class="subsection-header"><strong>Facilities</strong></h4>
+        <div class="callout">
+          {{facilities-section borocd=model.borocd}}
         </div>
 
         <h4 class="subsection-header"><strong>Community Assets</strong></h4>
@@ -279,11 +284,6 @@
               Parks {{info-tooltip tip='Properties operated by NYC Parks, NYC DOT, NYS Office of Parks, Recreation and Historic Preservation, NYS Dept. of Conservation, and City-State corporations and trusts'}}
             </div>
           </div>
-        </div>
-
-        <h4 class="subsection-header"><strong>Facilities</strong></h4>
-        <div class="callout">
-          {{facilities-section borocd=model.borocd}}
         </div>
       </section>
 

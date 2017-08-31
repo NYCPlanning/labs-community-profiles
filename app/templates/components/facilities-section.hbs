@@ -1,5 +1,5 @@
-<div class="grid-x grid-padding-x align-middle">
-  <div class="cell medium-6">
+<div class="grid-x grid-padding-x-small align-middle">
+  <div class="cell medium-6 large-7">
     {{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#with (await vectorSource) as |vSource|}}
         {{#map.source sourceId='facilities' source=vSource as |source|}}
@@ -21,10 +21,10 @@
       {{hover-tooltip mouse=mouseoverLocation text=tooltip-text}}
     {{/mapbox-gl}}
   </div>
-  <div class="cell medium-6">
+  <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
     {{#each (await data) as |data|}}
       <p class="grid-x">
-        <span class="legend-dot-wrapper cell small-2" style="color:{{data.color}};">
+        <span class="legend-dot-wrapper cell small-2 cell-medium-padded-left" style="color:{{data.color}};">
           <span class="legend-dot" style="background-color:{{data.color}}"></span>
           <strong>{{data.count}}</strong>
         </span>
@@ -32,7 +32,7 @@
       </p>
     {{/each}}
     <hr/>
-    <p>View this area in the <a href="https://capitalplanning.nyc.gov/facilities/explorer#13.62/{{centroid.[1]}}/{{centroid.[0]}}" target="_blank">{{fa-icon "external-link"}} NYC Facilities Explorer</a></p>
+    <p class="text-center">View this area in the <a href="https://capitalplanning.nyc.gov/facilities/explorer#13.62/{{centroid.[1]}}/{{centroid.[0]}}" target="_blank">{{fa-icon "external-link"}} NYC Facilities Explorer</a></p>
   </div>
 </div>
 {{yield}}
