@@ -7,7 +7,7 @@
     {{source.layer layer=rasterLayer before='waterway-label'}}
   {{/map.source}}
 
-  {{map.call 'fitBounds' mapState.bounds}}
+  {{map.call 'fitBounds' mapState.bounds fitBoundsOptions}}
   {{map.on 'mousemove' (action 'handleMouseover')}}
   {{map.on 'mouseout' (action 'handleMouseleave')}}
 

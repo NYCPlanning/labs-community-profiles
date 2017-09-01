@@ -46,3 +46,7 @@ A Proxy API that scrapes LUCATS in real-time and produces JSON for a community d
 
 ### Land Use Tiles
 A tile microservice that serves vector and raster tiles for NYC PLUTO data.  It is used in the land use maps because we had issues generating tiles with thousands of polygons on them to show land use at medium zoom levels.  [https://github.com/NYCPlanning/labs-land-use-tiles](https://github.com/NYCPlanning/labs-land-use-tiles)
+
+## Device Testing
+We use BrowserStack (free for open source projects) to do device testing.
+<img src="https://www.browserstack.com/images/layout/browserstack-logo-600x315.png" width="200">

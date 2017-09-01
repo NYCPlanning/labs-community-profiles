@@ -2,11 +2,11 @@
   {{#with (await vectorSource) as |vSource|}}
 
     {{#map.source sourceId='floodzones' source=vSource as |source|}}
-      {{source.layer layer=floodplain2050Layer before='waterway-label'}}
-      {{source.layer layer=pfirm15Layer before='waterway-label'}}
+      {{source.layer layer=floodplain2050Layer before='aeroway-polygon'}}
+      {{source.layer layer=pfirm15Layer before='aeroway-polygon'}}
     {{/map.source}}
 
-    {{map.call 'fitBounds' mapState.bounds}}
+    {{map.call 'fitBounds' mapState.bounds fitBoundsOptions}}
 
     {{#if mapState.currentlySelected}}
       {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}

@@ -1,7 +1,7 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-
-import carto from '../utils/carto';
+import { Promise } from 'rsvp'; // eslint-disable-line
+import githubraw from '../utils/githubraw';
 
 const colors = function(zonedist) {
   if (zonedist === 'R') return '#F3F88F';
@@ -29,35 +29,10 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   loading: false,
 
   borocd: '',
-  sql: Ember.computed('borocd', function sql() {
-    const borocd = this.get('borocd');
-    const SQL = `
-      WITH zones as (
-        SELECT ST_Intersection(ST_MakeValid(a.the_geom), ST_MakeValid(b.the_geom)) as the_geom, zonedist
-        FROM support_zoning_zd a, support_admin_cdboundaries b
-        WHERE ST_intersects(ST_MakeValid(a.the_geom), ST_MakeValid(b.the_geom))
-        AND b.borocd = '${borocd}'
-      ),
-      totalsm AS (
-        SELECT sum(ST_Area(the_geom::geography)) as total
-        FROM zones
-      )
-
-    SELECT sum(percent) as percent, zonedist FROM (
-        SELECT  ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, LEFT(zonedist, 1) as zonedist
-      FROM zones, totalsm
-      GROUP BY zonedist, totalsm.total
-      ORDER BY percent DESC
-    ) x
-    GROUP BY zonedist
-  `;
-
-    return SQL;
-  }),
 
   data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql);
+    const borocd = this.get('borocd');
+    return githubraw('zoning', borocd);
   }),
 
   didRender() {
@@ -69,7 +44,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     this.updateChart();
   },
 
-  createChart: function createChart() {
+  createChart() {
     let svg = this.get('svg');
 
     if (!svg) {
@@ -82,7 +57,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     this.updateChart();
   },
 
-  updateChart: function updateChart() {
+  updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
 
@@ -102,21 +77,20 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    data.then((rawData) => {
-
+    if (data) {
       const y = d3.scaleBand()
-        .domain(rawData.map(d => d.zonedist))
+        .domain(data.map(d => d.zonedist))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.2);
 
       const x = d3.scaleLinear()
-        .domain([0, d3.max(rawData, d => d.percent)])
+        .domain([0, d3.max(data, d => d.percent)])
         .range([0, width]);
 
 
       const bars = svg.selectAll('.bar')
-        .data(rawData, d => d.zonedist);
+        .data(data, d => d.zonedist);
 
       bars.enter()
         .append('rect')
@@ -138,7 +112,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       bars.exit().remove();
 
       const labels = svg.selectAll('text')
-        .data(rawData, d => d.zonedist);
+        .data(data, d => d.zonedist);
 
       labels.enter().append('text')
         .attr('class', 'label')
@@ -148,18 +122,18 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
         .text((d) => {
           const description = descriptions(d.zonedist);
-          return `${description} | ${(d.percent * 100).toFixed(2)}%`
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`;
         });
 
       labels.transition().duration(300)
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
         .text((d) => {
           const description = descriptions(d.zonedist);
-          return `${description} | ${(d.percent * 100).toFixed(2)}%`
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`;
         });
 
       labels.exit().remove();
-    });
+    }
   },
 });
 

@@ -1,5 +1,8 @@
 import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
+import { task } from 'ember-concurrency';
+import ScrollToTop from '../mixins/scroll-to-top';
+import githubraw from '../utils/githubraw';
 
 import carto from '../utils/carto';
 
@@ -26,7 +29,8 @@ function buildBorocd(boro, cd) {
   return borocode + parseInt(cd, 10);
 }
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(ScrollToTop, {
+
   mapState: Ember.inject.service(),
   model(params) {
     const { boro, cd } = params;
@@ -45,11 +49,27 @@ export default Ember.Route.extend({
   afterModel(district) {
     const mapState = this.get('mapState');
 
-    mapState.set('bounds', district.get('bounds'));
-    mapState.set('centroid', district.get('centroid'));
+    mapState.setProperties({
+      bounds: district.get('bounds'),
+      centroid: district.get('centroid'),
+    });
   },
+  setupController(controller, district) {
+    this._super(...arguments);
+
+    const borocd = district.get('borocd');
+    const zoningData = this.get('zoningData').perform(borocd, controller);
+    controller.setProperties({
+      zoningData,
+    });
+  },
+
+  zoningData: task(function * (borocd, controller) {
+    return githubraw('zoning', borocd)
+  }).restartable(),
+
   actions: {
-    error(error) {
+    error() {
       this.transitionTo('/not-found');
     },
   },

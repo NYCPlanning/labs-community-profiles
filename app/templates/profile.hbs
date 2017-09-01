@@ -7,7 +7,7 @@
         <ul class="menu">
           <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#resiliency' label='Resiliency' afterScroll='handleAfterScroll'}}</li>
+          <li>{{scroll-to offset=-210 href='#floodplain' label='Floodplain' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#projects' label='Projects' afterScroll='handleAfterScroll'}}</li>
           <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
@@ -31,17 +31,10 @@
           <div class="cell medium-8 xlarge-9">
             <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
           </div>
-          <div class="cell medium-4 xlarge-3 medium-text-right">
-            <span class="chart-legend">
-              <span class="estimate"></span>&nbsp;Estimate
-              &nbsp;
-              <span class="moe"></span>&nbsp;Margin of Error
-            </span>
-          </div>
         </div>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-8 large-12 xlarge-7">
+          <div class="cell medium-6 large-12 xlarge-7">
 
             <h4 class="subsection-header"><strong>Population</strong></h4>
             <div class="callout">
@@ -67,24 +60,51 @@
               </div>
             </div>
 
-          </div>
-          <div class="cell medium-4 large-12 xlarge-5">
+            <div class="grid-x grid-padding-x">
+              <div class="cell large-4 xlarge-5">
 
-            <h4 class="subsection-header"><strong>Land Mass</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-padding-x align-middle">
-                <div class="cell small-6 medium-12 large-6 text-center">
-                  <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
-                  <span class="stat-footer">Square Miles</span>
+                <h4 class="subsection-header"><strong>Area &amp; Density</strong></h4>
+                <div class="callout text-center">
+                  <div class="grid-x grid-margin-x align-middle">
+                    <div class="cell small-6 large-12">
+                      <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
+                      <span class="stat-footer">Square Miles</span>
+                    </div>
+                    <div class="cell small-6 large-12 cell-divider--density">
+                      <span class="lead">{{numeral-format popDensity '0,0'}}</span>
+                      <small class="stat-footer">People per Sq Mi</small>
+                    </div>
+                  </div>
                 </div>
-                <div class="cell small-6 medium-12 large-6 text-center">
-                  <span class="stat">{{numeral-format d.acres '0,0'}}</span>
-                  <span class="stat-footer">Acres</span>
+
+              </div>
+              <div class="cell large-8 xlarge-7">
+
+                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin</strong></h4>
+                <div class="callout">
+                  {{horizontal-bar data=racialProfile height=150 barLabel=false}}
                 </div>
+
               </div>
             </div>
 
           </div>
+          <div class="cell medium-6 large-7 xlarge-5">
+
+            <h4 class="subsection-header"><strong>Population by Age</strong></h4>
+            <div class="callout">
+              <img src="http://via.placeholder.com/300x300?text=300pxTall" style="width:100%;height:300px;">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="text-right">
+          <span class="chart-legend">
+            <span class="estimate"></span>&nbsp;Estimate
+            &nbsp;
+            <span class="moe"></span>&nbsp;Margin of Error
+          </span>
         </div>
 
         {{#key-indicators class="key-indicators"
@@ -208,11 +228,11 @@
 
         <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Chart approximates total lot area by land use type."}}</strong></h4>
         <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell medium-6 large-7">
               {{land-use-map}}
             </div>
-            <div class="cell medium-6">
+            <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
               {{land-use-chart borocd=model.borocd}}
             </div>
           </div>
@@ -220,14 +240,22 @@
 
         <h4 class="subsection-header"><strong>Zoning {{info-tooltip tip="Chart shows area distribution of the three zoning designations &mdash residence, commercial, manufacturing &mdash and park area."}}</strong></h4>
         <div class="callout">
-          <div class="grid-x grid-padding-x">
-            <div class="cell medium-6">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell medium-6 large-7">
               {{zoning-map borocd=model.borocd}}
             </div>
-            <div class="cell medium-6">
-              {{zoning-chart borocd=model.borocd}}
+            <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
+              {{zoning-chart
+                  borocd=model.borocd
+                  data=zoningData.value
+                  loading=zoningData.isRunning}}
             </div>
           </div>
+        </div>
+
+        <h4 class="subsection-header"><strong>Facilities</strong></h4>
+        <div class="callout">
+          {{facilities-section borocd=model.borocd}}
         </div>
 
         <h4 class="subsection-header"><strong>Community Assets {{info-tooltip tip="Facility types are derived from City Planning’s Selected Facilities Database. To view location of facilities use NYC’s Facilities Explorer above."}}</strong></h4>
@@ -257,69 +285,100 @@
             </div>
           </div>
         </div>
-
-        <h4 class="subsection-header"><strong>Facilities {{info-tooltip tip="Click on a facility to view additional details on the NYC Facilities Explorer."}}</strong></h4>
-        <div class="callout">
-          {{facilities-section borocd=model.borocd}}
-        </div>
       </section>
 
-      <section id="resiliency" class="page-section">
+      <section id="floodplain" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#resiliency' afterScroll='handleAfterScroll'}}
-            {{fa-icon "tint"}} Waterfront Resiliency {{fa-icon "link"}}
+          {{#scroll-to offset=-210 href='#floodplain' afterScroll='handleAfterScroll'}}
+            {{fa-icon "tint"}} Floodplain {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise. For more information on flood hazards and City Planning’s resiliency work program, please visit the <a href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a> and <a href="https://nyc.gov/resilientneighborhoods">nyc.gov/resilientneighborhoods</a>.</p>
+        <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise. For more information on flood hazards and City Planning’s resiliency work program, please visit the <a href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a> and <a href="http://nyc.gov/resilientneighborhoods">Resilient Neighborhoods</a>.</p>
 
-        <div class="grid-x grid-padding-x">
-          <div class="cell xlarge-6">
-            <h4 class="subsection-header"><strong>Floodplain</strong></h4>
-            <div class="callout">
+        <h4 class="subsection-header"><strong>Current &amp; 2050s Floodplain</strong></h4>
+        <div class="callout">
+          <div class="grid-x grid-padding-x-small">
+            <div class="cell xlarge-6">
               {{waterfront-map}}
             </div>
-          </div>
-          <div class="cell xlarge-6">
-            <h4 class="subsection-header"><strong>Population in Floodplain</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-margin-x align-middle">
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.current_fp_pop '0.0a'}}</span>
-                  <span class="stat-footer">Current Floodplain<br /><small class="dark-gray">2010 Census</small></span>
-                </div>
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.future_fp_pop '0.0a'}}</span>
-                  <span class="stat-footer">2050s Floodplain<br /><small class="dark-gray">2010 Census</small></span>
-                </div>
+            <div class="cell xlarge-6 cell-xlarge-padded-left cell-large-down-padded-top">
+              <div class="floodplain-table-container">
+                <table class="text-small no-margin">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th style="background-color: #99CCEE;">Current Floodplain</th>
+                      <th style="background-color: #EDCD85;">2050s Floodplain</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Population</strong></td>
+                      <td>{{numeral-format d.current_fp_pop '0.0a'}}</td>
+                      <td>{{numeral-format d.future_fp_pop '0.0a'}}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Land Mass</strong></td>
+                      <td>{{numeral-format d.current_fp_area '0.000'}} sq mi</td>
+                      <td>{{numeral-format d.future_fp_area '0.000'}} sq mi</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Household Income</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Tenure (owner/renter)</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Percent with Mortgage</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Rent Burden</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Cost Burden</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Poverty</strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><strong></strong></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>
+        </div>
 
-            <h4 class="subsection-header"><strong>Land Mass in Floodplain</strong></h4>
-            <div class="callout">
-              <div class="grid-x grid-margin-x align-middle">
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.current_fp_area '0.000'}}</span>
-                  <span class="stat-footer">Square Miles in Current Floodplain</span>
-                </div>
-                <div class="cell small-6 text-center">
-                  <span class="stat">{{numeral-format d.future_fp_area '0.000'}}</span>
-                  <span class="stat-footer">Square Miles in 2050s Floodplain</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="grid-x grid-padding-x">
           <div class="cell large-4">
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout">
+            <div class="callout text-center">
+              <p>
+                <span class="stat">{{numeral-format d.current_fp_bldg '0,0'}}</span>
+                <span class="stat-footer">buildings are in the current floodplain</span>
+              </p>
               {{building-type-chart property='numbldgs' borocd=model.borocd}}
               <hr>
-              <div class="text-center">
-                <span class="chart-legend">
-                  <span class="total"></span>&nbsp;Total Buildings
-                  &nbsp;
-                  <span class="percent"></span>&nbsp;Buildings in Floodplain
-                </span>
-              </div>
+              <span class="chart-legend">
+                <span class="nobreak"><span class="total"></span> Total Buildings</span>
+                &nbsp;
+                <span class="nobreak"><span class="percent"></span> Within Floodplain</span>
+              </span>
               {{ranking-chart-plus
                   column='cd_tot_bldgs'
                   overlayColumn='current_fp_bldg'
@@ -329,16 +388,18 @@
           </div>
           <div class="cell large-4">
             <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
-            <div class="callout">
+            <div class="callout text-center">
+              <p>
+                <span class="stat">{{numeral-format d.current_fp_resunits '0,0'}}</span>
+                <span class="stat-footer">dwelling units are in the current floodplain</span>
+              </p>
               {{building-type-chart property='unitsres' borocd=model.borocd}}
               <hr>
-              <div class="text-center">
-                <span class="chart-legend">
-                  <span class="total"></span>&nbsp;Total Units
-                  &nbsp;
-                  <span class="percent"></span>&nbsp;Units in Floodplain
-                </span>
-              </div>
+              <span class="chart-legend">
+                <span class="nobreak"><span class="total"></span>&nbsp;Total Units</span>
+                &nbsp;
+                <span class="nobreak"><span class="percent"></span>&nbsp;Within Floodplain</span>
+              </span>
               {{ranking-chart-plus
                   column='cd_tot_resunits'
                   overlayColumn='current_fp_resunits'
@@ -348,12 +409,12 @@
             </div>
           </div>
           <div class="cell large-4">
-            <h4 class="subsection-header"><strong>Building Age in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PRIFM"}}</strong></h4>
             <div class="callout">
               {{building-age-chart borocd=model.borocd}}
             </div>
 
-            <h4 class="subsection-header"><strong>Subgrade Space in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PRIFM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart borocd=model.borocd}}
             </div>
@@ -427,12 +488,12 @@
 
           </div>
           <div class="cell medium-6 large-4 xlarge-5">
-            <h4 class="subsection-header"><strong>Neighborhood Studies & Plans {{info-tooltip tip="Place&mdashbased planning studies inform the use and development of land in the City’s neighborhoods, business districts, and waterfront through participatory planning and zoning changes."}}</strong></h4>
+            <h4 class="subsection-header"><strong>Neighborhood Studies &amp; Plans {{info-tooltip tip="Place&mdashbased planning studies inform the use and development of land in the City’s neighborhoods, business districts, and waterfront through participatory planning and zoning changes."}}</strong></h4>
             <div class="callout">
               {{studies-and-plans district=model}}
             </div>
 
-            <h4 class="subsection-header"><strong>Community&mdashBased Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197&mdasha of the City Charter."}}</h4>
+            <h4 class="subsection-header"><strong>Community&#8209;Based Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197&mdasha of the City Charter."}}</h4>
             <div class="callout">
               {{197a-plans district=model}}
             </div>

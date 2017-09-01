@@ -15,11 +15,11 @@ const pfirm15Layer = {
       property: 'fld_zone',
       type: 'categorical',
       stops: [
-        ['VE', '#52ABC4'],
-        ['AE', '#52C4EE'],
+        ['VE', '#99CCEE'],
+        ['AE', '#99CCEE'],
       ],
     },
-    'fill-opacity': 0.3,
+    'fill-opacity': 1,
     'fill-antialias': true,
   },
 };
@@ -30,8 +30,8 @@ const floodplain2050Layer = {
   'source-layer': 'layer1',
   type: 'fill',
   paint: {
-    'fill-color': 'orange',
-    'fill-opacity': 0.3,
+    'fill-color': '#EDCD85',
+    'fill-opacity': 1,
     'fill-antialias': true,
   },
 };
@@ -45,7 +45,14 @@ export default FacilitiesSection.extend({
         tiles: [template],
       }));
   }),
+
+  fitBoundsOptions: {
+    linear: true,
+    duration: 0,
+  },
+
   pfirm15Layer,
+
   floodplain2050Layer,
 
   rasterSource: {

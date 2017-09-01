@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
+import numeral from 'numeral';
 
 const HorizontalBar = Ember.Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -9,6 +10,9 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
+  barLabel: true,
+
+  data: [],
 
   didRender() {
     this.createChart();
@@ -35,13 +39,14 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   updateChart: function updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
+    const barLabel = this.get('barLabel');
 
     const el = this.$();
     const elWidth = el.width();
 
     const margin = {
       top: 0,
-      right: 50,
+      right: barLabel ? 50 : 0,
       bottom: 0,
       left: 0,
     };
@@ -52,7 +57,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    data.then((rawData) => {
+    Promise.resolve(data).then((rawData) => {
       const y = d3.scaleBand()
         .domain(rawData.map(d => d.group))
         .range([0, height])
@@ -92,7 +97,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
       barLabels.transition().duration(300)
         .attr('x', d => x(d.value) + 6)
         .attr('y', d => y(d.group) + (y.bandwidth() / 2) + -2)
-        .text(d => `${d.value}`);
+        .text(d => barLabel ? `${numeral(d.value).format('0,0')}` : '');
 
       barLabels.exit().remove();
 

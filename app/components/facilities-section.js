@@ -1,5 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
+import geoViewport from 'npm:@mapbox/geo-viewport'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
@@ -20,11 +21,20 @@ const SQL = `
 export default Ember.Component.extend({
   borocd: '',
 
-  initOptions: {
-    style: 'mapbox://styles/mapbox/light-v9',
-    zoom: 9,
-    center: [-74, 40.7071],
-    scrollZoom: false,
+  initOptions: Ember.computed('mapState', function() {
+    const { bounds } = this.get('mapState');
+    const { center, zoom } = geoViewport.viewport(bounds, [400, 400]);
+    return {
+      style: 'mapbox://styles/mapbox/light-v9',
+      center,
+      zoom,
+      scrollZoom: false,
+    };
+  }),
+
+  fitBoundsOptions: {
+    linear: true,
+    duration: 0,
   },
 
   vectorSource: Ember.computed('facilitiesTemplate', function () {
