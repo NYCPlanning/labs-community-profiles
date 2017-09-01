@@ -1,7 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-
-import carto from '../utils/carto';
+import githubraw from '../utils/githubraw';
 
 const LandUseChart = Ember.Component.extend(ResizeAware, {
   classNames: ['relative'],
@@ -37,8 +36,8 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   }),
 
   data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql);
+    const borocd = this.get('borocd');
+    return githubraw('subgrade_space', borocd);
   }),
 });
 

@@ -1,7 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-
-import carto from '../utils/carto';
+import githubraw from '../utils/githubraw';
 
 function getColor(group) {
   const colorMap = {
@@ -63,10 +62,14 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
     return SQL;
   }),
 
-  data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql)
+  data: Ember.computed('property', 'borocd', function() {
+    const borocd = this.get('borocd');
+    const property = this.get('property');
+    const filler = property === 'numbldgs' ? 'buildings' : 'units';
+    const id = `building_type_${filler}`;
+    return githubraw(id, borocd)
       .then((data) => {
+        console.log('DATA', data)
         return data.map((d) => {
           const colorAdded = d;
           colorAdded.color = getColor(d.group);

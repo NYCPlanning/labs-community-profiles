@@ -2,6 +2,7 @@ import Ember from 'ember'; // eslint-disable-line
 import { L } from 'ember-leaflet'; // eslint-disable-line
 import { task } from 'ember-concurrency';
 import ScrollToTop from '../mixins/scroll-to-top';
+import githubraw from '../utils/githubraw';
 
 import carto from '../utils/carto';
 
@@ -89,7 +90,7 @@ export default Ember.Route.extend(ScrollToTop, {
   },
 
   zoningData: task(function * (borocd, controller) {
-    return carto.SQL(generateZoningSQL(borocd));
+    return githubraw('zoning', borocd)
   }).restartable(),
 
   actions: {

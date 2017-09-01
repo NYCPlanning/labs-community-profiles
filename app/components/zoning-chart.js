@@ -1,8 +1,7 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import { Promise } from 'rsvp';
-
-import carto from '../utils/carto';
+import { Promise } from 'rsvp'; // eslint-disable-line
+import githubraw from '../utils/githubraw';
 
 const colors = function(zonedist) {
   if (zonedist === 'R') return '#F3F88F';
@@ -57,8 +56,8 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   }),
 
   data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql);
+    const borocd = this.get('borocd');
+    return githubraw('zoning', borocd);
   }),
 
   didRender() {
@@ -148,18 +147,18 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
         .text((d) => {
           const description = descriptions(d.zonedist);
-          return `${description} | ${(d.percent * 100).toFixed(2)}%`
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`;
         });
 
       labels.transition().duration(300)
         .attr('y', d => y(d.zonedist) + y.bandwidth() + -3)
         .text((d) => {
           const description = descriptions(d.zonedist);
-          return `${description} | ${(d.percent * 100).toFixed(2)}%`
+          return `${description} | ${(d.percent * 100).toFixed(2)}%`;
         });
 
       labels.exit().remove();
-    };
+    }
   },
 });
 
