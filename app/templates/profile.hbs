@@ -63,7 +63,7 @@
             <div class="grid-x grid-padding-x">
               <div class="cell large-4 xlarge-5">
 
-                <h4 class="subsection-header"><strong>Area &amp; Density</strong></h4>
+                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population."}}</strong></h4>
                 <div class="callout text-center">
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 large-12">
@@ -80,7 +80,7 @@
               </div>
               <div class="cell large-8 xlarge-7">
 
-                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin</strong></h4>
+                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
                 <div class="callout">
                   {{horizontal-bar data=racialProfile height=150 barLabel=false}}
                 </div>
@@ -91,7 +91,7 @@
           </div>
           <div class="cell medium-6 large-7 xlarge-5">
 
-            <h4 class="subsection-header"><strong>Population by Age</strong></h4>
+            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
             <div class="callout">
               {{age-pyramid data=agePopDist}}
             </div>
