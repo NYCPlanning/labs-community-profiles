@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
       { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, color: '#5e170e', group: 'Hispanic (of any race)' }];
     return profile;
   }),
-
   popDensity: Ember.computed('model', function() {
     const d = this.get('d');
     const { pop_2010, area_sqmi } = d;
