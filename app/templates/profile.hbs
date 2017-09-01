@@ -61,26 +61,26 @@
             </div>
 
             <div class="grid-x grid-padding-x">
-              <div class="cell large-4">
+              <div class="cell large-4 xlarge-5">
 
-                <h4 class="subsection-header"><strong>Land Mass</strong></h4>
+                <h4 class="subsection-header"><strong>Area &amp; Density</strong></h4>
                 <div class="callout text-center">
-                  <div class="grid-x grid-padding-x">
+                  <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 large-12">
                       <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
                       <span class="stat-footer">Square Miles</span>
                     </div>
-                    <div class="cell small-6 large-12">
-                      <span class="stat">XX</span>
-                      <span class="stat-footer">Per Sq Mi</span>
+                    <div class="cell small-6 large-12 cell-divider--density">
+                      <span class="lead">{{numeral-format popDensity '0,0'}}</span>
+                      <small class="stat-footer">People per Sq Mi</small>
                     </div>
                   </div>
                 </div>
 
               </div>
-              <div class="cell large-8">
+              <div class="cell large-8 xlarge-7">
 
-                <h4 class="subsection-header"><strong>Racial Breakdown</strong></h4>
+                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin</strong></h4>
                 <div class="callout">
                   {{horizontal-bar data=racialProfile height=150 barLabel=false}}
                 </div>

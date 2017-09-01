@@ -144,8 +144,21 @@ html, body {
 
   @include breakpoint(large) {
     border-top: 0;
-    border-left: $callout-border;
     padding-top: 0;
+    border-left: $callout-border;
+  }
+}
+
+.cell-divider--density {
+  border-left: $callout-border;
+  padding-left: 0.5rem;
+
+  @include breakpoint(large) {
+    border-left: 0;
+    padding-left: 0;
+    border-top: $callout-border;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
   }
 }
 
