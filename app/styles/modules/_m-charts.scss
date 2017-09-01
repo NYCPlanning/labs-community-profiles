@@ -80,3 +80,27 @@
   left: 50%;
   margin-left: -5px;
 }
+
+.age-chart {
+  .axis line,
+  .axis path {
+    shape-rendering: crispEdges;
+    fill: transparent;
+    stroke: #555;
+    stroke-width: 0px;
+  }
+  .axis text {
+    font-size: 11px;
+  }
+
+
+  .bar {
+    fill-opacity: 0.5;
+  }
+  .bar.left {
+    fill: steelblue;
+  }
+  .bar.right {
+    fill: firebrick;
+  }
+}

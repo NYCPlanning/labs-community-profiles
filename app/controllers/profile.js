@@ -1,4 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
+import range from 'd3';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
@@ -18,6 +19,25 @@ export default Ember.Controller.extend({
       { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, color: '#5e170e', group: 'Hispanic (of any race)' }];
     return profile;
   }),
+
+  agePopDist: Ember.computed('model', function() {
+    const d = this.get('d');
+    const groups = d3.range(4, 85, 5).reduce(
+      (newArr, curr, i, arr) => {
+        if (i + 1 <= arr.length - 1) newArr.push(`${curr + 1}_${arr[i + 1]}`);
+        return newArr;
+      },
+      [],
+    );
+
+    groups.push('85_over');
+    groups.unshift('under_5');
+
+    return groups.map(group => ({
+      group, male: d[`male_${group}`], female: d[`female_${group}`],
+    }));
+  }),
+
   columns: [
     'poverty_rate',
     'unemployment_cd',
