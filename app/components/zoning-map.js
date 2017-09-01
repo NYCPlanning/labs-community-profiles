@@ -79,8 +79,16 @@ export default FacilitiesSection.extend({
         tiles: [zoningTemplate],
       }));
   }),
+
+  fitBoundsOptions: {
+    linear: true,
+    duration: 0,
+  },
+
   pointsLayer: zdConfig,
+
   zoningLabelsLayer: zdLabelConfig,
+
   actions: {
     handleMouseover(e) {
       const feature = e.target.queryRenderedFeatures(e.point, { layers: ['zoning'] })[0];

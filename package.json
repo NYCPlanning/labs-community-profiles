@@ -76,6 +76,7 @@
   },
   "private": true,
   "dependencies": {
+    "@mapbox/geo-viewport": "^0.2.2",
     "@turf/boolean-contains": "^4.6.1",
     "@turf/centroid": "^4.6.1",
     "@turf/inside": "^4.6.0",

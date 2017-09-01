@@ -45,7 +45,14 @@ export default FacilitiesSection.extend({
         tiles: [template],
       }));
   }),
+
+  fitBoundsOptions: {
+    linear: true,
+    duration: 0,
+  },
+
   pfirm15Layer,
+
   floodplain2050Layer,
 
   rasterSource: {
