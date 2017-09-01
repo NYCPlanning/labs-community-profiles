@@ -29,7 +29,7 @@
 
         <div class="grid-x grid-padding-x align-bottom">
           <div class="cell medium-8 xlarge-9">
-            <p class="section-header-description">The data below provides a snapshot of key economic, demographic, social, land area public service indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, Borough and City averages are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
+            <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
           </div>
         </div>
 
@@ -55,7 +55,7 @@
                       {{numeral-format d.pop_11_15_acs '0.0a'}}
                     {{/if}}
                   </span>
-                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates"}}</small>
+                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
                 </div>
               </div>
             </div>
@@ -224,9 +224,9 @@
             {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The maps below provide detailed information regarding the zoning, land use, and selected facilities within the district. Each plot of land within the City’s jurisdiction has a <a href="http://www1.nyc.gov/site/planning/zoning/districts-tools.page" target="_blank">zoning designation</a> &mdash; <a href="http://www1.nyc.gov/site/planning/zoning/districts-tools/residence-districts-r1-r10.page" target="_blank">residence</a>, <a href="http://www1.nyc.gov/site/planning/zoning/districts-tools/commercial-districts-c1-c8.page" target="_blank">commercial</a>, or <a href="http://www1.nyc.gov/site/planning/zoning/districts-tools/mfg-districts.page" target="_blank">manufacturing</a> &mdash; to establish relevant parameters for building and land use. DCP aggregates information about facilities and program sites that are owned, operated, funded, licensed or certified by a City, State, or Federal agency in the City of New York into a central database called the City Planning Facilities Database.</p>
+        <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, check out the NYC Facilities Explorer.</p>
 
-        <h4 class="subsection-header"><strong>Land Use</strong></h4>
+        <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Chart approximates total lot area by land use type."}}</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell medium-6 large-7">
@@ -238,7 +238,7 @@
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Zoning</strong></h4>
+        <h4 class="subsection-header"><strong>Zoning {{info-tooltip tip="Chart shows area distribution of the three zoning designations &mdash residence, commercial, manufacturing &mdash and park area."}}</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell medium-6 large-7">
@@ -258,18 +258,18 @@
           {{facilities-section borocd=model.borocd}}
         </div>
 
-        <h4 class="subsection-header"><strong>Community Assets</strong></h4>
+        <h4 class="subsection-header"><strong>Community Assets {{info-tooltip tip="Facility types are derived from City Planning’s Selected Facilities Database. To view location of facilities use NYC’s Facilities Explorer above."}}</strong></h4>
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="dark-gray">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
-              Public Schools {{info-tooltip tip='Public elementary, middle, high, and special education schools. Public schools identified may serve multiple Community Districts'}}
+              Public Schools {{info-tooltip tip='Public elementary, middle, high, and special education schools. Public schools identified may serve multiple community districts.'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="dark-gray">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
-              Public Libraries {{info-tooltip tip='Libraries operated by NYPL, QPL, BPL and academic institutions'}}
+              Public Libraries {{info-tooltip tip='All public libraries'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
@@ -281,7 +281,7 @@
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
               <span class="stat"><span class="dark-gray">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
-              Parks {{info-tooltip tip='Properties operated by NYC Parks, NYC DOT, NYS Office of Parks, Recreation and Historic Preservation, NYS Dept. of Conservation, and City-State corporations and trusts'}}
+              Parks {{info-tooltip tip='Flagship parks, community parks, state parks, and city-state parks'}}
             </div>
           </div>
         </div>
@@ -428,7 +428,7 @@
             {{fa-icon "group"}} Community Board Perspectives {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">Community Boards are an integral part in the City of New York’s governance. To contact your community board use the information below or to learn more about issues affecting your district, view the most recent Statement of Community District Needs. NYC Charter mandates that Community Boards annually prepare Statements of Community District Needs to provide a context for their budget priorities.</p>
+        <p class="section-header-description">Community boards are liaisons between district residents and City government, charged with advocating for their districts’ unique priorities in collaboration with city agencies. To learn more about the issues affecting your district, view the most recent Statement of Community District Needs. Want to get involved? Visit your community board’s website or email them directly.</p>
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3">
@@ -444,7 +444,7 @@
           </div>
           <div class="cell medium-9">
 
-            <h4 class="subsection-header"><strong>Statement of Community District Needs</strong></h4>
+            <h4 class="subsection-header"><strong>Statement of Community District Needs {{info-tooltip tip="NYC Charter mandates that community boards annually prepare a Statement of Community District Needs and submit budget priorities each fiscal year."}}</strong></h4>
             <div class="callout">
               <div class="grid-x grid-margin-x">
                 <div class="cell xlarge-6">
@@ -476,23 +476,24 @@
             {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The following section contains information on current and approved land use plans and proposals, ongoing or concluded neighborhood studies, and 197-a plans for each district. Learn more about the land use application process on the <a gref="http://a030-lucats.nyc.gov/lucats/ULURP_Search.aspx">LUCATS website</a>, and more about community-based planning on the <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page" target="_blank">DCP website</a>.</p>
+        <p class="section-header-description">The following section contains information on active and completed land use plans and proposals, ongoing or concluded neighborhood studies, and community-based plans for each district. Click on an application below to view more details, or visit the <a href="http://www1.nyc.gov/site/planning/applicants/applicant-portal/application-process.page" target="_blank">LUCATS website</a> to learn more about the land use application process. Learn more about community-based planning by visiting our <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page" target="_blank">website</a>.</p>
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-8 xlarge-7">
 
-            <h4 class="subsection-header"><strong>Land Use Applications {{info-tooltip tip="Application records are pulled from LUCATS, the Department of City Planning’s web application for land use (ULURP) and CEQR application records."}}</strong></h4>
+            <h4 class="subsection-header"><strong>Land Use Applications {{info-tooltip tip="Application records are pulled from LUCATS, City Planning’s web application for land use (ULURP) and CEQR application records."}}</strong></h4>
             <div class="callout">
               {{lucats-list district=model}}
             </div>
 
           </div>
           <div class="cell medium-6 large-4 xlarge-5">
-            <h4 class="subsection-header"><strong>Neighborhood Studies & Plans</strong></h4>
+            <h4 class="subsection-header"><strong>Neighborhood Studies &amp; Plans {{info-tooltip tip="Place&mdashbased planning studies inform the use and development of land in the City’s neighborhoods, business districts, and waterfront through participatory planning and zoning changes."}}</strong></h4>
             <div class="callout">
               {{studies-and-plans district=model}}
             </div>
-            <h4 class="subsection-header"><strong>197a Plans</strong></h4>
+
+            <h4 class="subsection-header"><strong>Community&#8209;Based Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197&mdasha of the City Charter."}}</h4>
             <div class="callout">
               {{197a-plans district=model}}
             </div>
@@ -507,7 +508,7 @@
             {{fa-icon "files-o"}} Resources {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">Selected census data tables are provided for community district/PUMA. The mapping resources below provide geographic information on a variety of topics at the community district level. The data found on on this profile may be downloaded below.</p>
+        <p class="section-header-description">Selected census data tables are provided by community district/PUMA. The mapping resources below provide geographic information on a variety of topics at the community district level. The data found on this profile may also be downloaded in CSV and SHP file formats.</p>
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3 xlarge-4">
