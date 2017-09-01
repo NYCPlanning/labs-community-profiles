@@ -435,7 +435,7 @@
 
             <h4 class="subsection-header"><strong>{{model.boro}} Community Board&nbsp;{{model.cd}}</strong></h4>
             <p>
-              <a class="button small hollow expanded {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{model.dataprofile.cb_website}}" target="_blank">
+              <a class="button small hollow expanded {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{add-http model.dataprofile.cb_website}}" target="_blank">
                 {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
               </a>
               <a class="button small hollow expanded {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
