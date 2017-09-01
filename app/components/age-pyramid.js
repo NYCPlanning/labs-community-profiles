@@ -14,12 +14,6 @@ export default HorizontalBar.extend({
     middle: 28,
   },
   height: 300,
-  debouncedDidResize() {
-    this._super(...arguments);
-    this.get('svg').remove();
-    this.set('svg', null);
-    this.createChart();
-  },
 
   createChart: function createChart() {
     let svg = this.get('svg');
@@ -30,19 +24,28 @@ export default HorizontalBar.extend({
     const width = elWidth - margin.left - margin.right;
 
     if (!svg) {
-      const el = this.$();
       svg = d3.select(el.get(0)).append('svg')
         .attr('class', 'age-chart')
         .attr('width', margin.left + width + margin.right)
         .attr('height', margin.top + height + margin.bottom)
         .append('g')
-          .attr('transform', translation(margin.left, margin.top));
+        .attr('class', 'padding-group')
+        .attr('transform', translation(margin.left, margin.top));
 
       svg.append('g')
         .attr('class', 'male');
 
       svg.append('g')
         .attr('class', 'female');
+
+      svg.append('g')
+        .attr('class', 'axis x-axis-left');
+
+      svg.append('g')
+        .attr('class', 'axis x-axis-right');
+
+      svg.append('g')
+        .attr('class', 'axis y-axis-left');
     }
 
     this.set('svg', svg);
@@ -71,6 +74,9 @@ export default HorizontalBar.extend({
       .attr('width', margin.left + width + margin.right)
       .attr('height', margin.top + height + margin.bottom);
 
+    svg.select('.padding-group')
+      .attr('transform', translation(margin.left, margin.top));
+
     const maxValue = Math.max(
       d3.max(data, function(d) { return percentage(d.male); }),
       d3.max(data, function(d) { return percentage(d.female); }),
@@ -88,20 +94,18 @@ export default HorizontalBar.extend({
     const yAxisLeft = d3.axisRight()
       .scale(yScale)
       .tickSize(4, 0)
-      .tickPadding(margin.middle - 4);
-
-    const yAxisRight = d3.axisLeft()
-      .scale(yScale)
-      .tickSize(4, 0)
-      .tickFormat('');
+      .tickPadding(margin.middle - 4)
+      .tickFormat(d => `${d.replace('_', ' - ')}`);
 
     const xAxisRight = d3.axisBottom()
       .scale(xScale)
-      .tickFormat('');
+      .ticks(4)
+      .tickFormat(d => `${d}%`);
 
     const xAxisLeft = d3.axisBottom()
       .scale(xScale.copy().range([pointA, 0]))
-      .tickFormat('');
+      .ticks(4)
+      .tickFormat(d => `${d}%`);
 
     const leftBarGroup = svg.select('.male')
       .attr('transform', `${translation(pointA, 0)}scale(-1,1)`)
@@ -114,25 +118,17 @@ export default HorizontalBar.extend({
       .data(data, d => d.group);
 
     // DRAW AXES
-    svg.append('g')
-      .attr('class', 'axis y left')
+    svg.select('.y-axis-left')
       .attr('transform', translation(pointA, 0))
       .call(yAxisLeft)
       .selectAll('text')
       .style('text-anchor', 'middle');
 
-    svg.append('g')
-      .attr('class', 'axis y right')
-      .attr('transform', translation(pointB, 0))
-      .call(yAxisRight);
-
-    svg.append('g')
-      .attr('class', 'axis x left')
+    svg.select('.x-axis-left')
       .attr('transform', translation(0, height))
       .call(xAxisLeft);
 
-    svg.append('g')
-      .attr('class', 'axis x right')
+    svg.select('.x-axis-right')
       .attr('transform', translation(pointB, height))
       .call(xAxisRight);
 
