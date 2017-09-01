@@ -1,7 +1,6 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-
-import carto from '../utils/carto';
+import githubraw from '../utils/githubraw';
 
 function getColor(group) {
   const colorMap = {
@@ -26,47 +25,14 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
   loading: false,
   property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
-  sql: Ember.computed('borocd', function sql() {
+  data: Ember.computed('property', 'borocd', function() {
     const borocd = this.get('borocd');
     const property = this.get('property');
-    const SQL = `
-      SELECT
-      SUM(${property}) as value,
-     building_typology as group,
-     ROUND(SUM(${property})::numeric / propertytotal, 4) AS value_pct
-      FROM (
-        SELECT
-          ${property},
-        CASE
-
-          WHEN (unitsres < 3 AND unitsres > 0) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN '1-2 Family'
-          WHEN (unitsres < 6 AND unitsres > 2) AND (numfloors < 5) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Small Apartment Buildings'
-          WHEN (unitsres >= 6 AND numfloors >= 5) AND (comarea = 0 AND officearea = 0 AND retailarea = 0 AND factryarea = 0) THEN 'Big Apartment Buildings'
-          WHEN (unitsres > 2) AND (comarea > 0 OR officearea > 0 OR retailarea > 0 OR factryarea > 0) THEN 'Mixed-Use Apartment Buildings'
-          WHEN (unitsres = 0) AND (comarea > 0 OR officearea > 0 OR retailarea > 0) AND factryarea = 0 THEN 'Commercial Buildings'
-          WHEN (unitsres = 0) AND factryarea > 0 THEN 'Manufacturing Buildings'
-          ELSE 'Public facilities, utilities and other buildings'
-        END AS building_typology,
-        SUM (${property}) OVER () as propertytotal
-        FROM support_mappluto a
-        INNER JOIN support_admin_cdboundaries b
-        ON ST_Contains(b.the_geom, a.the_geom)
-        AND b.borocd = '${borocd}'
-        INNER JOIN support_waterfront_pfirm15 c
-        ON ST_Intersects(a.the_geom, c.the_geom)
-        AND (fld_zone = 'AE' OR fld_zone = 'VE')
-      ) x
-      GROUP BY building_typology, propertytotal
-      ORDER BY SUM(${property}) DESC
-    `;
-
-    return SQL;
-  }),
-
-  data: Ember.computed('sql', 'borocd', function() {
-    const sql = this.get('sql');
-    return carto.SQL(sql)
+    const filler = property === 'numbldgs' ? 'buildings' : 'units';
+    const id = `building_type_${filler}`;
+    return githubraw(id, borocd)
       .then((data) => {
+        console.log('DATA', data)
         return data.map((d) => {
           const colorAdded = d;
           colorAdded.color = getColor(d.group);
