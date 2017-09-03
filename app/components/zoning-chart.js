@@ -1,6 +1,5 @@
 import Ember from 'ember'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import { Promise } from 'rsvp'; // eslint-disable-line
 import githubraw from '../utils/githubraw';
 
 const colors = function(zonedist) {

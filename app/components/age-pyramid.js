@@ -153,7 +153,9 @@ export default HorizontalBar.extend({
       .attr('x', 0)
       .attr('y', function(d) { return yScale(d.group); })
       .attr('width', function(d) { return xScale(percentage(d.female)); })
-      .attr('height', yScale.step() - 3);
+      .attr('height', yScale.step() - 3)
+      .attr('rx', 2)
+      .attr('ry', 2);
 
     rightBarGroup.transition().duration(300)
       .attr('y', function(d) { return yScale(d.group); })
