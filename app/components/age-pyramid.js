@@ -68,7 +68,7 @@ export default HorizontalBar.extend({
     const pointA = regionWidth;
     const pointB = width - regionWidth;
 
-    const percentage = function(d) { return d; };
+    const tickFormat = d => `${d.replace('_', ' - ').replace('under -', 'Under ').replace('- over', '& over')}`;
 
     svg
       .attr('width', margin.left + width + margin.right)
@@ -78,8 +78,8 @@ export default HorizontalBar.extend({
       .attr('transform', translation(margin.left, margin.top));
 
     const maxValue = Math.max(
-      d3.max(data, function(d) { return percentage(d.male); }),
-      d3.max(data, function(d) { return percentage(d.female); }),
+      d3.max(data, function(d) { return d.male; }),
+      d3.max(data, function(d) { return d.female; }),
     );
 
     const xScale = d3.scaleLinear()
@@ -95,7 +95,7 @@ export default HorizontalBar.extend({
       .scale(yScale)
       .tickSize(4, 0)
       .tickPadding(margin.middle - 4)
-      .tickFormat(d => `${d.replace('_', ' - ')}`);
+      .tickFormat(tickFormat);
 
     const xAxisRight = d3.axisBottom()
       .scale(xScale)
@@ -138,13 +138,13 @@ export default HorizontalBar.extend({
       .attr('x', 0)
       .attr('y', function(d) { return yScale(d.group); })
       .attr('height', yScale.step() - 3)
-      .attr('width', function(d) { return xScale(percentage(d.male)); })
+      .attr('width', function(d) { return xScale(d.male); })
       .attr('rx', 2)
       .attr('ry', 2);
 
     leftBarGroup.transition().duration(300)
       .attr('y', function(d) { return yScale(d.group); })
-      .attr('width', function(d) { return xScale(percentage(d.male)); })
+      .attr('width', function(d) { return xScale(d.male); })
       .attr('height', yScale.step() - 3);
 
     rightBarGroup
@@ -152,14 +152,14 @@ export default HorizontalBar.extend({
       .attr('class', 'bar right')
       .attr('x', 0)
       .attr('y', function(d) { return yScale(d.group); })
-      .attr('width', function(d) { return xScale(percentage(d.female)); })
+      .attr('width', function(d) { return xScale(d.female); })
       .attr('height', yScale.step() - 3)
       .attr('rx', 2)
       .attr('ry', 2);
 
     rightBarGroup.transition().duration(300)
       .attr('y', function(d) { return yScale(d.group); })
-      .attr('width', function(d) { return xScale(percentage(d.female)); })
+      .attr('width', function(d) { return xScale(d.female); })
       .attr('height', yScale.step() - 3);
 
     leftBarGroup.exit().remove();
