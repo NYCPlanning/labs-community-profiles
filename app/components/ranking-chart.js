@@ -4,21 +4,6 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 import numeral from 'numeral';
 import d3 from 'd3';
 
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function() {
-    this.parentNode.appendChild(this);
-  });
-};
-
-d3.selection.prototype.moveToBack = function() {
-  return this.each(function() {
-    const firstChild = this.parentNode.firstChild;
-    if (firstChild) {
-      this.parentNode.insertBefore(this, firstChild);
-    }
-  });
-};
-
 export default Ember.Component.extend(ResizeAware, {
   init() {
     this._super(...arguments);
