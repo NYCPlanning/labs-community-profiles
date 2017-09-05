@@ -7,13 +7,13 @@ const translation = function(x,y) {
 
 export default HorizontalBar.extend({
   margin: {
-    top: 20,
-    right: 20,
-    bottom: 24,
-    left: 20,
+    top: 5,
+    right: 5,
+    bottom: 20,
+    left: 5,
     middle: 28,
   },
-  height: 300,
+  height: 280,
 
   createChart: function createChart() {
     let svg = this.get('svg');
@@ -68,7 +68,7 @@ export default HorizontalBar.extend({
     const pointA = regionWidth;
     const pointB = width - regionWidth;
 
-    const tickFormat = d => `${d.replace('_', ' - ').replace('under -', 'Under ').replace('- over', '& over')}`;
+    const tickFormat = d => `${d.replace('_', '–').replace('under–', 'Under ').replace('–over', ' & over')}`;
 
     svg
       .attr('width', margin.left + width + margin.right)
