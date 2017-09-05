@@ -22,6 +22,16 @@ p {
   }
 }
 
+.section-header-call-to-action {
+  margin-top: -1rem;
+
+  @include breakpoint(xlarge) {
+    margin-top: -2rem;
+    padding-bottom: 1rem;
+    max-width: 65em;
+  }
+}
+
 //
 // Headings
 // --------------------------------------------------
