@@ -11,7 +11,7 @@ export default Ember.Route.extend(ScrollToTop, SetMapBounds, {
     didTransition() {
       const scroller = this.get('scroller');
       const section = this.paramsFor('about').section;
-      console.log(this.paramsFor('about'));
+
       if (section) {
         Ember.run.next(this, () => {
           scroller.scrollVertical(`#${section}`, {
