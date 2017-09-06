@@ -63,7 +63,7 @@
             <div class="grid-x grid-padding-x">
               <div class="cell large-4 xlarge-5">
 
-                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population."}}</strong></h4>
+                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population. Density may vary drastically within a community district."}}</strong></h4>
                 <div class="callout text-center">
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 large-12">
@@ -112,7 +112,7 @@
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator" name='Age 18 & Under'
+          {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
                             tip=d.acs_tooltip
                             unit='%'
@@ -167,12 +167,12 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Crime'
                             column='crime_count'
-                            tip='NYPD Complaint Data, 2016'
+                            tip='NYPD Complaint Data, 2016. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle.'
                             cd_stat=d.crime_count
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major crimes</a> were reported in&nbsp;2016
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2016
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -322,7 +322,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Population</strong></td>
+                      <td><strong>2010 Population</strong></td>
                       <td>{{numeral-format d.current_fp_pop '0.0a'}}</td>
                       <td>{{numeral-format d.future_fp_pop '0.0a'}}</td>
                     </tr>
@@ -396,7 +396,7 @@
             </div>
           </div>
           <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               <p>
                 <span class="stat">{{numeral-format d.current_fp_resunits '0,0'}}</span>
@@ -418,20 +418,20 @@
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
               {{building-age-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
             </div>
@@ -510,7 +510,7 @@
               {{studies-and-plans district=model}}
             </div>
 
-            <h4 class="subsection-header"><strong>Community&#8209;Based Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197-a of the City Charter."}}</h4>
+            <h4 class="subsection-header"><strong>197&#8209;a Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197-a of the City Charter."}}</h4>
             <div class="callout">
               {{197a-plans district=model}}
             </div>
