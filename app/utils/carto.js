@@ -1,8 +1,8 @@
 import fetch from 'fetch'; // eslint-disable-line
 import { Promise } from 'rsvp'; // eslint-disable-line
 
-const cartoUser = 'cpp';
-const cartoDomain = 'cartoprod.capitalplanning.nyc';
+const cartoUser = 'data';
+const cartoDomain = 'carto.planninglabs.nyc';
 
 const buildTemplate = (layergroupid, type) => { // eslint-disable-line
   return `https://${cartoDomain}/user/${cartoUser}/api/v1/map/${layergroupid}/{z}/{x}/{y}.${type}`;

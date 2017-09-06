@@ -31,14 +31,11 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
     const filler = property === 'numbldgs' ? 'buildings' : 'units';
     const id = `building_type_${filler}`;
     return githubraw(id, borocd)
-      .then((data) => {
-        console.log('DATA', data)
-        return data.map((d) => {
-          const colorAdded = d;
-          colorAdded.color = getColor(d.group);
-          return d;
-        });
-      });
+      .then(data => data.map((d) => {
+        const colorAdded = d;
+        colorAdded.color = getColor(d.group);
+        return d;
+      }));
   }),
 });
 
