@@ -4,7 +4,7 @@ import githubraw from '../utils/githubraw';
 
 function getColor(group) {
   const colorMap = {
-    '1–2 Family Homes': '#f4f455',
+    '1-2 Family Homes': '#f4f455',
     'Small Apartments (<= 5 units, < 5 stories)': '#f7d496',
     'Large Apartments (> 5 units, 5-plus stories)': '#ea6661',
     'Mixed-use Apartments': '#FF9900',
