@@ -11,6 +11,12 @@ export default RankingChart.extend({
     const percent = this.get('percent');
     return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of ${this.get('unit') || 'buildings'} are in floodplain</span>`;
   },
+  colors: {
+    gray: '#dddddd',
+    web_safe_orange: '#a24c0e',
+    dcp_orange: '#de7d2c',
+    curr: '#60acbf',
+  },
   sql: Ember.computed('borocd', function() {
     const { column, overlayColumn } =
       this.getProperties('column', 'overlayColumn');
