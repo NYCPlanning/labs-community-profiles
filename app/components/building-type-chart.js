@@ -4,13 +4,13 @@ import githubraw from '../utils/githubraw';
 
 function getColor(group) {
   const colorMap = {
-    '1-2 Family': '#f4f455',
-    'Small Apartment Buildings': '#f7d496',
-    'Commercial Buildings': '#ea6661',
-    'Big Apartment Buildings': '#FF9900',
-    'Mixed-use Apartment Buildings': '#f7cabf',
-    'Manufacturing Buildings': '#d36ff4',
-    'Public facilities, utilities and other buildings': '#5CA2D1',
+    '1-2 Family Homes': '#f4f455',
+    'Small Apartments (<= 5 units, < 5 stories)': '#f7d496',
+    'Large Apartments (> 5 units, 5-plus stories)': '#ea6661',
+    'Mixed-use Apartments': '#FF9900',
+    'Commercial': '#f7cabf',
+    'Manufacturing': '#d36ff4',
+    'Public Facilities, Institutions, Other': '#5CA2D1',
   };
 
   return colorMap[group];
