@@ -75,7 +75,7 @@ const nabesCrosswalk = {
   111: [
     'East Harlem',
     'Harlem',
-    'Randall&apos;s Island Park',
+    'Randall\'s Island Park',
     'Wards Island Park',
   ],
   112: [
