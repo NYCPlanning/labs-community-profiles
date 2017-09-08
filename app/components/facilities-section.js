@@ -4,6 +4,8 @@ import geoViewport from 'npm:@mapbox/geo-viewport'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
+const facdbTable = 'facdb_170522';
+
 const colorsArray = [
   ['Education, Child Welfare, and Youth', '#f7ca00'],
   ['Parks, Gardens, and Historical Sites', '#4CAF50'],
@@ -15,7 +17,7 @@ const colorsArray = [
 ];
 
 const SQL = `
-  SELECT the_geom_webmercator, facname, facdomain, uid FROM facdb_facilities;
+  SELECT the_geom_webmercator, facname, facdomain, uid FROM ${facdbTable};
 `;
 
 export default Ember.Component.extend({
@@ -77,7 +79,7 @@ export default Ember.Component.extend({
     const borocd = this.get('borocd');
     const joinSql = `
       SELECT facdomain, count(facdomain)
-      FROM facdb_facilities a
+      FROM ${facdbTable} a
       INNER JOIN support_admin_cdboundaries b
       ON ST_Contains(b.the_geom, a.the_geom)
       WHERE b.borocd = '${borocd}'
