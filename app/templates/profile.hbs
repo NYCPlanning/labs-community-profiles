@@ -128,6 +128,7 @@
                           borocd=d.borocd as |data|}}
           {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
+                            moe='moe_under18_rate'
                             tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.under18_rate
@@ -137,6 +138,7 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Age 65 & Over'
                             column='over65_rate'
+                            moe='moe_over65_rate'
                             tip=d.acs_tooltip
                             unit='%'
                             cd_stat=d.over65_rate

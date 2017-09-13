@@ -61,6 +61,8 @@ export default Ember.Controller.extend({
     'moe_lep_rate',
     'under18_rate',
     'over65_rate',
+    'moe_under18_rate',
+    'moe_over65_rate',
   ],
 
   section: '',
