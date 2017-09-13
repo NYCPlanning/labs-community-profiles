@@ -12,7 +12,7 @@ export default HorizontalBar.extend({
     left: 12,
     middle: 28,
   },
-  height: 280,
+  height: 286,
 
   createChart: function createChart() {
     let svg = this.get('svg');
