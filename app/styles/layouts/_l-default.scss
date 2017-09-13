@@ -153,13 +153,13 @@ html, body {
   border-left: $callout-border;
   padding-left: 0.5rem;
 
-  @include breakpoint(large) {
-    border-left: 0;
-    padding-left: 0;
-    border-top: $callout-border;
-    padding-top: 0.5rem;
-    margin-top: 0.5rem;
-  }
+  // @include breakpoint(large) {
+  //   border-left: 0;
+  //   padding-left: 0;
+  //   border-top: $callout-border;
+  //   padding-top: 0.5rem;
+  //   margin-top: 0.5rem;
+  // }
 }
 
 
