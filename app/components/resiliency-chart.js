@@ -3,21 +3,6 @@ import RankingChart from '../components/ranking-chart';
 import carto from '../utils/carto';
 
 export default RankingChart.extend({
-  overlayColumn: '',
-  didInsertElement() {
-    this._super(...arguments);
-    let svg = this.get('svg');
-    let curr = svg.append('g')
-      .attr('class', 'curr');
-    this.set('curr', curr);
-  },
-
-  colors: {
-    gray: '#dddddd',
-    web_safe_orange: '#a24c0e',
-    dcp_orange: '#de7d2c',
-  },
-
   tooltip(d, current) {
     const selected = current || d;
     const { column, overlayColumn } = this.getProperties('column', 'overlayColumn');
@@ -26,32 +11,11 @@ export default RankingChart.extend({
     const percent = this.get('percent');
     return `${selected.boro_district}: <strong>${percent(numerator / denominator * 100)}%</strong> <span class='moe-text'>of ${this.get('unit') || 'buildings'} are in floodplain</span>`;
   },
-
-  drawChart(el, data) {
-    this._super(...arguments);
-    const bars = this.get('curr');
-    const { x, y, colors, height, overlayColumn } =
-      this.getProperties('x', 'y', 'colors', 'height', 'overlayColumn');
-    const theseBars = bars
-      .selectAll('.curr')
-      .data(data, function (d) {
-        return d.borocd;
-      });
-
-    theseBars
-      .attr('fill', '#60acbf')
-      .attr('width', () => x.bandwidth() - 2)
-      .attr('x', d => x(d.borocd));
-
-    theseBars.enter()
-      .append('rect')
-      .attr('class', (d, i) => `bar bar-${d.borocd} bar-index-${i}`)
-      .attr('fill', '#60acbf')
-      .attr('style', 'pointer-events: none;')
-      .attr('y', d => height - y(d[overlayColumn]))
-      .attr('width', d => x.bandwidth() - 2)
-      .attr('x', d => x(d.borocd))
-      .attr('height', d => y(d[overlayColumn]));
+  colors: {
+    gray: '#dddddd',
+    web_safe_orange: '#a24c0e',
+    dcp_orange: '#de7d2c',
+    curr: '#60acbf',
   },
   sql: Ember.computed('borocd', function() {
     const { column, overlayColumn } =
