@@ -337,8 +337,20 @@
                   <tbody>
                     <tr>
                       <td>2010 Population</td>
-                      <td>{{if d.current_fp_pop (numeral-format d.current_fp_pop '0.0a') 'n/a'}}</td>
-                      <td>{{if d.future_fp_pop (numeral-format d.future_fp_pop '0.0a') 'n/a'}}</td>
+                      <td>
+                        {{#if d.future_fp_pop}}
+                          {{if (gte d.current_fp_pop 1000) (numeral-format d.current_fp_pop '0.0a') (numeral-format d.current_fp_pop '0')}}
+                        {{else}}
+                          n/a
+                        {{/if}}
+                      </td>
+                      <td>
+                        {{#if d.future_fp_pop}}
+                          {{if (gte d.current_fp_pop 1000) (numeral-format d.future_fp_pop '0.0a') (numeral-format d.future_fp_pop '0')}}
+                        {{else}}
+                          n/a
+                        {{/if}}
+                      </td>
                     </tr>
                     <tr>
                       <td>Land Mass</td>
