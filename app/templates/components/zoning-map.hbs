@@ -1,8 +1,8 @@
   {{#mapbox-gl id='zoning-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
     {{#with (await vectorSource) as |vSource|}}
       {{#map.source sourceId='zoning' source=vSource as |source|}}
-        {{source.layer layer=zoningLabelsLayer before='waterway-label'}}
         {{source.layer layer=pointsLayer before='waterway-label'}}
+        {{source.layer layer=zoningLabelsLayer before='waterway-label'}}
       {{/map.source}}
 
       {{#if mapState.currentlySelected}}

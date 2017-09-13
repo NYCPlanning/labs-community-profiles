@@ -67,8 +67,20 @@ const zdLabelConfig = {
   layout: {
     'symbol-placement': 'point',
     'text-field': '{zonedist}',
+    'text-size': {
+      stops: [
+        [
+          10,
+          8,
+        ],
+        [
+          14,
+          16,
+        ],
+      ],
+    },
   },
-  minzoom: 14,
+  minzoom: 12,
 };
 
 export default FacilitiesSection.extend({
