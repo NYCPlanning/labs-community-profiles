@@ -2,7 +2,7 @@ import Ember from 'ember';
 import fetch from 'fetch';
 
 const statements = 'https://api.github.com/repos/NYCPlanning/labs-cd-needs-statements/git/trees/master?recursive=1';
-const download = 'https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master/';
+const download = 'https://docs.google.com/viewer?url=https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master/';
 
 export default Ember.Component.extend({
   district: null,
