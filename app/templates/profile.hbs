@@ -20,18 +20,8 @@
         {{model.neighborhoods}}
       </div>
 
-      <section id="indicators" class="page-section">
-        <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
-            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
-          {{/scroll-to}}
-        </h3>
-
-        <div class="grid-x grid-padding-x align-bottom">
-          <div class="cell medium-8 xlarge-9">
-            <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
-          </div>
-        </div>
+      <section class="page-section">
+        <hr class="hide-for-large"><br class="show-for-large">
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-12 xlarge-7">
@@ -63,7 +53,7 @@
             <div class="grid-x grid-padding-x">
               <div class="cell large-4 xlarge-5">
 
-                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population."}}</strong></h4>
+                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population. Density may vary drastically within a community district."}}</strong></h4>
                 <div class="callout text-center">
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 large-12">
@@ -98,21 +88,34 @@
 
           </div>
         </div>
+      </section>
 
-        <div class="text-right">
-          <span class="chart-legend">
-            <span class="estimate"></span>&nbsp;Estimate
-            &nbsp;
-            <span class="moe"></span>&nbsp;Margin of Error
-          </span>
-        </div>
+      <section id="indicators" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
+            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+
+        <div class="grid-x grid-padding-x align-bottom">
+          <div class="cell medium-8 xlarge-9">
+            <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
+          </div>
+          <div class="cell medium-4 xlarge-3 medium-text-right">
+            <span class="chart-legend">
+              <span class="estimate"></span>&nbsp;Estimate
+              &nbsp;
+              <span class="moe"></span>&nbsp;Margin of Error
+            </span>
+          </div>
+         </div>
 
         {{#key-indicators class="key-indicators"
                           indicators=columns
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator" name='Age 18 & Under'
+          {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
                             tip=d.acs_tooltip
                             unit='%'
@@ -138,7 +141,7 @@
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
                             city_stat=d.pct_hh_rent_burd_nyc}}
-            of households spend 35% or more of their income on&nbsp;rent
+            of households <a href="https://www.census.gov/topics/housing/about.html" target="_blank">spend 35% or more of their income on&nbsp;rent</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Access to Parks'
                             column='pct_served_parks'
@@ -154,7 +157,7 @@
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
-            minutes
+            <a href="https://www.census.gov/topics/employment/commuting/about.html" target="_blank">minutes</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Street Cleanliness'
                             column='pct_clean_strts'
@@ -167,12 +170,12 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Crime'
                             column='crime_count'
-                            tip='NYPD Complaint Data, 2016'
+                            tip='NYPD Complaint Data, 2016. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle.'
                             cd_stat=d.crime_count
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major crimes</a> were reported in&nbsp;2016
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2016
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -182,7 +185,7 @@
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
-            of residents 25 years or older have earned a bachelor's degree or&nbsp;higher
+            of residents 25 years or older have <a href="https://www.census.gov/topics/education/educational-attainment/about.html" target="_blank">earned a bachelor's degree or&nbsp;higher</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Limited English Proficiency'
                             column='lep_rate'
@@ -192,7 +195,7 @@
                             cd_stat=d.lep_rate
                             boro_stat=d.lep_rate_boro
                             city_stat=d.lep_rate_nyc}}
-            of residents self-identify as having limited English&nbsp;proficiency
+            of residents self-identify as having <a href="https://www.census.gov/topics/population/language-use/about.html" target="_blank">limited English&nbsp;proficiency</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Unemployment'
                             column='unemployment_cd'
@@ -202,7 +205,7 @@
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
                             city_stat=d.unemployment_nyc}}
-            of the civilian labor force is unemployed
+            of the <a href="https://www.census.gov/topics/employment/labor-force.html" target="_blank">civilian labor force is unemployed</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Poverty'
                             column='poverty_rate'
@@ -212,7 +215,7 @@
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the poverty&nbsp;level
+            of residents have <a href="https://www.census.gov/topics/income-poverty/poverty.html" target="_blank">incomes below the poverty&nbsp;level</a>
           {{/data.indicator}}
         {{/key-indicators}}
 
@@ -238,7 +241,7 @@
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Zoning {{info-tooltip tip="Chart shows area distribution of the three zoning designations &mdash residence, commercial, manufacturing &mdash and park area."}}</strong></h4>
+        <h4 class="subsection-header"><strong>Zoning {{info-tooltip tip="Chart shows area distribution of the three zoning designations-residence, commercial, manufacturing &mdash and park area."}}</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell medium-6 large-7">
@@ -249,11 +252,13 @@
                   borocd=model.borocd
                   data=zoningData.value
                   loading=zoningData.isRunning}}
+              <hr/>
+              <p class="text-center">Learn more about zoning and land use in <a href="http://maps.nyc.gov/zola/" target="_blank">{{fa-icon "external-link"}}&nbsp;ZoLa</a></p>
             </div>
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Facilities</strong></h4>
+        <h4 class="subsection-header"><strong>Facilities</strong> {{info-tooltip tip="Click on a facility to view additional details on the NYC Facilities Explorer."}}</h4>
         <div class="callout">
           {{facilities-section borocd=model.borocd}}
         </div>
@@ -293,7 +298,16 @@
             {{fa-icon "tint"}} Floodplain {{fa-icon "link"}}
           {{/scroll-to}}
         </h3>
-        <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise. For more information on flood hazards and City Planning’s resiliency work program, please visit the <a href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a> and <a href="http://nyc.gov/resilientneighborhoods">Resilient Neighborhoods</a>.</p>
+        <div class="grid-x grid-padding-x">
+          <div class="cell large-8">
+            <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York City Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise in the 2050s. For more information on City Planning’s resiliency work program, visit <a href="http://nyc.gov/resilientneighborhoods">Resilient Neighborhoods</a>.</p>
+          </div>
+          <div class="cell large-4">
+            <p class="section-header-call-to-action">
+              <a class="button hollow small" target="_blank" href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a>
+            </p>
+          </div>
+        </div>
 
         <h4 class="subsection-header"><strong>Current &amp; 2050s Floodplain</strong></h4>
         <div class="callout">
@@ -306,14 +320,14 @@
                 <table class="text-small no-margin">
                   <thead>
                     <tr>
-                      <th></th>
+                      <th>Indicators {{info-tooltip tip=d.acs_tooltip}}</th>
                       <th style="background-color: #99CCEE;">Current Floodplain</th>
                       <th style="background-color: #EDCD85;">2050s Floodplain</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Population</strong></td>
+                      <td><strong>2010 Population</strong></td>
                       <td>{{numeral-format d.current_fp_pop '0.0a'}}</td>
                       <td>{{numeral-format d.future_fp_pop '0.0a'}}</td>
                     </tr>
@@ -365,7 +379,7 @@
         </div>
 
         <div class="grid-x grid-padding-x">
-          <div class="cell large-4">
+          <div class="cell medium-6 large-6 xlarge-5">
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               <p>
@@ -386,8 +400,8 @@
                   borocd=model.borocd}}
             </div>
           </div>
-          <div class="cell large-4">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+          <div class="cell medium-6 large-6 xlarge-5">
+            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               <p>
                 <span class="stat">{{numeral-format d.current_fp_resunits '0,0'}}</span>
@@ -408,15 +422,23 @@
                   unit='units'}}
             </div>
           </div>
-          <div class="cell large-4">
-            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+          <div class="cell medium-6 xlarge-4">
+            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
+              <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
               {{building-age-chart borocd=model.borocd}}
             </div>
-
-            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PRIFM"}}</strong></h4>
+          </div>
+          <div class="cell medium-6 xlarge-4">
+            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart borocd=model.borocd}}
+            </div>
+          </div>
+          <div class="cell medium-6 xlarge-4">
+            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
+            <div class="callout">
+              {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
             </div>
           </div>
         </div>
@@ -453,9 +475,9 @@
                     <p>This community board did not provide a statement of needs.</p>
                   {{else}}
                   <ul>
-                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_1}}</strong></li>
-                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_2}}</strong></li>
-                    <li class="list-item-padded"><strong class="title-case header-medium">{{d.son_issue_3}}</strong></li>
+                    <li class="list-item-padded"><strong class="header-small">{{d.son_issue_1}}</strong></li>
+                    <li class="list-item-padded"><strong class="header-small">{{d.son_issue_2}}</strong></li>
+                    <li class="list-item-padded"><strong class="header-small">{{d.son_issue_3}}</strong></li>
                   </ul>
                   {{/if}}
                 </div>
@@ -488,14 +510,19 @@
 
           </div>
           <div class="cell medium-6 large-4 xlarge-5">
-            <h4 class="subsection-header"><strong>Neighborhood Studies &amp; Plans {{info-tooltip tip="Place&mdashbased planning studies inform the use and development of land in the City’s neighborhoods, business districts, and waterfront through participatory planning and zoning changes."}}</strong></h4>
+            <h4 class="subsection-header"><strong>Neighborhood Studies &amp; Plans {{info-tooltip tip="Place-based planning studies inform the use and development of land in the City’s neighborhoods, business districts, and waterfront through participatory planning and zoning changes."}}</strong></h4>
             <div class="callout">
               {{studies-and-plans district=model}}
             </div>
 
-            <h4 class="subsection-header"><strong>Community&#8209;Based Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197&mdasha of the City Charter."}}</h4>
+            <h4 class="subsection-header"><strong>197&#8209;a Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197-a of the City Charter."}}</h4>
             <div class="callout">
               {{197a-plans district=model}}
+            </div>
+
+            <h4 class="subsection-header"><strong>Building Information &amp; Permits</strong></h4>
+            <div class="callout">
+              <a class="button small hollow expanded no-margin" href="http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp" target="_blank"><strong>Search BISweb</strong></a>
             </div>
           </div>
         </div>
@@ -513,15 +540,13 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3 xlarge-4">
 
-            <h4 class="subsection-header"><strong>Census Data Tables {{info-tooltip tip="Public Use Microdata Areas (PUMAS) approximate Community Districts, allowing for aggregation of census data.  See the Comparison Map for more info."}}</strong></h4>
+            <h4 class="subsection-header"><strong>Additional Census Data {{info-tooltip tip="Census data are available at the community district level, while American Community Survey data are available at the Public Use Microdata Area (PUMA) level. PUMAs are approximations of community districts, and some PUMAs include two districts. See the CD/PUMA Comparison Map for more information."}}</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
                 <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">{{fa-icon "file-pdf-o"}} <strong>2010 Census Summary</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Demographic Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Social Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Economic Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Housing Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/">{{fa-icon "external-link"}} <strong>NYC Census FactFinder</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/american-community-survey.page">{{fa-icon "external-link"}} <strong>American Community Survey (ACS) Data</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/census-2010.page">{{fa-icon "external-link"}} <strong>Decennial Census Data</strong></a></li>
               </ul>
             </div>
           </div>
@@ -534,9 +559,9 @@
           <div class="cell medium-5 xlarge-4">
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Indicators Data</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_facilities a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Facilities Data</strong> <small>(Shapefile)</small></a>
-              <a class="button small hollow expanded" href="https://cartoprod.capitalplanning.nyc/user/cpp/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Pluto Data</strong> <small>(Shapefile)</small></a>
+              <a class="button small hollow expanded" href="https://carto.planninglabs.nyc/user/data/api/v2/sql?format=csv&q=SELECT%20borocd,poverty_rate,moe_poverty_rate,pct_bach_deg,moe_bach_deg,unemployment_cd,moe_unemployment_cd,crime_per_1000,mean_commute,moe_mean_commute,pct_hh_rent_burd,moe_hh_rent_burd,pct_clean_strts,pct_served_parks FROM community_district_profiles&filename={{model.boro}}-{{model.cd}}-indicators.csv">{{fa-icon "download"}}&nbsp;<strong>Indicators Data</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://carto.planninglabs.nyc/user/data/api/v2/sql?format=shp&q=SELECT a.the_geom_webmercator, a.the_geom, a.facname, a.facdomain, b.borocd FROM facdb_170522 a INNER JOIN support_admin_cdboundaries b ON ST_Contains(b.the_geom, a.the_geom) WHERE b.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-facilities.shp">{{fa-icon "download"}}&nbsp;<strong>Facilities Data</strong> <small>(Shapefile)</small></a>
+              <a class="button small hollow expanded" href="https://carto.planninglabs.nyc/user/data/api/v2/sql?format=SHP&q=SELECT a.the_geom_webmercator, a.the_geom, a.landuse, b.description, a.address, c.borocd FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code INNER JOIN support_admin_cdboundaries c ON ST_Intersects(a.the_geom, c.the_geom) WHERE c.borocd={{model.borocd}}&filename={{model.boro}}-{{model.cd}}-pluto.shp">{{fa-icon "download"}}&nbsp;<strong>Pluto Data</strong> <small>(Shapefile)</small></a>
             </div>
           </div>
         </div>

@@ -5,10 +5,13 @@ import githubraw from '../utils/githubraw';
 const LandUseChart = Ember.Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
+  datasetName: 'subgrade_space',
 
   data: Ember.computed('sql', 'borocd', function() {
     const borocd = this.get('borocd');
-    return githubraw('subgrade_space', borocd);
+    const datasetName = this.get('datasetName');
+    
+    return githubraw(datasetName, borocd);
   }),
 });
 
