@@ -1,4 +1,4 @@
-<div class="grid-x grid-padding-x">
+{{!-- <div class="grid-x grid-padding-x">
   <div class="cell">
 
     <div class="district-header">
@@ -371,17 +371,22 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-6 xlarge-5">
             <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
-              <p>
-                <span class="stat">{{numeral-format d.current_fp_bldg '0,0'}}</span>
-                <span class="stat-footer">buildings are in the current floodplain</span>
-              </p>
-              {{building-type-chart property='numbldgs' borocd=model.borocd}}
+              {{#building-type-chart property='numbldgs' borocd=model.borocd as |chart|}}
+                <p>
+                  <span class="stat">
+                    {{#if (await chart.data) as |data|}}
+                      {{numeral-format (reduce (action 'sum') 0 (map-by 'value' data)) '0,0'}}
+                    {{/if}}
+                  </span>
+                  <span class="stat-footer">buildings are in the current floodplain</span>
+                </p>
+              {{/building-type-chart}}
               <hr>
               <span class="chart-legend">
                 <span class="nobreak"><span class="total"></span> Total Buildings</span>
@@ -437,7 +442,7 @@
             </div>
           </div>
         </div>
-      </section>
+{{!--       </section>
 
       <section id="community-board" class="page-section">
         <h3 class="section-header">
@@ -564,3 +569,4 @@
 
   </div>
 </div>
+ --}}
