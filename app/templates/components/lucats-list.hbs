@@ -1,6 +1,6 @@
 {{#if (await active) as |resolvedActive|}}
   {{#if resolvedActive}}
-    Active Applications
+    <h6>Active Applications</h6>
     {{#if resolvedActive.length}}
     <ul class="no-bullet xlarge-2-column">
     {{#each resolvedActive as |application|}}
@@ -19,7 +19,8 @@
 
 {{#if (await completed) as |resolvedCompleted|}}
   {{#if resolvedCompleted}}
-    Completed Applications
+    <hr>
+    <h6>Completed Applications</h6>
     {{#if resolvedCompleted.length}}
     <ul class="no-bullet xlarge-2-column">
     {{#each resolvedCompleted as |application|}}
@@ -36,6 +37,6 @@
   {{else}}
 {{/if}}
 
-<a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx" target="_blank">Search LUCATS</a>
+<a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx" target="_blank"><strong>Search LUCATS</strong></a>
 
 {{yield}}
