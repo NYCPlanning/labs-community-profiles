@@ -243,12 +243,13 @@
 
         <h4 class="subsection-header"><strong>Zoning {{info-tooltip tip="Chart shows area distribution of the three zoning designations-residence, commercial, manufacturing &mdash and park area."}}</strong></h4>
         <div class="callout">
-          <div class="grid-x grid-padding-x-small">
+          <div class="grid-x grid-padding-x-small align-middle">
             <div class="cell medium-6 large-7">
               {{zoning-map borocd=model.borocd}}
             </div>
             <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
               {{zoning-chart
+                  height=100
                   borocd=model.borocd
                   data=zoningData.value
                   loading=zoningData.isRunning}}
