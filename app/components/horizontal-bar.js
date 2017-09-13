@@ -7,6 +7,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
   classNames: ['horizontal-bar'],
 
   height: 400,
+  xMax: null,
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
@@ -65,7 +66,7 @@ const HorizontalBar = Ember.Component.extend(ResizeAware, {
         .paddingInner(0.1);
 
       const x = d3.scaleLinear()
-        .domain([0, d3.max(rawData, d => d.value)])
+        .domain([0, this.get('xMax') ? this.get('xMax') : d3.max(rawData, d => d.value)])
         .range([0, width]);
 
       const groupLabels = svg.selectAll('.typelabel')

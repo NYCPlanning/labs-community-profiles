@@ -11,7 +11,7 @@ const colors = function(zonedist) {
 };
 
 const descriptions = function(zonedist) {
-  if (zonedist === 'R') return 'Resdiential';
+  if (zonedist === 'R') return 'Residence';
   if (zonedist === 'M') return 'Manufacturing';
   if (zonedist === 'C') return 'Commercial';
   if (zonedist === 'P') return 'Park';

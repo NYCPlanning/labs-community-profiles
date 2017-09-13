@@ -91,7 +91,7 @@
 
                 <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
                 <div class="callout">
-                  {{horizontal-bar data=racialProfile height=150 barLabel=false}}
+                  {{horizontal-bar data=racialProfile height=150 barLabel=false xMax=100}}
                 </div>
 
               </div>
@@ -316,11 +316,6 @@
           <div class="cell large-8">
             <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain based on FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York City Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise in the 2050s. For more information on City Planning’s resiliency work program, visit <a href="http://nyc.gov/resilientneighborhoods">Resilient Neighborhoods</a>.</p>
           </div>
-          <div class="cell large-4">
-            <p class="section-header-call-to-action">
-              <a class="button hollow small" target="_blank" href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a>
-            </p>
-          </div>
         </div>
 
         <h4 class="subsection-header"><strong>Current &amp; 2050s Floodplain</strong></h4>
@@ -388,6 +383,8 @@
                   </tbody>
                 </table>
               </div>
+              <hr/>
+              <p class="text-center">Learn more with the <a href="http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5" target="_blank">{{fa-icon "external-link"}} NYC Flood Hazard Mapper</a></p>
             </div>
           </div>
         </div>
@@ -451,12 +448,14 @@
           <div class="cell medium-6 xlarge-4">
             <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
+              <p class="text-small">Basements are highly vulnerable to flooding and can lead to higher retrofitting costs.</p>
               {{subgrade-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
             <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
+              <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
               {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
             </div>
           </div>
@@ -573,6 +572,10 @@
             <h4 class="subsection-header"><strong>New York City Community Health Profiles {{info-tooltip tip="The New York City Community Health Profiles capture the health of 59 community districts across the city."}}</strong></h4>
             <div class="callout">
               <a class="button small hollow expanded" target="_blank" href="{{model.healthProfileLink}}">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Health Profile</strong></a>
+            </div>
+            <h4 class="subsection-header"><strong>City Planning Commission Decisions {{info-tooltip tip="City Planning Commission (CPC) Reports are the official records of actions taken by the CPC"}}</strong></h4>
+            <div class="callout">
+              <a class="button small hollow expanded" target="_blank" href="http://a030-cpc.nyc.gov/html/cpc/index.aspx?boro_link={{model.boroAcronymLowerCase}}&cd_link={{model.cd}}">{{fa-icon "external-link"}} <strong>{{model.boro}} Community District {{model.cd}} CPC Reports</strong></a>
             </div>
           </div>
           <div class="cell medium-5 xlarge-4">
