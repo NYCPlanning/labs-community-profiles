@@ -20,18 +20,8 @@
         {{model.neighborhoods}}
       </div>
 
-      <section id="indicators" class="page-section">
-        <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
-            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
-          {{/scroll-to}}
-        </h3>
-
-        <div class="grid-x grid-padding-x align-bottom">
-          <div class="cell medium-8 xlarge-9">
-            <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
-          </div>
-        </div>
+      <section class="page-section">
+        <hr class="hide-for-large"><br class="show-for-large">
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-12 xlarge-7">
@@ -98,14 +88,27 @@
 
           </div>
         </div>
+      </section>
 
-        <div class="text-right">
-          <span class="chart-legend">
-            <span class="estimate"></span>&nbsp;Estimate
-            &nbsp;
-            <span class="moe"></span>&nbsp;Margin of Error
-          </span>
-        </div>
+      <section id="indicators" class="page-section">
+        <h3 class="section-header">
+          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
+            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
+          {{/scroll-to}}
+        </h3>
+
+        <div class="grid-x grid-padding-x align-bottom">
+          <div class="cell medium-8 xlarge-9">
+            <p class="section-header-description">The information below provides a snapshot of key socio-economic, demographic, and select service performance indicators. To provide further context, the selected district is displayed in comparison to all 59 community districts; where available, borough and City benchmarks are provided. The entire set of indicators may be downloaded in the Resources section below.</p>
+          </div>
+          <div class="cell medium-4 xlarge-3 medium-text-right">
+            <span class="chart-legend">
+              <span class="estimate"></span>&nbsp;Estimate
+              &nbsp;
+              <span class="moe"></span>&nbsp;Margin of Error
+            </span>
+          </div>
+         </div>
 
         {{#key-indicators class="key-indicators"
                           indicators=columns
