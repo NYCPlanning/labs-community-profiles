@@ -63,7 +63,7 @@
             <div class="grid-x grid-padding-x">
               <div class="cell large-4 xlarge-5">
 
-                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population."}}</strong></h4>
+                <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population. Density may vary drastically within a community district."}}</strong></h4>
                 <div class="callout text-center">
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 large-12">
@@ -112,7 +112,7 @@
                           boro=model.boro
                           cd=model.cd
                           borocd=d.borocd as |data|}}
-          {{#data.indicator class="indicator" name='Age 18 & Under'
+          {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
                             tip=d.acs_tooltip
                             unit='%'
@@ -167,12 +167,12 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Crime'
                             column='crime_count'
-                            tip='NYPD Complaint Data, 2016'
+                            tip='NYPD Complaint Data, 2016. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle.'
                             cd_stat=d.crime_count
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major crimes</a> were reported in&nbsp;2016
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2016
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -299,7 +299,7 @@
           </div>
           <div class="cell large-4">
             <p class="section-header-call-to-action">
-              <a class="button hollow small" href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a>
+              <a class="button hollow small" target="_blank" href = "http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5">NYC Flood Hazard Mapper</a>
             </p>
           </div>
         </div>
@@ -322,7 +322,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Population</strong></td>
+                      <td><strong>2010 Population</strong></td>
                       <td>{{numeral-format d.current_fp_pop '0.0a'}}</td>
                       <td>{{numeral-format d.future_fp_pop '0.0a'}}</td>
                     </tr>
@@ -396,7 +396,7 @@
             </div>
           </div>
           <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               <p>
                 <span class="stat">{{numeral-format d.current_fp_resunits '0,0'}}</span>
@@ -418,20 +418,20 @@
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
               {{building-age-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PRIFM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
             </div>
@@ -510,7 +510,7 @@
               {{studies-and-plans district=model}}
             </div>
 
-            <h4 class="subsection-header"><strong>Community&#8209;Based Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197-a of the City Charter."}}</h4>
+            <h4 class="subsection-header"><strong>197&#8209;a Plans</strong> {{info-tooltip tip="A formal way to develop a community-based plan is set out in Section 197-a of the City Charter."}}</h4>
             <div class="callout">
               {{197a-plans district=model}}
             </div>
@@ -530,15 +530,13 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3 xlarge-4">
 
-            <h4 class="subsection-header"><strong>Census Data Tables {{info-tooltip tip="Public Use Microdata Areas (PUMAS) approximate Community Districts, allowing for aggregation of census data.  See the Comparison Map for more info."}}</strong></h4>
+            <h4 class="subsection-header"><strong>Additional Census Data {{info-tooltip tip="Census data are available at the community district level, while American Community Survey data are available at the Public Use Microdata Area (PUMA) level. PUMAs are approximations of community districts, and some PUMAs include two districts. See the CD/PUMA Comparison Map for more information."}}</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
                 <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/community/community-portal/socio_demo/{{model.borocdAcronymLowerCase}}_socio_demo.pdf">{{fa-icon "file-pdf-o"}} <strong>2010 Census Summary</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/demo_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Demographic Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/soc_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Social Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Economic Profile</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/hous_2015acs5yr_puma.pdf#{{model.borocdAcronymLowerCase}}">{{fa-icon "file-pdf-o"}} <strong>PUMA Housing Profile</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/">{{fa-icon "external-link"}} <strong>NYC Census FactFinder</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/american-community-survey.page">{{fa-icon "external-link"}} <strong>American Community Survey (ACS) Data</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/census-2010.page">{{fa-icon "external-link"}} <strong>Decennial Census Data</strong></a></li>
               </ul>
             </div>
           </div>
