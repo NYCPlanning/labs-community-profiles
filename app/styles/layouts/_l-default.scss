@@ -272,8 +272,10 @@ html, body {
 // Floodplain Table
 // --------------------------------------------------
 .floodplain-table-container {
+  margin-bottom: $global-margin;
+
   @include breakpoint(xlarge) {
-    max-height: 400px;
+    max-height: calc(400px - 3rem);
     overflow-y: scroll;
 
     // &::-webkit-scrollbar {
