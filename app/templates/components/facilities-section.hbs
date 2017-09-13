@@ -23,13 +23,13 @@
   </div>
   <div class="cell medium-6 large-5 cell-medium-padded-left cell-small-only-padded-top">
     {{#each (await data) as |data|}}
-      <p class="grid-x">
+      <div class="grid-x align-middle">
         <span class="nowrap legend-dot-wrapper cell small-2 medium-3 cell-medium-padded-left" style="color:{{data.color}};">
           <span class="legend-dot" style="background-color:{{data.color}}"></span>
           <strong>{{data.count}}</strong>
         </span>
         <small class="legend-dot-wrapper cell auto">{{data.facdomain}}</small>
-      </p>
+      </div>
     {{/each}}
     <hr/>
     <p class="text-center">View this area in the <a href="https://capitalplanning.nyc.gov/facilities/explorer#13.62/{{centroid.[1]}}/{{centroid.[0]}}" target="_blank">{{fa-icon "external-link"}}&nbsp;NYC&nbsp;Facilities Explorer</a></p>

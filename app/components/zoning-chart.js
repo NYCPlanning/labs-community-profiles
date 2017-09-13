@@ -26,6 +26,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
+  height: 400,
 
   borocd: '',
 
@@ -69,7 +70,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       bottom: 0,
       left: 0,
     };
-    const height = 400 - margin.top - margin.bottom;
+    const height = this.get('height') - margin.top - margin.bottom;
     const width = elWidth - margin.left - margin.right;
 
     svg

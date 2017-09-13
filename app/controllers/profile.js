@@ -72,5 +72,8 @@ export default Ember.Controller.extend({
     handleAfterScroll(href) {
       this.set('section', href.replace('#', ''));
     },
+    sum(accum, curr) {
+      return accum + curr;
+    },
   },
 });
