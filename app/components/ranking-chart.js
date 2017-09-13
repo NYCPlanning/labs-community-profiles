@@ -15,7 +15,7 @@ export default Ember.Component.extend(ResizeAware, {
     const defaultTooltip = (d, current) => {
       const selected = current || d;
       const percent = this.get('percent');
-      const { column, unit, moe } = this.getProperties('column', 'unit', 'moe');
+      const { column, overlayColumn, unit, moe } = this.getProperties('column', 'overlayColumn', 'unit', 'moe');
       return `${selected.boro_district}: <strong>${percent(selected[column])}${unit}</strong><span class='moe-text'>${moe ? `(± ${percent(selected[moe])}${unit})` : ''}</span>`;
     };
     const tooltip = this.get('tooltip') || defaultTooltip;
@@ -42,6 +42,7 @@ export default Ember.Component.extend(ResizeAware, {
     gray: '#a8a8a8',
     web_safe_orange: '#a24c0e',
     dcp_orange: '#de7d2c',
+    curr: '#60acbf',
   },
 
   height: 50,
@@ -68,6 +69,9 @@ export default Ember.Component.extend(ResizeAware, {
     let bars = svg.append('g')
       .attr('class', 'bars');
 
+    let curr = svg.append('g')
+      .attr('class', 'curr');
+
     let moes = svg.append('g')
       .attr('class', 'moes');
 
@@ -84,6 +88,7 @@ export default Ember.Component.extend(ResizeAware, {
     this.set('bars', bars);
     this.set('moes', moes);
     this.set('masks', masks);
+    this.set('curr', curr);
 
     this._super(...arguments);
   },
@@ -100,14 +105,15 @@ export default Ember.Component.extend(ResizeAware, {
     const width = elWidth - margin.left - margin.right;
     const colorsHash = this.get('colors');
     const column = this.get('column');
+    const overlayColumn = this.get('overlayColumn');
     const moe = this.get('moe');
     const rank = data.findIndex(d => d.is_selected);
     const unit = this.get('unit');
     const current = data[rank];
     if(!data[0][column]) return;
 
-    const { svg, div, bars, masks, moes } =
-      this.getProperties('svg', 'div', 'bars', 'masks', 'moes');
+    const { svg, div, bars, masks, moes, curr } =
+      this.getProperties('svg', 'div', 'bars', 'masks', 'moes', 'curr');
 
     div
       .attr('class', 'tooltip');
@@ -132,6 +138,10 @@ export default Ember.Component.extend(ResizeAware, {
       return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
     };
 
+    const currColors = (d) => {
+      return d.is_selected ? colorsHash.web_safe_orange : colorsHash.curr;
+    };
+
     const calculateMidpoint = (node) => {
       return (node.getBoundingClientRect().width / 2) - Math.floor((x.bandwidth() / 2));
     };
@@ -140,10 +150,15 @@ export default Ember.Component.extend(ResizeAware, {
 
     const handleMouseOver = (d, i) => {
       const selector = `.bar-${d.borocd}`;
+      const overlay = `.bar-curr-${d.borocd}`;
+
       svg.select(selector)
         .transition()
         .duration(10)
         .attr('fill', colorsHash.dcp_orange);
+
+      svg.select(overlay)
+        .attr('opacity', 0);
 
       div
         .html(function() {
@@ -157,12 +172,17 @@ export default Ember.Component.extend(ResizeAware, {
 
     const handleMouseOut = (d, i) => {
       const selector = `.bar-${d.borocd}`;
+      const overlay = `.bar-curr-${d.borocd}`;
+
       svg.select(selector)
         .transition()
         .duration(10)
         .attr('fill', function (d) {
           return d.is_selected ? colorsHash.web_safe_orange : colorsHash.gray;
         });
+
+      svg.select(overlay)
+        .attr('opacity', 1);
     };
 
     // Join new data
@@ -180,6 +200,12 @@ export default Ember.Component.extend(ResizeAware, {
 
     const theseMasks = masks
       .selectAll('.mask')
+      .data(data, function (d) {
+        return d.borocd;
+      });
+
+    const theseCurr = curr
+      .selectAll('.curr')
       .data(data, function (d) {
         return d.borocd;
       });
@@ -215,6 +241,23 @@ export default Ember.Component.extend(ResizeAware, {
       .attr('height', height)
       .on('mouseover', handleMouseOver)
       .on('mouseout', handleMouseOut);
+
+    if(overlayColumn) {
+      theseCurr
+        .attr('fill', currColors)
+        .attr('width', () => x.bandwidth() - 2)
+        .attr('x', d => x(d.borocd));
+
+      theseCurr.enter()
+        .append('rect')
+        .attr('class', (d, i) => `bar curr bar-curr-${d.borocd} bar-index-${i}`)
+        .attr('fill', currColors)
+        .attr('style', 'pointer-events: none;')
+        .attr('y', d => height - y(d[overlayColumn]))
+        .attr('width', d => x.bandwidth() - 2)
+        .attr('x', d => x(d.borocd))
+        .attr('height', d => y(d[overlayColumn]));
+    }
 
     if(moe) {
       theseMoes
