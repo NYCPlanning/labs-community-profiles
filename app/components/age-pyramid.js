@@ -1,16 +1,15 @@
-import Ember from 'ember';
 import HorizontalBar from '../components/horizontal-bar';
 
-const translation = function(x,y) {
-  return 'translate(' + x + ',' + y + ')';
+const translation = function(x, y) {
+  return `translate(${x},${y})`;
 };
 
 export default HorizontalBar.extend({
   margin: {
-    top: 5,
-    right: 5,
+    top: 25,
+    right: 12,
     bottom: 20,
-    left: 5,
+    left: 12,
     middle: 28,
   },
   height: 280,
@@ -46,6 +45,13 @@ export default HorizontalBar.extend({
 
       svg.append('g')
         .attr('class', 'axis y-axis-left');
+
+      svg.append('text')
+        .attr('class', 'label-male');
+
+
+      svg.append('text')
+        .attr('class', 'label-female');
     }
 
     this.set('svg', svg);
@@ -55,6 +61,9 @@ export default HorizontalBar.extend({
   updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
+
+    const percentMale = d3.sum(data, d => d.male);
+    const percentFemale = 100 - percentMale;
 
     const el = this.$();
     const elWidth = el.width();
@@ -77,10 +86,8 @@ export default HorizontalBar.extend({
     svg.select('.padding-group')
       .attr('transform', translation(margin.left, margin.top));
 
-    const maxValue = Math.max(
-      d3.max(data, function(d) { return d.male; }),
-      d3.max(data, function(d) { return d.female; }),
-    );
+    // no bar will ever reflect more than 10% of pop in a CD
+    const maxValue = 10;
 
     const xScale = d3.scaleLinear()
       .domain([0, maxValue])
@@ -132,6 +139,19 @@ export default HorizontalBar.extend({
       .attr('transform', translation(pointB, height))
       .call(xAxisRight);
 
+    // update top labels positioning
+    svg.select('.label-male')
+      .text(`Male (${percentMale.toFixed(1)}%)`)
+      .attr('text-anchor', 'end')
+      .attr('x', (width / 2) - margin.middle)
+      .attr('y', -8);
+
+    svg.select('.label-female')
+      .text(`Female (${percentFemale.toFixed(1)}%)`)
+      .attr('text-anchor', 'start')
+      .attr('x', (width / 2) + margin.middle)
+      .attr('y', -8);
+
     leftBarGroup.enter()
       .append('rect')
       .attr('class', 'bar left')
@@ -147,8 +167,8 @@ export default HorizontalBar.extend({
       .attr('width', function(d) { return xScale(d.male); })
       .attr('height', yScale.step() - 3);
 
-    rightBarGroup
-      .enter().append('rect')
+    rightBarGroup.enter()
+      .append('rect')
       .attr('class', 'bar right')
       .attr('x', 0)
       .attr('y', function(d) { return yScale(d.group); })
