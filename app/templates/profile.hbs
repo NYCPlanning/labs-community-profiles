@@ -50,17 +50,25 @@
               </div>
             </div>
 
+            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
+            <div class="callout">
+              {{age-pyramid data=agePopDist}}
+            </div>
+
+          </div>
+          <div class="cell medium-6 large-12 xlarge-5">
+
             <div class="grid-x grid-padding-x">
-              <div class="cell large-4 xlarge-5">
+              <div class="cell large-6 xlarge-12">
 
                 <h4 class="subsection-header"><strong>Area &amp; Density {{info-tooltip tip="Density is calculated using 2010 Census population. Density may vary drastically within a community district."}}</strong></h4>
                 <div class="callout text-center">
                   <div class="grid-x grid-margin-x align-middle">
-                    <div class="cell small-6 large-12">
+                    <div class="cell small-6 -large-12">
                       <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
                       <span class="stat-footer">Square Miles</span>
                     </div>
-                    <div class="cell small-6 large-12 cell-divider--density">
+                    <div class="cell small-6 -large-12 cell-divider--density">
                       <span class="lead">{{numeral-format popDensity '0,0'}}</span>
                       <small class="stat-footer">People per Sq Mi</small>
                     </div>
@@ -68,7 +76,18 @@
                 </div>
 
               </div>
-              <div class="cell large-8 xlarge-7">
+              <div class="cell large-6 xlarge-8">
+
+                <h4 class="subsection-header"><strong>Foreign-Born Population {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
+                <div class="callout text-center">
+                  <span class="stat">
+                    {{numeral-format d.pct_foreign_born '0.0'}}%
+                  </span>
+                  <small class="stat-footer">of residents are <a href="https://www.census.gov/topics/population/foreign-born/about.html" target="_blank">foreign-born</a></small>
+                </div>
+
+              </div>
+              <div class="cell xlarge-10">
 
                 <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
                 <div class="callout">
@@ -76,14 +95,6 @@
                 </div>
 
               </div>
-            </div>
-
-          </div>
-          <div class="cell medium-6 large-7 xlarge-5">
-
-            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
-            <div class="callout">
-              {{age-pyramid data=agePopDist}}
             </div>
 
           </div>
