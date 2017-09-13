@@ -424,12 +424,14 @@
           <div class="cell medium-6 xlarge-4">
             <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
+              <p class="text-small">Basements are highly vulnerable to flooding and can lead to higher retrofitting costs.</p>
               {{subgrade-chart borocd=model.borocd}}
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
             <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
+              <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
               {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
             </div>
           </div>
