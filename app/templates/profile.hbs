@@ -70,11 +70,11 @@
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 -large-12">
                       <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
-                      <span class="stat-footer">Square Miles</span>
+                      <span class="stat-footer">square miles</span>
                     </div>
                     <div class="cell small-6 -large-12 cell-divider--density">
                       <span class="lead">{{numeral-format popDensity '0,0'}}</span>
-                      <small class="stat-footer">People per Sq Mi</small>
+                      <small class="stat-footer">persons per sq mi</small>
                     </div>
                   </div>
                 </div>
@@ -148,7 +148,7 @@
                             cd_stat=d.over65_rate
                             boro_stat=d.over65_rate_boro
                             city_stat=d.over65_rate_nyc}}
-            of residents are over the age&nbsp;of&nbsp;65
+            of residents are age 65 and over
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Rent Burden'
                             column='pct_hh_rent_burd'
@@ -202,7 +202,7 @@
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
-            of residents 25 years or older have <a href="https://www.census.gov/topics/education/educational-attainment/about.html" target="_blank">earned a bachelor's degree or&nbsp;higher</a>
+            of residents age 25 years and over have <a href="https://www.census.gov/topics/education/educational-attainment/about.html" target="_blank">earned a bachelor's degree or&nbsp;higher</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Limited English Proficiency'
                             column='lep_rate'
