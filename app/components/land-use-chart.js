@@ -16,25 +16,22 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   sql: Ember.computed('borocd', function sql() {
     const borocd = this.get('borocd');
     const SQL = `
-      WITH lots AS (
-        SELECT a.the_geom, c.description as landuse_desc, c.code as landuse
-        FROM support_mappluto a
-        INNER JOIN support_landuse_lookup c
-              ON a.landuse::integer = c.code
-        INNER JOIN support_admin_cdboundaries b
-        ON ST_Contains(b.the_geom, a.the_geom)
+    WITH lots AS (
+      SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse
+      FROM support_mappluto a
+      LEFT JOIN support_landuse_lookup c
+            ON a.landuse::integer = c.code
+      WHERE a.cd = '${borocd}'
+    ),
+    totalsm AS (
+      SELECT sum(ST_Area(the_geom::geography)) as total
+      FROM lots
+    )
 
-        AND b.borocd = '${borocd}'
-      ),
-      totalsm AS (
-        SELECT sum(ST_Area(the_geom::geography)) as total
-        FROM lots
-      )
-
-      SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
-      FROM lots, totalsm
-      GROUP BY landuse, landuse_desc, totalsm.total
-      ORDER BY percent DESC
+    SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
+    FROM lots, totalsm
+    GROUP BY landuse, landuse_desc, totalsm.total
+    ORDER BY percent DESC
     `;
 
     return SQL;
