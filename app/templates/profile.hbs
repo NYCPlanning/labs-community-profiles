@@ -1,8 +1,12 @@
-<div class="grid-x grid-padding-x">
+<div id="top" class="grid-x grid-padding-x">
   <div class="cell">
 
     <div class="district-header">
-      <h1>{{model.boro}} Community District {{model.cd}}</h1>
+      <h1>
+        {{#scroll-to offset=-210 href='#top' afterScroll='handleAfterScroll'}}
+          {{model.boro}} Community District {{model.cd}}
+        {{/scroll-to}}
+      </h1>
       <div class="section-menu hide-for-print">
         <ul class="menu">
           <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
