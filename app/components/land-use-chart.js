@@ -17,18 +17,18 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     const borocd = this.get('borocd');
     const SQL = `
     WITH lots AS (
-      SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse
+      SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse, lotarea
       FROM support_mappluto a
       LEFT JOIN support_landuse_lookup c
             ON a.landuse::integer = c.code
       WHERE a.cd = '${borocd}'
     ),
     totalsm AS (
-      SELECT sum(ST_Area(the_geom::geography)) as total
+      SELECT sum(lotarea) as total
       FROM lots
     )
 
-    SELECT count(landuse), sum(ST_Area(the_geom::geography)) * 10.7639 as sqft, ROUND((sum(ST_Area(the_geom::geography))/totalsm.total)::numeric,4) as percent, landuse, landuse_desc
+    SELECT count(landuse_desc), ROUND(SUM(lotarea)/totalsm.total::numeric, 4) AS percent, landuse, landuse_desc
     FROM lots, totalsm
     GROUP BY landuse, landuse_desc, totalsm.total
     ORDER BY percent DESC
