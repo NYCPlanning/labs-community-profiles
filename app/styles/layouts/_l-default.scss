@@ -28,7 +28,7 @@ html, body {
   position: relative;
 
   @include breakpoint(large) {
-    padding-top: 97px
+    padding-top: 80px
   //   height: calc(100vh - 97px);
   }
 }
@@ -60,11 +60,10 @@ html, body {
 
     @include breakpoint(large) {
       position: fixed;
-      top: rem-calc(97);
       bottom: 0;
       left: 0;
       width: 33.33333%;
-      height: calc(100vh - 97px);
+      height: calc(100vh - 80px);
     }
 
     @include breakpoint(xlarge) {
@@ -96,10 +95,9 @@ html, body {
 
 // #page-content is everything in main not in #cd-chooser
 #page-content {
-  padding-top: $global-margin;
 
   @include breakpoint(large) {
-    min-height: calc(100vh - 97px);
+    min-height: calc(100vh - 80px);
   }
 }
 
