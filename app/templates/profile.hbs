@@ -70,11 +70,11 @@
                   <div class="grid-x grid-margin-x align-middle">
                     <div class="cell small-6 -large-12">
                       <span class="stat">{{numeral-format d.area_sqmi '0.0'}}</span>
-                      <span class="stat-footer">Square Miles</span>
+                      <span class="stat-footer">square miles</span>
                     </div>
                     <div class="cell small-6 -large-12 cell-divider--density">
                       <span class="lead">{{numeral-format popDensity '0,0'}}</span>
-                      <small class="stat-footer">People per Sq Mi</small>
+                      <small class="stat-footer">persons per sq mi</small>
                     </div>
                   </div>
                 </div>
@@ -148,7 +148,7 @@
                             cd_stat=d.over65_rate
                             boro_stat=d.over65_rate_boro
                             city_stat=d.over65_rate_nyc}}
-            of residents are over the age&nbsp;of&nbsp;65
+            of residents are age 65 and over
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Rent Burden'
                             column='pct_hh_rent_burd'
@@ -202,7 +202,7 @@
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
                             city_stat=d.pct_bach_deg_nyc}}
-            of residents 25 years or older have <a href="https://www.census.gov/topics/education/educational-attainment/about.html" target="_blank">earned a bachelor's degree or&nbsp;higher</a>
+            of residents age 25 years and over have <a href="https://www.census.gov/topics/education/educational-attainment/about.html" target="_blank">earned a bachelor's degree or&nbsp;higher</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Limited English Proficiency'
                             column='lep_rate'
@@ -246,7 +246,7 @@
         </h3>
         <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, check out the NYC Facilities Explorer.</p>
 
-        <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Chart approximates total lot area by land use type."}}</strong></h4>
+        <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Primary Land Use Tax Lot Output (PLUTO) release 16v2. Chart provides total lot area by land use type according to NYC Department of Finance lot measurements."}}</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell medium-6 large-7">
@@ -368,8 +368,8 @@
                     </tr>
                     <tr>
                       <td>Open Space Area</td>
-                      <td>{{if d.current_fp_openspace (concat d.current_fp_openspace ' sq mi') 'na'}}</td>
-                      <td>{{if d.future_fp_openspace (concat d.future_fp_openspace ' sq mi') 'na'}}</td>
+                      <td>{{if d.current_fp_openspace (concat d.current_fp_openspace ' sq mi') 'n/a'}}</td>
+                      <td>{{if d.future_fp_openspace (concat d.future_fp_openspace ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Total Units Owner Occupied</td>
