@@ -1,9 +1,10 @@
-{{#if (await active) as |resolvedActive|}}
+{{#with (await active) as |resolvedActive|}}
   {{#if resolvedActive}}
     <h6>Active Applications</h6>
     {{#if resolvedActive.length}}
     <ul class="no-bullet xlarge-2-column">
-    {{#each resolvedActive as |application|}}
+    {{#each (await active) as |application|}}
+      {{log application}}
       <li class="list-item-padded">
         <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
         <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
@@ -15,15 +16,16 @@
     {{/if}}
   {{/if}}
   {{else}}
-{{/if}}
+{{/with}}
 
-{{#if (await completed) as |resolvedCompleted|}}
+{{#with (await completed) as |resolvedCompleted|}}
   {{#if resolvedCompleted}}
     <hr>
     <h6>Completed Applications</h6>
     {{#if resolvedCompleted.length}}
     <ul class="no-bullet xlarge-2-column">
-    {{#each resolvedCompleted as |application|}}
+    {{#each (await completed) as |application|}}
+      {{log application}}
       <li class="list-item-padded">
         <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
         <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
@@ -35,7 +37,7 @@
     {{/if}}
   {{/if}}
   {{else}}
-{{/if}}
+{{/with}}
 
 <a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx" target="_blank"><strong>Search LUCATS</strong></a>
 
