@@ -3,18 +3,18 @@
 
     <div class="district-header">
       <h1>
-        {{#scroll-to offset=-210 href='#top' afterScroll='handleAfterScroll'}}
+        <a href="#top" onClick={{action 'handleAfterScroll'}}>
           {{model.boro}} Community District {{model.cd}}
-        {{/scroll-to}}
+        </a>
       </h1>
       <div class="section-menu hide-for-print">
         <ul class="menu">
-          <li>{{scroll-to offset=-210 href='#indicators' label='Indicators' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#built-environment' label='Built Environment' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#floodplain' label='Floodplain' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#community-board' label='Community Board' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#projects' label='Projects' afterScroll='handleAfterScroll'}}</li>
-          <li>{{scroll-to offset=-210 href='#resources' label='Resources' afterScroll='handleAfterScroll'}}</li>
+          <li><a onClick={{action 'handleAfterScroll'}} href="#indicators">Indicators</a></li>
+          <li><a onClick={{action 'handleAfterScroll'}} href='#built-environment'>Built Environment</a></li>
+          <li><a onClick={{action 'handleAfterScroll'}} href='#floodplain'>Floodplain</a></li>
+          <li><a onClick={{action 'handleAfterScroll'}} href='#community-board'>Community Board</a></li>
+          <li><a onClick={{action 'handleAfterScroll'}} href='#projects'>Projects</a></li>
+          <li><a onClick={{action 'handleAfterScroll'}} href='#resources'>Resources</a></li>
         </ul>
       </div>
     </div>
@@ -107,9 +107,7 @@
 
       <section id="indicators" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#indicators' afterScroll='handleAfterScroll'}}
-            {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "bar-chart"}} Indicators {{fa-icon "link"}}
         </h3>
 
         <div class="grid-x grid-padding-x align-bottom">
@@ -240,9 +238,7 @@
 
       <section id="built-environment" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#built-environment' afterScroll='handleAfterScroll'}}
-            {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "building"}} Built Environment {{fa-icon "link"}}
         </h3>
         <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, check out the NYC Facilities Explorer.</p>
 
@@ -312,9 +308,7 @@
 
       <section id="floodplain" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#floodplain' afterScroll='handleAfterScroll'}}
-            {{fa-icon "tint"}} Floodplain {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "tint"}} Floodplain {{fa-icon "link"}}
         </h3>
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
@@ -474,9 +468,7 @@
 
       <section id="community-board" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#community-board' afterScroll='handleAfterScroll'}}
-            {{fa-icon "group"}} Community Board Perspectives {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "group"}} Community Board Perspectives {{fa-icon "link"}}
         </h3>
         <p class="section-header-description">Community boards are liaisons between district residents and City government, charged with advocating for their districts’ unique priorities in collaboration with city agencies. To learn more about the issues affecting your district, view the most recent Statement of Community District Needs. Want to get involved? Visit your community board’s website or email them directly.</p>
 
@@ -522,9 +514,7 @@
 
       <section id="projects" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#projects' afterScroll='handleAfterScroll'}}
-            {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "calendar"}} Projects {{fa-icon "link"}}
         </h3>
         <p class="section-header-description">The following section contains information on active and completed land use plans and proposals, ongoing or concluded neighborhood studies, and community-based plans for each district. Click on an application below to view more details, or visit the <a href="http://www1.nyc.gov/site/planning/applicants/applicant-portal/application-process.page" target="_blank">LUCATS website</a> to learn more about the land use application process. Learn more about community-based planning by visiting our <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page" target="_blank">website</a>.</p>
 
@@ -564,9 +554,7 @@
 
       <section id="resources" class="page-section">
         <h3 class="section-header">
-          {{#scroll-to offset=-210 href='#resources' afterScroll='handleAfterScroll'}}
-            {{fa-icon "files-o"}} Resources {{fa-icon "link"}}
-          {{/scroll-to}}
+          {{fa-icon "files-o"}} Resources {{fa-icon "link"}}
         </h3>
         <p class="section-header-description">Selected census data tables are provided by community district/PUMA. The mapping resources below provide geographic information on a variety of topics at the community district level. The data found on this profile may also be downloaded in CSV and SHP file formats.</p>
 

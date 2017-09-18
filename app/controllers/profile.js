@@ -71,8 +71,8 @@ export default Ember.Controller.extend({
     return this.get('model.dataprofile');
   }),
   actions: {
-    handleAfterScroll(href) {
-      this.set('section', href.replace('#', ''));
+    handleAfterScroll({ target }) {
+      this.set('section', target.hash.replace('#', ''));
     },
     sum(accum, curr) {
       return accum + curr;
