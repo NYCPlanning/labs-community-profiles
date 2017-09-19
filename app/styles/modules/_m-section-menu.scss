@@ -23,17 +23,13 @@
   }
 }
 
-:target:before {
-  content:"";
-  display:block;
-  height: 190px; /* fixed header height*/
-  margin:-60px 0 0; /* negative fixed header height */
+.offset-anchor {
+  @include breakpoint(large) {
+    position: absolute;
+    top: -180px;
+
+    &.about {
+      top: -90px;
+    }
+  }
 }
-
-// .anchor {
-//   padding-top: 190px;
-// }
-
-// .page-section {
-//   padding-top: 190px;
-// }

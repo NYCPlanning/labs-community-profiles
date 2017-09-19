@@ -15,7 +15,7 @@ export default Ember.Route.extend(ScrollToTop, SetMapBounds, {
       if (section) {
         Ember.run.next(this, () => {
           scroller.scrollVertical(`#${section}`, {
-            offset: -115,
+            // offset: -115,
           });
         });
       }

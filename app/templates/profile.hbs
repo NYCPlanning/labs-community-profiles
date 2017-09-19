@@ -1,9 +1,9 @@
-<div id="top" class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x">
   <div class="cell">
 
     <div class="district-header">
       <h1>
-        <a href="#top" onClick={{action 'handleAfterScroll'}}>
+        <a href="#main" onClick={{action 'handleAfterScroll'}}>
           {{model.boro}} Community District {{model.cd}}
         </a>
       </h1>
@@ -105,9 +105,10 @@
         </div>
       </section>
 
-      <section id="indicators" class="page-section">
+      <section class="page-section">
+        <a id="indicators" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "bar-chart"}} Indicators
+          <a onClick={{action 'handleAfterScroll'}} href='#indicators'>{{fa-icon "bar-chart"}} Indicators</a>
         </h3>
 
         <div class="grid-x grid-padding-x align-bottom">
@@ -236,9 +237,10 @@
 
       </section>
 
-      <section id="built-environment" class="page-section">
+      <section class="page-section">
+        <a id="built-environment" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "building"}} Built Environment
+          <a onClick={{action 'handleAfterScroll'}} href='#built-environment'>{{fa-icon "building"}} Built Environment</a>
         </h3>
         <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, check out the NYC Facilities Explorer.</p>
 
@@ -306,9 +308,10 @@
         </div>
       </section>
 
-      <section id="floodplain" class="page-section">
+      <section class="page-section">
+        <a id="floodplain" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "tint"}} Floodplain
+          <a onClick={{action 'handleAfterScroll'}} href='#floodplain'>{{fa-icon "tint"}} Floodplain</a>
         </h3>
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
@@ -466,9 +469,10 @@
         </div>
       </section>
 
-      <section id="community-board" class="page-section">
+      <section class="page-section">
+        <a id="community-board" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "group"}} Community Board Perspectives
+          <a onClick={{action 'handleAfterScroll'}} href='#community-board'>{{fa-icon "group"}} Community Board Perspectives</a>
         </h3>
         <p class="section-header-description">Community boards are liaisons between district residents and City government, charged with advocating for their districts’ unique priorities in collaboration with city agencies. To learn more about the issues affecting your district, view the most recent Statement of Community District Needs. Want to get involved? Visit your community board’s website or email them directly.</p>
 
@@ -512,9 +516,10 @@
 
       </section>
 
-      <section id="projects" class="page-section">
+      <section class="page-section">
+        <a id="projects" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "calendar"}} Projects
+          <a onClick={{action 'handleAfterScroll'}} href='#projects'>{{fa-icon "calendar"}} Projects</a>
         </h3>
         <p class="section-header-description">The following section contains information on active and completed land use plans and proposals, ongoing or concluded neighborhood studies, and community-based plans for each district. Click on an application below to view more details, or visit the <a href="http://www1.nyc.gov/site/planning/applicants/applicant-portal/application-process.page" target="_blank">LUCATS website</a> to learn more about the land use application process. Learn more about community-based planning by visiting our <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page" target="_blank">website</a>.</p>
 
@@ -552,9 +557,10 @@
 
       </section>
 
-      <section id="resources" class="page-section">
+      <section class="page-section">
+        <a id="resources" class="offset-anchor"></a>
         <h3 class="section-header">
-          {{fa-icon "files-o"}} Resources 
+          <a onClick={{action 'handleAfterScroll'}} href='#resources'>{{fa-icon "files-o"}} Resources</a>
         </h3>
         <p class="section-header-description">Selected census data tables are provided by community district/PUMA. The mapping resources below provide geographic information on a variety of topics at the community district level. The data found on this profile may also be downloaded in CSV and SHP file formats.</p>
 

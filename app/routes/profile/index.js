@@ -22,7 +22,7 @@ export default Ember.Route.extend({
       if (section) {
         Ember.run.next(this, () => {
           scroller.scrollVertical(`#${section}`, {
-            offset: -210,
+            // offset: -210,
           });
         });
       }
