@@ -360,7 +360,11 @@
                     </tr>
                     <tr>
                       <td>Median Household Income</td>
-                      <td>{{if d.current_fp_mhhi (numeral-format d.current_fp_mhhi '$0,0') 'n/a'}}</td>
+                      {{#if (eq d.current_fp_mhhi 200000)}}
+                        <td>$200,000+</td>
+                      {{else}}
+                        <td>{{if d.current_fp_mhhi (numeral-format d.current_fp_mhhi '$0,0') 'n/a'}}</td>
+                      {{/if}}
                       <td>{{if d.future_fp_mhhi (numeral-format d.future_fp_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
@@ -370,18 +374,23 @@
                     </tr>
                     <tr>
                       <td>Total Units Owner Occupied</td>
-                      <td>{{if d.current_fp_rent_burden (concat d.current_fp_rent_burden '%') 'n/a'}}</td>
-                      <td>{{if d.future_fp_rent_burden (concat d.future_fp_rent_burden '%') 'n/a'}}</td>
+                      <td>{{if d.current_fp_ownerocc (numeral-format d.current_fp_ownerocc '(0.00%)') 'n/a'}}</td>
+                      <td>{{if d.future_fp_ownerocc (numeral-format d.future_fp_ownerocc '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Owner Occupied Units with Mortgages</td>
-                      <td>{{if d.current_fp_permortg (concat d.current_fp_permortg '%') 'n/a'}}</td>
-                      <td>{{if d.future_fp_permortg (concat d.future_fp_permortg '%') 'n/a'}}</td>
+                      <td>{{if d.current_fp_permortg (numeral-format d.current_fp_permortg '(0.00%)') 'n/a'}}</td>
+                      <td>{{if d.future_fp_permortg (numeral-format d.future_fp_permortg '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Renter Occupied Units Cost Burdened</td>
-                      <td>{{if d.current_fp_ownerocc (concat d.current_fp_ownerocc '%') 'n/a'}}</td>
-                      <td>{{if d.future_fp_ownerocc (concat d.future_fp_ownerocc '%') 'n/a'}}</td>
+                      <td>{{if d.current_fp_rent_burden (numeral-format d.current_fp_rent_burden '(0.00%)') 'n/a'}}</td>
+                      <td>{{if d.future_fp_rent_burden (numeral-format d.future_fp_rent_burden '(0.00%)') 'n/a'}}</td>
+                    </tr>
+                    <tr>
+                      <td>Owner Occupied Units Cost Burdened</td>
+                      <td>{{if d.current_fp_cost_burden (numeral-format d.current_fp_cost_burden '(0.00%)') 'n/a'}}</td>
+                      <td>{{if d.future_fp_cost_burden (numeral-format d.future_fp_cost_burden '(0.00%)') 'n/a'}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -590,6 +599,10 @@
             <h4 class="subsection-header"><strong>New York City Community Health Profiles {{info-tooltip tip="The New York City Community Health Profiles capture the health of 59 community districts across the city."}}</strong></h4>
             <div class="callout">
               <a class="button small hollow expanded" target="_blank" href="{{model.healthProfileLink}}">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Health Profile</strong></a>
+            </div>
+            <h4 class="subsection-header"><strong>Static Community Profiles</strong></h4>
+            <div class="callout">
+              <a class="button small hollow expanded" target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/static-profiles/{{model.borocdAcronymLowerCase}}_profile.pdf">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Static Profile</strong></a>
             </div>
           </div>
           <div class="cell medium-5 xlarge-4">
