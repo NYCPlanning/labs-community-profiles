@@ -29,7 +29,6 @@ html, body {
 
   @include breakpoint(large) {
     padding-top: 90px
-  //   height: calc(100vh - 97px);
   }
 }
 
@@ -150,14 +149,6 @@ html, body {
 .cell-divider--density {
   border-left: $callout-border;
   padding-left: 0.5rem;
-
-  // @include breakpoint(large) {
-  //   border-left: 0;
-  //   padding-left: 0;
-  //   border-top: $callout-border;
-  //   padding-top: 0.5rem;
-  //   margin-top: 0.5rem;
-  // }
 }
 
 
@@ -275,15 +266,5 @@ html, body {
   @include breakpoint(xlarge) {
     max-height: calc(400px - 3rem);
     overflow-y: scroll;
-
-    // &::-webkit-scrollbar {
-    //     -webkit-appearance: none;
-    //     width: 6px;
-    // }
-    // &::-webkit-scrollbar-thumb {
-    //     border-radius: 3px;
-    //     background-color: rgba(0,0,0,.5);
-    //     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-    // }
   }
 }
