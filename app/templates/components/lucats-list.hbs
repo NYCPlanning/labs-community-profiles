@@ -4,7 +4,6 @@
     {{#if resolvedActive.length}}
     <ul class="no-bullet xlarge-2-column">
     {{#each (await active) as |application|}}
-      {{log application}}
       <li class="list-item-padded">
         <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
         <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
@@ -25,7 +24,6 @@
     {{#if resolvedCompleted.length}}
     <ul class="no-bullet xlarge-2-column">
     {{#each (await completed) as |application|}}
-      {{log application}}
       <li class="list-item-padded">
         <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
         <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
