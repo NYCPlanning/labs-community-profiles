@@ -3,6 +3,7 @@ import range from 'd3';
 
 export default Ember.Controller.extend({
   mapState: Ember.inject.service(),
+  scroller: Ember.inject.service(),
   metrics: Ember.inject.service(),
   queryParams: ['section'],
   noSON: Ember.computed('model', function () {
@@ -71,8 +72,14 @@ export default Ember.Controller.extend({
     return this.get('model.dataprofile');
   }),
   actions: {
-    handleAfterScroll({ target }) {
-      this.set('section', target.hash.replace('#', ''));
+    handleAfterScroll(target) {
+      const scroller = this.get('scroller');
+      this.set('section', target);
+      Ember.run.next(this, () => {
+        scroller.scrollVertical(`#${target}`, {
+          // offset: -210,
+        });
+      });
     },
     sum(accum, curr) {
       return accum + curr;

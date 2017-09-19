@@ -30,6 +30,11 @@ function buildBorocd(boro, cd) {
 }
 
 export default Ember.Route.extend(ScrollToTop, {
+  queryParams: {
+    section: {
+      refresh: true,
+    },
+  },
 
   mapState: Ember.inject.service(),
   model(params) {
@@ -71,6 +76,9 @@ export default Ember.Route.extend(ScrollToTop, {
   actions: {
     error() {
       this.transitionTo('/not-found');
+    },
+    didTransition() {
+      console.log('transition');
     },
   },
 });

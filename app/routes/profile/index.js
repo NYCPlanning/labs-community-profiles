@@ -3,6 +3,7 @@ import Ember from 'ember'; // eslint-disable-line
 export default Ember.Route.extend({
   mapState: Ember.inject.service(),
   scroller: Ember.inject.service(),
+
   model() {
     return this.modelFor('profile');
   },
