@@ -7,7 +7,7 @@ export default Ember.Component.extend({
     // remove space in 'staten island'
     const boro = this.get('district.boro').replace(/\s+/g, '').toLowerCase();
     const cd = this.get('district.cd');
-    const URL = `https://lucats.capitalplanning.nyc/ulurp/cd/${boro}/${cd}.json`;
+    const URL = `https://lucats.planninglabs.nyc/ulurp/cd/${boro}/${cd}.json`;
 
     return fetch(URL)
       .then(data => data.json())
