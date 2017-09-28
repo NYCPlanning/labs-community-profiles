@@ -74,7 +74,8 @@
     "node-fetch": "^1.7.2"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "8.6.0",
+    "npm": "5.3.0"
   },
   "private": true,
   "dependencies": {
