@@ -24,32 +24,6 @@
     </div>
 {{/with}}
 
-{{#with (await completed) as |resolvedCompleted|}}
-  {{#if resolvedCompleted}}
-    <hr>
-    <h6>Completed Applications</h6>
-    {{#if resolvedCompleted.length}}
-    <ul class="no-bullet xlarge-2-column">
-    {{#each (await completed) as |application|}}
-      <li class="list-item-padded">
-        <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
-        <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
-      </li>
-    {{/each}}
-    </ul>
-    {{else}}
-    <p class="text-center" style="padding: 60px 0;">No completed applications found.</p>
-    {{/if}}
-  {{/if}}
-  {{else}}
-  <div class="spinner-wrapper loading">
-    <div class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
-  </div>
-{{/with}}
 
 <a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx" target="_blank"><strong>Search LUCATS</strong></a>
 
