@@ -18,11 +18,11 @@ export default Ember.Route.extend({
   actions: {
     didTransition() {
       const scroller = this.get('scroller');
-      const section = this.paramsFor('profile').section;
+      const section = window.location.hash.substr(1);
+
       if (section) {
         Ember.run.next(this, () => {
           scroller.scrollVertical(`#${section}`, {
-            // offset: -210,
           });
         });
       }
