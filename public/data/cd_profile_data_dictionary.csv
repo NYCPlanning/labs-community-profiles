@@ -11,12 +11,10 @@ pop_2000,"Total population, 2000",US Census 2000
 pop_2010,"Total population, 2010",US Census 2010
 pop_change_00_10,Population change from 2000-2010,"US Census 2000, 2010"
 pop_11_15_acs,"Total population of PUMA that roughly matches CD. For CDs that share a PUMA with another CD (BX1/BX2, BX3/BX6, MN1/MN2, MN4/MN5), the population estimate cannot be reliably disaggregated to individual districts.",American Community Survey 2011-2015 5-year estimates
-poverty_rate,Percentage of residents with income below the poverty level in the last 12 months  in the PUMA that CD roughly matches,American Community Survey 2011-2015 5-year estimates
-moe_poverty_rate,Margin of error for corresponding data,American Community Survey 2011-2015 5-year estimates
-poverty_rate_boro,Percentage of residents with income below the poverty level in the last 12 months in CD's borough,American Community Survey 2011-2015 5-year estimates
-moe_poverty_rate_boro,Margin of error for corresponding data,American Community Survey 2011-2015 5-year estimates
-poverty_rate_nyc,Percentage of residents with income below the poverty level in the last 12 months in NYC,American Community Survey 2011-2015 5-year estimates
-moe_poverty_rate_nyc,Margin of error for corresponding data,American Community Survey 2011-2015 5-year estimates
+poverty_rate,"The NYCgov poverty rate, which is a poverty measurement specific to New York City. The NYCgov poverty threshold is based on national expenditures on food, clothing, shelter and utilities adjusted for the high cost of housing in New York City. The income side of the measure includes the value of anti-poverty programs such as SNAP, housing assistance, and the earned income tax credit among others as family resources while accounting for medical spending and the costs of commuting and childcare for workers. The NYCgov poverty measure is a historically higher, but more realistic, measure of poverty than the official U.S. measure. That measure does not account for local costs of living, or the value of most anti-poverty benefits.  For more information about the NYCgov Poverty measure see http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page.","American Community Survey 2011-2015 5-year estimates, Mayor's Office for Economic Opportunity"
+moe_poverty_rate,Margin of error for corresponding data,"American Community Survey 2011-2015 5-year estimates, Mayor's Office for Economic Opportunity"
+poverty_rate_boro,The NYCgov poverty rate for the CD's borough,"American Community Survey 2011-2015 5-year estimates, Mayor's Office for Economic Opportunity"
+poverty_rate_nyc,The NYCgov poverty rate for all of New York City,"American Community Survey 2011-2015 5-year estimates, Mayor's Office for Economic Opportunity"
 pct_bach_deg,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in the PUMA that CD roughly matches,American Community Survey 2011-2015 5-year estimates
 moe_bach_deg,Margin of error for corresponding data,American Community Survey 2011-2015 5-year estimates
 pct_bach_deg_boro,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in CD's borough,American Community Survey 2011-2015 5-year estimates
