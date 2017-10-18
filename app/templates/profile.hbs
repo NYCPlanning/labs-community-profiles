@@ -223,15 +223,15 @@
                             city_stat=d.unemployment_nyc}}
             of the <a href="https://www.census.gov/topics/employment/labor-force.html" target="_blank">civilian labor force is unemployed</a>
           {{/data.indicator}}
-          {{#data.indicator class="indicator" name='Poverty'
+          {{#data.indicator class="indicator" name='NYCgov Poverty Measure'
                             column='poverty_rate'
                             moe='moe_poverty_rate'
-                            tip=d.acs_tooltip
+                            tip='NYC-specific poverty measure, adjusted for the City’s high cost of housing. Includes the value of anti-poverty programs (e.g. SNAP, housing assistance) as family resources. Accounts for certain costs (e.g. medical, commuting, childcare). Historically produces a higher, more realistic measure of poverty than the official U.S. measure.'
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents have <a href="https://www.census.gov/topics/income-poverty/poverty.html" target="_blank">incomes below the poverty&nbsp;level</a>
+            of residents have incomes below the <a href="http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page" target="_blank">NYCgov poverty threshold</a>. Compare to <a href="https://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf" target="_blank">federal poverty&nbsp;rate</a>.
           {{/data.indicator}}
         {{/key-indicators}}
 
