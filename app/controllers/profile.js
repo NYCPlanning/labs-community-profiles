@@ -66,6 +66,16 @@ export default Ember.Controller.extend({
     'moe_over65_rate',
   ],
 
+  dataprofileColumns: Ember.computed('model', function() {
+    return Object.keys(this.get('model.dataprofile'));
+  }),
+  dataprofileDownload: Ember.computed('dataprofileColumns', function() {
+    const columns = this.get('dataprofileColumns').join(',');
+    const model = this.get('model');
+
+    return `https://carto.planninglabs.nyc/user/data/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
+  }),
+
   section: '',
 
   d: Ember.computed('model', function () {
