@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import RankingChart from '../components/ranking-chart';
 import carto from '../utils/carto';
 
@@ -17,7 +17,7 @@ export default RankingChart.extend({
     dcp_orange: '#de7d2c',
     curr: '#60acbf',
   },
-  sql: Ember.computed('borocd', function() {
+  sql: computed('borocd', function() {
     const { column, overlayColumn } =
       this.getProperties('column', 'overlayColumn');
 
@@ -32,7 +32,7 @@ export default RankingChart.extend({
       borocd
       FROM community_district_profiles`;
   }),
-  data: Ember.computed('sql', function() {
+  data: computed('sql', function() {
     const sql = this.get('sql');
     const borocd = this.get('borocd');
     return carto.SQL(sql, 'json').then(data => {

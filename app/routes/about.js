@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { next } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import SetMapBounds from '../mixins/set-map-bounds';
 import ScrollToTop from '../mixins/scroll-to-top';
 
-export default Ember.Route.extend(ScrollToTop, SetMapBounds, {
-  scroller: Ember.inject.service(),
+export default Route.extend(ScrollToTop, SetMapBounds, {
+  scroller: service(),
   model() {
     return this.modelFor('application');
   },
@@ -13,7 +15,7 @@ export default Ember.Route.extend(ScrollToTop, SetMapBounds, {
       const section = this.paramsFor('about').section;
 
       if (section) {
-        Ember.run.next(this, () => {
+        next(this, () => {
           scroller.scrollVertical(`#${section}`, {
             // offset: -115,
           });

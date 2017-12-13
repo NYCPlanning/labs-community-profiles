@@ -1,10 +1,10 @@
-import Ember from 'ember'; // eslint-disable-line
+import Component from '@ember/component'; // eslint-disable-line
 import { Promise } from 'rsvp';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import numeral from 'numeral';
 import d3 from 'd3';
 
-export default Ember.Component.extend(ResizeAware, {
+export default Component.extend(ResizeAware, {
   init() {
     this._super(...arguments);
 

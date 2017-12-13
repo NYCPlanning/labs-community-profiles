@@ -1,36 +1,37 @@
-import Ember from 'ember'; // eslint-disable-line
+import { alias } from '@ember/object/computed'; // eslint-disable-line
+import EmberObject, { computed } from '@ember/object';
 import DS from 'ember-data'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson'; // eslint-disable-line
 import isIntersecting from 'npm:@turf/inside'; // eslint-disable-line
 import District from '../models/district';
 
 export default DS.Model.extend({
-  district: Ember.computed('geometry', function() {
+  district: computed('geometry', function() {
     const districts = this.store.peekAll('district');
     const point = this.get('geometry');
 
     return districts
       .find(dist =>
         isIntersecting(point, dist.get('geometry')),
-      ) || Ember.Object.create();
+      ) || EmberObject.create();
   }),
-  borocd: Ember.computed('district', function() {
+  borocd: computed('district', function() {
     const district = this.get('district');
 
     return district.get('borocd');
   }),
-  boro: Ember.computed('district', function() {
+  boro: computed('district', function() {
     const district = this.get('district');
 
     return district.get('boro');
   }),
-  cd: Ember.computed('district', function() {
+  cd: computed('district', function() {
     const district = this.get('district');
 
     return district.get('cd');
   }),
-  name: Ember.computed.alias('label'),
-  neighborhoods: Ember.computed.alias('label'),
+  name: alias('label'),
+  neighborhoods: alias('label'),
   label: DS.attr('string'),
   region: DS.attr('string'),
   geometry: DS.attr(),

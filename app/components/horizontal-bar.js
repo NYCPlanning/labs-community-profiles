@@ -1,8 +1,8 @@
-import Ember from 'ember'; // eslint-disable-line
+import Component from '@ember/component'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import numeral from 'numeral';
 
-const HorizontalBar = Ember.Component.extend(ResizeAware, {
+const HorizontalBar = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['horizontal-bar'],
 

@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/string';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   'tooltip-text': '',
   mouse: null,
-  style: Ember.computed('mouse', function() {
+  style: computed('mouse', function() {
     const mouse = this.get('mouse');
-    return Ember.String.htmlSafe(`top: ${mouse.y}px; 
+    return htmlSafe(`top: ${mouse.y}px; 
                                   left: ${mouse.x - 20}px;`);
   }),
 });

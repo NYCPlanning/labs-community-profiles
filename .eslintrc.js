@@ -1,24 +1,13 @@
 module.exports = {
-  parser: "babel-eslint",
   root: true,
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
-  extends: "airbnb",
+  extends: 'eslint:recommended',
   env: {
     browser: true
   },
   rules: {
-    'func-names': 0,
-    'no-underscore-dangle': 0,
-    'prefer-rest-params': 0,
-    'prefer-arrow-callback': 0,
-    'import/no-extraneous-dependencies': 0,
-    'space-before-function-paren': 0,
-  },
-  globals: {
-   $: true,
-   d3: true,
   }
 };

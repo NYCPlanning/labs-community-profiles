@@ -1,16 +1,19 @@
-import Ember from 'ember'; // eslint-disable-line
+import { next } from '@ember/runloop'; // eslint-disable-line
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import range from 'd3';
 
-export default Ember.Controller.extend({
-  mapState: Ember.inject.service(),
-  scroller: Ember.inject.service(),
-  metrics: Ember.inject.service(),
+export default Controller.extend({
+  mapState: service(),
+  scroller: service(),
+  metrics: service(),
   queryParams: ['section'],
-  noSON: Ember.computed('model', function () {
+  noSON: computed('model', function () {
     const d = this.get('model.dataprofile');
     return d.son_issue_1.length === 0 && d.son_issue_2.length === 0 && d.son_issue_3.length === 0;
   }),
-  racialProfile: Ember.computed('model', function() {
+  racialProfile: computed('model', function() {
     const d = this.get('d');
     const profile = [
       { value_pct: d.pct_white_nh / 100, value: d.pct_white_nh, color: '#1f4064', group: 'White (Non-Hispanic)' },
@@ -20,13 +23,13 @@ export default Ember.Controller.extend({
       { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, color: '#5e170e', group: 'Hispanic (of any race)' }];
     return profile;
   }),
-  popDensity: Ember.computed('model', function() {
+  popDensity: computed('model', function() {
     const d = this.get('d');
     const { pop_2010, area_sqmi } = d;
 
     return pop_2010 / area_sqmi;
   }),
-  agePopDist: Ember.computed('model', function() {
+  agePopDist: computed('model', function() {
     const d = this.get('d');
     const groups = d3.range(4, 85, 5).reduce(
       (newArr, curr, i, arr) => {
@@ -66,10 +69,10 @@ export default Ember.Controller.extend({
     'moe_over65_rate',
   ],
 
-  dataprofileColumns: Ember.computed('model', function() {
+  dataprofileColumns: computed('model', function() {
     return Object.keys(this.get('model.dataprofile'));
   }),
-  dataprofileDownload: Ember.computed('dataprofileColumns', function() {
+  dataprofileDownload: computed('dataprofileColumns', function() {
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
@@ -78,14 +81,14 @@ export default Ember.Controller.extend({
 
   section: '',
 
-  d: Ember.computed('model', function () {
+  d: computed('model', function () {
     return this.get('model.dataprofile');
   }),
   actions: {
     handleAfterScroll(target) {
       const scroller = this.get('scroller');
       this.set('section', target);
-      Ember.run.next(this, () => {
+      next(this, () => {
         scroller.scrollVertical(`#${target}`, {
           // offset: -210,
         });

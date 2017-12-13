@@ -1,10 +1,13 @@
-import Ember from 'ember'; // eslint-disable-line
+import { get } from '@ember/object'; // eslint-disable-line
+import { scheduleOnce } from '@ember/runloop';
+import { inject as service } from '@ember/service';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment'; // eslint-disable-line
 
-const Router = Ember.Router.extend({
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
-  metrics: Ember.inject.service(),
+  metrics: service(),
 
   didTransition() {
     this._super(...arguments);
@@ -12,11 +15,11 @@ const Router = Ember.Router.extend({
   },
 
   _trackPage() {
-    Ember.run.scheduleOnce('afterRender', this, () => {
+    scheduleOnce('afterRender', this, () => {
       const page = this.get('url');
       const title = this.getWithDefault('currentRouteName', 'unknown');
 
-      Ember.get(this, 'metrics').trackPage({ page, title });
+      get(this, 'metrics').trackPage({ page, title });
     });
   },
 });

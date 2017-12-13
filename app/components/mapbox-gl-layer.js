@@ -1,11 +1,9 @@
 // extends ember-mapbox-gl's layer component to have an API that is more like mapbox.addLayer()
-import Ember from 'ember'; // eslint-disable-line
+import Component from '@ember/component'; // eslint-disable-line
 
-const {
-  getProperties,
-} = Ember;
+import { getProperties } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   map: null,
   layer: {},
   before: '',

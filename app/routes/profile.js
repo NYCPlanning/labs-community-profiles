@@ -1,4 +1,5 @@
-import Ember from 'ember'; // eslint-disable-line
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import Route from '@ember/routing/route';
 import { L } from 'ember-leaflet'; // eslint-disable-line
 import { task } from 'ember-concurrency';
 import ScrollToTop from '../mixins/scroll-to-top';
@@ -29,14 +30,14 @@ function buildBorocd(boro, cd) {
   return borocode + parseInt(cd, 10);
 }
 
-export default Ember.Route.extend(ScrollToTop, {
+export default Route.extend(ScrollToTop, {
   queryParams: {
     section: {
       refresh: true,
     },
   },
 
-  mapState: Ember.inject.service(),
+  mapState: service(),
   model(params) {
     const { boro, cd } = params;
     const borocd = buildBorocd(boro, cd);

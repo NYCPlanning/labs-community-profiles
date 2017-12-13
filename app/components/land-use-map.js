@@ -1,7 +1,9 @@
-import Ember from 'ember'; // eslint-disable-line
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 
-export default Ember.Component.extend({
+export default Component.extend({
   initOptions: {
     style: 'mapbox://styles/mapbox/light-v9',
     zoom: 9,
@@ -63,7 +65,7 @@ export default Ember.Component.extend({
     maxzoom: 14,
   },
 
-  cdSelectedSource: Ember.computed('mapState.currentlySelected.geometry', function () {
+  cdSelectedSource: computed('mapState.currentlySelected.geometry', function () {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
@@ -112,5 +114,5 @@ export default Ember.Component.extend({
     },
   },
 
-  mapState: Ember.inject.service(),
+  mapState: service(),
 });

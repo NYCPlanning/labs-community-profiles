@@ -1,17 +1,18 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import fetch from 'fetch';
 
 const statements = 'https://api.github.com/repos/NYCPlanning/labs-cd-needs-statements/git/trees/master?recursive=1';
 const download = 'https://docs.google.com/viewer?url=https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master/';
 
-export default Ember.Component.extend({
+export default Component.extend({
   district: null,
   downloadPath: download,
-  allStatements: Ember.computed('district', function() {
+  allStatements: computed('district', function() {
     return fetch(statements).then(d => d.json());
   }),
 
-  availableYears: Ember.computed('district', function() {
+  availableYears: computed('district', function() {
     const district = this.get('district');
 
     return this.get('allStatements')
@@ -29,7 +30,7 @@ export default Ember.Component.extend({
 
   showAll: false,
 
-  truncatedYears: Ember.computed('district', 'showAll', function() {
+  truncatedYears: computed('district', 'showAll', function() {
     return this.get('availableYears').then(years => {
       if(this.get('showAll')) {
         return years;

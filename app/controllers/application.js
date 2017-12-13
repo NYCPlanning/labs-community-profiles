@@ -1,10 +1,12 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import isCdLayer from '../utils/is-cd-layer';
 
-export default Ember.Controller.extend({
-  mapState: Ember.inject.service(),
-  metrics: Ember.inject.service(),
+export default Controller.extend({
+  mapState: service(),
+  metrics: service(),
   lat: 40.7071266,
   lng: -74,
   zoom: 9.2,
@@ -13,7 +15,7 @@ export default Ember.Controller.extend({
 
   geojson: {},
 
-  cdSource: Ember.computed('geojson', function () {
+  cdSource: computed('geojson', function () {
     return {
       type: 'geojson',
       data: this.get('geojson'),
@@ -25,21 +27,21 @@ export default Ember.Controller.extend({
     data: '/data/cd_label.geojson',
   },
 
-  cdSelectedSource: Ember.computed('mapState.currentlySelected.geometry', function () {
+  cdSelectedSource: computed('mapState.currentlySelected.geometry', function () {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
     };
   }),
 
-  cdHoveredSource: Ember.computed('mapState.currentlyHovered', function () {
+  cdHoveredSource: computed('mapState.currentlyHovered', function () {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlyHovered'),
     };
   }),
 
-  cdCurrentAddressSource: Ember.computed('mapState.currentAddress.geometry', function () {
+  cdCurrentAddressSource: computed('mapState.currentAddress.geometry', function () {
     return {
       type: 'geojson',
       data: this.get('mapState.currentAddress.geometry'),
@@ -144,7 +146,7 @@ export default Ember.Controller.extend({
   mouseoverLocation: null,
   'tooltip-text': '',
 
-  style: Ember.computed('mapState.currentlySelected', function() {
+  style: computed('mapState.currentlySelected', function() {
     return (geoJsonFeature) => {
       if (geoJsonFeature.properties.borocd === this.get('mapState.currentlySelected.borocd')) {
         return {

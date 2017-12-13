@@ -1,4 +1,4 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
 import FacilitiesSection from '../components/facilities-section';
 import carto from '../utils/carto';
 
@@ -38,7 +38,7 @@ const floodplain2050Layer = {
 
 export default FacilitiesSection.extend({
   pfirm15Template: null,
-  vectorSource: Ember.computed('pfirm15Template', function () {
+  vectorSource: computed('pfirm15Template', function () {
     return carto.getVectorTileTemplate([pfirm15SQL, floodplain2050SQL])
       .then(template => ({
         type: 'vector',

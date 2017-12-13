@@ -1,8 +1,10 @@
-import Ember from 'ember'; // eslint-disable-line
+import { next } from '@ember/runloop'; // eslint-disable-line
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
-  mapState: Ember.inject.service(),
-  scroller: Ember.inject.service(),
+export default Route.extend({
+  mapState: service(),
+  scroller: service(),
 
   model() {
     return this.modelFor('profile');
@@ -11,7 +13,7 @@ export default Ember.Route.extend({
     const mapState = this.get('mapState');
 
     // seeing async issues - putting inside run loop to stagger
-    Ember.run.next(this, () => {
+    next(this, () => {
       mapState.set('currentlySelected', district);
     });
   },
@@ -22,7 +24,7 @@ export default Ember.Route.extend({
       const section = window.location.hash.substr(1);
 
       if (section) {
-        Ember.run.next(this, () => {
+        next(this, () => {
           scroller.scrollVertical(`#${section}`, {
           });
         });

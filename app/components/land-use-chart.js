@@ -1,10 +1,11 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
+import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 
 import carto from '../utils/carto';
 import landUseColors from '../utils/landUseColors';
 
-const LandUseChart = Ember.Component.extend(ResizeAware, {
+const LandUseChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['land-use-chart'],
 
@@ -13,7 +14,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   loading: false,
 
   borocd: '',
-  sql: Ember.computed('borocd', function sql() {
+  sql: computed('borocd', function sql() {
     const borocd = this.get('borocd');
     const SQL = `
     WITH lots AS (
@@ -37,7 +38,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     return SQL;
   }),
 
-  data: Ember.computed('sql', 'borocd', function() {
+  data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
     return carto.SQL(sql);
   }),
