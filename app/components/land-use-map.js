@@ -1,5 +1,4 @@
 import { inject as service } from '@ember/service'; // eslint-disable-line
-import { computed } from '@ember/object';
 import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import { computed } from 'ember-decorators/object';
