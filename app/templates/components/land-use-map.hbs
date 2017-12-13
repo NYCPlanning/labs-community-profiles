@@ -1,21 +1,29 @@
 {{#mapbox-gl id='lu-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
-  {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
+  {{!-- {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
     {{source.layer layer=vectorLayer before='waterway-label'}}
   {{/map.source}}
 
   {{#map.source sourceId='pluto-raster' source=rasterSource as |source|}}
     {{source.layer layer=rasterLayer before='waterway-label'}}
-  {{/map.source}}
+  {{/map.source}} --}}
+
+  {{#with (await vectorSource) as |vSource|}}
+    {{#map.source sourceId='pluto' source=vSource as |source|}}
+    {{source.layer layer=vectorLayer before='waterway-label'}}
+    {{/map.source}}
+
+    {{!-- Community District Boundary --}}
+    {{#if mapState.currentlySelected}}
+      {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
+        {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+      {{/map.source}}
+    {{/if}}
+  {{/with}}
+
 
   {{map.call 'fitBounds' mapState.bounds fitBoundsOptions}}
   {{map.on 'mousemove' (action 'handleMouseover')}}
   {{map.on 'mouseout' (action 'handleMouseleave')}}
-
-  {{#if mapState.currentlySelected}}
-    {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-      {{source.layer layer=cdSelectedLayer before='waterway-label'}}
-    {{/map.source}}
-  {{/if}}
 
   {{hover-tooltip mouse=mouseoverLocation text=tooltip-text}}
 {{/mapbox-gl}}

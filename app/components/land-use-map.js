@@ -2,11 +2,16 @@ import { inject as service } from '@ember/service'; // eslint-disable-line
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
+import { computed } from 'ember-decorators/object';
+import carto from '../utils/carto';
+
+const SQL = 'SELECT a.the_geom_webmercator, a.landuse, b.description, address FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code';
 
 export default Component.extend({
   initOptions: {
     style: 'mapbox://styles/mapbox/light-v9',
     zoom: 9,
+    minZoom: 13.01,
     center: [-74, 40.7071],
     scrollZoom: false,
   },
@@ -16,27 +21,20 @@ export default Component.extend({
     duration: 0,
   },
 
-  vectorSource: {
-    type: 'vector',
-    tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.mvt'],
-    minzoom: 14,
-  },
-
-  rasterSource: {
-    type: 'raster',
-    tiles: ['https://tiles.planninglabs.nyc/pluto/{z}/{x}/{y}/tile.png'],
-    tileSize: 256,
-    maxzoom: 14,
-  },
+  vectorSource: Ember.computed('landuseTemplate', function () {
+    return carto.getVectorTileTemplate([SQL])
+      .then(landuseTemplate => ({
+        type: 'vector',
+        tiles: [landuseTemplate],
+      }));
+  }),
 
   vectorLayer: {
     id: 'landuse-vector',
     type: 'fill',
-    source: 'pluto-vector',
-    'source-layer': 'pluto',
-    minzoom: 14,
+    source: 'pluto',
+    'source-layer': 'layer0',
     paint: {
-      'fill-outline-color': '#cdcdcd',
       'fill-color': {
         property: 'landuse',
         type: 'categorical',
@@ -65,12 +63,13 @@ export default Component.extend({
     maxzoom: 14,
   },
 
-  cdSelectedSource: computed('mapState.currentlySelected.geometry', function () {
+  @computed('mapState.currentlySelected.geometry')
+  cdSelectedSource() {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
     };
-  }),
+  },
 
   cdSelectedLayer: {
     id: 'cd-line',
@@ -96,13 +95,13 @@ export default Component.extend({
       const feature = e.target.queryRenderedFeatures(e.point, { layers: ['landuse-vector'] })[0];
 
       if (feature) {
-        const { descriptio, address } = feature.properties;
+        const { description, address } = feature.properties;
         e.target.getCanvas().style.cursor = 'pointer';
         this.set('mouseoverLocation', {
           x: e.point.x + 30,
           y: e.point.y,
         });
-        this.set('tooltip-text', `${address} ${descriptio}`);
+        this.set('tooltip-text', `${address} ${description}`);
       } else {
         e.target.getCanvas().style.cursor = '';
         this.set('mouseoverLocation', null);
