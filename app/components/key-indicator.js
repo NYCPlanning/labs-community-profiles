@@ -1,10 +1,8 @@
-import Ember from 'ember';
-import d3 from 'd3';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { ChildMixin } from 'ember-composability-tools';
 
-const { computed } = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   borocd: '',
   column: '',
   data: [],

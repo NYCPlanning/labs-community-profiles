@@ -1,11 +1,12 @@
-import Ember from 'ember'; // eslint-disable-line
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import { computed } from 'ember-decorators/object';
 import carto from '../utils/carto';
 
 const SQL = 'SELECT a.the_geom_webmercator, a.landuse, b.description, address FROM support_mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code';
 
-export default Ember.Component.extend({
+export default Component.extend({
   initOptions: {
     style: 'mapbox://styles/mapbox/light-v9',
     zoom: 9,
@@ -52,6 +53,13 @@ export default Ember.Component.extend({
       },
       'fill-opacity': 1,
     },
+  },
+
+  rasterLayer: {
+    id: 'landuse-raster',
+    type: 'raster',
+    source: 'pluto-raster',
+    maxzoom: 14,
   },
 
   @computed('mapState.currentlySelected.geometry')
@@ -104,5 +112,5 @@ export default Ember.Component.extend({
     },
   },
 
-  mapState: Ember.inject.service(),
+  mapState: service(),
 });

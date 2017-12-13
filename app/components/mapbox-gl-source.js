@@ -1,13 +1,9 @@
 // extends ember-mapbox-gl's source component to have an API that is more like mapbox.addSource()
-import Ember from 'ember'; // eslint-disable-line
-// import mapboxGlSource from 'ember-mapbox-gl/components/mapbox-gl-source'; // eslint-disable-line
+import Component from '@ember/component'; // eslint-disable-line
 
-const {
-  get,
-  getProperties,
-} = Ember;
+import { getProperties, get } from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   map: null,
   id: '',
   source: {},

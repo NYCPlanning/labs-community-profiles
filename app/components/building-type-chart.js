@@ -1,4 +1,5 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
+import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import githubraw from '../utils/githubraw';
 
@@ -16,7 +17,7 @@ function getColor(group) {
   return colorMap[group];
 }
 
-const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
+const BuildingTypeChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['relative'],
 
@@ -25,7 +26,7 @@ const BuildingTypeChart = Ember.Component.extend(ResizeAware, {
   loading: false,
   property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
-  data: Ember.computed('property', 'borocd', function() {
+  data: computed('property', 'borocd', function() {
     const borocd = this.get('borocd');
     const property = this.get('property');
     const filler = property === 'numbldgs' ? 'buildings' : 'units';

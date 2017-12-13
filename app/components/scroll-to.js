@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import ScrollTo from 'ember-scroll-to/components/scroll-to';
 
 export default ScrollTo.extend({

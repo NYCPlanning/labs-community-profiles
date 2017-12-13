@@ -1,4 +1,4 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
 import FacilitiesSection from '../components/facilities-section';
 import carto from '../utils/carto';
 
@@ -84,7 +84,7 @@ const zdLabelConfig = {
 };
 
 export default FacilitiesSection.extend({
-  vectorSource: Ember.computed('zoningTemplate', function () {
+  vectorSource: computed('zoningTemplate', function () {
     return carto.getVectorTileTemplate([SQL])
       .then(zoningTemplate => ({
         type: 'vector',

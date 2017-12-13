@@ -1,10 +1,11 @@
-import Ember from 'ember'; // eslint-disable-line
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import Route from '@ember/routing/route';
 import toGeojson from '../utils/to-geojson';
 import bbox from 'npm:@turf/bbox'; // eslint-disable-line
 import ScrollToTop from '../mixins/scroll-to-top';
 
-export default Ember.Route.extend(ScrollToTop, {
-  mapState: Ember.inject.service(),
+export default Route.extend(ScrollToTop, {
+  mapState: service(),
 
   model() {
     return this.modelFor('application');

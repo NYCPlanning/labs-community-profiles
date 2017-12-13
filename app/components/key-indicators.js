@@ -1,13 +1,15 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { A } from '@ember/array';
+import Component from '@ember/component';
 import carto from '../utils/carto';
 import { task } from 'ember-concurrency';
 
-export default Ember.Component.extend({
+export default Component.extend({
   shouldRender: false,
   borocd: '',
   indicators: ['borocd'],
-  coalescedIndicators: Ember.A([]),
-  sql: Ember.computed('indicators.[]', function() {
+  coalescedIndicators: A([]),
+  sql: computed('indicators.[]', function() {
     const indicators = this.get('indicators').join(',');
 
     return `SELECT ${indicators}, 
@@ -22,7 +24,7 @@ export default Ember.Component.extend({
       FROM community_district_profiles`;
   }),
 
-  comparisonData: Ember.computed('sql', function() {
+  comparisonData: computed('sql', function() {
     const sql = this.get('sql');
     return carto.SQL(sql, 'json');
   }),

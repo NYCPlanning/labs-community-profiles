@@ -1,4 +1,6 @@
-import Ember from 'ember'; // eslint-disable-line
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import geoViewport from 'npm:@mapbox/geo-viewport'; // eslint-disable-line
 
@@ -20,10 +22,10 @@ const SQL = `
   SELECT the_geom_webmercator, facname, facdomain, uid FROM ${facdbTable};
 `;
 
-export default Ember.Component.extend({
+export default Component.extend({
   borocd: '',
 
-  initOptions: Ember.computed('mapState', function() {
+  initOptions: computed('mapState', function() {
     const { bounds } = this.get('mapState');
     const { center, zoom } = geoViewport.viewport(bounds, [400, 400]);
     return {
@@ -39,7 +41,7 @@ export default Ember.Component.extend({
     duration: 0,
   },
 
-  vectorSource: Ember.computed('facilitiesTemplate', function () {
+  vectorSource: computed('facilitiesTemplate', function () {
     return carto.getVectorTileTemplate([SQL])
       .then(facilitiesTemplate => ({
         type: 'vector',
@@ -75,7 +77,7 @@ export default Ember.Component.extend({
     },
   },
 
-  sql: Ember.computed('borocd', function sql() {
+  sql: computed('borocd', function sql() {
     const borocd = this.get('borocd');
     const joinSql = `
       SELECT facdomain, count(facdomain)
@@ -89,7 +91,7 @@ export default Ember.Component.extend({
     return joinSql;
   }),
 
-  data: Ember.computed('sql', 'borocd', function() {
+  data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
     return carto.SQL(sql)
       .then((data) => { // eslint-disable-line
@@ -101,14 +103,14 @@ export default Ember.Component.extend({
       });
   }),
 
-  cdSelectedSource: Ember.computed('mapState.currentlySelected', function () {
+  cdSelectedSource: computed('mapState.currentlySelected', function () {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
     };
   }),
 
-  centroid: Ember.computed('mapState.currentlySelected', function () {
+  centroid: computed('mapState.currentlySelected', function () {
     return this.get('mapState.centroid');
   }),
 
@@ -162,5 +164,5 @@ export default Ember.Component.extend({
     },
   },
 
-  mapState: Ember.inject.service(),
+  mapState: service(),
 });

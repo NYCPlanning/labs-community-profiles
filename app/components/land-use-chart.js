@@ -1,10 +1,16 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
+import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
+
+import { max } from 'd3-array';
+import { scaleLinear, scaleBand } from 'd3-scale';
+import { select } from 'd3-selection';
+import 'd3-transition';
 
 import carto from '../utils/carto';
 import landUseColors from '../utils/landUseColors';
 
-const LandUseChart = Ember.Component.extend(ResizeAware, {
+const LandUseChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['land-use-chart'],
 
@@ -13,7 +19,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
   loading: false,
 
   borocd: '',
-  sql: Ember.computed('borocd', function sql() {
+  sql: computed('borocd', function sql() {
     const borocd = this.get('borocd');
     const SQL = `
     WITH lots AS (
@@ -37,7 +43,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
     return SQL;
   }),
 
-  data: Ember.computed('sql', 'borocd', function() {
+  data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
     return carto.SQL(sql);
   }),
@@ -56,7 +62,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
 
     if (!svg) {
       const el = this.$();
-      svg = d3.select(el.get(0)).append('svg')
+      svg = select(el.get(0)).append('svg')
         .attr('class', 'chart');
     }
 
@@ -85,14 +91,14 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     data.then((rawData) => {
-      const y = d3.scaleBand()
+      const y = scaleBand()
         .domain(rawData.map(d => d.landuse_desc))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.2);
 
-      const x = d3.scaleLinear()
-        .domain([0, d3.max(rawData, d => d.percent)])
+      const x = scaleLinear()
+        .domain([0, max(rawData, d => d.percent)])
         .range([0, width]);
 
 

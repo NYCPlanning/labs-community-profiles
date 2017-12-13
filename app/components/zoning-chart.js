@@ -1,6 +1,12 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
+import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import githubraw from '../utils/githubraw';
+
+import { max } from 'd3-array';
+import { scaleLinear, scaleBand } from 'd3-scale';
+import { select } from 'd3-selection';
+import 'd3-transition';
 
 const colors = function(zonedist) {
   if (zonedist === 'R') return '#F3F88F';
@@ -19,7 +25,7 @@ const descriptions = function(zonedist) {
   return 'Other Zones';
 };
 
-const LandUseChart = Ember.Component.extend(ResizeAware, {
+const LandUseChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['land-use-chart'],
 
@@ -30,7 +36,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
 
   borocd: '',
 
-  data: Ember.computed('sql', 'borocd', function() {
+  data: computed('sql', 'borocd', function() {
     const borocd = this.get('borocd');
     return githubraw('zoning', borocd);
   }),
@@ -49,7 +55,7 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
 
     if (!svg) {
       const el = this.$();
-      svg = d3.select(el.get(0)).append('svg')
+      svg = select(el.get(0)).append('svg')
         .attr('class', 'chart');
     }
 
@@ -78,14 +84,14 @@ const LandUseChart = Ember.Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     if (data) {
-      const y = d3.scaleBand()
+      const y = scaleBand()
         .domain(data.map(d => d.zonedist))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.2);
 
-      const x = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.percent)])
+      const x = scaleLinear()
+        .domain([0, max(data, d => d.percent)])
         .range([0, width]);
 
 

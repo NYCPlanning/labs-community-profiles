@@ -1,4 +1,9 @@
 import HorizontalBar from '../components/horizontal-bar';
+import { sum } from 'd3-array';
+import { axisRight, axisBottom } from 'd3-axis';
+import { scaleLinear, scaleBand } from 'd3-scale';
+import { select } from 'd3-selection';
+import 'd3-transition';
 
 const translation = function(x, y) {
   return `translate(${x},${y})`;
@@ -23,7 +28,7 @@ export default HorizontalBar.extend({
     const width = elWidth - margin.left - margin.right;
 
     if (!svg) {
-      svg = d3.select(el.get(0)).append('svg')
+      svg = select(el.get(0)).append('svg')
         .attr('class', 'age-chart')
         .attr('width', margin.left + width + margin.right)
         .attr('height', margin.top + height + margin.bottom)
@@ -62,7 +67,7 @@ export default HorizontalBar.extend({
     const svg = this.get('svg');
     const data = this.get('data');
 
-    const percentMale = d3.sum(data, d => d.male);
+    const percentMale = sum(data, d => d.male);
     const percentFemale = 100 - percentMale;
 
     const el = this.$();
@@ -89,27 +94,27 @@ export default HorizontalBar.extend({
     // no bar will ever reflect more than 10% of pop in a CD
     const maxValue = 10;
 
-    const xScale = d3.scaleLinear()
+    const xScale = scaleLinear()
       .domain([0, maxValue])
       .range([0, regionWidth])
       .nice();
 
-    const yScale = d3.scaleBand()
+    const yScale = scaleBand()
       .domain(data.map(function(d) { return d.group; }))
       .range([height, 0], 0.1);
 
-    const yAxisLeft = d3.axisRight()
+    const yAxisLeft = axisRight()
       .scale(yScale)
       .tickSize(4, 0)
       .tickPadding(margin.middle - 4)
       .tickFormat(tickFormat);
 
-    const xAxisRight = d3.axisBottom()
+    const xAxisRight = axisBottom()
       .scale(xScale)
       .ticks(4)
       .tickFormat(d => `${d}%`);
 
-    const xAxisLeft = d3.axisBottom()
+    const xAxisLeft = axisBottom()
       .scale(xScale.copy().range([pointA, 0]))
       .ticks(4)
       .tickFormat(d => `${d}%`);

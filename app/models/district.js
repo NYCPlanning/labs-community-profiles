@@ -1,4 +1,4 @@
-import Ember from 'ember'; // eslint-disable-line
+import { computed } from '@ember/object'; // eslint-disable-line
 import DS from 'ember-data'; // eslint-disable-line
 import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 import bbox from 'npm:@turf/bbox' // eslint-disable-line
@@ -16,25 +16,25 @@ const acronymCrosswalk = {
 export default DS.Model.extend({
   borocd: DS.attr('number'),
   boro: DS.attr('string'),
-  borocdAcronym: Ember.computed('boro', function() {
+  borocdAcronym: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')];
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
-  borocdAcronymLowerCase: Ember.computed('boro', function() {
+  borocdAcronymLowerCase: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')].toLowerCase();
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
-  boroAcronym: Ember.computed('boro', function() {
+  boroAcronym: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')];
     return `${acronym}`;
   }),
-  boroAcronymLowerCase: Ember.computed('boro', function() {
+  boroAcronymLowerCase: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')].toLowerCase();
     return `${acronym}`;
   }),
-  healthProfileLink: Ember.computed('boro', function() {
+  healthProfileLink: computed('boro', function() {
     const boroAcronymLowerCase = this.get('boroAcronymLowerCase');
     let cd = this.get('cd');
     if(boroAcronymLowerCase === 'si' || boroAcronymLowerCase === 'qn') {
@@ -44,20 +44,20 @@ export default DS.Model.extend({
   }),
   cd: DS.attr('string'),
   geometry: DS.attr(),
-  bounds: Ember.computed('geometry', function() {
+  bounds: computed('geometry', function() {
     const geometry = this.get('geometry');
     return bbox(geometry);
   }),
-  centroid: Ember.computed('geometry', function() {
+  centroid: computed('geometry', function() {
     const geometry = this.get('geometry');
     return centroid(geometry).geometry.coordinates;
   }),
-  neighborhoods: Ember.computed('borocd', function() {
+  neighborhoods: computed('borocd', function() {
     const borocd = this.get('borocd');
     return neighborhoodsCrosswalk[borocd].join(', ');
   }),
   dataprofile: {},
-  name: Ember.computed('boro', 'cd', 'neighborhoods', function() {
+  name: computed('boro', 'cd', 'neighborhoods', function() {
     const { boro, cd, neighborhoods } =
       this.getProperties('boro', 'cd', 'neighborhoods');
 
