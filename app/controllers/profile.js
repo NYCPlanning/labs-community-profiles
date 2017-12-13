@@ -2,7 +2,7 @@ import { next } from '@ember/runloop'; // eslint-disable-line
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import range from 'd3';
+import { range } from 'd3-array';
 
 export default Controller.extend({
   mapState: service(),
@@ -31,7 +31,7 @@ export default Controller.extend({
   }),
   agePopDist: computed('model', function() {
     const d = this.get('d');
-    const groups = d3.range(4, 85, 5).reduce(
+    const groups = range(4, 85, 5).reduce(
       (newArr, curr, i, arr) => {
         if (i + 1 <= arr.length - 1) newArr.push(`${curr + 1}_${arr[i + 1]}`);
         return newArr;

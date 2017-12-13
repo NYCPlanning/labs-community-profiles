@@ -2,7 +2,9 @@ import Component from '@ember/component'; // eslint-disable-line
 import { Promise } from 'rsvp';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import numeral from 'numeral';
-import d3 from 'd3';
+import { select } from 'd3-selection';
+import { scaleLinear, scaleBand } from 'd3-scale';
+import { max } from 'd3-array';
 
 export default Component.extend(ResizeAware, {
   init() {
@@ -60,7 +62,7 @@ export default Component.extend(ResizeAware, {
     const height = this.get('height') - margin.top - margin.bottom;
     const width = elWidth - margin.left - margin.right;
 
-    let svg = d3.select(el.get(0))
+    let svg = select(el.get(0))
       .append('svg')
       .attr('class', 'chart')
       .attr('width', width + margin.left + margin.right)
@@ -78,7 +80,7 @@ export default Component.extend(ResizeAware, {
     let masks = svg.append('g')
       .attr('class', 'masks');
 
-    let div = d3.select(el.get(0))
+    let div = select(el.get(0))
       .append('div')
       .attr('class', 'tooltip')
       .attr('style', 'opacity: 1;');
@@ -122,13 +124,13 @@ export default Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    const x = d3.scaleBand()
+    const x = scaleBand()
       .domain(data.map(d => d.borocd))
       .range([0, width])
       .padding(0);
 
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => (d[column] + (d[moe] || 0)))])
+    const y = scaleLinear()
+      .domain([0, max(data, d => (d[column] + (d[moe] || 0)))])
       .range([0, height]);
 
     const moeColor = '#6eceff';

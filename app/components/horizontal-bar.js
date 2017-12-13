@@ -1,6 +1,10 @@
 import Component from '@ember/component'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import numeral from 'numeral';
+import { max } from 'd3-array';
+import { scaleLinear, scaleBand } from 'd3-scale';
+import { select } from 'd3-selection';
+import 'd3-transition';
 
 const HorizontalBar = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -29,7 +33,7 @@ const HorizontalBar = Component.extend(ResizeAware, {
 
     if (!svg) {
       const el = this.$();
-      svg = d3.select(el.get(0)).append('svg')
+      svg = select(el.get(0)).append('svg')
         .attr('class', 'chart');
     }
 
@@ -59,14 +63,14 @@ const HorizontalBar = Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     Promise.resolve(data).then((rawData) => {
-      const y = d3.scaleBand()
+      const y = scaleBand()
         .domain(rawData.map(d => d.group))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.1);
 
-      const x = d3.scaleLinear()
-        .domain([0, this.get('xMax') ? this.get('xMax') : d3.max(rawData, d => d.value)])
+      const x = scaleLinear()
+        .domain([0, this.get('xMax') ? this.get('xMax') : max(rawData, d => d.value)])
         .range([0, width]);
 
       const groupLabels = svg.selectAll('.typelabel')

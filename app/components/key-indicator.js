@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import d3 from 'd3';
 import { ChildMixin } from 'ember-composability-tools';
 
 export default Component.extend({
