@@ -16,11 +16,11 @@ export default Controller.extend({
   racialProfile: computed('model', function() {
     const d = this.get('d');
     const profile = [
-      { value_pct: d.pct_white_nh / 100, value: d.pct_white_nh, color: '#1f4064', group: 'White (Non-Hispanic)' },
-      { value_pct: d.pct_black_nh / 100, value: d.pct_black_nh, color: '#fdc010', group: 'Black (Non-Hispanic)' },
-      { value_pct: d.pct_asian_nh / 100, value: d.pct_asian_nh, color: '#cd594a', group: 'Asian (Non-Hispanic)' },
-      { value_pct: d.pct_other_nh / 100, value: d.pct_other_nh, color: '#73c4e1', group: 'Other Race (Non-Hispanic)' },
-      { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, color: '#5e170e', group: 'Hispanic (of any race)' }];
+      { value_pct: d.pct_white_nh / 100, value: d.pct_white_nh, group: 'White (Non-Hispanic)' },
+      { value_pct: d.pct_black_nh / 100, value: d.pct_black_nh, group: 'Black (Non-Hispanic)' },
+      { value_pct: d.pct_asian_nh / 100, value: d.pct_asian_nh, group: 'Asian (Non-Hispanic)' },
+      { value_pct: d.pct_other_nh / 100, value: d.pct_other_nh, group: 'Other Race (Non-Hispanic)' },
+      { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, group: 'Hispanic (of any race)' }];
     return profile;
   }),
   popDensity: computed('model', function() {
