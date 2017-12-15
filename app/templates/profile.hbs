@@ -407,9 +407,7 @@
               {{#building-type-chart property='numbldgs' borocd=model.borocd as |chart|}}
                 <p>
                   <span class="stat">
-                    {{#if (await chart.data) as |data|}}
-                      {{numeral-format (reduce (action 'sum') 0 (map-by 'value' data)) '0,0'}}
-                    {{/if}}
+                    {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
                   </span>
                   <span class="stat-footer">buildings are in the current floodplain</span>
                 </p>
@@ -433,9 +431,7 @@
               {{#building-type-chart property='unitsres' borocd=model.borocd as |chart|}}
                 <p>
                   <span class="stat">
-                    {{#if (await chart.data) as |data|}}
-                      {{numeral-format (reduce (action 'sum') 0 (map-by 'value' data)) '0,0'}}
-                    {{/if}}
+                      {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
                   </span>
                   <span class="stat-footer">dwelling units are in the current floodplain</span>
                 </p>
