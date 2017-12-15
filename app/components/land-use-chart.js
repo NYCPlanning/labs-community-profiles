@@ -8,7 +8,7 @@ import { select } from 'd3-selection';
 import 'd3-transition';
 
 import carto from '../utils/carto';
-import landUseColors from '../utils/landUseColors';
+import landUseLookup from '../utils/land-use-lookup';
 
 const LandUseChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -108,7 +108,9 @@ const LandUseChart = Component.extend(ResizeAware, {
       bars.enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('fill', d => landUseColors(d.landuse))
+        .attr('fill', d => {
+          return landUseLookup(d.landuse).color
+        })
         .attr('x', 0)
         .attr('height', y.bandwidth() - 15)
         .attr('rx', 2)

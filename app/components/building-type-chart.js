@@ -1,21 +1,9 @@
-import { computed } from '@ember/object'; // eslint-disable-line
-import Component from '@ember/component';
+import computed from 'ember-computed-decorators';
+import Component from '@ember/component'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import githubraw from '../utils/githubraw';
+import carto from '../utils/carto';
+import landUseLookup from '../utils/land-use-lookup';
 
-function getColor(group) {
-  const colorMap = {
-    '1-2 Family Homes': '#f4f455',
-    'Small Apartments (<= 5 units, < 5 stories)': '#f7d496',
-    'Large Apartments (> 5 units, 5-plus stories)': '#ea6661',
-    'Mixed-use Apartments': '#FF9900',
-    'Commercial': '#f7cabf',
-    'Manufacturing': '#d36ff4',
-    'Public Facilities, Institutions, Other': '#5CA2D1',
-  };
-
-  return colorMap[group];
-}
 
 const BuildingTypeChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -26,18 +14,57 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   loading: false,
   property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
-  data: computed('property', 'borocd', function() {
-    const borocd = this.get('borocd');
-    const property = this.get('property');
-    const filler = property === 'numbldgs' ? 'buildings' : 'units';
-    const id = `building_type_${filler}`;
-    return githubraw(id, borocd)
-      .then(data => data.map((d) => {
-        const colorAdded = d;
-        colorAdded.color = getColor(d.group);
-        return d;
-      }));
-  }),
+
+  @computed('borocd', 'property')
+  sql(borocd, property) {
+    return `
+      SELECT
+        x.landuse as group,
+        SUM(${property}) as value,
+        ROUND(SUM(${property})::numeric / NULLIF(propertytotal,0), 4) AS value_pct
+      FROM (
+        WITH floodplain AS (
+            SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+        )
+
+        SELECT
+          landuse::integer,
+          ${property},
+          SUM (${property}) OVER () as propertytotal
+        FROM support_mappluto a, floodplain b
+        WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
+      ) x
+      GROUP BY landuse, propertytotal
+      ORDER BY SUM(${property}) DESC
+    `;
+  },
+
+  @computed('sql', 'borocd')
+  data() {
+    const sql = this.get('sql');
+    return carto.SQL(sql)
+      .then((data) => { // eslint-disable-line
+        return data.map(d => ({
+          group: landUseLookup(d.group).description,
+          color: landUseLookup(d.group).color,
+          value: d.value,
+          value_pct: d.value_pct,
+        }));
+      });
+  },
+
+  // data: computed('property', 'borocd', function() {
+  //   const borocd = this.get('borocd');
+  //   const property = this.get('property');
+  //   const filler = property === '${property}' ? 'buildings' : 'units';
+  //   const id = `building_type_${filler}`;
+  //   return githubraw(id, borocd)
+  //     .then(data => data.map((d) => {
+  //       const colorAdded = d;
+  //       colorAdded.color = getColor(d.group);
+  //       return d;
+  //     }));
+  // }),
 });
 
 export default BuildingTypeChart;
