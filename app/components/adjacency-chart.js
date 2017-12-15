@@ -14,8 +14,8 @@ const LandUseChart = Component.extend(ResizeAware, {
   sql(borocd) {
     return `
       SELECT
-        count(subgrade_space) AS value,
-        subgrade_space AS group
+        sum(numbldgs) as value, building_age as group,
+        CASE WHEN totalbuildings > 0 THEN ROUND(count(building_age)::numeric / NULLIF(totalbuildings,0), 3) ELSE NULL END AS value_pct
       FROM (
         WITH floodplain AS (
             SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
@@ -23,17 +23,17 @@ const LandUseChart = Component.extend(ResizeAware, {
 
         SELECT
           CASE
-            WHEN landuse IN ('01','02','03') AND bsmtcode IN ('2','4') THEN 'Residential, full basement below grade'
-            WHEN landuse IN ('04','05','06','07','08','09','10','11') AND bsmtcode IN ('2','4') THEN 'Non-residential, full basement below grade'
-            WHEN landuse IN ('01','02','03','04','05','06','07','08','09','10','11') AND bsmtcode = '5' THEN 'Structure with Unknown Basement Type'
-          END AS subgrade_space,
+            WHEN unitsres > 0 AND proxcode = '1'  THEN 'Detached'
+            WHEN unitsres > 0 AND (proxcode = '2' OR proxcode = '3') THEN 'Attached or Semi-detached'
+            ELSE 'Unknown'
+          END AS building_age,
+          numbldgs,
           SUM (numbldgs) OVER () as totalbuildings
         FROM support_mappluto a, floodplain b
         WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
       ) x
-      WHERE subgrade_space IS NOT NULL
-      GROUP BY subgrade_space
-      ORDER BY array_position(array%5B'Residential, full basement below grade', 'Non-residential, full basement below grade', 'Structure with Unknown Basement Type'%5D, subgrade_space)
+      GROUP BY building_age, totalbuildings
+      ORDER BY array_position(array%5B'Detached','Attached or Semi-detached','Unknown'%5D, building_age)
     `;
   },
 

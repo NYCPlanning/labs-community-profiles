@@ -402,7 +402,7 @@
 
         <div class="grid-x grid-padding-x">
           <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that lie within the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               {{#building-type-chart property='numbldgs' borocd=model.borocd as |chart|}}
                 <p>
@@ -426,7 +426,7 @@
             </div>
           </div>
           <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PFIRM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that lie within the 2015 PFIRM"}}</strong></h4>
             <div class="callout text-center">
               {{#building-type-chart property='unitsres' borocd=model.borocd as |chart|}}
                 <p>
@@ -451,7 +451,7 @@
             </div>
           </div>
           <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
+            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that lie within the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
               {{building-age-chart borocd=model.borocd}}
@@ -468,7 +468,7 @@
             <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
             <div class="callout">
               <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
-              {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
+              {{adjacency-chart borocd=model.borocd}}
             </div>
           </div>
         </div>
