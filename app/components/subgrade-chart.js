@@ -28,7 +28,7 @@ const LandUseChart = Component.extend(ResizeAware, {
           END AS subgrade_space,
           SUM (numbldgs) OVER () as totalbuildings
         FROM support_mappluto a, floodplain b
-        WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
+        WHERE cd = ${borocd} AND landuse = '01' AND ST_Within(a.the_geom, b.the_geom)
       ) x
       WHERE subgrade_space IS NOT NULL
       GROUP BY subgrade_space
