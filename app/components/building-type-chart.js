@@ -52,19 +52,6 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
         }));
       });
   },
-
-  // data: computed('property', 'borocd', function() {
-  //   const borocd = this.get('borocd');
-  //   const property = this.get('property');
-  //   const filler = property === '${property}' ? 'buildings' : 'units';
-  //   const id = `building_type_${filler}`;
-  //   return githubraw(id, borocd)
-  //     .then(data => data.map((d) => {
-  //       const colorAdded = d;
-  //       colorAdded.color = getColor(d.group);
-  //       return d;
-  //     }));
-  // }),
 });
 
 export default BuildingTypeChart;

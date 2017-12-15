@@ -1,7 +1,6 @@
 import computed from 'ember-computed-decorators';
 import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import githubraw from '../utils/githubraw';
 import carto from '../utils/carto';
 
 
