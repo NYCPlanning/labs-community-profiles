@@ -10,15 +10,15 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
 
-  @computed('borocd')
-  sql(borocd) {
+  @computed('borocd', 'floodplainSQL')
+  sql(borocd, floodplainSQL) {
     return `
     SELECT
       sum(numbldgs) as value, building_age as group,
       CASE WHEN totalbuildings %3E 0 THEN ROUND(count(building_age)::numeric / NULLIF(totalbuildings,0), 4) ELSE NULL END AS value_pct
     FROM (
       WITH floodplain AS (
-          SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+          ${floodplainSQL}
       )
 
       SELECT

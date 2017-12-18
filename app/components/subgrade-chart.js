@@ -9,15 +9,15 @@ const LandUseChart = Component.extend(ResizeAware, {
   borocd: '',
   datasetName: 'subgrade_space',
 
-  @computed('borocd')
-  sql(borocd) {
+  @computed('borocd', 'floodplainSQL')
+  sql(borocd, floodplainSQL) {
     return `
       SELECT
         count(subgrade_space) AS value,
         subgrade_space AS group
       FROM (
         WITH floodplain AS (
-            SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+            ${floodplainSQL}
         )
 
         SELECT

@@ -94,8 +94,5 @@ export default Controller.extend({
         });
       });
     },
-    sum(accum, curr) {
-      return accum + curr;
-    },
   },
 });

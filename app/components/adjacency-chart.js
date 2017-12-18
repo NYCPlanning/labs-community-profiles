@@ -9,15 +9,15 @@ const LandUseChart = Component.extend(ResizeAware, {
   borocd: '',
   datasetName: 'subgrade_space',
 
-  @computed('borocd')
-  sql(borocd) {
+  @computed('borocd', 'floodplainSQL')
+  sql(borocd, floodplainSQL) {
     return `
       SELECT
         sum(numbldgs) as value, building_age as group,
         CASE WHEN totalbuildings > 0 THEN ROUND(count(building_age)::numeric / NULLIF(totalbuildings,0), 3) ELSE NULL END AS value_pct
       FROM (
         WITH floodplain AS (
-            SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+          ${floodplainSQL}
         )
 
         SELECT

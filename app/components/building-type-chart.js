@@ -15,8 +15,8 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
 
-  @computed('borocd', 'property')
-  sql(borocd, property) {
+  @computed('borocd', 'property', 'floodplainSQL')
+  sql(borocd, property, floodplainSQL) {
     return `
       SELECT
         x.landuse as group,
@@ -24,7 +24,7 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
         ROUND(SUM(${property})::numeric / NULLIF(propertytotal,0), 4) AS value_pct
       FROM (
         WITH floodplain AS (
-            SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = 'AE' OR fld_zone = 'VE'
+            ${floodplainSQL}
         )
 
         SELECT
