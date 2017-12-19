@@ -13,6 +13,16 @@ export default Component.extend({
     return 'SELECT * FROM cdprofiles_floodplain_2050';
   },
 
+  @computed('mode')
+  buildingComparisonChartColumn(mode) {
+    return (mode === '2015') ? 'current_fp_bldg' : 'future_fp_bldg';
+  },
+
+  @computed('mode')
+  resunitsComparisonChartColumn(mode) {
+    return (mode === '2015') ? 'current_fp_resunits' : 'future_fp_resunits';
+  },
+
   actions: {
     setMode(mode) {
       this.set('mode', mode);
