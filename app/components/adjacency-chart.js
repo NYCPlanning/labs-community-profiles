@@ -9,37 +9,40 @@ const LandUseChart = Component.extend(ResizeAware, {
   borocd: '',
   datasetName: 'subgrade_space',
 
-  @computed('borocd', 'floodplainSQL')
-  sql(borocd, floodplainSQL) {
+  @computed('borocd', 'mode')
+  sql(borocd, mode) {
+    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+
     return `
       SELECT
-        sum(numbldgs) as value, building_age as group,
-        CASE WHEN totalbuildings > 0 THEN ROUND(count(building_age)::numeric / NULLIF(totalbuildings,0), 3) ELSE NULL END AS value_pct
-      FROM (
-        WITH floodplain AS (
-          ${floodplainSQL}
-        )
-
-        SELECT
-          CASE
-            WHEN unitsres > 0 AND proxcode = '1'  THEN 'Detached'
-            WHEN unitsres > 0 AND (proxcode = '2' OR proxcode = '3') THEN 'Attached or Semi-detached'
-            ELSE 'Unknown'
-          END AS building_age,
-          numbldgs,
-          SUM (numbldgs) OVER () as totalbuildings
-        FROM support_mappluto a, floodplain b
-        WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
-      ) x
-      GROUP BY building_age, totalbuildings
-      ORDER BY array_position(array%5B'Detached','Attached or Semi-detached','Unknown'%5D, building_age)
+        ${modePrefix}_adj_det AS "Detached",
+        ${modePrefix}_adj_semi AS "Attached or Semi-detached",
+        ${modePrefix}_adj_unk AS "Unknown"
+      FROM planninglabs.community_profiles_floodplain
+      WHERE borocd = ${borocd}
     `;
   },
 
   @computed('sql', 'borocd')
   data() {
     const sql = this.get('sql');
-    return carto.SQL(sql, 'json');
+    return carto.SQL(sql, 'json')
+      .then((rawData) => {
+        const data = rawData[0];
+        const total = Object.keys(data).reduce((acc, curr) => acc + curr);
+
+        return Object.keys(data)
+          .map((key) => {
+            const group = key;
+            const value = data[key];
+            const value_pct = value / total; // eslint-disable-line
+            return {
+              group,
+              value,
+              value_pct,
+            };
+          });
+      });
   },
 });
 

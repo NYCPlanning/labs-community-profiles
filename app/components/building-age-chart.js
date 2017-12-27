@@ -5,44 +5,45 @@ import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-li
 import carto from '../utils/carto';
 
 
-
 const BuildingAgeChart = Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
 
-  @computed('borocd', 'floodplainSQL')
-  sql(borocd, floodplainSQL) {
+  @computed('borocd', 'mode')
+  sql(borocd, mode) {
+    const modePrefix = mode === '2015' ? 'cur' : 'fut';
     return `
-    SELECT
-      sum(numbldgs) as value, building_age as group,
-      CASE WHEN totalbuildings %3E 0 THEN ROUND(count(building_age)::numeric / NULLIF(totalbuildings,0), 4) ELSE NULL END AS value_pct
-    FROM (
-      WITH floodplain AS (
-          ${floodplainSQL}
-      )
-
       SELECT
-        CASE
-          WHEN yearbuilt %3E 0 AND yearbuilt %3C 1961  THEN 'Pre-1961'
-          WHEN yearbuilt %3E= 1961 AND YearBuilt %3C 1983 THEN '1961-1982'
-          WHEN yearbuilt %3E= 1983 AND YearBuilt %3C 2013 THEN '1983-2012'
-          WHEN yearbuilt %3E= 2013 THEN '2013-Present'
-          ELSE 'Unknown'
-        END AS building_age,
-        numbldgs,
-        SUM (numbldgs) OVER () as totalbuildings
-      FROM support_mappluto a, floodplain b
-      WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
-    ) x
-    GROUP BY building_age, totalbuildings
-    ORDER BY array_position(array%5B'Pre-1961','1961-1982','1983-2012','2013-Present','Unknown'%5D, building_age)
+        ${modePrefix}_age_pre_1961 AS "Pre-1961",
+        ${modePrefix}_age_1961_1982 AS "1961-1982",
+        ${modePrefix}_age_1983_2012 AS "1983-2012",
+        ${modePrefix}_age_2013_2016 AS "2013-2016",
+        ${modePrefix}_age_unk AS "Unknown"
+      FROM planninglabs.community_profiles_floodplain
+      WHERE borocd = ${borocd}
     `;
   },
 
   @computed('sql', 'borocd')
   data() {
     const sql = this.get('sql');
-    return carto.SQL(sql, 'json');
+    return carto.SQL(sql, 'json')
+      .then((rawData) => {
+        const data = rawData[0];
+        const total = Object.keys(data).reduce((acc, curr) => acc + curr);
+
+        return Object.keys(data)
+          .map((key) => {
+            const group = key;
+            const value = data[key];
+            const value_pct = value / total; // eslint-disable-line
+            return {
+              group,
+              value,
+              value_pct,
+            };
+          });
+      });
   },
 });
 

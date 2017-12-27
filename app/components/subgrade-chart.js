@@ -9,37 +9,40 @@ const LandUseChart = Component.extend(ResizeAware, {
   borocd: '',
   datasetName: 'subgrade_space',
 
-  @computed('borocd', 'floodplainSQL')
-  sql(borocd, floodplainSQL) {
+  @computed('borocd', 'mode')
+  sql(borocd, mode) {
+    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+
     return `
       SELECT
-        count(subgrade_space) AS value,
-        subgrade_space AS group
-      FROM (
-        WITH floodplain AS (
-            ${floodplainSQL}
-        )
-
-        SELECT
-          CASE
-            WHEN landuse IN ('01','02','03') AND bsmtcode IN ('2','4') THEN 'Residential, full basement below grade'
-            WHEN landuse IN ('04','05','06','07','08','09','10','11') AND bsmtcode IN ('2','4') THEN 'Non-residential, full basement below grade'
-            WHEN landuse IN ('01','02','03','04','05','06','07','08','09','10','11') AND bsmtcode = '5' THEN 'Structure with Unknown Basement Type'
-          END AS subgrade_space,
-          SUM (numbldgs) OVER () as totalbuildings
-        FROM support_mappluto a, floodplain b
-        WHERE cd = ${borocd} AND landuse = '01' AND ST_Within(a.the_geom, b.the_geom)
-      ) x
-      WHERE subgrade_space IS NOT NULL
-      GROUP BY subgrade_space
-      ORDER BY array_position(array%5B'Residential, full basement below grade', 'Non-residential, full basement below grade', 'Structure with Unknown Basement Type'%5D, subgrade_space)
+        ${modePrefix}_sub_fulla AS "Residential, full basement below grade",
+        ${modePrefix}_sub_fullb AS "Non-residential, full basement below grade",
+        ${modePrefix}_sub_unk AS "Unknown"
+      FROM planninglabs.community_profiles_floodplain
+      WHERE borocd = ${borocd}
     `;
   },
 
   @computed('sql', 'borocd')
   data() {
     const sql = this.get('sql');
-    return carto.SQL(sql, 'json');
+    return carto.SQL(sql, 'json')
+      .then((rawData) => {
+        const data = rawData[0];
+        const total = Object.keys(data).reduce((acc, curr) => acc + curr);
+
+        return Object.keys(data)
+          .map((key) => {
+            const group = key;
+            const value = data[key];
+            const value_pct = value / total; // eslint-disable-line
+            return {
+              group,
+              value,
+              value_pct,
+            };
+          });
+      });
   },
 });
 
