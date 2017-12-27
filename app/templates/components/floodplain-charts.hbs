@@ -9,7 +9,7 @@
   <div class="cell medium-6 large-6 xlarge-5">
     <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that lie within the selected floodplain"}}</strong></h4>
     <div class="callout text-center">
-      {{#building-type-chart property='numbldgs' floodplainSQL=floodplainSQL borocd=model.borocd as |chart|}}
+      {{#building-type-chart type='buildings' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
             {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
@@ -33,7 +33,7 @@
   <div class="cell medium-6 large-6 xlarge-5">
     <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that lie within the selected floodplain"}}</strong></h4>
     <div class="callout text-center">
-      {{#building-type-chart property='unitsres' floodplainSQL=floodplainSQL borocd=model.borocd as |chart|}}
+      {{#building-type-chart type='units' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
               {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
@@ -59,21 +59,21 @@
     <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that lie within the selected floodplain"}}</strong></h4>
     <div class="callout">
       <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
-      {{building-age-chart borocd=model.borocd floodplainSQL=floodplainSQL}}
+      {{building-age-chart borocd=model.borocd}}
     </div>
   </div>
   <div class="cell medium-6 xlarge-4">
     <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of 1 and 2 family dwellings with basements that lie within the selected floodplain"}}</strong></h4>
     <div class="callout">
       <p class="text-small">Basements are highly vulnerable to flooding and can lead to higher retrofitting costs.</p>
-      {{subgrade-chart borocd=model.borocd floodplainSQL=floodplainSQL}}
+      {{subgrade-chart borocd=model.borocd}}
     </div>
   </div>
   <div class="cell medium-6 xlarge-4">
     <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that lie within the selected floodplain"}}</strong></h4>
     <div class="callout">
       <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
-      {{adjacency-chart borocd=model.borocd floodplainSQL=floodplainSQL}}
+      {{adjacency-chart borocd=model.borocd}}
     </div>
   </div>
 </div>

@@ -5,15 +5,6 @@ export default Component.extend({
   mode: '2015',
 
   @computed('mode')
-  floodplainSQL(mode) {
-    if (mode === '2015') {
-      return 'SELECT * FROM support_waterfront_pfirm15 WHERE fld_zone = \'AE\' OR fld_zone = \'VE\'';
-    }
-
-    return 'SELECT * FROM cdprofiles_floodplain_2050';
-  },
-
-  @computed('mode')
   buildingComparisonChartColumn(mode) {
     return (mode === '2015') ? 'current_fp_bldg' : 'future_fp_bldg';
   },

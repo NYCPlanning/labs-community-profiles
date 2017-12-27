@@ -15,27 +15,24 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
 
-  @computed('borocd', 'property', 'floodplainSQL')
-  sql(borocd, property, floodplainSQL) {
+  @computed('borocd', 'type', 'mode')
+  sql(borocd, type, mode) {
+    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+    const typeAbbrev = type === 'buildings' ? 'b' : 'du';
     return `
       SELECT
-        x.landuse as group,
-        SUM(${property}) as value,
-        ROUND(SUM(${property})::numeric / NULLIF(propertytotal,0), 4) AS value_pct
-      FROM (
-        WITH floodplain AS (
-            ${floodplainSQL}
-        )
-
-        SELECT
-          landuse::integer,
-          ${property},
-          SUM (${property}) OVER () as propertytotal
-        FROM support_mappluto a, floodplain b
-        WHERE cd = ${borocd} AND ST_Within(a.the_geom, b.the_geom)
-      ) x
-      GROUP BY landuse, propertytotal
-      ORDER BY SUM(${property}) DESC
+        ${modePrefix}_${typeAbbrev}_lu01 AS "1",
+        ${modePrefix}_${typeAbbrev}_lu02 AS "2",
+        ${modePrefix}_${typeAbbrev}_lu03 AS "3",
+        ${modePrefix}_${typeAbbrev}_lu04 AS "4",
+        ${modePrefix}_${typeAbbrev}_lu05 AS "5",
+        ${modePrefix}_${typeAbbrev}_lu06 AS "6",
+        ${modePrefix}_${typeAbbrev}_lu07 AS "7",
+        ${modePrefix}_${typeAbbrev}_lu08 AS "8",
+        ${modePrefix}_${typeAbbrev}_lu10 AS "10",
+        ${modePrefix}_${typeAbbrev}_lu11 AS "11"
+      FROM planninglabs.community_profiles_floodplain
+      WHERE borocd = ${borocd}
     `;
   },
 
@@ -43,13 +40,25 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   data() {
     const sql = this.get('sql');
     return carto.SQL(sql)
-      .then((data) => { // eslint-disable-line
-        return data.map(d => ({
-          group: landUseLookup(d.group).description,
-          color: landUseLookup(d.group).color,
-          value: d.value,
-          value_pct: d.value_pct,
-        }));
+      .then((rawData) => { // eslint-disable-line
+        const data = rawData[0];
+        const total = Object.keys(data).reduce((acc, curr) => acc + curr);
+
+        return Object.keys(data)
+          .map((key) => {
+            const group = parseInt(key, 10);
+            const value = data[key];
+            const value_pct = value / total; // eslint-disable-line
+            return {
+              group: landUseLookup(group).description,
+              color: landUseLookup(group).color,
+              value,
+              value_pct,
+            };
+          })
+          .sort((a, b) => { // eslint-disable-line
+            return a.value === b.value ? 0 : -(a.value > b.value) || 1;
+          });
       });
   },
 });
