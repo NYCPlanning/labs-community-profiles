@@ -12,7 +12,6 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
-  property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
 
   @computed('borocd', 'type', 'mode')

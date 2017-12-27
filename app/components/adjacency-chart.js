@@ -7,7 +7,6 @@ import carto from '../utils/carto';
 const LandUseChart = Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
-  datasetName: 'subgrade_space',
 
   @computed('borocd', 'mode')
   sql(borocd, mode) {
