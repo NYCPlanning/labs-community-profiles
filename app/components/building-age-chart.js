@@ -35,7 +35,7 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
         return Object.keys(data)
           .map((key) => {
             const group = key;
-            const value = data[key];
+            const value = data[key] || 0;
             const value_pct = value / total; // eslint-disable-line
             return {
               group,
