@@ -313,6 +313,7 @@
         <h3 class="section-header">
           <a href='#floodplain'>{{fa-icon "tint"}} Floodplain</a>
         </h3>
+        {{#if inFloodplain}}
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
             <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain is based on the 1% annual chance floodplain established by the FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York City Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise in the 2050s. For more information on City Planning’s resiliency work program, visit <a href="http://nyc.gov/resilientneighborhoods" target="_blank">Resilient Neighborhoods</a>.</p>
@@ -399,8 +400,14 @@
             </div>
           </div>
         </div>
-
-        {{floodplain-charts model=model}}
+          {{floodplain-charts model=model}}
+        {{else}}
+        <div class="grid-x grid-padding-x">
+          <div class="cell large-8">
+            <p class="section-header-description"> This community district is not affected by the floodplain.</p>
+          </div>
+        </div>
+        {{/if}}
       </section>
 
       <section class="page-section">
