@@ -30,7 +30,9 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
     return carto.SQL(sql, 'json')
       .then((rawData) => {
         const data = rawData[0];
-        const total = Object.keys(data).reduce((acc, curr) => acc + curr);
+        const total = Object.keys(data)
+          .map(key => data[key])
+          .reduce((acc, curr) => acc + curr);
 
         return Object.keys(data)
           .map((key) => {
