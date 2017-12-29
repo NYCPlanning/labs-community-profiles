@@ -331,14 +331,14 @@
                 <table class="text-small no-margin">
                   <thead>
                     <tr>
-                      <th>Indicators {{info-tooltip tip=d.acs_tooltip}}</th>
+                      <th>Indicators</th>
                       <th style="background-color: #99CCEE;">Current Floodplain</th>
                       <th style="background-color: #EDCD85;">2050s Floodplain</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>2010 Population</td>
+                      <td>2010 Population {{info-tooltip tip="Population counts for floodplain geographies were defined in terms of 2010 census block geographies, which selected 2010 census blocks if their centroids intersected the floodplain areas. Selected demographic data were obtained and then aggregated to produce demographic profiles of floodplain areas that lay within community districts."}}</td>
                       <td>
                         {{#if d.future_fp_pop}}
                           {{if (gte d.current_fp_pop 1000) (numeral-format d.current_fp_pop '0.0a') (numeral-format d.current_fp_pop '0')}}
@@ -355,12 +355,12 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Total Lot Area</td>
+                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
                       <td>{{if d.current_fp_area (concat (numeral-format d.current_fp_area '0.00') ' sq mi') 'n/a'}}</td>
                       <td>{{if d.future_fp_area (concat (numeral-format d.future_fp_area '0.00') ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Median Household Income</td>
+                      <td>Median Household Income {{info-tooltip tip=d.acs_tooltip}}</td>
                       {{#if (eq d.current_fp_mhhi 200000)}}
                         <td>$200,000+</td>
                       {{else}}
@@ -369,27 +369,27 @@
                       <td>{{if d.future_fp_mhhi (numeral-format d.future_fp_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Open Space Area</td>
+                      <td>Open Space Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
                       <td>{{if d.current_fp_openspace (concat d.current_fp_openspace ' sq mi') 'n/a'}}</td>
                       <td>{{if d.future_fp_openspace (concat d.future_fp_openspace ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Total Units Owner Occupied</td>
+                      <td>Total Units Owner Occupied {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_ownerocc (numeral-format d.current_fp_ownerocc '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_ownerocc (numeral-format d.future_fp_ownerocc '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units with Mortgages</td>
+                      <td>Owner Occupied Units with Mortgages {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_permortg (numeral-format d.current_fp_permortg '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_permortg (numeral-format d.future_fp_permortg '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Renter Occupied Units Cost Burdened</td>
+                      <td>Renter Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_rent_burden (numeral-format d.current_fp_rent_burden '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_rent_burden (numeral-format d.future_fp_rent_burden '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units Cost Burdened</td>
+                      <td>Owner Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_cost_burden (numeral-format d.current_fp_cost_burden '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_cost_burden (numeral-format d.future_fp_cost_burden '(0.00%)') 'n/a'}}</td>
                     </tr>
@@ -404,7 +404,7 @@
         {{else}}
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
-            <p class="section-header-description"> This community district is not affected by the floodplain.</p>
+            <p class="callout"> This community district is not affected by the floodplain.</p>
           </div>
         </div>
         {{/if}}
