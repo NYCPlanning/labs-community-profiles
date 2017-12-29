@@ -14,9 +14,9 @@ const LandUseChart = Component.extend(ResizeAware, {
 
     return `
       SELECT
-        ${modePrefix}_sub_fullb AS "Full basement below grade",
-        ${modePrefix}_sub_fulla AS "Full basement above grade",
-        ${modePrefix}_sub_unk AS "Unknown"
+        ${modePrefix}_adj_det AS "Detached",
+        ${modePrefix}_adj_semi AS "Attached or Semi-detached",
+        ${modePrefix}_adj_unk AS "Unknown"
       FROM planninglabs.community_profiles_floodplain
       WHERE borocd = ${borocd}
     `;

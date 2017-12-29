@@ -1,7 +1,7 @@
 import { next } from '@ember/runloop'; // eslint-disable-line
-import { computed } from '@ember/object';
-import { inject as service } from '@ember/service';
-import Controller from '@ember/controller';
+import computed from 'ember-computed-decorators';
+import { inject as service } from '@ember/service'; // eslint-disable-line
+import Controller from '@ember/controller'; // eslint-disable-line
 import { range } from 'd3-array';
 
 export default Controller.extend({
@@ -9,11 +9,15 @@ export default Controller.extend({
   scroller: service(),
   metrics: service(),
   queryParams: ['section'],
-  noSON: computed('model', function () {
+
+  @computed('model')
+  noSON() {
     const d = this.get('model.dataprofile');
     return d.son_issue_1.length === 0 && d.son_issue_2.length === 0 && d.son_issue_3.length === 0;
-  }),
-  racialProfile: computed('model', function() {
+  },
+
+  @computed('model')
+  racialProfile() {
     const d = this.get('d');
     const profile = [
       { value_pct: d.pct_white_nh / 100, value: d.pct_white_nh, group: 'White (Non-Hispanic)' },
@@ -22,14 +26,24 @@ export default Controller.extend({
       { value_pct: d.pct_other_nh / 100, value: d.pct_other_nh, group: 'Other Race (Non-Hispanic)' },
       { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, group: 'Hispanic (of any race)' }];
     return profile;
-  }),
-  popDensity: computed('model', function() {
-    const d = this.get('d');
-    const { pop_2010, area_sqmi } = d;
+  },
 
-    return pop_2010 / area_sqmi;
-  }),
-  agePopDist: computed('model', function() {
+  @computed('model')
+  inFloodplain(model) {
+    const { current_fp_bldg, future_fp_bldg } = model.dataprofile; // eslint-disable-line
+    return current_fp_bldg !== 0 || future_fp_bldg !== 0; // eslint-disable-line
+  },
+
+  @computed('model')
+  popDensity() {
+    const d = this.get('d');
+    const { pop_2010, area_sqmi } = d; // eslint-disable-line
+
+    return pop_2010 / area_sqmi; // eslint-disable-line
+  },
+
+  @computed('model')
+  agePopDist() {
     const d = this.get('d');
     const groups = range(4, 85, 5).reduce(
       (newArr, curr, i, arr) => {
@@ -45,7 +59,7 @@ export default Controller.extend({
     return groups.map(group => ({
       group, male: d[`male_${group}`], female: d[`female_${group}`],
     }));
-  }),
+  },
 
   columns: [
     'poverty_rate',
@@ -69,21 +83,26 @@ export default Controller.extend({
     'moe_over65_rate',
   ],
 
-  dataprofileColumns: computed('model', function() {
+  @computed('model')
+  dataprofileColumns() {
     return Object.keys(this.get('model.dataprofile'));
-  }),
-  dataprofileDownload: computed('dataprofileColumns', function() {
+  },
+
+  @computed('dataprofileColumns')
+  dataprofileDownload() {
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
     return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
-  }),
+  },
 
   section: '',
 
-  d: computed('model', function () {
+  @computed('model')
+  d() {
     return this.get('model.dataprofile');
-  }),
+  },
+
   actions: {
     handleAfterScroll(target) {
       const scroller = this.get('scroller');
@@ -93,9 +112,6 @@ export default Controller.extend({
           // offset: -210,
         });
       });
-    },
-    sum(accum, curr) {
-      return accum + curr;
     },
   },
 });

@@ -313,6 +313,7 @@
         <h3 class="section-header">
           <a href='#floodplain'>{{fa-icon "tint"}} Floodplain</a>
         </h3>
+        {{#if inFloodplain}}
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
             <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The current floodplain is based on the 1% annual chance floodplain established by the FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM). The 2050s floodplain is based on FEMA’s Preliminary Flood Insurance Rate Map data and the New York City Panel on Climate Change’s 90th Percentile Projections for Sea-Level Rise in the 2050s. For more information on City Planning’s resiliency work program, visit <a href="http://nyc.gov/resilientneighborhoods" target="_blank">Resilient Neighborhoods</a>.</p>
@@ -330,14 +331,14 @@
                 <table class="text-small no-margin">
                   <thead>
                     <tr>
-                      <th>Indicators {{info-tooltip tip=d.acs_tooltip}}</th>
+                      <th>Indicators</th>
                       <th style="background-color: #99CCEE;">Current Floodplain</th>
                       <th style="background-color: #EDCD85;">2050s Floodplain</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>2010 Population</td>
+                      <td>2010 Population {{info-tooltip tip="Population counts for floodplain geographies were defined in terms of 2010 census block geographies, which selected 2010 census blocks if their centroids intersected the floodplain areas. Selected demographic data were obtained and then aggregated to produce demographic profiles of floodplain areas that lay within community districts."}}</td>
                       <td>
                         {{#if d.future_fp_pop}}
                           {{if (gte d.current_fp_pop 1000) (numeral-format d.current_fp_pop '0.0a') (numeral-format d.current_fp_pop '0')}}
@@ -354,12 +355,12 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Total Lot Area</td>
+                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
                       <td>{{if d.current_fp_area (concat (numeral-format d.current_fp_area '0.00') ' sq mi') 'n/a'}}</td>
                       <td>{{if d.future_fp_area (concat (numeral-format d.future_fp_area '0.00') ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Median Household Income</td>
+                      <td>Median Household Income {{info-tooltip tip=d.acs_tooltip}}</td>
                       {{#if (eq d.current_fp_mhhi 200000)}}
                         <td>$200,000+</td>
                       {{else}}
@@ -368,27 +369,27 @@
                       <td>{{if d.future_fp_mhhi (numeral-format d.future_fp_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Open Space Area</td>
+                      <td>Open Space Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
                       <td>{{if d.current_fp_openspace (concat d.current_fp_openspace ' sq mi') 'n/a'}}</td>
                       <td>{{if d.future_fp_openspace (concat d.future_fp_openspace ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Total Units Owner Occupied</td>
+                      <td>Total Units Owner Occupied {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_ownerocc (numeral-format d.current_fp_ownerocc '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_ownerocc (numeral-format d.future_fp_ownerocc '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units with Mortgages</td>
+                      <td>Owner Occupied Units with Mortgages {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_permortg (numeral-format d.current_fp_permortg '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_permortg (numeral-format d.future_fp_permortg '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Renter Occupied Units Cost Burdened</td>
+                      <td>Renter Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_rent_burden (numeral-format d.current_fp_rent_burden '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_rent_burden (numeral-format d.future_fp_rent_burden '(0.00%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units Cost Burdened</td>
+                      <td>Owner Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip}}</td>
                       <td>{{if d.current_fp_cost_burden (numeral-format d.current_fp_cost_burden '(0.00%)') 'n/a'}}</td>
                       <td>{{if d.future_fp_cost_burden (numeral-format d.future_fp_cost_burden '(0.00%)') 'n/a'}}</td>
                     </tr>
@@ -399,79 +400,14 @@
             </div>
           </div>
         </div>
-
+          {{floodplain-charts model=model}}
+        {{else}}
         <div class="grid-x grid-padding-x">
-          <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout text-center">
-              {{#building-type-chart property='numbldgs' borocd=model.borocd as |chart|}}
-                <p>
-                  <span class="stat">
-                    {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
-                  </span>
-                  <span class="stat-footer">buildings are in the current floodplain</span>
-                </p>
-              {{/building-type-chart}}
-              <hr>
-              <span class="chart-legend">
-                <span class="nobreak"><span class="total"></span> Total Buildings</span>
-                &nbsp;
-                <span class="nobreak"><span class="percent"></span> Within Floodplain</span>
-              </span>
-              {{resiliency-chart
-                  column='cd_tot_bldgs'
-                  overlayColumn='current_fp_bldg'
-                  numeral_format='0,0'
-                  borocd=model.borocd}}
-            </div>
-          </div>
-          <div class="cell medium-6 large-6 xlarge-5">
-            <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of residential units on lots that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout text-center">
-              {{#building-type-chart property='unitsres' borocd=model.borocd as |chart|}}
-                <p>
-                  <span class="stat">
-                      {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
-                  </span>
-                  <span class="stat-footer">dwelling units are in the current floodplain</span>
-                </p>
-              {{/building-type-chart}}
-              <hr>
-              <span class="chart-legend">
-                <span class="nobreak"><span class="total"></span>&nbsp;Total Units</span>
-                &nbsp;
-                <span class="nobreak"><span class="percent"></span>&nbsp;Within Floodplain</span>
-              </span>
-              {{resiliency-chart
-                  column='cd_tot_resunits'
-                  overlayColumn='current_fp_resunits'
-                  numeral_format='0,0'
-                  borocd=model.borocd
-                  unit='units'}}
-            </div>
-          </div>
-          <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings on lots that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout">
-              <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
-              {{building-age-chart borocd=model.borocd}}
-            </div>
-          </div>
-          <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of buildings with basements that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout">
-              <p class="text-small">Basements are highly vulnerable to flooding and can lead to higher retrofitting costs.</p>
-              {{subgrade-chart borocd=model.borocd}}
-            </div>
-          </div>
-          <div class="cell medium-6 xlarge-4">
-            <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of adjacent buildings that intersect with the 2015 PFIRM"}}</strong></h4>
-            <div class="callout">
-              <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
-              {{subgrade-chart datasetName='building_adjacency' borocd=model.borocd}}
-            </div>
+          <div class="cell large-8">
+            <p class="callout"> This community district is not affected by the floodplain.</p>
           </div>
         </div>
+        {{/if}}
       </section>
 
       <section class="page-section">
@@ -601,7 +537,6 @@
               <a class="button small hollow expanded" target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/static-profiles/{{model.borocdAcronymLowerCase}}_profile.pdf">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Summary Profile</strong></a>
             </div>
           </div>
-          {{log dataprofileColumns}}
           <div class="cell medium-5 xlarge-4">
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">

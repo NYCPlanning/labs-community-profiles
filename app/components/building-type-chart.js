@@ -1,21 +1,9 @@
-import { computed } from '@ember/object'; // eslint-disable-line
-import Component from '@ember/component';
+import computed from 'ember-computed-decorators';
+import Component from '@ember/component'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import githubraw from '../utils/githubraw';
+import carto from '../utils/carto';
+import landUseLookup from '../utils/land-use-lookup';
 
-function getColor(group) {
-  const colorMap = {
-    '1-2 Family Homes': '#f4f455',
-    'Small Apartments (<= 5 units, < 5 stories)': '#f7d496',
-    'Large Apartments (> 5 units, 5-plus stories)': '#ea6661',
-    'Mixed-use Apartments': '#FF9900',
-    'Commercial': '#f7cabf',
-    'Manufacturing': '#d36ff4',
-    'Public Facilities, Institutions, Other': '#5CA2D1',
-  };
-
-  return colorMap[group];
-}
 
 const BuildingTypeChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
@@ -24,20 +12,56 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   resizeWidthSensitive: true,
   resizeHeightSensitive: true,
   loading: false,
-  property: '', // one of 'numbldgs' or 'unitsres' passed in to component
   borocd: '',
-  data: computed('property', 'borocd', function() {
-    const borocd = this.get('borocd');
-    const property = this.get('property');
-    const filler = property === 'numbldgs' ? 'buildings' : 'units';
-    const id = `building_type_${filler}`;
-    return githubraw(id, borocd)
-      .then(data => data.map((d) => {
-        const colorAdded = d;
-        colorAdded.color = getColor(d.group);
-        return d;
-      }));
-  }),
+
+  @computed('borocd', 'type', 'mode')
+  sql(borocd, type, mode) {
+    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+    const typeAbbrev = type === 'buildings' ? 'b' : 'du';
+    return `
+      SELECT
+        ${modePrefix}_${typeAbbrev}_lu01 AS "1",
+        ${modePrefix}_${typeAbbrev}_lu02 AS "2",
+        ${modePrefix}_${typeAbbrev}_lu03 AS "3",
+        ${modePrefix}_${typeAbbrev}_lu04 AS "4",
+        ${modePrefix}_${typeAbbrev}_lu05 AS "5",
+        ${modePrefix}_${typeAbbrev}_lu06 AS "6",
+        ${modePrefix}_${typeAbbrev}_lu07 AS "7",
+        ${modePrefix}_${typeAbbrev}_lu08 AS "8",
+        ${modePrefix}_${typeAbbrev}_lu10 AS "10",
+        ${modePrefix}_${typeAbbrev}_lu11 AS "11"
+      FROM planninglabs.community_profiles_floodplain
+      WHERE borocd = ${borocd}
+    `;
+  },
+
+  @computed('sql', 'borocd')
+  data() {
+    const sql = this.get('sql');
+    return carto.SQL(sql)
+      .then((rawData) => { // eslint-disable-line
+        const data = rawData[0];
+        const total = Object.keys(data)
+          .map(key => data[key])
+          .reduce((acc, curr) => acc + curr);
+
+        return Object.keys(data)
+          .map((key) => {
+            const group = parseInt(key, 10);
+            const value = data[key];
+            const value_pct = value / total; // eslint-disable-line
+            return {
+              group: landUseLookup(group).description,
+              color: landUseLookup(group).color,
+              value,
+              value_pct,
+            };
+          })
+          .sort((a, b) => { // eslint-disable-line
+            return a.value === b.value ? 0 : -(a.value > b.value) || 1;
+          });
+      });
+  },
 });
 
 export default BuildingTypeChart;
