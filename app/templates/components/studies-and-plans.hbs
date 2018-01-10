@@ -1,5 +1,5 @@
 <ul class="no-bullet">
-  {{#each (array) as |study|}}
+  {{#each (await studies) as |study|}}
     <li class="list-item-padded">
       <a href = "{{study.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{study.name}}</strong></a>
     </li>
