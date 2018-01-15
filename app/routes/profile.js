@@ -79,7 +79,6 @@ export default Route.extend(ScrollToTop, {
       this.transitionTo('/not-found');
     },
     didTransition() {
-      console.log('transition');
     },
   },
 });

@@ -1,0 +1,81 @@
+<h4 style="margin-bottom: .5em;">
+  Floodplain Charts
+  <button class="button tiny no-margin {{if (not-eq mode '2015') 'hollow'}}" style="border-top-right-radius: 0; border-bottom-right-radius:0" {{action "setMode" "2015"}}>2015 Floodplain</button><button class="button tiny no-margin {{if (not-eq mode '2050s') 'hollow'}}" style="border-top-left-radius: 0; border-bottom-left-radius:0" {{action "setMode" "2050s"}}>2050s Floodplain</button>
+</h4>
+<p class="text-small">These charts show data calculated by aggregating PLUTO data for tax lots where buildings fall within the specified floodplain boundary.</p>
+
+
+<div class="grid-x grid-padding-x">
+  <div class="cell medium-6 large-6 xlarge-5">
+    <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of total buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <div class="callout text-center">
+      {{#building-type-chart type='buildings' mode=mode borocd=model.borocd as |chart|}}
+        <p>
+          <span class="stat">
+            {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
+          </span>
+          <span class="stat-footer">buildings are in the {{mode}} floodplain</span>
+        </p>
+      {{/building-type-chart}}
+      <hr>
+      <span class="chart-legend">
+        <span class="nobreak"><span class="total"></span> Total Buildings</span>
+        &nbsp;
+        <span class="nobreak"><span class="percent"></span> Within Floodplain</span>
+      </span>
+      {{resiliency-chart
+          column='cd_tot_bldgs'
+          overlayColumn=buildingComparisonChartColumn
+          numeral_format='0,0'
+          borocd=model.borocd}}
+    </div>
+  </div>
+  <div class="cell medium-6 large-6 xlarge-5">
+    <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of total residential units within buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <div class="callout text-center">
+      {{#building-type-chart type='units' mode=mode borocd=model.borocd as |chart|}}
+        <p>
+          <span class="stat">
+              {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
+          </span>
+          <span class="stat-footer">dwelling units are in the {{mode}} floodplain</span>
+        </p>
+      {{/building-type-chart}}
+      <hr>
+      <span class="chart-legend">
+        <span class="nobreak"><span class="total"></span>&nbsp;Total Units</span>
+        &nbsp;
+        <span class="nobreak"><span class="percent"></span>&nbsp;Within Floodplain</span>
+      </span>
+      {{resiliency-chart
+          column='cd_tot_resunits'
+          overlayColumn=resunitsComparisonChartColumn
+          numeral_format='0,0'
+          borocd=model.borocd
+          unit='units'}}
+    </div>
+  </div>
+  <div class="cell medium-6 xlarge-4">
+    <h4 class="subsection-header"><strong>Age of Buildings in Floodplain {{info-tooltip tip="Counts of buildings that fall within the selected floodplain sorted by age of buildings."}}</strong></h4>
+    <div class="callout">
+      <p class="text-small">These counts are grouped based on {{#link-to 'about' (query-params section='floodplain')}}important dates{{/link-to}} in the history of NYC’s land-use and floodplain regulation.</p>
+      {{building-age-chart mode=mode borocd=model.borocd}}
+    </div>
+  </div>
+  <div class="cell medium-6 xlarge-4">
+    <h4 class="subsection-header"><strong>Basements in Floodplain {{info-tooltip tip="Counts of 1 and 2 family dwellings with basements that fall within the selected floodplain sorted by basement type."}}</strong></h4>
+    <div class="callout">
+      <p class="text-small">Basements are highly vulnerable to flooding and can lead to higher retrofitting costs.</p>
+      {{subgrade-chart mode=mode borocd=model.borocd}}
+    </div>
+  </div>
+  <div class="cell medium-6 xlarge-4">
+    <h4 class="subsection-header"><strong>Residential Buildings by Adjacency {{info-tooltip tip="Counts of buildings that fall within the selected floodplain sorted by building adjacency."}}</strong></h4>
+    <div class="callout">
+      <p class="text-small">Buildings that are fully or partially attached are harder to elevate or retrofit to minimize flood risk.</p>
+      {{adjacency-chart mode=mode borocd=model.borocd}}
+    </div>
+  </div>
+</div>
+
+{{yield}}

@@ -1,5 +1,5 @@
-import { computed } from '@ember/object';
 import RankingChart from '../components/ranking-chart';
+import computed from 'ember-computed-decorators';
 import carto from '../utils/carto';
 
 export default RankingChart.extend({
@@ -17,10 +17,10 @@ export default RankingChart.extend({
     dcp_orange: '#de7d2c',
     curr: '#60acbf',
   },
-  sql: computed('borocd', function() {
-    const { column, overlayColumn } =
-      this.getProperties('column', 'overlayColumn');
 
+  @computed('borocd', 'overlayColumn')
+  sql(borocd, overlayColumn) {
+    const column = this.get('column');
     return `SELECT ${column}, ${overlayColumn || 1},
       CASE
         WHEN LEFT(borocd::text, 1) = '1' THEN 'Manhattan ' || borocd %25 100
@@ -31,15 +31,16 @@ export default RankingChart.extend({
       END as boro_district,
       borocd
       FROM community_district_profiles`;
-  }),
-  data: computed('sql', function() {
-    const sql = this.get('sql');
+  },
+
+  @computed('sql')
+  data(sql) {
     const borocd = this.get('borocd');
-    return carto.SQL(sql, 'json').then(data => {
-      return data.sortBy(this.get('overlayColumn')).reverse().map(d => {
+    return carto.SQL(sql, 'json').then((data) => {
+      return data.sortBy(this.get('overlayColumn')).reverse().map((d) => {
         d.is_selected = (borocd === d.borocd) ? true : false;
         return d;
       });
     });
-  }),
+  }
 });
