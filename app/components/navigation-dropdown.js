@@ -17,12 +17,9 @@ export default Component.extend({
     const addressesPromise = this.get('addresses');
     const stream = A();
     return addressesPromise.then(addresses => {
-      const districtAddresses =
-        addresses.filter(addy => addy.get('locality') === 'New York');
-
       stream
         .pushObjects(districts.toArray())
-        .pushObjects(districtAddresses.toArray());
+        .pushObjects(addresses.toArray());
 
       return stream;
     });
