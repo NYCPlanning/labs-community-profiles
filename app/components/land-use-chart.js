@@ -24,19 +24,20 @@ const LandUseChart = Component.extend(ResizeAware, {
     const SQL = `
     WITH lots AS (
       SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse, lotarea
-      FROM support_mappluto a
+      FROM mappluto_v1711 a
       LEFT JOIN support_landuse_lookup c
             ON a.landuse::integer = c.code
       WHERE a.cd = '${borocd}'
+      AND a.address != 'BODY OF WATER'
     ),
-    totalsm AS (
+    totalsf AS (
       SELECT sum(lotarea) as total
       FROM lots
     )
 
-    SELECT count(landuse_desc), ROUND(SUM(lotarea)/totalsm.total::numeric, 4) AS percent, landuse, landuse_desc
-    FROM lots, totalsm
-    GROUP BY landuse, landuse_desc, totalsm.total
+    SELECT count(landuse_desc), ROUND(SUM(lotarea)/totalsf.total::numeric, 4) AS percent, landuse, landuse_desc
+    FROM lots, totalsf
+    GROUP BY landuse, landuse_desc, totalsf.total
     ORDER BY percent DESC
     `;
 
