@@ -13,11 +13,24 @@ const acronymCrosswalk = {
   'Staten Island': 'SI',
 };
 
+const zapCrosswalk = {
+  'Bronx': 'X',
+  'Brooklyn': 'K',
+  'Manhattan': 'M',
+  'Queens': 'Q',
+  'Staten Island': 'R',
+};
+
 export default DS.Model.extend({
   borocd: DS.attr('number'),
   boro: DS.attr('string'),
   borocdAcronym: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')];
+    const cd = numeral(this.get('cd')).format('00');
+    return `${acronym}${cd}`;
+  }),
+  zapAcronym: computed('boro', function() {
+    const acronym = zapCrosswalk[this.get('boro')];
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
