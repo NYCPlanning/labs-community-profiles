@@ -1,6 +1,5 @@
 <ul class="no-bullet">
 {{#each (await plans) as |plan|}}
-  {{log plan}}
   <li class="list-item-padded">
     {{#if plan.url}}
       <a href = "{{plan.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{plan.name}}</strong></a>

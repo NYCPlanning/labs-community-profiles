@@ -1,12 +1,13 @@
-{{#with (await active) as |resolvedActive|}}
-  {{#if resolvedActive}}
+
+{{#with (await projects) as |resolvedProjects|}}
+  {{#if resolvedProjects}}
     <h6>Active Applications</h6>
-    {{#if resolvedActive.length}}
+    {{#if resolvedProjects.length}}
     <ul class="no-bullet xlarge-2-column">
-    {{#each (await active) as |application|}}
+    {{#each (await projects) as |application|}}
       <li class="list-item-padded">
-        <a href = "http://a030-lucats.nyc.gov/lucats/DirectAccess.aspx?ULURPNO={{application.landUseId}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectName}}</strong></a>
-        <small class="list--link-meta">{{application.location}} <br/>{{application.lastMilestone}} {{application.lastMilestoneDate}}</small>
+        <a href = "https://dcppfsuat.dynamics365portals.us/applicants/overview/application-status-new/project-read/?id={{application.projectid}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectname}}</strong></a>
+        <small class="list--link-meta">{{application.type}} | {{application.applicant_customer}}</small>
       </li>
     {{/each}}
     </ul>
@@ -25,6 +26,6 @@
 {{/with}}
 
 
-<a class="button small hollow expanded no-margin" href="http://a030-lucats.nyc.gov/lucats/welcome.aspx" target="_blank"><strong>Search LUCATS</strong></a>
+<a class="button small hollow expanded no-margin" href="https://dcppfsuat.dynamics365portals.us/applicants/overview/application-status-new/" target="_blank"><strong>Search ZAP</strong></a>
 
 {{yield}}
