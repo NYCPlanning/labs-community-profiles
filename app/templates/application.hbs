@@ -3,21 +3,21 @@
 
 <div id="main" class="grid-x">
   <div class="cell large-4 xlarge-3" id="cd-chooser">
-    {{#mapbox-gl id='map' initOptions=(hash style='mapbox://styles/mapbox/light-v9' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
+    {{#mapbox-gl id='map' initOptions=(hash style='//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
 
       {{#map.source sourceId='cds' source=cdSource as |source|}}
-        {{source.layer layer=cdFillLayer before='admin-2-boundaries-dispute'}}
-        {{source.layer layer=cdLineLayer before='admin-2-boundaries-dispute'}}
+        {{source.layer layer=cdFillLayer before='highway_name_other'}}
+        {{source.layer layer=cdLineLayer before='highway_name_other'}}
       {{/map.source}}
 
       {{#map.source sourceId='cdLabel' source=cdLabelSource as |source|}}
-        {{source.layer layer=cdLabelLayer before='admin-2-boundaries-dispute'}}
-        {{source.layer layer=cdBoroLabelLayer before='admin-2-boundaries-dispute'}}
+        {{source.layer layer=cdLabelLayer before='highway_name_other'}}
+        {{source.layer layer=cdBoroLabelLayer before='highway_name_other'}}
       {{/map.source}}
 
       {{#if mapState.currentlyHovered}}
         {{#map.source sourceId='cd-hovered' source=cdHoveredSource as |source|}}
-          {{source.layer layer=cdHoveredLayer before='admin-2-boundaries-dispute'}}
+          {{source.layer layer=cdHoveredLayer before='highway_name_other'}}
         {{/map.source}}
       {{/if}}
 
@@ -27,13 +27,13 @@
       {{map.on 'mouseout' (action 'handleMouseout')}}
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-          {{source.layer layer=cdSelectedLayer before='admin-2-boundaries-dispute'}}
+          {{source.layer layer=cdSelectedLayer before='highway_name_other'}}
         {{/map.source}}
       {{/if}}
 
       {{#if mapState.currentAddress}}
         {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
-          {{source.layer layer=cdPointLayer before='admin-2-boundaries-dispute'}}
+          {{source.layer layer=cdPointLayer before='highway_name_other'}}
         {{/map.source}}
       {{/if}}
     {{/mapbox-gl}}

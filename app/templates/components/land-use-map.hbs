@@ -1,21 +1,21 @@
 {{#mapbox-gl id='lu-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
   {{!-- {{#map.source sourceId='pluto-vector' source=vectorSource as |source|}}
-    {{source.layer layer=vectorLayer before='waterway-label'}}
+    {{source.layer layer=vectorLayer before='place_other'}}
   {{/map.source}}
 
   {{#map.source sourceId='pluto-raster' source=rasterSource as |source|}}
-    {{source.layer layer=rasterLayer before='waterway-label'}}
+    {{source.layer layer=rasterLayer before='place_other'}}
   {{/map.source}} --}}
 
   {{#with (await vectorSource) as |vSource|}}
     {{#map.source sourceId='pluto' source=vSource as |source|}}
-    {{source.layer layer=vectorLayer before='waterway-label'}}
+    {{source.layer layer=vectorLayer before='place_other'}}
     {{/map.source}}
 
     {{!-- Community District Boundary --}}
     {{#if mapState.currentlySelected}}
       {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-        {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+        {{source.layer layer=cdSelectedLayer before='place_other'}}
       {{/map.source}}
     {{/if}}
   {{/with}}

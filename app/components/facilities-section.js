@@ -29,7 +29,7 @@ export default Component.extend({
     const { bounds } = this.get('mapState');
     const { center, zoom } = geoViewport.viewport(bounds, [400, 400]);
     return {
-      style: 'mapbox://styles/mapbox/light-v9',
+      style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
       center,
       zoom,
       scrollZoom: false,

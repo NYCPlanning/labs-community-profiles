@@ -3,8 +3,8 @@
     {{#mapbox-gl id='facilities-map' initOptions=initOptions mapLoaded=(action 'handleMapLoad') as |map|}}
       {{#with (await vectorSource) as |vSource|}}
         {{#map.source sourceId='facilities' source=vSource as |source|}}
-          {{source.layer layer=pointsLayer before='waterway-label'}}
-          {{source.layer layer=pointsOutlineLayer before='waterway-label'}}
+          {{source.layer layer=pointsLayer before='place_other'}}
+          {{source.layer layer=pointsOutlineLayer before='place_other'}}
         {{/map.source}}
       {{/with}}
 
@@ -15,7 +15,7 @@
 
       {{#if mapState.currentlySelected}}
         {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-          {{source.layer layer=cdSelectedLayer before='waterway-label'}}
+          {{source.layer layer=cdSelectedLayer before='place_other'}}
         {{/map.source}}
       {{/if}}
       {{hover-tooltip mouse=mouseoverLocation text=tooltip-text}}

@@ -211,6 +211,7 @@ export default Controller.extend({
     },
 
     handleMapLoad(map) {
+      window.map = map;
       map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
       const mapState = this.get('mapState');
