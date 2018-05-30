@@ -6,7 +6,7 @@
     <ul class="no-bullet xlarge-2-column">
     {{#each (await projects) as |application|}}
       <li class="list-item-padded">
-        <a href = "https://dcppfsuat.dynamics365portals.us/applicants/overview/application-status-new/project-read/?id={{application.projectid}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{application.projectname}}</strong></a>
+        <a href = "https://nycdcppfs.dynamics365portals.us/applicants/overview/application-status-new/project-read/?id={{application.projectid}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{if application.projectname application.projectname "No Name"}}</strong></a>
         <small class="list--link-meta">{{application.type}} | {{application.applicant_customer}}</small>
       </li>
     {{/each}}
@@ -26,6 +26,6 @@
 {{/with}}
 
 
-<a class="button small hollow expanded no-margin" href="https://dcppfsuat.dynamics365portals.us/applicants/overview/application-status-new/" target="_blank"><strong>Search ZAP</strong></a>
+<a class="button small hollow expanded no-margin" href="https://nycdcppfs.dynamics365portals.us/applicants/overview/application-status-new/" target="_blank"><strong>Search ZAP</strong></a>
 
 {{yield}}
