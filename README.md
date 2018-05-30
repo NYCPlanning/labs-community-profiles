@@ -74,8 +74,8 @@ Most of the data use by the app is stored in tables on the planninglabs carto in
 ### mapzen search API
 [Mapzen search](https://mapzen.com/products/search/geocoding/) is used for autocomplete address searching.  
 
-### LUCATS Proxy
-A Proxy API that scrapes LUCATS in real-time and produces JSON for a community district's projects.  [https://github.com/NYCPlanning/labs-lucats-proxy](https://github.com/NYCPlanning/labs-lucats-proxy)
+### ZAP Proxy
+A Proxy API that pulls data for a community district using ZAP's odata API, creating nice-looking URLs for a community district's projects.  [https://github.com/NYCPlanning/labs-zap-proxy](https://github.com/NYCPlanning/labs-zap-proxy)
 
 
 ## Testing and checks

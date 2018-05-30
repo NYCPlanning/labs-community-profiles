@@ -8,7 +8,7 @@ export default Component.extend({
   projects: computed('district', function() {
     const zapAcronym = this.get('district.zapAcronym');
 
-    const URL = `https://lucats.planninglabs.nyc/zap/${zapAcronym}.json`;
+    const URL = `https://zap-api.planninglabs.nyc/zap/${zapAcronym}.json`;
 
     return fetch(URL)
       .then(data => data.json());
