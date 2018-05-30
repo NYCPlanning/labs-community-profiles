@@ -8,7 +8,7 @@ const SQL = 'SELECT a.the_geom_webmercator, a.landuse, b.description, address FR
 
 export default Component.extend({
   initOptions: {
-    style: 'mapbox://styles/mapbox/light-v9',
+    style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
     zoom: 9,
     minZoom: 13.01,
     center: [-74, 40.7071],
