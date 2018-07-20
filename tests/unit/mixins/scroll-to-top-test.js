@@ -6,7 +6,7 @@ module('Unit | Mixin | scroll to top');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let ScrollToTopObject = EmberObject.extend(ScrollToTopMixin);
-  let subject = ScrollToTopObject.create();
+  const ScrollToTopObject = EmberObject.extend(ScrollToTopMixin);
+  const subject = ScrollToTopObject.create();
   assert.ok(subject);
 });

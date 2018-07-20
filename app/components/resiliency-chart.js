@@ -1,5 +1,5 @@
-import RankingChart from '../components/ranking-chart';
 import computed from 'ember-computed-decorators';
+import RankingChart from './ranking-chart';
 import carto from '../utils/carto';
 
 export default RankingChart.extend({
@@ -36,11 +36,9 @@ export default RankingChart.extend({
   @computed('sql')
   data(sql) {
     const borocd = this.get('borocd');
-    return carto.SQL(sql, 'json').then((data) => {
-      return data.sortBy(this.get('overlayColumn')).reverse().map((d) => {
-        d.is_selected = (borocd === d.borocd) ? true : false;
-        return d;
-      });
-    });
-  }
+    return carto.SQL(sql, 'json').then(data => data.sortBy(this.get('overlayColumn')).reverse().map((d) => {
+      d.is_selected = (borocd === d.borocd);
+      return d;
+    }));
+  },
 });

@@ -20,7 +20,7 @@ export default Component.extend({
     duration: 0,
   },
 
-  vectorSource: Ember.computed('landuseTemplate', function () {
+  vectorSource: Ember.computed('landuseTemplate', function () { // eslint-disable-line
     return carto.getVectorTileTemplate([SQL])
       .then(landuseTemplate => ({
         type: 'vector',

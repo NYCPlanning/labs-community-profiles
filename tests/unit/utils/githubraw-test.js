@@ -5,6 +5,6 @@ module('Unit | Utility | githubraw');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = githubraw();
+  const result = githubraw();
   assert.ok(result);
 });

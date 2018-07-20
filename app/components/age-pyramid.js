@@ -1,8 +1,8 @@
-import HorizontalBar from '../components/horizontal-bar';
 import { sum } from 'd3-array';
 import { axisRight, axisBottom } from 'd3-axis';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { select } from 'd3-selection';
+import HorizontalBar from './horizontal-bar';
 import 'd3-transition';
 
 const translation = function(x, y) {

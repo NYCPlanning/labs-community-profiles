@@ -31,7 +31,7 @@ export default Route.extend(SetMapBounds, {
       const modelName = district.get('constructor.modelName');
       const mapState = this.get('mapState');
 
-      if(modelName === 'address') {
+      if (modelName === 'address') {
         mapState.set('currentAddress', district);
       }
 

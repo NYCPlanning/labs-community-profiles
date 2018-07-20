@@ -6,7 +6,7 @@ module('Unit | Mixin | set map bounds');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let SetMapBoundsObject = EmberObject.extend(SetMapBoundsMixin);
-  let subject = SetMapBoundsObject.create();
+  const SetMapBoundsObject = EmberObject.extend(SetMapBoundsMixin);
+  const subject = SetMapBoundsObject.create();
   assert.ok(subject);
 });

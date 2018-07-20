@@ -16,14 +16,14 @@ export default Component.extend({
   },
 
   didUpdateAttrs() {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
 
     const { sourceId, source } = getProperties(this, 'sourceId', 'source');
     this.map.getSource(sourceId).setData(source.data);
   },
 
   willDestroy() {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
 
     this.map.removeSource(get(this, 'sourceId'));
   },

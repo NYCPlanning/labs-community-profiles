@@ -5,6 +5,6 @@ module('Unit | Utility | is cd layer');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = isCdLayer();
+  const result = isCdLayer();
   assert.ok(result);
 });
