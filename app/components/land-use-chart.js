@@ -109,9 +109,7 @@ const LandUseChart = Component.extend(ResizeAware, {
       bars.enter()
         .append('rect')
         .attr('class', 'bar')
-        .attr('fill', d => {
-          return landUseLookup(d.landuse).color
-        })
+        .attr('fill', d => landUseLookup(d.landuse).color)
         .attr('x', 0)
         .attr('height', y.bandwidth() - 15)
         .attr('rx', 2)

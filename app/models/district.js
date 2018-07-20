@@ -1,15 +1,15 @@
 import { computed } from '@ember/object'; // eslint-disable-line
 import DS from 'ember-data'; // eslint-disable-line
-import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 import bbox from 'npm:@turf/bbox' // eslint-disable-line
 import centroid from 'npm:@turf/centroid'; // eslint-disable-line
 import numeral from 'npm:numeral';
+import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 
 const acronymCrosswalk = {
-  'Bronx': 'BX',
-  'Brooklyn': 'BK',
-  'Manhattan': 'MN',
-  'Queens': 'QN',
+  Bronx: 'BX',
+  Brooklyn: 'BK',
+  Manhattan: 'MN',
+  Queens: 'QN',
   'Staten Island': 'SI',
 };
 
@@ -42,7 +42,7 @@ export default DS.Model.extend({
   healthProfileLink: computed('boro', function() {
     const boroAcronymLowerCase = this.get('boroAcronymLowerCase');
     let cd = this.get('cd');
-    if(boroAcronymLowerCase === 'si' || boroAcronymLowerCase === 'qn') {
+    if (boroAcronymLowerCase === 'si' || boroAcronymLowerCase === 'qn') {
       cd = numeral(cd).format('00');
     }
     return `https://www1.nyc.gov/assets/doh/downloads/pdf/data/2015chp-${boroAcronymLowerCase}${cd}.pdf`;
@@ -63,8 +63,7 @@ export default DS.Model.extend({
   }),
   dataprofile: {},
   name: computed('boro', 'cd', 'neighborhoods', function() {
-    const { boro, cd, neighborhoods } =
-      this.getProperties('boro', 'cd', 'neighborhoods');
+    const { boro, cd, neighborhoods } = this.getProperties('boro', 'cd', 'neighborhoods');
 
     return `${boro} ${cd} - ${neighborhoods}`;
   }),

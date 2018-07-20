@@ -3,7 +3,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('numeral-format', 'helper:numeral-format', {
-  integration: true
+  integration: true,
 });
 
 // Replace this with your real tests.
@@ -14,4 +14,3 @@ test('it renders', function(assert) {
 
   assert.equal(this.$().text().trim(), '1234');
 });
-

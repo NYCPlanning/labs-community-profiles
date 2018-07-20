@@ -2,7 +2,6 @@ import { computed } from '@ember/object';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import carto from '../utils/carto';
-import { task } from 'ember-concurrency';
 
 export default Component.extend({
   shouldRender: false,
@@ -12,7 +11,7 @@ export default Component.extend({
   sql: computed('indicators.[]', function() {
     const indicators = this.get('indicators').join(',');
 
-    return `SELECT ${indicators}, 
+    return `SELECT ${indicators},
       CASE
         WHEN LEFT(borocd::text, 1) = '1' THEN 'Manhattan ' || borocd %25 100
         WHEN LEFT(borocd::text, 1) = '2' THEN 'Bronx ' || borocd %25 100

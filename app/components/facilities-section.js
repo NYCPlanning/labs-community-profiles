@@ -97,7 +97,7 @@ export default Component.extend({
       .then((data) => { // eslint-disable-line
         return data.map((d) => {
           const dWithColor = d;
-          dWithColor.color = colorsArray.find(el => el[0] === d.facdomain)[1];
+          [, dWithColor.color] = colorsArray.find(el => el[0] === d.facdomain);
           return dWithColor;
         });
       });

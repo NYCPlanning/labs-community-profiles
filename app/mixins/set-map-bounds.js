@@ -7,7 +7,7 @@ export default Mixin.create({
   mapState: service(),
 
   afterModel(districts) {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
     const mapState = this.get('mapState');
     const geojsonDistricts = toGeojson(districts);
     mapState.set('bounds', bbox(geojsonDistricts));

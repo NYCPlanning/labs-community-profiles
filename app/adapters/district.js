@@ -1,6 +1,5 @@
 import DS from 'ember-data';
-import carto, { buildSqlUrl } from '../utils/carto';
-import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
+import { buildSqlUrl } from '../utils/carto';
 
 const SQL = `
   SELECT ST_Simplify(the_geom, 0.0001) AS the_geom, borocd %25 100 as cd,
@@ -14,7 +13,7 @@ const SQL = `
     borocd,
     cartodb_id as id
   FROM support_admin_cdboundaries
-  WHERE borocd %25 100 %3C 20 
+  WHERE borocd %25 100 %3C 20
   ORDER BY boro, cd ASC
 `;
 
@@ -22,7 +21,7 @@ export default DS.JSONAPIAdapter.extend({
   keyForAttribute(key) {
     return key;
   },
-  buildURL(modelName, id, snapshot, requestType, query) {
+  buildURL() {
     return buildSqlUrl(SQL, 'geojson');
   },
 });

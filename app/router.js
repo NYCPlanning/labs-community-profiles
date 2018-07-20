@@ -10,7 +10,7 @@ const Router = EmberRouter.extend({
   metrics: service(),
 
   didTransition() {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
     this._trackPage();
   },
 

@@ -1,8 +1,8 @@
 /* eslint-env node */
-'use strict';
+
 
 module.exports = function(environment) {
-  let ENV = {
+  const ENV = {
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
@@ -27,7 +27,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     'ember-cli-string-helpers': {
-      only: ['dasherize']
+      only: ['dasherize'],
     },
     EmberENV: {
       FEATURES: {
@@ -36,8 +36,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
     'mapbox-gl': {
       accessToken: 'pk.eyJ1IjoiY3dob25nbnljIiwiYSI6ImNpczF1MXdrdjA4MXcycXA4ZGtyN2x5YXIifQ.3HGyME8tBs6BnljzUVIt4Q',
@@ -48,7 +48,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
@@ -68,10 +68,6 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-  }
-
-  if (environment === 'production') {
-
   }
 
   return ENV;

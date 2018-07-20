@@ -12,7 +12,7 @@ export default Route.extend(ScrollToTop, SetMapBounds, {
   actions: {
     didTransition() {
       const scroller = this.get('scroller');
-      const section = this.paramsFor('about').section;
+      const { section } = this.paramsFor('about');
 
       if (section) {
         next(this, () => {

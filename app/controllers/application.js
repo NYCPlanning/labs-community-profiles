@@ -191,7 +191,7 @@ export default Controller.extend({
 
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
-          const borocd = firstCD.properties.borocd;
+          const { borocd } = firstCD.properties;
           const prevBorocd = currentlyHovered ? currentlyHovered.properties.borocd : null;
           if (!currentlyHovered || (borocd !== prevBorocd)) {
             mapState.set('currentlyHovered', firstCD);

@@ -1,10 +1,10 @@
 /* eslint-env node */
-'use strict';
+
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  let app = new EmberApp(defaults, {
+  const app = new EmberApp(defaults, {
     'ember-composable-helpers': {
       only: ['array', 'map-by', 'reduce'],
     },
@@ -14,11 +14,11 @@ module.exports = function(defaults) {
         'images/layers.png',
         'images/marker-icon-2x.png',
         'images/marker-icon.png',
-        'images/marker-shadow.png'
-      ]
+        'images/marker-shadow.png',
+      ],
     },
     'ember-cli-babel': {
-      includePolyfill: true
+      includePolyfill: true,
     },
   });
 
