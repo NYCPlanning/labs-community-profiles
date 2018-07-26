@@ -4033,12 +4033,12 @@ ember-macro-helpers@^0.17.0:
     ember-cli-test-info "^1.0.0"
     ember-weakmap "^3.0.0"
 
-ember-mapbox-gl@0.8.7:
-  version "0.8.7"
-  resolved "https://registry.yarnpkg.com/ember-mapbox-gl/-/ember-mapbox-gl-0.8.7.tgz#37374ba5423b9ae2ee8beb78cc44507987ec82d4"
+ember-mapbox-gl@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/ember-mapbox-gl/-/ember-mapbox-gl-0.10.0.tgz#26f6cefab12f98723c410062485d82c6beddb284"
   dependencies:
     broccoli-funnel "^2.0.0"
-    broccoli-merge-trees "^2.0.0"
+    broccoli-merge-trees "^3.0.0"
     ember-cli-babel "^6.6.0"
     ember-cli-htmlbars "^2.0.1"
     ember-wormhole "^0.5.1"
