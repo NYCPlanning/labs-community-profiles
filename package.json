@@ -73,7 +73,7 @@
     "foundation-sites": "^6.4.1",
     "leaflet": "^1.1.0",
     "loader.js": "^4.2.3",
-    "mapbox-gl": "^0.42.0",
+    "mapbox-gl": "^0.47.0",
     "node-fetch": "^1.7.2"
   },
   "engines": {
