@@ -83,7 +83,7 @@
   "private": true,
   "dependencies": {
     "@glimmer/syntax": "^0.30.3",
-    "@mapbox/geo-viewport": "^0.2.2",
+    "@mapbox/geo-viewport": "^0.3.0",
     "@turf/boolean-contains": "5.1.5",
     "@turf/centroid": "5.1.5",
     "@turf/inside": "5.0.0",
