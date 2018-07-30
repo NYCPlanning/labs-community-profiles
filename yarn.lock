@@ -185,11 +185,11 @@
   dependencies:
     "@glimmer/util" "^0.30.5"
 
-"@mapbox/geo-viewport@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@mapbox/geo-viewport/-/geo-viewport-0.2.2.tgz#93206c044238c21a60fca7e9064c8ce63e8027b4"
+"@mapbox/geo-viewport@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/geo-viewport/-/geo-viewport-0.3.0.tgz#e7a9458c12f20879c18f74b468efd9f854f2a3d3"
   dependencies:
-    "@mapbox/sphericalmercator" "~1.0.2"
+    "@mapbox/sphericalmercator" "~1.1.0"
 
 "@mapbox/geojson-area@0.2.2":
   version "0.2.2"
@@ -213,9 +213,9 @@
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@mapbox/shelf-pack/-/shelf-pack-3.2.0.tgz#df3630ecce8c042817c9a365b88078412963de64"
 
-"@mapbox/sphericalmercator@~1.0.2":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@mapbox/sphericalmercator/-/sphericalmercator-1.0.5.tgz#70237b9774095ed1cfdbcea7a8fd1fc82b2691f2"
+"@mapbox/sphericalmercator@~1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/sphericalmercator/-/sphericalmercator-1.1.0.tgz#f3b1af042620716a1289fc41e1e97f610823aefe"
 
 "@mapbox/tiny-sdf@^1.1.0":
   version "1.1.0"
