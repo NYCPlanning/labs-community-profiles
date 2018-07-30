@@ -46,7 +46,7 @@
     "ember-d3": "^0.4.4",
     "ember-data": "~2.17.0",
     "ember-export-application-global": "^2.0.0",
-    "ember-fetch": "^3.3.0",
+    "ember-fetch": "^5.1.1",
     "ember-font-awesome": "4.0.0-rc.1",
     "ember-leaflet": "^3.0.12",
     "ember-load-initializers": "^1.0.0",
