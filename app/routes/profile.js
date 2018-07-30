@@ -1,9 +1,7 @@
 import { inject as service } from '@ember/service'; // eslint-disable-line
 import Route from '@ember/routing/route';
 import { L } from 'ember-leaflet'; // eslint-disable-line
-import { task } from 'ember-concurrency';
 import ScrollToTop from '../mixins/scroll-to-top';
-import githubraw from '../utils/githubraw';
 
 import carto from '../utils/carto';
 

@@ -66,7 +66,6 @@ const ZoningChart = Component.extend(ResizeAware, {
   updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
-    console.log(data);
 
     const el = this.$();
     const elWidth = el.width();
@@ -140,7 +139,7 @@ const ZoningChart = Component.extend(ResizeAware, {
         });
 
       labels.exit().remove();
-    })
+    });
   },
 });
 
