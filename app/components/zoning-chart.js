@@ -1,11 +1,11 @@
 import { computed } from '@ember/object'; // eslint-disable-line
 import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
-import githubraw from '../utils/githubraw';
 
 import { max } from 'd3-array';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { select } from 'd3-selection';
+import githubraw from '../utils/githubraw';
 import 'd3-transition';
 
 const colors = function(zonedist) {

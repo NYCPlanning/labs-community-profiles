@@ -1,5 +1,5 @@
 import { computed } from '@ember/object'; // eslint-disable-line
-import FacilitiesSection from '../components/facilities-section';
+import FacilitiesSection from './facilities-section';
 import carto from '../utils/carto';
 
 const SQL = 'SELECT *, LEFT(zonedist, 2) as primaryzone FROM support_zoning_zd';

@@ -3,9 +3,8 @@ import { A } from '@ember/array';
 import { computed, get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import { Promise } from 'rsvp';
 import { task, timeout } from 'ember-concurrency';
-import { defaultMatcher} from 'ember-power-select/utils/group-utils';
+import { defaultMatcher } from 'ember-power-select/utils/group-utils';
 
 const DEBOUNCE_MS = 200;
 
@@ -17,7 +16,7 @@ export default Component.extend({
     const districts = this.get('model');
     const addressesPromise = this.get('addresses');
     const stream = A();
-    return addressesPromise.then(addresses => {
+    return addressesPromise.then((addresses) => {
       stream
         .pushObjects(districts.toArray())
         .pushObjects(addresses.toArray());
@@ -35,6 +34,8 @@ export default Component.extend({
 
     yield timeout(DEBOUNCE_MS);
     yield this.set('searchTerms', terms);
+
+    return null;
   }).restartable(),
 
   matcher(value, searchTerm) {
@@ -46,9 +47,8 @@ export default Component.extend({
   },
 
   actions: {
-    handleSearch(terms, dropdownState) {
+    handleSearch(terms) {
       this.get('debounceTerms').perform(terms);
     },
   },
 });
-

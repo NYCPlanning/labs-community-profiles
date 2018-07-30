@@ -6,6 +6,6 @@ moduleFor('route:profile', 'Unit | Route | profile', {
 });
 
 test('it exists', function(assert) {
-  let route = this.subject();
+  const route = this.subject();
   assert.ok(route);
 });

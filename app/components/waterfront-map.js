@@ -1,5 +1,5 @@
 import { computed } from '@ember/object'; // eslint-disable-line
-import FacilitiesSection from '../components/facilities-section';
+import FacilitiesSection from './facilities-section';
 import carto from '../utils/carto';
 
 const pfirm15SQL = 'SELECT the_geom_webmercator, fld_zone FROM support_waterfront_pfirm15 WHERE fld_zone = \'AE\' OR fld_zone = \'VE\'';

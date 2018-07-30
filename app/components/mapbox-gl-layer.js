@@ -9,7 +9,7 @@ export default Component.extend({
   before: '',
 
   init() {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
 
     const { layer, before } = getProperties(this, 'layer', 'before');
 
@@ -17,7 +17,7 @@ export default Component.extend({
   },
 
   willDestroy() {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
 
     this.map.removeLayer(this.layer.id);
   },

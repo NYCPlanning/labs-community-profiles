@@ -3,7 +3,6 @@ import EmberObject, { computed } from '@ember/object';
 import DS from 'ember-data'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson'; // eslint-disable-line
 import isIntersecting from 'npm:@turf/inside'; // eslint-disable-line
-import District from '../models/district';
 
 export default DS.Model.extend({
   district: computed('geometry', function() {
@@ -11,9 +10,7 @@ export default DS.Model.extend({
     const point = this.get('geometry');
 
     return districts
-      .find(dist =>
-        isIntersecting(point, dist.get('geometry')),
-      ) || EmberObject.create();
+      .find(dist => isIntersecting(point, dist.get('geometry'))) || EmberObject.create();
   }),
   borocd: computed('district', function() {
     const district = this.get('district');

@@ -43,8 +43,7 @@ export default Route.extend(ScrollToTop, {
     const borocd = buildBorocd(boro, cd);
     const sql = `SELECT * FROM community_district_profiles WHERE borocd=${borocd}`;
 
-    const selectedDistrict =
-      this.modelFor('application').findBy('borocd', borocd);
+    const selectedDistrict = this.modelFor('application').findBy('borocd', borocd);
 
     return carto.SQL(sql, 'json')
       .then((json) => {
@@ -61,7 +60,7 @@ export default Route.extend(ScrollToTop, {
     });
   },
   setupController(controller, district) {
-    this._super(...arguments);
+    this._super(...arguments); // eslint-disable-line
 
     const borocd = district.get('borocd');
     const zoningData = this.get('zoningData').perform(borocd, controller);
@@ -70,8 +69,8 @@ export default Route.extend(ScrollToTop, {
     });
   },
 
-  zoningData: task(function * (borocd, controller) {
-    return githubraw('zoning', borocd)
+  zoningData: task(function (borocd) {
+    return githubraw('zoning', borocd);
   }).restartable(),
 
   actions: {

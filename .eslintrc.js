@@ -1,24 +1,53 @@
 module.exports = {
-  parser: "babel-eslint",
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
-  extends: "airbnb",
+  plugins: [
+    'ember'
+  ],
+  extends: [
+    'airbnb-base'
+  ],
   env: {
-    browser: true
+    browser: true,
+  },
+  globals:{
+    '$': true,
+    d3: true,
   },
   rules: {
-    'func-names': 0,
-    'no-underscore-dangle': 0,
-    'prefer-rest-params': 0,
-    'prefer-arrow-callback': 0,
     'import/no-extraneous-dependencies': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    'lines-around-directive': 0,
+    'func-names': 0,
     'space-before-function-paren': 0,
+    'prefer-arrow-callback': 0,
+    'no-underscore-dangle': 0,
+    'camelcase': 0,
+    'max-len': 0,
+    'no-param-reassign': 0,
   },
-  globals: {
-   $: true,
-   d3: true,
-  }
+  overrides: [
+    // node files
+    {
+      files: [
+        'testem.js',
+        'ember-cli-build.js',
+        'config/**/*.js',
+        'lib/*/index.js'
+      ],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2015
+      },
+      env: {
+        browser: false,
+        node: true
+      }
+    }
+  ]
 };
