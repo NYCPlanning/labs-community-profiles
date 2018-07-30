@@ -34,7 +34,7 @@
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-numeral": "1.0.0",
     "ember-cli-qunit": "^4.1.1",
-    "ember-cli-sass": "7.1.2",
+    "ember-cli-sass": "7.1.7",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-string-helpers": "^1.4.0",
