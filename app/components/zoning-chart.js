@@ -25,7 +25,7 @@ const descriptions = function(zonedist) {
   return 'Other Zones';
 };
 
-const LandUseChart = Component.extend(ResizeAware, {
+const ZoningChart = Component.extend(ResizeAware, {
   classNameBindings: ['loading'],
   classNames: ['land-use-chart'],
 
@@ -66,6 +66,7 @@ const LandUseChart = Component.extend(ResizeAware, {
   updateChart() {
     const svg = this.get('svg');
     const data = this.get('data');
+    console.log(data);
 
     const el = this.$();
     const elWidth = el.width();
@@ -83,20 +84,20 @@ const LandUseChart = Component.extend(ResizeAware, {
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);
 
-    if (data) {
+    data.then((rawData) => {
       const y = scaleBand()
-        .domain(data.map(d => d.zonedist))
+        .domain(rawData.map(d => d.zonedist))
         .range([0, height])
         .paddingOuter(0)
         .paddingInner(0.2);
 
       const x = scaleLinear()
-        .domain([0, max(data, d => d.percent)])
+        .domain([0, max(rawData, d => d.percent)])
         .range([0, width]);
 
 
       const bars = svg.selectAll('.bar')
-        .data(data, d => d.zonedist);
+        .data(rawData, d => d.zonedist);
 
       bars.enter()
         .append('rect')
@@ -118,7 +119,7 @@ const LandUseChart = Component.extend(ResizeAware, {
       bars.exit().remove();
 
       const labels = svg.selectAll('text')
-        .data(data, d => d.zonedist);
+        .data(rawData, d => d.zonedist);
 
       labels.enter().append('text')
         .attr('class', 'label')
@@ -139,8 +140,8 @@ const LandUseChart = Component.extend(ResizeAware, {
         });
 
       labels.exit().remove();
-    }
+    })
   },
 });
 
-export default LandUseChart;
+export default ZoningChart;

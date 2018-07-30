@@ -59,19 +59,6 @@ export default Route.extend(ScrollToTop, {
       centroid: district.get('centroid'),
     });
   },
-  setupController(controller, district) {
-    this._super(...arguments); // eslint-disable-line
-
-    const borocd = district.get('borocd');
-    const zoningData = this.get('zoningData').perform(borocd, controller);
-    controller.setProperties({
-      zoningData,
-    });
-  },
-
-  zoningData: task(function (borocd) {
-    return githubraw('zoning', borocd);
-  }).restartable(),
 
   actions: {
     error() {
