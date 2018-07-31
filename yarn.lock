@@ -144,11 +144,11 @@
   dependencies:
     "@glimmer/wire-format" "^0.27.0"
 
-"@glimmer/interfaces@^0.30.5":
-  version "0.30.5"
-  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.30.5.tgz#9fd391ff4b9e4b29cf56495a2c3f5f660e45497a"
+"@glimmer/interfaces@^0.35.7":
+  version "0.35.7"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.35.7.tgz#8430229467f98e4a35d9514fe1dd809558b3b0ab"
   dependencies:
-    "@glimmer/wire-format" "^0.30.5"
+    "@glimmer/wire-format" "^0.35.7"
 
 "@glimmer/resolver@^0.4.1":
   version "0.4.3"
@@ -165,22 +165,22 @@
     handlebars "^4.0.6"
     simple-html-tokenizer "^0.3.0"
 
-"@glimmer/syntax@^0.30.3":
-  version "0.30.5"
-  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.30.5.tgz#763a631fccdb5ee2468269becd215752fc2361cc"
+"@glimmer/syntax@^0.35.7":
+  version "0.35.7"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.35.7.tgz#5980ecbcda7b731b970100539518670d84a482d9"
   dependencies:
-    "@glimmer/interfaces" "^0.30.5"
-    "@glimmer/util" "^0.30.5"
+    "@glimmer/interfaces" "^0.35.7"
+    "@glimmer/util" "^0.35.7"
     handlebars "^4.0.6"
-    simple-html-tokenizer "^0.4.1"
+    simple-html-tokenizer "^0.5.5"
 
 "@glimmer/util@^0.27.0":
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.27.0.tgz#e6e26779b4b7ced899ec376c7b949d0f16f92383"
 
-"@glimmer/util@^0.30.5":
-  version "0.30.5"
-  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.30.5.tgz#97f3dcd4029f713c503371e1608e129a833a70e1"
+"@glimmer/util@^0.35.7":
+  version "0.35.7"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.35.7.tgz#c6dcda4c03690d511bae17658b4e32c8ae222b39"
 
 "@glimmer/wire-format@^0.27.0":
   version "0.27.0"
@@ -188,11 +188,11 @@
   dependencies:
     "@glimmer/util" "^0.27.0"
 
-"@glimmer/wire-format@^0.30.5":
-  version "0.30.5"
-  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.30.5.tgz#17d79a320b931950ac03887733e56ecc7bbd0a06"
+"@glimmer/wire-format@^0.35.7":
+  version "0.35.7"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.35.7.tgz#5d287467c4adfe71505faeba6d85b05638c54f71"
   dependencies:
-    "@glimmer/util" "^0.30.5"
+    "@glimmer/util" "^0.35.7"
 
 "@mapbox/geo-viewport@^0.3.0":
   version "0.3.0"
@@ -8503,9 +8503,9 @@ simple-html-tokenizer@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.3.0.tgz#9b8b5559d80e331a544dd13dd59382e5d0d94411"
 
-simple-html-tokenizer@^0.4.1:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.4.3.tgz#9b00b766e30058b4bb377c0d4f97566a13ab1be1"
+simple-html-tokenizer@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/simple-html-tokenizer/-/simple-html-tokenizer-0.5.5.tgz#110e63f2fe095e1f21f2f07e8c259a5ab6d6bebb"
 
 simple-is@~0.2.0:
   version "0.2.0"
