@@ -74,7 +74,7 @@
     "leaflet": "^1.1.0",
     "loader.js": "^4.2.3",
     "mapbox-gl": "^0.47.0",
-    "node-fetch": "^1.7.2"
+    "node-fetch": "^2.2.0"
   },
   "engines": {
     "node": "^8.11.3",
