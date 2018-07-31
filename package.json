@@ -16,7 +16,7 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "@turf/bbox": "5.1.5",
+    "@turf/bbox": "6.0.1",
     "babel-eslint": "8",
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-clean-css": "~1.1.0",
