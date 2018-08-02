@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/NYCPlanning/labs-community-profiles/tree/develop.svg?style=svg)](https://circleci.com/gh/NYCPlanning/labs-community-profiles/tree/develop)
+
 # labs-community-profiles
 
 The Community District Profiles organize a wide variety of data, maps, and other content to present an accessible and informative view of the built environment, key socio-economic conditions, community board perspectives, and planning activities in each district. This information empowers residents, community board members, planners, and other stakeholders to engage in city planning and advocate for their communities.
