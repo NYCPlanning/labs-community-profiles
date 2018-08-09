@@ -66,7 +66,7 @@
     "ember-truth-helpers": "2.0.0",
     "ember-welcome-page": "^3.0.0",
     "ember-wormhole": "^0.5.2",
-    "eslint": "^4.19.1",
+    "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-import": "^2.12.0",
