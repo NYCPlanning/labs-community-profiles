@@ -82,7 +82,7 @@
   },
   "private": true,
   "dependencies": {
-    "@glimmer/syntax": "^0.30.3",
+    "@glimmer/syntax": "^0.35.7",
     "@mapbox/geo-viewport": "^0.3.0",
     "@turf/boolean-contains": "5.1.5",
     "@turf/centroid": "5.1.5",
