@@ -49,7 +49,7 @@
                       {{numeral-format d.pop_acs '0.0a'}}
                     {{/if}}
                   </span>
-                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
+                  <small class="stat-footer">2012-2016 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
                 </div>
               </div>
             </div>
@@ -186,12 +186,12 @@
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Crime'
                             column='crime_count'
-                            tip='NYPD Complaint Data, 2016. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle.'
+                            tip='NYPD Historic Complaint Data accessed via NYC Open Data. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle. Only reports with precise location information are included in community district crime indicator.'
                             cd_stat=d.crime_count
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2016
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2017
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
