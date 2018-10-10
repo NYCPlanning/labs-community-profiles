@@ -39,7 +39,7 @@ export default Route.extend(ScrollToTop, {
   model(params) {
     const { boro, cd } = params;
     const borocd = buildBorocd(boro, cd);
-    const sql = `SELECT * FROM community_district_profiles WHERE borocd=${borocd}`;
+    const sql = `SELECT * FROM community_district_profiles_v201810 WHERE borocd=${borocd}`;
 
     const selectedDistrict = this.modelFor('application').findBy('borocd', borocd);
 
