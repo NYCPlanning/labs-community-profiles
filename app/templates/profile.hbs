@@ -46,10 +46,10 @@
                     {{#if d.shared_puma}}
                       N/A
                     {{else}}
-                      {{numeral-format d.pop_11_15_acs '0.0a'}}
+                      {{numeral-format d.pop_acs '0.0a'}}
                     {{/if}}
                   </span>
-                  <small class="stat-footer">2011-2015 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
+                  <small class="stat-footer">2012-2016 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
                 </div>
               </div>
             </div>
@@ -178,20 +178,20 @@
           {{#data.indicator class="indicator" name='Street Cleanliness'
                             column='pct_clean_strts'
                             unit='%'
-                            tip='New York City Department of Sanitation, 2017'
+                            tip='New York City Department of Sanitation, 2018'
                             cd_stat=d.pct_clean_strts
                             boro_stat=d.pct_clean_strts_boro
                             city_stat=d.pct_clean_strts_nyc}}
-            of streets rated "acceptable" on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page" target="_blank">Street Cleanliness Scorecard</a> in FY&nbsp;2016
+            of streets rated "acceptable" on the <a href="https://www1.nyc.gov/site/operations/performance/scorecard-street-sidewalk-cleanliness-ratings.page" target="_blank">Street Cleanliness Scorecard</a> in FY&nbsp;2017
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Crime'
                             column='crime_count'
-                            tip='NYPD Complaint Data, 2016. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle.'
+                            tip='NYPD Historic Complaint Data accessed via NYC Open Data. NYPD classifies seven crimes as major felonies: murder, rape, robbery, felony assault, burglary, grand larceny, and grand larceny of a motor vehicle. Only reports with precise location information are included in community district crime indicator.'
                             cd_stat=d.crime_count
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2016
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2017
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -226,12 +226,12 @@
           {{#data.indicator class="indicator" name='NYCgov Poverty Measure'
                             column='poverty_rate'
                             moe='moe_poverty_rate'
-                            tip='NYCgov Poverty Rate, 2011-2015 5-year average. This NYC-specific poverty measure is adjusted for the City’s high cost of housing and includes the value of anti-poverty programs (e.g. SNAP, housing assistance) as family resources. Accounts for certain costs (e.g. medical, commuting, childcare). Historically produces a higher, more realistic measure of poverty than the official U.S. measure.'
+                            tip='NYCgov Poverty Rate, 2012-2016 5-year average. This NYC-specific poverty measure is adjusted for the City’s high cost of housing and includes the value of anti-poverty programs (e.g. SNAP, housing assistance) as family resources. Accounts for certain costs (e.g. medical, commuting, childcare). Historically produces a higher, more realistic measure of poverty than the official U.S. measure.'
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the <a href="http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page" target="_blank">NYCgov poverty threshold</a>. Compare to <a href="https://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/acs/econ_2015acs5yr_puma.pdf" target="_blank">federal poverty&nbsp;rate</a>.
+            of residents have incomes below the <a href="http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page" target="_blank">NYCgov poverty threshold</a>. Compare to <a href="https://www1.nyc.gov/assets/planning/download/office/data-maps/nyc-population/acs/econ_2016acs5yr_puma.xlsx?r=1" target="_blank">federal poverty&nbsp;rate</a>.
           {{/data.indicator}}
         {{/key-indicators}}
 
