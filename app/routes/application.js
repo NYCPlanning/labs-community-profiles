@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service'; // eslint-disable-line
 import Route from '@ember/routing/route';
-import bbox from 'npm:@turf/bbox'; // eslint-disable-line
+import bbox from '@turf/bbox'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
 import SetMapBounds from '../mixins/set-map-bounds';
 

@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service'; // eslint-disable-line
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
-import geoViewport from 'npm:@mapbox/geo-viewport'; // eslint-disable-line
+import geoViewport from '@mapbox/geo-viewport'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
