@@ -47,7 +47,19 @@ jobs:
           name: Deployment
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git remote add dokku dokku@planninglabs.nyc:communityprofiles && git push dokku master
+              yarn build -e production
+              cd dist
+              touch .static
+              git init
+              git add .
+              git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
+              git remote add dokku dokku@planninglabs.nyc:communityprofiles && git push -f dokku master
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              git remote add dokku dokku@planninglabs.nyc:communityprofiles-staging && git push dokku develop:master
+              yarn build -e staging
+              cd dist
+              touch .static
+              git init
+              git add .
+              git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
+              git remote add dokku dokku@planninglabs.nyc:communityprofiles-staging && git push -f dokku master
             fi
