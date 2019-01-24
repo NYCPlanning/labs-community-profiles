@@ -42,7 +42,7 @@ jobs:
       # deploy
       - run:
           name: Avoid hosts unknown for github
-          command: ssh-keyscan planninglabs.nyc >> ~/.ssh/known_hosts
+          command: ssh-keyscan community-profiles.planninglabs.nyc >> ~/.ssh/known_hosts
       - deploy:
           name: Deployment
           command: |
@@ -53,7 +53,7 @@ jobs:
               git init
               git add .
               git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
-              git remote add dokku dokku@planninglabs.nyc:communityprofiles && git push -f dokku master
+              git remote add dokku dokku@community-profiles.planninglabs.nyc:communityprofiles && git push -f dokku master
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
               yarn build -e staging
               cd dist
@@ -61,5 +61,5 @@ jobs:
               git init
               git add .
               git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
-              git remote add dokku dokku@planninglabs.nyc:communityprofiles-staging && git push -f dokku master
+              git remote add dokku dokku@community-profiles.planninglabs.nyc:communityprofiles-staging && git push -f dokku master
             fi
