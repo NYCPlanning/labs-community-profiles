@@ -38,28 +38,3 @@ jobs:
       # run tests!
       # ADD TESTS BACK ONCE THEY ARE PROPERLY SET UP FOR THIS APP
       # - run: yarn test
-
-      # deploy
-      - run:
-          name: Avoid hosts unknown for github
-          command: ssh-keyscan community-profiles.planninglabs.nyc >> ~/.ssh/known_hosts
-      - deploy:
-          name: Deployment
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn build -e production
-              cd dist
-              touch .static
-              git init
-              git add .
-              git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
-              git remote add dokku dokku@community-profiles.planninglabs.nyc:communityprofiles && git push -f dokku master
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              yarn build -e staging
-              cd dist
-              touch .static
-              git init
-              git add .
-              git -c user.name='Labs Deploy Script' -c user.email='labs_dl@planning.nyc.gov' commit -m "deploy"
-              git remote add dokku dokku@community-profiles.planninglabs.nyc:communityprofiles-staging && git push -f dokku master
-            fi
