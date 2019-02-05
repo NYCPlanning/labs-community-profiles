@@ -2,7 +2,7 @@ import { alias } from '@ember/object/computed'; // eslint-disable-line
 import EmberObject, { computed } from '@ember/object';
 import DS from 'ember-data'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson'; // eslint-disable-line
-import isIntersecting from 'npm:@turf/inside'; // eslint-disable-line
+import isIntersecting from '@turf/inside'; // eslint-disable-line
 
 export default DS.Model.extend({
   district: computed('geometry', function() {

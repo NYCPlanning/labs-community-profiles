@@ -1,8 +1,8 @@
 import { computed } from '@ember/object'; // eslint-disable-line
 import DS from 'ember-data'; // eslint-disable-line
-import bbox from 'npm:@turf/bbox' // eslint-disable-line
-import centroid from 'npm:@turf/centroid'; // eslint-disable-line
-import numeral from 'npm:numeral';
+import bbox from '@turf/bbox' // eslint-disable-line
+import centroid from '@turf/centroid'; // eslint-disable-line
+import numeral from 'numeral';
 import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 
 const acronymCrosswalk = {

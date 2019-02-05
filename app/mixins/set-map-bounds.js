@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import Mixin from '@ember/object/mixin';
-import bbox from 'npm:@turf/bbox'; // eslint-disable-line
+import bbox from '@turf/bbox'; // eslint-disable-line
 import toGeojson from '../utils/to-geojson';
 
 export default Mixin.create({

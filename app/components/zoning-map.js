@@ -2,7 +2,7 @@ import { computed } from '@ember/object'; // eslint-disable-line
 import FacilitiesSection from './facilities-section';
 import carto from '../utils/carto';
 
-const SQL = 'SELECT *, LEFT(zonedist, 2) as primaryzone FROM support_zoning_zd';
+const SQL = 'SELECT *, LEFT(zonedist, 2) as primaryzone FROM zoning_districts';
 const zdConfig = {
   id: 'zoning',
   type: 'fill',
