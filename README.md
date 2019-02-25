@@ -65,10 +65,10 @@ Most of the data use by the app is stored in tables on the planninglabs carto in
 - `cdprofiles_197a_plans` - a row for each 197a plan with its associated community districts
 
 #### Supporting tables
-- `support_mappluto` - mappluto 17v1
+- `mappluto` - aliased view of the latest MapPLUTO version
 - `support_waterfront_pfirm` - 2015 Preliminary Flood Insurance Rate Map, for calculating things in the floodplain
 - `cdprofiles_floodplain_2050` - future floodplain shapefile (for visualization only)
-- `facilities_facdb` - the NYC facilities Database
+- `facdb` - aliased view of the latest NYC facilities Database
 
 ### github static content
 - static JSON files for the zoning chart are accessed via the github raw files api using [https://github.com/NYCPlanning/labs-community-data](https://github.com/NYCPlanning/labs-community-data)

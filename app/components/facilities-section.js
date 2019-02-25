@@ -6,7 +6,7 @@ import geoViewport from '@mapbox/geo-viewport'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
-const facdbTable = 'facdb_v201705';
+const facdbTable = 'facdb';
 
 const colorsArray = [
   ['Education, Child Welfare, and Youth', '#f7ca00'],
