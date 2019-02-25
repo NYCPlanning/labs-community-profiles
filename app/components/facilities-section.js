@@ -6,7 +6,7 @@ import geoViewport from '@mapbox/geo-viewport'; // eslint-disable-line
 
 import carto from '../utils/carto';
 
-const facdbTable = 'facdb_v201705';
+const facdbTable = 'facdb';
 
 const colorsArray = [
   ['Education, Child Welfare, and Youth', '#f7ca00'],
@@ -82,7 +82,7 @@ export default Component.extend({
     const joinSql = `
       SELECT facdomain, count(facdomain)
       FROM ${facdbTable} a
-      INNER JOIN support_admin_cdboundaries b
+      INNER JOIN community_districts b
       ON ST_Contains(b.the_geom, a.the_geom)
       WHERE b.borocd = '${borocd}'
       GROUP BY facdomain

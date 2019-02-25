@@ -12,7 +12,7 @@ const SQL = `
     END as boro,
     borocd,
     cartodb_id as id
-  FROM support_admin_cdboundaries
+  FROM community_districts
   WHERE borocd %25 100 %3C 20
   ORDER BY boro, cd ASC
 `;
