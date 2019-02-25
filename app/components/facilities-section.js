@@ -82,7 +82,7 @@ export default Component.extend({
     const joinSql = `
       SELECT facdomain, count(facdomain)
       FROM ${facdbTable} a
-      INNER JOIN support_admin_cdboundaries b
+      INNER JOIN community_districts b
       ON ST_Contains(b.the_geom, a.the_geom)
       WHERE b.borocd = '${borocd}'
       GROUP BY facdomain
