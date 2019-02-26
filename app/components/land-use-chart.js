@@ -24,7 +24,7 @@ const LandUseChart = Component.extend(ResizeAware, {
     const SQL = `
     WITH lots AS (
       SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse, lotarea
-      FROM mappluto_v1711 a
+      FROM mappluto a
       LEFT JOIN support_landuse_lookup c
             ON a.landuse::integer = c.code
       WHERE a.cd = '${borocd}'
