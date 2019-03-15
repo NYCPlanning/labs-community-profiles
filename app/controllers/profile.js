@@ -30,8 +30,8 @@ export default Controller.extend({
 
   @computed('model')
   inFloodplain(model) {
-    const { current_fp_bldg, future_fp_bldg } = model.dataprofile; // eslint-disable-line
-    return current_fp_bldg !== 0 || future_fp_bldg !== 0; // eslint-disable-line
+    const { fp_100_bldg, fp_500_bldg } = model.dataprofile; // eslint-disable-line
+    return fp_100_bldg !== 0 || fp_500_bldg !== 0; // eslint-disable-line
   },
 
   @computed('model')
@@ -93,7 +93,7 @@ export default Controller.extend({
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
-    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
+    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles_v201903&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
   },
 
   section: '',

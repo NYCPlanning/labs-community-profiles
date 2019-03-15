@@ -2,8 +2,8 @@
   {{#with (await vectorSource) as |vSource|}}
 
     {{#map.source sourceId='floodzones' source=vSource as |source|}}
-      {{source.layer layer=floodplain2050Layer before='building'}}
-      {{source.layer layer=pfirm15Layer before='building'}}
+      {{source.layer layer=floodplain500Layer before='building'}}
+      {{source.layer layer=floodplain100Layer before='building'}}
     {{/map.source}}
 
     {{map.call 'fitBounds' mapState.bounds fitBoundsOptions}}

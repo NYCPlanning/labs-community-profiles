@@ -10,14 +10,14 @@ const LandUseChart = Component.extend(ResizeAware, {
 
   @computed('borocd', 'mode')
   sql(borocd, mode) {
-    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+    const modePrefix = mode === '100-yr' ? '1' : '5';
 
     return `
       SELECT
-        ${modePrefix}_adj_det AS "Detached",
-        ${modePrefix}_adj_semi AS "Attached or Semi-detached",
-        ${modePrefix}_adj_unk AS "Unknown"
-      FROM planninglabs.community_profiles_floodplain
+        ba${modePrefix}01 AS "Detached",
+        ba${modePrefix}02 AS "Semi-Attached",
+        ba${modePrefix}03 AS "Attached"
+      FROM planninglabs.cd_floodplains
       WHERE borocd = ${borocd}
     `;
   },
