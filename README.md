@@ -48,7 +48,7 @@ Community Profiles consists of a landing page and a route for each of NYC's 59 C
 
 Once on a profile route, a long-scrolling page of charts, maps, and other content display the data.  
 
-Each profile has a model that pulls one row from the `community_district_profiles` table and contains most of the data necessary to render the profile.  The reports are Componentized where possible, using ember components to make sections or sub-sections self-contained.  
+Each profile has a model that pulls one row from the `community_district_profiles_v201903` table and contains most of the data necessary to render the profile.  The reports are Componentized where possible, using ember components to make sections or sub-sections self-contained.  
 
 ## Backend services
 
@@ -59,16 +59,17 @@ Each profile has a model that pulls one row from the `community_district_profile
 Most of the data use by the app is stored in tables on the planninglabs carto instance.
 
 #### App-specific tables:
-- `community_district_profiles` - an aliased view of a wide table with one row for each community district and a column for each indicator
+- `community_district_profiles_v201903` - an aliased view of a wide table with one row for each community district and a column for each indicator
 - `community_profiles_floodplain` - same as above, but specific to waterfront/resiliency data used in the Floodplain section charts.
 - `cdprofiles_studies_plans` - a row for each dcp study/plan with its associated community districts
 - `cdprofiles_197a_plans` - a row for each 197a plan with its associated community districts
 
 #### Supporting tables
 - `mappluto` - aliased view of the latest MapPLUTO version
-- `support_waterfront_pfirm` - 2015 Preliminary Flood Insurance Rate Map, for calculating things in the floodplain
-- `cdprofiles_floodplain_2050` - future floodplain shapefile (for visualization only)
 - `facdb` - aliased view of the latest NYC facilities Database
+- `merged_pfirm_firm_100yr_v201901` - Merged version of 2007 Food Insurance Rate Map and 2015 Preliminary Flood Insurance Rate Map 100 yr floodplain boundary, used for vizualizing and calculating things in the floodplain
+- `merged_pfirm_firm_500yr_v201901` - Merged version of 2007 Food Insurance Rate Map and 2015 Preliminary Flood Insurance Rate Map 500 yr floodplain boundary, used for vizualizing and calculating things in the floodplain
+- `zoning_districts` - aliased view of the latest zoning dataset version
 
 ### github static content
 - static JSON files for the zoning chart are accessed via the github raw files api using [https://github.com/NYCPlanning/labs-community-data](https://github.com/NYCPlanning/labs-community-data)

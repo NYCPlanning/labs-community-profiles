@@ -2,11 +2,11 @@ import { computed } from '@ember/object'; // eslint-disable-line
 import FacilitiesSection from './facilities-section';
 import carto from '../utils/carto';
 
-const pfirm15SQL = 'SELECT the_geom_webmercator, fld_zone FROM support_waterfront_pfirm15 WHERE fld_zone = \'AE\' OR fld_zone = \'VE\'';
-const floodplain2050SQL = 'SELECT * FROM cdprofiles_floodplain_2050';
+const floodplain100SQL = 'SELECT the_geom_webmercator, fld_zone FROM merged_pfirm_firm_100yr WHERE fld_zone = \'AE\' OR fld_zone = \'VE\'';
+const floodplain500SQL = 'SELECT * FROM merged_pfirm_firm_500yr';
 
-const pfirm15Layer = {
-  id: 'pfirm15',
+const floodplain100Layer = {
+  id: 'floodplain100',
   source: 'floodzones',
   'source-layer': 'layer0',
   type: 'fill',
@@ -24,8 +24,8 @@ const pfirm15Layer = {
   },
 };
 
-const floodplain2050Layer = {
-  id: 'floodplain2050',
+const floodplain500Layer = {
+  id: 'floodplain500',
   source: 'floodzones',
   'source-layer': 'layer1',
   type: 'fill',
@@ -37,9 +37,9 @@ const floodplain2050Layer = {
 };
 
 export default FacilitiesSection.extend({
-  pfirm15Template: null,
-  vectorSource: computed('pfirm15Template', function () {
-    return carto.getVectorTileTemplate([pfirm15SQL, floodplain2050SQL])
+  floodplainTemplate: null,
+  vectorSource: computed('floodplainTemplate', function () {
+    return carto.getVectorTileTemplate([floodplain100SQL, floodplain500SQL])
       .then(template => ({
         type: 'vector',
         tiles: [template],
@@ -51,9 +51,9 @@ export default FacilitiesSection.extend({
     duration: 0,
   },
 
-  pfirm15Layer,
+  floodplain100Layer,
 
-  floodplain2050Layer,
+  floodplain500Layer,
 
   rasterSource: {
     type: 'raster',
