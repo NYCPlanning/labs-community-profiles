@@ -28,6 +28,7 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
         ${typeAbbrev}${modePrefix}06 AS "6",
         ${typeAbbrev}${modePrefix}07 AS "7",
         ${typeAbbrev}${modePrefix}08 AS "8",
+        ${typeAbbrev}${modePrefix}09 AS "9",
         ${typeAbbrev}${modePrefix}10 AS "10",
         ${typeAbbrev}${modePrefix}11 AS "11"
       FROM planninglabs.cd_floodplains
@@ -56,9 +57,6 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
               value,
               value_pct,
             };
-          })
-          .sort((a, b) => { // eslint-disable-line
-            return a.value === b.value ? 0 : -(a.value > b.value) || 1;
           });
       });
   },
