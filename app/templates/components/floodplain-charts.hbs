@@ -12,7 +12,11 @@
       {{#building-type-chart type='buildings' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
-            {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
+            {{#if (eq mode '100-yr')}}
+              {{model.dataprofile.fp_100_bldg}}
+            {{else}}
+              {{model.dataprofile.fp_500_bldg}}
+            {{/if}}
           </span>
           <span class="stat-footer">buildings are in the {{mode}} floodplain</span>
         </p>
@@ -36,7 +40,11 @@
       {{#building-type-chart type='units' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
-              {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
+            {{#if (eq mode '100-yr')}}
+              {{model.dataprofile.fp_100_resunits}}
+            {{else}}
+              {{model.dataprofile.fp_500_resunits}}
+            {{/if}}
           </span>
           <span class="stat-footer">dwelling units are in the {{mode}} floodplain</span>
         </p>
