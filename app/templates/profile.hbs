@@ -368,11 +368,6 @@
                       <td>{{if d.fp_500_mhhi (numeral-format d.fp_500_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Open Space Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
-                      <td>{{if d.fp_100_openspace (concat d.fp_100_openspace ' sq mi') 'n/a'}}</td>
-                      <td>{{if d.fp_500_openspace (concat d.fp_500_openspace ' sq mi') 'n/a'}}</td>
-                    </tr>
-                    <tr>
                       <td>Total Units Owner Occupied {{info-tooltip tip=d.acs_tooltip_2}}</td>
                       <td>{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
                       <td>{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
