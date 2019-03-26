@@ -13,9 +13,9 @@
         <p>
           <span class="stat">
             {{#if (eq mode '100-yr')}}
-              {{model.dataprofile.fp_100_bldg}}
+              {{numeral-format model.dataprofile.fp_100_bldg '0,0'}}
             {{else}}
-              {{model.dataprofile.fp_500_bldg}}
+              {{numeral-format model.dataprofile.fp_500_bldg '0,0'}}
             {{/if}}
           </span>
           <span class="stat-footer">buildings are in the {{mode}} floodplain</span>
@@ -41,9 +41,9 @@
         <p>
           <span class="stat">
             {{#if (eq mode '100-yr')}}
-              {{model.dataprofile.fp_100_resunits}}
+              {{numeral-format model.dataprofile.fp_100_resunits '0,0'}}
             {{else}}
-              {{model.dataprofile.fp_500_resunits}}
+              {{numeral-format model.dataprofile.fp_500_resunits '0,0'}}
             {{/if}}
           </span>
           <span class="stat-footer">dwelling units are in the {{mode}} floodplain</span>
