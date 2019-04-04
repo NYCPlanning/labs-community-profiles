@@ -11,15 +11,14 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
 
   @computed('borocd', 'mode')
   sql(borocd, mode) {
-    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+    const modePrefix = mode === '100-yr' ? '1' : '5';
     return `
       SELECT
-        ${modePrefix}_age_pre_1961 AS "Pre-1961",
-        ${modePrefix}_age_1961_1982 AS "1961-1982",
-        ${modePrefix}_age_1983_2012 AS "1983-2012",
-        ${modePrefix}_age_2013_2016 AS "2013-2016",
-        ${modePrefix}_age_unk AS "Unknown"
-      FROM planninglabs.community_profiles_floodplain
+        yb${modePrefix}01 AS "Pre-1961",
+        yb${modePrefix}02 AS "1961-1982",
+        yb${modePrefix}03 AS "1983-2012",
+        yb${modePrefix}04 AS "2013-2017"
+      FROM planninglabs.cd_floodplains
       WHERE borocd = ${borocd}
     `;
   },

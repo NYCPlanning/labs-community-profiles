@@ -10,14 +10,14 @@ const LandUseChart = Component.extend(ResizeAware, {
 
   @computed('borocd', 'mode')
   sql(borocd, mode) {
-    const modePrefix = mode === '2015' ? 'cur' : 'fut';
+    const modePrefix = mode === '100-yr' ? '1' : '5';
 
     return `
       SELECT
-        ${modePrefix}_sub_fullb AS "Full basement below grade",
-        ${modePrefix}_sub_fulla AS "Full basement above grade",
-        ${modePrefix}_sub_unk AS "Unknown"
-      FROM planninglabs.community_profiles_floodplain
+        bm${modePrefix}bg AS "Full basement below grade",
+        bm${modePrefix}ag AS "Full basement above grade",
+        bm${modePrefix}un AS "Unknown"
+      FROM planninglabs.cd_floodplains
       WHERE borocd = ${borocd}
     `;
   },
