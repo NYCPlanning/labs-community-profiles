@@ -7,7 +7,7 @@
 
 <div class="grid-x grid-padding-x">
   <div class="cell medium-6 large-6 xlarge-5">
-    <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of total buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts for total buildings that fall within the selected floodplain sorted by Building Typologies (a combination of Land Use type, Building Adjacency, Lot Size and Number of Buildings)."}}</strong></h4>
     <div class="callout text-center">
       {{#building-type-chart type='buildings' mode=mode borocd=model.borocd as |chart|}}
         <p>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="cell medium-6 large-6 xlarge-5">
-    <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of total residential units within buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts for total residential units that fall within the selected floodplain sorted by Building Typologies (a combination of Land Use type, Building Adjacency, Lot Size and Number of Buildings)."}}</strong></h4>
     <div class="callout text-center">
       {{#building-type-chart type='units' mode=mode borocd=model.borocd as |chart|}}
         <p>
