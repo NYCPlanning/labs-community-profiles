@@ -35,14 +35,6 @@ export default Controller.extend({
   },
 
   @computed('model')
-  popTooltip(model) {
-    const cd = this.get(model.cd);
-    console.log(cd);
-    const tooltip = 'hey how are you';
-    return tooltip;
-  },
-
-  @computed('model')
   popDensity() {
     const d = this.get('d');
     const { pop_2010, area_sqmi } = d; // eslint-disable-line
