@@ -337,7 +337,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>2010 Population {{info-tooltip tip="Population counts for floodplain geographies were defined in terms of 2010 census block geographies, which selected 2010 census blocks if their centroids intersected the floodplain areas. Selected demographic data were obtained and then aggregated to produce demographic profiles of floodplain areas that lay within community districts."}}</td>
+                      <td>2010 Population {{info-tooltip tip=d.acs_tooltip_3}}</td>
                       <td>
                         {{#if d.fp_500_pop}}
                           {{if (gte d.fp_100_pop 1000) (numeral-format d.fp_100_pop '0.0a') (numeral-format d.fp_100_pop '0')}}
@@ -354,7 +354,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
+                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 18v1"}}</td>
                       <td>{{if d.fp_100_area (concat (numeral-format d.fp_100_area '0.00') ' sq mi') 'n/a'}}</td>
                       <td>{{if d.fp_500_area (concat (numeral-format d.fp_500_area '0.00') ' sq mi') 'n/a'}}</td>
                     </tr>
@@ -368,34 +368,30 @@
                       <td>{{if d.fp_500_mhhi (numeral-format d.fp_500_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Open Space Area {{info-tooltip tip="based on MapPluto 15v1"}}</td>
-                      <td>{{if d.fp_100_openspace (concat d.fp_100_openspace ' sq mi') 'n/a'}}</td>
-                      <td>{{if d.fp_500_openspace (concat d.fp_500_openspace ' sq mi') 'n/a'}}</td>
-                    </tr>
-                    <tr>
                       <td>Total Units Owner Occupied {{info-tooltip tip=d.acs_tooltip_2}}</td>
-                      <td>{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
-                      <td>{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Owner Occupied Units with Mortgages {{info-tooltip tip=d.acs_tooltip_2}}</td>
-                      <td>{{if d.fp_100_permortg (numeral-format d.fp_100_permortg '(0.0%)') 'n/a'}}</td>
-                      <td>{{if d.fp_500_permortg (numeral-format d.fp_500_permortg '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_mortg_value 1000) 'unreliable'}}">{{if d.fp_100_permortg (numeral-format d.fp_100_permortg '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_mortg_value 1000) 'unreliable'}}">{{if d.fp_500_permortg (numeral-format d.fp_500_permortg '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Renter Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
-                      <td>{{if d.fp_100_rent_burden (numeral-format d.fp_100_rent_burden '(0.0%)') 'n/a'}}</td>
-                      <td>{{if d.fp_500_rent_burden (numeral-format d.fp_500_rent_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_100_rent_burden (numeral-format d.fp_100_rent_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_500_rent_burden (numeral-format d.fp_500_rent_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>Owner Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
-                      <td>{{if d.fp_100_cost_burden (numeral-format d.fp_100_cost_burden '(0.0%)') 'n/a'}}</td>
-                      <td>{{if d.fp_500_cost_burden (numeral-format d.fp_500_cost_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_100_cost_burden (numeral-format d.fp_100_cost_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_500_cost_burden (numeral-format d.fp_500_cost_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <p class="text-center no-margin">Learn more with the <a href="http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5" target="_blank">{{fa-icon "external-link"}} NYC Flood Hazard Mapper</a></p>
+              <p class="floodplain-data-info">2010 Census population is calculated by identifying census blocks with centroids in the floodplain. American Community Survey (ACS) characteristics are calculated by, first, identifying census blocks with centroids in the floodplain, and then using ACS data for census block groups with constituent blocks that fall in the floodplain. Users should note that ACS data are derived from a survey and are subject to sampling variability. Grayed values are not statistically reliable (<a href="https://www.census.gov/programs-surveys/acs/guidance.html" target="_blank">guidance on ACS data</a>).</p>
             </div>
           </div>
         </div>
