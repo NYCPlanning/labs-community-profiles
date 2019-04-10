@@ -62,7 +62,7 @@ html, body {
       bottom: 0;
       left: 0;
       width: 33.33333%;
-      height: calc(100vh - 75px);
+      height: calc(100vh);
     }
 
     @include breakpoint(xlarge) {
@@ -254,6 +254,17 @@ html, body {
   @include breakpoint(small only) {
     padding-top: $callout-padding;
   }
+}
+
+// floodplaing data info
+
+.floodplain-data-info {
+  margin-top: 0.9rem;
+  font-size: rem-calc(12);
+  line-height: 1.7;
+  color: $dark-gray;
+  text-align: center;
+  max-width: none;
 }
 
 
