@@ -14,7 +14,7 @@
           <span class="stat">
             {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
           </span>
-          <span class="stat-footer">buildings are in the {{mode}} floodplain</span>
+          <span class="stat-footer">buildings are in the {{if (eq mode '100-yr') '1% Annual Chance' '0.2% Annual Chance'}} floodplain</span>
         </p>
       {{/building-type-chart}}
       <hr>
@@ -38,7 +38,7 @@
           <span class="stat">
               {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
           </span>
-          <span class="stat-footer">dwelling units are in the {{mode}} floodplain</span>
+          <span class="stat-footer">dwelling units are in the {{if (eq mode '100-yr') '1% Annual Chance' '0.2% Annual Chance'}} floodplain</span>
         </p>
       {{/building-type-chart}}
       <hr>
