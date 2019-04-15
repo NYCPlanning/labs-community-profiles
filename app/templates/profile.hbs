@@ -315,11 +315,11 @@
         {{#if inFloodplain}}
         <div class="grid-x grid-padding-x">
           <div class="cell large-8">
-            <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The 100 year flood plain is based on the 1% annual chance floodplain established by the FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM) and the FEMA 2007 Flood Insurance Rate Maps (FIRM). The 500 year floodplain is based on the 0.2% annual chance floodplain established by the FEMA 2015 Preliminary Flood Insurance Rate Maps (PFIRM) and the FEMA 2007 Flood Insurance Rate Maps (FIRM). For more information on City Planning’s resiliency work program, visit <a href="http://nyc.gov/resilientneighborhoods" target="_blank">Resilient Neighborhoods</a>.</p>
+            <p class="section-header-description">The information below details the people and built environment within NYC’s floodplain, showing the risk and key characteristics that influence the ability of a neighborhood to adapt. The 1% annual chance floodplain is based on FEMA’s 2015 Preliminary Flood Insurance Rate Maps (PFIRM) and the FEMA 2007 Flood Insurance Rate Maps (FIRM). The 0.2% annual chance floodplain is based on FEMA’s 2015 Preliminary Flood Insurance Rate Maps (PFIRM) and the FEMA 2007 Flood Insurance Rate Maps (FIRM). For more information on City Planning’s resiliency work program, visit <a href="https://www1.nyc.gov/site/planning/plans/climate-resiliency/climate-resiliency.page" target="_blank">Resilient Neighborhoods</a>.</p>
           </div>
         </div>
 
-        <h4 class="subsection-header"><strong>Current &amp; 500-yr Floodplain</strong></h4>
+        <h4 class="subsection-header"><strong>1% Annual Chance &amp; 0.2% Annual Chance Floodplain</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell xlarge-6">
@@ -331,13 +331,13 @@
                   <thead>
                     <tr>
                       <th>Indicators</th>
-                      <th style="background-color: #99CCEE;">100-yr Floodplain</th>
-                      <th style="background-color: #EDCD85;">500-yr Floodplain</th>
+                      <th style="background-color: #99CCEE;">1% Annual Chance Floodplain</th>
+                      <th style="background-color: #EDCD85;">0.2% Annual Chance Floodplain</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>2010 Population {{info-tooltip tip=d.acs_tooltip_3}}</td>
+                      <td>Population (2010) {{info-tooltip tip=d.acs_tooltip_3}}</td>
                       <td>
                         {{#if d.fp_500_pop}}
                           {{if (gte d.fp_100_pop 1000) (numeral-format d.fp_100_pop '0.0a') (numeral-format d.fp_100_pop '0')}}
@@ -368,22 +368,22 @@
                       <td>{{if d.fp_500_mhhi (numeral-format d.fp_500_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Total Units Owner Occupied {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Housing Units that are Owner-Occupied {{info-tooltip tip=d.acs_tooltip_2}}</td>
                       <td class="{{if (lte d.fp_100_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units with Mortgages {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Owner-Occupied Housing Units with Mortgages {{info-tooltip tip=d.acs_tooltip_2}}</td>
                       <td class="{{if (lte d.fp_100_mortg_value 1000) 'unreliable'}}">{{if d.fp_100_permortg (numeral-format d.fp_100_permortg '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_mortg_value 1000) 'unreliable'}}">{{if d.fp_500_permortg (numeral-format d.fp_500_permortg '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Renter Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Owner-Occupied Units that are Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
                       <td class="{{if (lte d.fp_100_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_100_rent_burden (numeral-format d.fp_100_rent_burden '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_500_rent_burden (numeral-format d.fp_500_rent_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Owner Occupied Units Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Renter-Occupied Units that are Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
                       <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_100_cost_burden (numeral-format d.fp_100_cost_burden '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_500_cost_burden (numeral-format d.fp_500_cost_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
