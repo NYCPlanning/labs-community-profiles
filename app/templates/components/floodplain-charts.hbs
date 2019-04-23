@@ -1,20 +1,20 @@
 <h4 style="margin-bottom: .5em;">
   Floodplain Charts
-  <button class="button tiny no-margin {{if (not-eq mode '100-yr') 'hollow'}}" style="border-top-right-radius: 0; border-bottom-right-radius:0" {{action "setMode" "100-yr"}}>100-yr Floodplain</button><button class="button tiny no-margin {{if (not-eq mode '500-yr') 'hollow'}}" style="border-top-left-radius: 0; border-bottom-left-radius:0" {{action "setMode" "500-yr"}}>500-yr Floodplain</button>
+  <button class="button tiny no-margin {{if (not-eq mode '100-yr') 'hollow'}}" style="border-top-right-radius: 0; border-bottom-right-radius:0" {{action "setMode" "100-yr"}}>1% Annual Chance Floodplain</button><button class="button tiny no-margin {{if (not-eq mode '500-yr') 'hollow'}}" style="border-top-left-radius: 0; border-bottom-left-radius:0" {{action "setMode" "500-yr"}}>0.2% Annual Chance Floodplain</button>
 </h4>
 <p class="text-small">These charts show data calculated by aggregating PLUTO data for tax lots where buildings fall within the specified floodplain boundary.</p>
 
 
 <div class="grid-x grid-padding-x">
   <div class="cell medium-6 large-6 xlarge-5">
-    <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts of total buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <h4 class="subsection-header"><strong>Buildings in Floodplain {{info-tooltip tip="Counts for total buildings that fall within the selected floodplain sorted by Building Typologies (a combination of Land Use type, Building Adjacency, Lot Size and Number of Buildings)."}}</strong></h4>
     <div class="callout text-center">
       {{#building-type-chart type='buildings' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
             {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
           </span>
-          <span class="stat-footer">buildings are in the {{mode}} floodplain</span>
+          <span class="stat-footer">buildings are in the {{if (eq mode '100-yr') '1% Annual Chance' '0.2% Annual Chance'}} floodplain</span>
         </p>
       {{/building-type-chart}}
       <hr>
@@ -31,14 +31,14 @@
     </div>
   </div>
   <div class="cell medium-6 large-6 xlarge-5">
-    <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts of total residential units within buildings that fall within the selected floodplain sorted by PLUTO land use type."}}</strong></h4>
+    <h4 class="subsection-header"><strong>Dwelling Units in Floodplain {{info-tooltip tip="Counts for total residential units that fall within the selected floodplain sorted by Building Typologies (a combination of Land Use type, Building Adjacency, Lot Size and Number of Buildings)."}}</strong></h4>
     <div class="callout text-center">
       {{#building-type-chart type='units' mode=mode borocd=model.borocd as |chart|}}
         <p>
           <span class="stat">
               {{numeral-format (reduce (action 'sum') 0 (map-by 'value' (await chart.data))) '0,0'}}
           </span>
-          <span class="stat-footer">dwelling units are in the {{mode}} floodplain</span>
+          <span class="stat-footer">dwelling units are in the {{if (eq mode '100-yr') '1% Annual Chance' '0.2% Annual Chance'}} floodplain</span>
         </p>
       {{/building-type-chart}}
       <hr>
