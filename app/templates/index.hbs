@@ -1,25 +1,30 @@
 <div class="grid-x grid-padding-x">
-  <div class="cell" style="padding-bottom:2rem;max-width:75em;">
-    <h1>Welcome to NYC Department of&nbsp;City&nbsp;Planning’s<br>Community District&nbsp;Profiles!</h1>
-    <p class="lead">This is your gateway to data, maps, and other resources describing New York City’s 59 community districts. Choose a community district profile by clicking on the map, or by searching for a district, neighborhood, or address.</p>
-    <div style="padding-bottom:1rem;max-width:42em;">
+  <div class="cell xlarge-8" style="padding-bottom:1rem; padding-top:1rem;">
+    <h1 class="header-large">Welcome to the NYC Department of City Planning’s Community District Profiles! </h1>
+    <p class="lead">This is your gateway to data, maps, and other resources describing New York City’s 59 community districts, each represented by a community&nbsp;board. Choose a community district profile by using the map, or by searching for a district, neighborhood, or&nbsp;address.</p>
+    <div style="margin:2rem 0;max-width:42em;">
       {{navigation-dropdown
           model=model
           placeholder='Search for a District, Neighborhood, or Address...'
           selected=mapState.currentlySelected
           onchange=(route-action 'transitionToProfile')}}
     </div>
+    <p>Community boards create opportunities for active, local participation in public decision making processes. They articulate community needs; inform services provided; and reflect New York City’s remarkable diversity. Community districts range in size from less than 900 acres to almost 15,000 acres, and in population from a little more than 50,000 residents to more than&nbsp;200,000.</p>
   </div>
-  <div class="cell medium-4">
-    <h2 class="header-large">{{fa-icon 'search'}}&nbsp;&nbsp;Explore</h2>
-    <p>Maps and statistics illustrate each district’s built environment, socio&#8209;economic, and demographic characteristics. Dynamic charts compare conditions across districts.</p>
-  </div>
-  <div class="cell medium-4">
-    <h2 class="header-large">{{fa-icon 'pie-chart'}}&nbsp;&nbsp;Learn</h2>
-    <p>Each community district is unique. Find out about your community board's budget priorities and most pressing concerns, and learn about the projects and neighborhood studies that are happening in your district.</p>
-  </div>
-  <div class="cell medium-4">
-    <h2 class="header-large">{{fa-icon 'download'}}&nbsp;&nbsp;Download</h2>
-    <p>Each profile's indicators, land use and zoning data, and more are available for your use and analysis.</p>
+  <div class="cell xlarge-4" style="padding-bottom:1rem; padding-top:1rem;">
+    <div class="grid-x grid-padding-x">
+      <div class="cell medium-4 xlarge-12">
+        <h2 class="header-large">{{fa-icon 'search'}}&nbsp;&nbsp;Explore</h2>
+        <p>Maps and statistics illustrate each district’s built environment, socio&#8209;economic, and demographic characteristics. Dynamic charts compare conditions across districts.</p>
+      </div>
+      <div class="cell medium-4 xlarge-12">
+        <h2 class="header-large">{{fa-icon 'pie-chart'}}&nbsp;&nbsp;Learn</h2>
+        <p>Each community district is unique. Find out about your community board's budget priorities and most pressing concerns, and learn about the projects and neighborhood studies that are happening in your district.</p>
+      </div>
+      <div class="cell medium-4 xlarge-12">
+        <h2 class="header-large">{{fa-icon 'download'}}&nbsp;&nbsp;Download</h2>
+        <p>Each profile's indicators, land use and zoning data, and more are available for your use and analysis.</p>
+      </div>
+    </div>
   </div>
 </div>
