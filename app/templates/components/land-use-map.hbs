@@ -8,7 +8,7 @@
   {{/map.source}} --}}
 
   {{#with (await vectorSource) as |vSource|}}
-    {{#map.source sourceId='pluto' source=vSource as |source|}}
+    {{#map.source sourceId='pluto_landuse' source=vSource as |source|}}
     {{source.layer layer=vectorLayer before='place_other'}}
     {{/map.source}}
 

@@ -8,7 +8,7 @@ const SQL = 'SELECT a.the_geom_webmercator, a.landuse, b.description, address FR
 
 export default Component.extend({
   initOptions: {
-    style: '//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json',
+    style: 'https://layers-api.planninglabs.nyc/v1/base/style.json',
     zoom: 9,
     minZoom: 13.01,
     center: [-74, 40.7071],

@@ -3,7 +3,7 @@
 
 <div id="main" class="grid-x">
   <div class="cell large-4 xlarge-3" id="cd-chooser">
-    {{#mapbox-gl id='map' initOptions=(hash style='//raw.githubusercontent.com/NYCPlanning/labs-gl-style/master/data/style.json' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
+    {{#mapbox-gl id='map' initOptions=(hash style='https://layers-api.planninglabs.nyc/v1/base/style.json' zoom=zoom center=(array lng lat)) mapLoaded=(action 'handleMapLoad') as |map|}}
 
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer before='highway_name_other'}}
