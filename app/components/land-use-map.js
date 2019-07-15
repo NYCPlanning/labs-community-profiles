@@ -31,7 +31,7 @@ export default Component.extend({
   vectorLayer: {
     id: 'landuse-vector',
     type: 'fill',
-    source: 'pluto',
+    source: 'pluto-landuse',
     'source-layer': 'layer0',
     paint: {
       'fill-color': {
