@@ -16,6 +16,8 @@
 npm-debug.log*
 yarn-error.log
 testem.log
+.DS_Store
+public/.DS_Store
 
 # ember-try
 .node_modules.ember-try/
