@@ -23,7 +23,14 @@ const LandUseChart = Component.extend(ResizeAware, {
     const borocd = this.get('borocd');
     const SQL = `
     WITH lots AS (
-      SELECT a.the_geom, CASE WHEN c.description IS NOT NULL THEN c.description ELSE 'Other' END as landuse_desc, c.code as landuse, lotarea
+      SELECT
+        a.the_geom,
+        CASE
+          WHEN c.description IS NOT NULL THEN c.description
+          ELSE 'Other'
+        END as landuse_desc,
+        c.code as landuse,
+        lotarea
       FROM mappluto a
       LEFT JOIN support_landuse_lookup c
             ON a.landuse::integer = c.code
@@ -34,8 +41,11 @@ const LandUseChart = Component.extend(ResizeAware, {
       SELECT sum(lotarea) as total
       FROM lots
     )
-
-    SELECT count(landuse_desc), ROUND(SUM(lotarea)/totalsf.total::numeric, 4) AS percent, landuse, landuse_desc
+    SELECT
+      count(landuse_desc),
+      ROUND(SUM(lotarea)/totalsf.total::numeric, 4) AS percent,
+      landuse,
+      landuse_desc
     FROM lots, totalsf
     GROUP BY landuse, landuse_desc, totalsf.total
     ORDER BY percent DESC
