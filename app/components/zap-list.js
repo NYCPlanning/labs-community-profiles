@@ -17,8 +17,12 @@ export default Component.extend({
         const projects = res.data;
 
         projects.forEach((project) => {
-          const applicant = project.attributes.applicants.split(';')[0];
-          project.attributes.applicant = applicant; // eslint-disable-line
+          if (project.attributes.applicants) {
+            const applicant = project.attributes.applicants.split(';')[0];
+            project.attributes.applicant = applicant; // eslint-disable-line
+          } else {
+            project.attributes.applicant = 'Unknown Applicant'
+          }
         });
 
         return {
