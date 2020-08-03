@@ -49,7 +49,7 @@
                       {{numeral-format d.pop_acs '0.0a'}}
                     {{/if}}
                   </span>
-                  <small class="stat-footer">2013-2017 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
+                  <small class="stat-footer">2014-2018 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
                 </div>
               </div>
             </div>
@@ -191,7 +191,7 @@
                             numeral_format=0
                             boro_stat=d.crime_count_boro
                             city_stat=d.crime_count_nyc}}
-            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2017
+            <a href="https://maps.nyc.gov/crime/" target="_blank">major felonies</a> were reported in&nbsp;2019
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
@@ -244,7 +244,7 @@
         </h3>
         <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, visit the <a href="http://capitalplanning.nyc/facilities" target="_blank">NYC Facilities Explorer</a>.</p>
 
-        <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Primary Land Use Tax Lot Output (PLUTO) release 16v2. Chart provides total lot area by land use type according to NYC Department of Finance lot measurements."}}</strong></h4>
+        <h4 class="subsection-header"><strong>Land Use {{info-tooltip tip="Primary Land Use Tax Lot Output (PLUTO) release 20v4. Chart provides total lot area by land use type according to NYC Department of Finance lot measurements."}}</strong></h4>
         <div class="callout">
           <div class="grid-x grid-padding-x-small">
             <div class="cell medium-6 large-7">
@@ -354,7 +354,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 18v1"}}</td>
+                      <td>Total Lot Area {{info-tooltip tip="based on MapPluto 20v4"}}</td>
                       <td>{{if d.fp_100_area (concat (numeral-format d.fp_100_area '0.00') ' sq mi') 'n/a'}}</td>
                       <td>{{if d.fp_500_area (concat (numeral-format d.fp_500_area '0.00') ' sq mi') 'n/a'}}</td>
                     </tr>
