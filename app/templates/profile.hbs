@@ -54,7 +54,7 @@
               </div>
             </div>
 
-            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
+            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
             <div class="callout">
               {{age-pyramid data=agePopDist}}
             </div>
@@ -82,7 +82,7 @@
               </div>
               <div class="cell large-6 xlarge-8">
 
-                <h4 class="subsection-header"><strong>Foreign-Born Population {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
+                <h4 class="subsection-header"><strong>Foreign-Born Population {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
                 <div class="callout text-center">
                   <span class="stat">
                     {{numeral-format d.pct_foreign_born '0.0'}}%
@@ -93,7 +93,7 @@
               </div>
               <div class="cell xlarge-10">
 
-                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=d.acs_tooltip}}</strong></h4>
+                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
                 <div class="callout">
                   {{horizontal-bar data=racialProfile height=150 barLabel=false xMax=100}}
                 </div>
@@ -132,7 +132,7 @@
           {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
                             moe='moe_under18_rate'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.under18_rate
                             boro_stat=d.under18_rate_boro
@@ -142,7 +142,7 @@
           {{#data.indicator class="indicator" name='Age 65 & Over'
                             column='over65_rate'
                             moe='moe_over65_rate'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.over65_rate
                             boro_stat=d.over65_rate_boro
@@ -152,7 +152,7 @@
           {{#data.indicator class="indicator" name='Rent Burden'
                             column='pct_hh_rent_burd'
                             moe='moe_hh_rent_burd'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
@@ -169,7 +169,7 @@
           {{#data.indicator class="indicator" name='Mean Commute to Work'
                             column='mean_commute'
                             moe='moe_mean_commute'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
@@ -196,7 +196,7 @@
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
                             moe='moe_bach_deg'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
@@ -206,7 +206,7 @@
           {{#data.indicator class="indicator" name='Limited English Proficiency'
                             column='lep_rate'
                             moe='moe_lep_rate'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.lep_rate
                             boro_stat=d.lep_rate_boro
@@ -216,7 +216,7 @@
           {{#data.indicator class="indicator" name='Unemployment'
                             column='unemployment_cd'
                             moe='moe_unemployment_cd'
-                            tip=d.acs_tooltip
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
@@ -337,7 +337,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Population (2010) {{info-tooltip tip=d.acs_tooltip_3}}</td>
+                      <td>Population (2010) {{info-tooltip tip=(census-floodplain-tooltip d)}}</td>
                       <td>
                         {{#if d.fp_500_pop}}
                           {{if (gte d.fp_100_pop 1000) (numeral-format d.fp_100_pop '0.0a') (numeral-format d.fp_100_pop '0')}}
@@ -359,7 +359,7 @@
                       <td>{{if d.fp_500_area (concat (numeral-format d.fp_500_area '0.00') ' sq mi') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>Median Household Income {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>Median Household Income {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
                       {{#if (eq d.fp_100_mhhi 200000)}}
                         <td>$200,000+</td>
                       {{else}}
@@ -368,22 +368,22 @@
                       <td>{{if d.fp_500_mhhi (numeral-format d.fp_500_mhhi '$0,0') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>% of Housing Units that are Owner-Occupied {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Housing Units that are Owner-Occupied {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
                       <td class="{{if (lte d.fp_100_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>% of Owner-Occupied Housing Units with Mortgages {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Owner-Occupied Housing Units with Mortgages {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
                       <td class="{{if (lte d.fp_100_mortg_value 1000) 'unreliable'}}">{{if d.fp_100_permortg (numeral-format d.fp_100_permortg '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_mortg_value 1000) 'unreliable'}}">{{if d.fp_500_permortg (numeral-format d.fp_500_permortg '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>% of Owner-Occupied Units that are Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Owner-Occupied Units that are Cost Burdened {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
                       <td class="{{if (lte d.fp_100_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_100_rent_burden (numeral-format d.fp_100_rent_burden '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_500_rent_burden (numeral-format d.fp_500_rent_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
                     <tr>
-                      <td>% of Renter-Occupied Units that are Cost Burdened {{info-tooltip tip=d.acs_tooltip_2}}</td>
+                      <td>% of Renter-Occupied Units that are Cost Burdened {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
                       <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_100_cost_burden (numeral-format d.fp_100_cost_burden '(0.0%)') 'n/a'}}</td>
                       <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_500_cost_burden (numeral-format d.fp_500_cost_burden '(0.0%)') 'n/a'}}</td>
                     </tr>
