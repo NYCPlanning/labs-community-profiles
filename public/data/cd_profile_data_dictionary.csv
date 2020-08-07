@@ -21,8 +21,8 @@ pct_bach_deg_boro,Percentage of residents 25 years or older that have earned a b
 moe_bach_deg_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
 pct_bach_deg_nyc,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in NYC,American Community Survey 2012-2016 5-year estimates
 moe_bach_deg_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
-unemployment_cd,Percentage of the civilian labor force that is unemployed in the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
-moe_unemployment_cd,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+unemployment,Percentage of the civilian labor force that is unemployed in the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
+moe_unemployment,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
 unemployment_boro,Percentage of the civilian labor force that is unemployed in the CD's borough,American Community Survey 2012-2016 5-year estimates
 moe_unemployment_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
 unemployment_nyc,Percentage of the civilian labor force that is unemployed in NYC,American Community Survey 2012-2016 5-year estimates
