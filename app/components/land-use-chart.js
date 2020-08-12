@@ -43,12 +43,10 @@ const LandUseChart = Component.extend(ResizeAware, {
     )
     SELECT
       count(landuse_desc),
-      ROUND(SUM(lotarea)/totalsf.total::numeric, 4) AS percent,
       landuse,
       landuse_desc
     FROM lots, totalsf
     GROUP BY landuse, landuse_desc, totalsf.total
-    ORDER BY percent DESC
     `;
 
     return SQL;
@@ -132,6 +130,23 @@ const LandUseChart = Component.extend(ResizeAware, {
 
     data.then((rawData) => {
       this.get('communityProfilesData').then((communityProfilesData) => {
+        // NAME of lot area percent field on community_district_profiles dataset
+        function landUsePercentField(plutoData) {
+          return landUseLookup(plutoData.landuse).community_profiles_percent_field;
+        }
+
+        // VALUE of lot area percent field pulled from community_district_profiles dataset
+        function lotAreaPercent(plutoData) {
+          const percentField = landUsePercentField(plutoData);
+          const percentValue = communityProfilesData[0][percentField];
+          return percentValue / 100;
+        }
+
+        // sort rawData by lot area percent field value
+        rawData.sort(function(a, b) {
+          return communityProfilesData[0][landUsePercentField(b)] - communityProfilesData[0][landUsePercentField(a)];
+        });
+
         const y = scaleBand()
           .domain(rawData.map(d => d.landuse_desc))
           .range([0, height])
@@ -139,9 +154,8 @@ const LandUseChart = Component.extend(ResizeAware, {
           .paddingInner(0.2);
 
         const x = scaleLinear()
-          .domain([0, max(rawData, d => d.percent)])
+          .domain([0, max(rawData, d => lotAreaPercent(d))])
           .range([0, width]);
-
 
         const bars = svg.selectAll('.bar')
           .data(rawData, d => d.landuse);
@@ -155,13 +169,13 @@ const LandUseChart = Component.extend(ResizeAware, {
           .attr('rx', 2)
           .attr('ry', 2)
           .attr('y', d => y(d.landuse_desc))
-          .attr('width', d => x(d.percent));
+          .attr('width', d => x(lotAreaPercent(d)));
 
 
         bars.transition().duration(300)
           .attr('height', y.bandwidth() - 15)
           .attr('y', d => y(d.landuse_desc))
-          .attr('width', d => x(d.percent));
+          .attr('width', d => x(lotAreaPercent(d)));
 
         bars.exit().remove();
 
@@ -174,11 +188,11 @@ const LandUseChart = Component.extend(ResizeAware, {
           .attr('alignment-baseline', 'top')
           .attr('x', 0)
           .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-          .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+          .text(d => `${d.landuse_desc} | ${(lotAreaPercent(d) * 100).toFixed(2)}%`);
 
         labels.transition().duration(300)
           .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-          .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+          .text(d => `${d.landuse_desc} | ${(lotAreaPercent(d) * 100).toFixed(2)}%`);
 
         labels.exit().remove();
       });
