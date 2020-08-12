@@ -214,11 +214,11 @@
             of residents self-identify as having <a href="https://www.census.gov/topics/population/language-use/about.html" target="_blank">limited English&nbsp;proficiency</a>
           {{/data.indicator}}
           {{#data.indicator class="indicator" name='Unemployment'
-                            column='unemployment'
-                            moe='moe_unemployment'
+                            column='unemployment_cd'
+                            moe='moe_unemployment_cd'
                             tip=(acs-puma-cd-tooltip d)
                             unit='%'
-                            cd_stat=d.unemployment
+                            cd_stat=d.unemployment_cd
                             boro_stat=d.unemployment_boro
                             city_stat=d.unemployment_nyc}}
             of the <a href="https://www.census.gov/topics/employment/labor-force.html" target="_blank">civilian labor force is unemployed</a>

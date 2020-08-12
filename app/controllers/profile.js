@@ -63,7 +63,7 @@ export default Controller.extend({
 
   columns: [
     'poverty_rate',
-    'unemployment',
+    'unemployment_cd',
     'crime_count',
     'mean_commute',
     'pct_hh_rent_burd',
@@ -72,7 +72,7 @@ export default Controller.extend({
     'pct_served_parks',
     'moe_poverty_rate',
     'moe_bach_deg',
-    'moe_unemployment',
+    'moe_unemployment_cd',
     'moe_mean_commute',
     'moe_hh_rent_burd',
     'lep_rate',
