@@ -54,8 +54,37 @@ const LandUseChart = Component.extend(ResizeAware, {
     return SQL;
   }),
 
+  communityProfilesSql: computed('borocd', function sql() {
+    const borocd = this.get('borocd');
+    const SQL = `
+    SELECT
+      borocd,
+      pct_lot_area_commercial_office,
+      pct_lot_area_industrial_manufacturing,
+      pct_lot_area_mixed_use,
+      pct_lot_area_open_space,
+      pct_lot_area_other_no_data,
+      pct_lot_area_parking,
+      pct_lot_area_public_facility_institution,
+      pct_lot_area_res_1_2_family_bldg,
+      pct_lot_area_res_multifamily_elevator,
+      pct_lot_area_res_multifamily_walkup,
+      pct_lot_area_transportation_utility,
+      pct_lot_area_vacant
+    FROM community_district_profiles
+    WHERE borocd = '${borocd}'
+    `;
+
+    return SQL;
+  }),
+
   data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
+    return carto.SQL(sql);
+  }),
+
+  communityProfilesData: computed('communityProfilesSql', 'borocd', function() {
+    const sql = this.get('communityProfilesSql');
     return carto.SQL(sql);
   }),
 
@@ -102,55 +131,57 @@ const LandUseChart = Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     data.then((rawData) => {
-      const y = scaleBand()
-        .domain(rawData.map(d => d.landuse_desc))
-        .range([0, height])
-        .paddingOuter(0)
-        .paddingInner(0.2);
+      this.get('communityProfilesData').then((communityProfilesData) => {
+        const y = scaleBand()
+          .domain(rawData.map(d => d.landuse_desc))
+          .range([0, height])
+          .paddingOuter(0)
+          .paddingInner(0.2);
 
-      const x = scaleLinear()
-        .domain([0, max(rawData, d => d.percent)])
-        .range([0, width]);
-
-
-      const bars = svg.selectAll('.bar')
-        .data(rawData, d => d.landuse);
-
-      bars.enter()
-        .append('rect')
-        .attr('class', 'bar')
-        .attr('fill', d => landUseLookup(d.landuse).color)
-        .attr('x', 0)
-        .attr('height', y.bandwidth() - 15)
-        .attr('rx', 2)
-        .attr('ry', 2)
-        .attr('y', d => y(d.landuse_desc))
-        .attr('width', d => x(d.percent));
+        const x = scaleLinear()
+          .domain([0, max(rawData, d => d.percent)])
+          .range([0, width]);
 
 
-      bars.transition().duration(300)
-        .attr('height', y.bandwidth() - 15)
-        .attr('y', d => y(d.landuse_desc))
-        .attr('width', d => x(d.percent));
+        const bars = svg.selectAll('.bar')
+          .data(rawData, d => d.landuse);
 
-      bars.exit().remove();
+        bars.enter()
+          .append('rect')
+          .attr('class', 'bar')
+          .attr('fill', d => landUseLookup(d.landuse).color)
+          .attr('x', 0)
+          .attr('height', y.bandwidth() - 15)
+          .attr('rx', 2)
+          .attr('ry', 2)
+          .attr('y', d => y(d.landuse_desc))
+          .attr('width', d => x(d.percent));
 
-      const labels = svg.selectAll('text')
-        .data(rawData, d => d.landuse);
 
-      labels.enter().append('text')
-        .attr('class', 'label')
-        .attr('text-anchor', 'left')
-        .attr('alignment-baseline', 'top')
-        .attr('x', 0)
-        .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+        bars.transition().duration(300)
+          .attr('height', y.bandwidth() - 15)
+          .attr('y', d => y(d.landuse_desc))
+          .attr('width', d => x(d.percent));
 
-      labels.transition().duration(300)
-        .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+        bars.exit().remove();
 
-      labels.exit().remove();
+        const labels = svg.selectAll('text')
+          .data(rawData, d => d.landuse);
+
+        labels.enter().append('text')
+          .attr('class', 'label')
+          .attr('text-anchor', 'left')
+          .attr('alignment-baseline', 'top')
+          .attr('x', 0)
+          .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
+          .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+        labels.transition().duration(300)
+          .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
+          .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
+
+        labels.exit().remove();
+      });
     });
   },
 });
