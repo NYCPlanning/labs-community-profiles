@@ -43,12 +43,34 @@ const LandUseChart = Component.extend(ResizeAware, {
     )
     SELECT
       count(landuse_desc),
-      ROUND(SUM(lotarea)/totalsf.total::numeric, 4) AS percent,
       landuse,
       landuse_desc
     FROM lots, totalsf
     GROUP BY landuse, landuse_desc, totalsf.total
-    ORDER BY percent DESC
+    `;
+
+    return SQL;
+  }),
+
+  communityProfilesSql: computed('borocd', function sql() {
+    const borocd = this.get('borocd');
+    const SQL = `
+    SELECT
+      borocd,
+      pct_lot_area_commercial_office,
+      pct_lot_area_industrial_manufacturing,
+      pct_lot_area_mixed_use,
+      pct_lot_area_open_space,
+      pct_lot_area_other_no_data,
+      pct_lot_area_parking,
+      pct_lot_area_public_facility_institution,
+      pct_lot_area_res_1_2_family_bldg,
+      pct_lot_area_res_multifamily_elevator,
+      pct_lot_area_res_multifamily_walkup,
+      pct_lot_area_transportation_utility,
+      pct_lot_area_vacant
+    FROM community_district_profiles
+    WHERE borocd = '${borocd}'
     `;
 
     return SQL;
@@ -56,6 +78,11 @@ const LandUseChart = Component.extend(ResizeAware, {
 
   data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
+    return carto.SQL(sql);
+  }),
+
+  communityProfilesData: computed('communityProfilesSql', 'borocd', function() {
+    const sql = this.get('communityProfilesSql');
     return carto.SQL(sql);
   }),
 
@@ -102,55 +129,73 @@ const LandUseChart = Component.extend(ResizeAware, {
       .attr('height', height + margin.top + margin.bottom);
 
     data.then((rawData) => {
-      const y = scaleBand()
-        .domain(rawData.map(d => d.landuse_desc))
-        .range([0, height])
-        .paddingOuter(0)
-        .paddingInner(0.2);
+      this.get('communityProfilesData').then((communityProfilesData) => {
+        // NAME of lot area percent field on community_district_profiles dataset
+        function landUsePercentField(plutoData) {
+          return landUseLookup(plutoData.landuse).community_profiles_percent_field;
+        }
 
-      const x = scaleLinear()
-        .domain([0, max(rawData, d => d.percent)])
-        .range([0, width]);
+        // VALUE of lot area percent field pulled from community_district_profiles dataset
+        function lotAreaPercent(plutoData) {
+          const percentField = landUsePercentField(plutoData);
+          const percentValue = communityProfilesData[0][percentField];
+          return percentValue / 100;
+        }
+
+        // sort rawData by lot area percent field value
+        rawData.sort(function(a, b) {
+          return communityProfilesData[0][landUsePercentField(b)] - communityProfilesData[0][landUsePercentField(a)];
+        });
+
+        const y = scaleBand()
+          .domain(rawData.map(d => d.landuse_desc))
+          .range([0, height])
+          .paddingOuter(0)
+          .paddingInner(0.2);
+
+        const x = scaleLinear()
+          .domain([0, max(rawData, d => lotAreaPercent(d))])
+          .range([0, width]);
+
+        const bars = svg.selectAll('.bar')
+          .data(rawData, d => d.landuse);
+
+        bars.enter()
+          .append('rect')
+          .attr('class', 'bar')
+          .attr('fill', d => landUseLookup(d.landuse).color)
+          .attr('x', 0)
+          .attr('height', y.bandwidth() - 15)
+          .attr('rx', 2)
+          .attr('ry', 2)
+          .attr('y', d => y(d.landuse_desc))
+          .attr('width', d => x(lotAreaPercent(d)));
 
 
-      const bars = svg.selectAll('.bar')
-        .data(rawData, d => d.landuse);
+        bars.transition().duration(300)
+          .attr('height', y.bandwidth() - 15)
+          .attr('y', d => y(d.landuse_desc))
+          .attr('width', d => x(lotAreaPercent(d)));
 
-      bars.enter()
-        .append('rect')
-        .attr('class', 'bar')
-        .attr('fill', d => landUseLookup(d.landuse).color)
-        .attr('x', 0)
-        .attr('height', y.bandwidth() - 15)
-        .attr('rx', 2)
-        .attr('ry', 2)
-        .attr('y', d => y(d.landuse_desc))
-        .attr('width', d => x(d.percent));
+        bars.exit().remove();
 
+        const labels = svg.selectAll('text')
+          .data(rawData, d => d.landuse);
 
-      bars.transition().duration(300)
-        .attr('height', y.bandwidth() - 15)
-        .attr('y', d => y(d.landuse_desc))
-        .attr('width', d => x(d.percent));
+        labels.enter().append('text')
+          .attr('class', 'label')
+          .attr('text-anchor', 'left')
+          .attr('alignment-baseline', 'top')
+          .attr('x', 0)
+          .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
+          .text(d => `${d.landuse_desc} | ${(lotAreaPercent(d) * 100).toFixed(2)}%`);
 
-      bars.exit().remove();
+        labels.transition().duration(300)
+          .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
+          .text(d => `${d.landuse_desc} | ${(lotAreaPercent(d) * 100).toFixed(2)}%`);
 
-      const labels = svg.selectAll('text')
-        .data(rawData, d => d.landuse);
-
-      labels.enter().append('text')
-        .attr('class', 'label')
-        .attr('text-anchor', 'left')
-        .attr('alignment-baseline', 'top')
-        .attr('x', 0)
-        .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
-
-      labels.transition().duration(300)
-        .attr('y', d => y(d.landuse_desc) + y.bandwidth() + -3)
-        .text(d => `${d.landuse_desc} | ${(d.percent * 100).toFixed(2)}%`);
-
-      labels.exit().remove();
+        labels.exit().remove();
+      });
     });
   },
 });
