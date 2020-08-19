@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
 import { computed } from 'ember-decorators/object';
 import carto from '../utils/carto';
+import landUseLookup from '../utils/land-use-lookup';
 
 const SQL = 'SELECT a.the_geom_webmercator, a.landuse, b.description, address FROM mappluto a LEFT JOIN support_landuse_lookup b ON a.landuse::integer = b.code';
 
@@ -34,23 +35,33 @@ export default Component.extend({
     source: 'pluto-landuse',
     'source-layer': 'layer0',
     paint: {
-      'fill-color': {
-        property: 'landuse',
-        type: 'categorical',
-        stops: [
-          ['01', '#f4f455'],
-          ['02', '#f7d496'],
-          ['03', '#FF9900'],
-          ['04', '#f7cabf'],
-          ['05', '#ea6661'],
-          ['06', '#d36ff4'],
-          ['07', '#dac0e8'],
-          ['08', '#5CA2D1'],
-          ['09', '#8ece7c'],
-          ['10', '#bab8b6'],
-          ['11', '#5f5f60'],
-        ],
-      },
+      'fill-color': [
+        'match',
+        ['get', 'landuse'],
+        '01',
+        landUseLookup(1).color,
+        '02',
+        landUseLookup(2).color,
+        '03',
+        landUseLookup(3).color,
+        '04',
+        landUseLookup(4).color,
+        '05',
+        landUseLookup(5).color,
+        '06',
+        landUseLookup(6).color,
+        '07',
+        landUseLookup(7).color,
+        '08',
+        landUseLookup(8).color,
+        '09',
+        landUseLookup(9).color,
+        '10',
+        landUseLookup(10).color,
+        '11',
+        landUseLookup(11).color,
+        /* other */ landUseLookup(12).color
+      ],
       'fill-opacity': 1,
     },
   },
@@ -95,12 +106,13 @@ export default Component.extend({
 
       if (feature) {
         const { description, address } = feature.properties;
+        const tooltipDescription = description ? description : 'Other';
         e.target.getCanvas().style.cursor = 'pointer';
         this.set('mouseoverLocation', {
           x: e.point.x + 30,
           y: e.point.y,
         });
-        this.set('tooltip-text', `${address} ${description}`);
+        this.set('tooltip-text', `${address} ${tooltipDescription}`);
       } else {
         e.target.getCanvas().style.cursor = '';
         this.set('mouseoverLocation', null);
