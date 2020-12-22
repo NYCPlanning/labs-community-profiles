@@ -93,7 +93,23 @@ export default Controller.extend({
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
-    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
+    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles&filename=community-profiles-indicators.csv`;
+  },
+
+  @computed('dataprofileColumns')
+  dataprofileDownloadGeoJSON() {
+    const columns = this.get('dataprofileColumns')
+      .filter(col => col !== 'the_geom') // prefer the spatial data
+      .map(col => `c.${col}`)
+      .join(',');
+    const model = this.get('model');
+
+    return `https://planninglabs.carto.com/api/v2/sql?format=geojson&q=SELECT 
+      ${columns}, community_districts.the_geom
+      FROM community_district_profiles c
+      INNER JOIN community_districts
+      ON community_districts.borocd = c.borocd
+    &filename=community-profiles-indicators.json`;
   },
 
   section: '',
