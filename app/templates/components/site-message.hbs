@@ -1,0 +1,27 @@
+{{#if open}}
+  <div class="site-message warning">
+
+    <div class="grid-x grid-margin-x align-middle">
+      <div class="cell text-center medium-text-left medium-shrink">
+        {{fa-icon 'exclamation-triangle' size='2x' class='yellow-dark site-message-warning'}}
+      </div>
+      <div class="cell auto">
+        In an effort to improve the user experience on the Community District Profiles website we will be streamlining the data available in the “Download the Data” section. The following datasets will no longer be available via the Community District Profiles: Facilities Data and PLUTO Data. If you require access to this data you may visit DCP’s Open Data portal via:
+        <a target="_blank" href="https://www1.nyc.gov/site/planning/data-maps/open-data.page">https://www1.nyc.gov/site/planning/data-maps/open-data.page</a>
+      </div>
+    </div>
+
+    {{#if dismissible}}
+      <button
+        class="close-button"
+        aria-label="Dismiss message"
+        type="button" data-close
+        onclick={{action 'handleSiteMessageToggle'}}
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    {{/if}}
+
+  </div>
+
+{{/if}}

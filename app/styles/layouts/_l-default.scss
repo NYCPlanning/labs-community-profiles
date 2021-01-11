@@ -279,3 +279,29 @@ html, body {
     overflow-y: scroll;
   }
 }
+
+//
+// Site Message
+// --------------------------------------------------
+.site-message {
+  @include callout($white);
+  padding: calc(2rem + 2vw) calc(2rem + 3vw);
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 42rem;
+  max-width: 80vw;
+  max-height: 80vh;
+  transform: translateX(-50%) translateY(-50%);
+  overflow: auto;
+  box-shadow: 0 0 0 6px rgba(0,0,0,0.1);
+
+  &.warning {
+    @include callout-style($warning-color);
+  }
+}
+
+.site-message-warning {
+  font-size: 50px;
+}
