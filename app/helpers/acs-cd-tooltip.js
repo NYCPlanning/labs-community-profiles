@@ -6,9 +6,9 @@ export function buildTooltip(data) {
     cd_short_title,
   } = data[0];
 
-  const acsFloodplain = tooltipText.acs.acsFloodplain(cd_short_title);
+  const communityDistrictTooltip = tooltipText.acs.communityDistrict(cd_short_title);
 
-  return acsFloodplain;
+  return communityDistrictTooltip;
 }
 
 export default helper(buildTooltip);

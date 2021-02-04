@@ -8,11 +8,10 @@ moduleForComponent('acs-floodplain-tooltip', 'helper:acs-floodplain-tooltip', {
 
 test('returns tooltip correctly', function(assert) {
   const data = [{
-    puma: 444,
     cd_short_title: 'Manhattan CD 2',
   }];
 
   const tooltip = buildTooltip(data);
 
-  assert.equal(tooltip, 'American Community Survey (ACS) 2013-2017 5-year estimates for floodplain area within PUMA 444, which is an approximation of Manhattan CD 2.');
+  assert.equal(tooltip, 'American Community Survey (ACS) 2014-2018 5-Year Estimates for floodplain area within Manhattan CD 2, approximated by aggregating data from blocks and block-groups.');
 });
