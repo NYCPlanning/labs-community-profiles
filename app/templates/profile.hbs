@@ -369,23 +369,23 @@
                     </tr>
                     <tr>
                       <td>% of Housing Units that are Owner-Occupied {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
-                      <td class="{{if (lte d.fp_100_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_100_ownerocc (numeral-format d.fp_100_ownerocc '(0.0%)') 'n/a'}}</td>
-                      <td class="{{if (lte d.fp_500_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_500_ownerocc (numeral-format d.fp_500_ownerocc '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_100_ownerocc (concat d.fp_100_ownerocc '%') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_ownerocc_value 1000) 'unreliable'}}">{{if d.fp_500_ownerocc (concat d.fp_500_ownerocc '%') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>% of Owner-Occupied Housing Units with Mortgages {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
-                      <td class="{{if (lte d.fp_100_mortg_value 1000) 'unreliable'}}">{{if d.fp_100_permortg (numeral-format d.fp_100_permortg '(0.0%)') 'n/a'}}</td>
-                      <td class="{{if (lte d.fp_500_mortg_value 1000) 'unreliable'}}">{{if d.fp_500_permortg (numeral-format d.fp_500_permortg '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_mortg_value 1000) 'unreliable'}}">{{if d.fp_100_permortg (concat d.fp_100_permortg '%') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_mortg_value 1000) 'unreliable'}}">{{if d.fp_500_permortg (concat d.fp_500_permortg '%') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>% of Owner-Occupied Units that are Cost Burdened {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
-                      <td class="{{if (lte d.fp_100_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_100_rent_burden (numeral-format d.fp_100_rent_burden '(0.0%)') 'n/a'}}</td>
-                      <td class="{{if (lte d.fp_500_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_500_rent_burden (numeral-format d.fp_500_rent_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_100_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_100_rent_burden (concat d.fp_100_rent_burden '%') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_rent_burden_value 1000) 'unreliable'}}">{{if d.fp_500_rent_burden (concat d.fp_500_rent_burden '%') 'n/a'}}</td>
                     </tr>
                     <tr>
                       <td>% of Renter-Occupied Units that are Cost Burdened {{info-tooltip tip=(acs-floodplain-tooltip d)}}</td>
-                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_100_cost_burden (numeral-format d.fp_100_cost_burden '(0.0%)') 'n/a'}}</td>
-                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_500_cost_burden (numeral-format d.fp_500_cost_burden '(0.0%)') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_100_cost_burden (concat d.fp_100_cost_burden '%') 'n/a'}}</td>
+                      <td class="{{if (lte d.fp_500_cost_burden_value 1000) 'unreliable'}}">{{if d.fp_500_cost_burden (concat d.fp_500_cost_burden '%') 'n/a'}}</td>
                     </tr>
                   </tbody>
                 </table>
