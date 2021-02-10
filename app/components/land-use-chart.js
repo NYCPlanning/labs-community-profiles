@@ -69,7 +69,7 @@ const LandUseChart = Component.extend(ResizeAware, {
       pct_lot_area_res_multifamily_walkup,
       pct_lot_area_transportation_utility,
       pct_lot_area_vacant
-    FROM community_district_profiles
+    FROM community_district_profiles_v202102
     WHERE borocd = '${borocd}'
     `;
 

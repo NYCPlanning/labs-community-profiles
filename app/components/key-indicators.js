@@ -20,7 +20,7 @@ export default Component.extend({
         WHEN LEFT(borocd::text, 1) = '5' THEN 'Staten Island ' || borocd %25 100
       END as boro_district,
       borocd
-      FROM community_district_profiles`;
+      FROM community_district_profiles_v202102`;
   }),
 
   comparisonData: computed('sql', function() {
