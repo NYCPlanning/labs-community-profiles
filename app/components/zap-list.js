@@ -8,7 +8,7 @@ export default Component.extend({
   projects: computed('district', function() {
     const zapAcronym = this.get('district.zapAcronym');
 
-    const URL = `https://zap-api-production.herokuapp.com/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
+    const URL = `https://zap-api-production.herokuapp.com/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Noticed&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
 
     return fetch(URL)
       .then(res => res.json())
@@ -34,6 +34,7 @@ export default Component.extend({
         }));
 
         return {
+          noticed: projectsUnderscored.filter(d => d.dcp_publicstatus === 'Noticed'),
           filed: projectsUnderscored.filter(d => d.dcp_publicstatus === 'Filed'),
           inPublicReview: projectsUnderscored.filter(d => d.dcp_publicstatus === 'In Public Review'),
         };
