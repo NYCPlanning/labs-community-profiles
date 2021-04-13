@@ -119,6 +119,7 @@
     "websocket-extensions": "0.1.4",
     "xmldom": "0.5.0",
     "y18n": "4.0.1",
-    "yargs-parser": "5.0.0-security.0"
+    "yargs-parser": "5.0.0-security.0",
+    "locate-path": "6.0.0"
   }
 }
