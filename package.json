@@ -13,7 +13,8 @@
     "build": "ember build",
     "start": "ember server",
     "lint": "./node_modules/.bin/eslint ./*.js app config lib server tests",
-    "test": "ember test"
+    "test": "ember test",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@turf/bbox": "5.1.5",
@@ -72,7 +73,9 @@
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-import": "^2.12.0",
     "foundation-sites": "^6.3.1",
+    "husky": "^6.0.0",
     "leaflet": "^1.1.0",
+    "lint-staged": ">=10",
     "loader.js": "^4.2.3",
     "mapbox-gl": "^0.47.0",
     "node-fetch": "^1.7.2"
@@ -94,5 +97,8 @@
   },
   "resolutions": {
     "handlebars": "4.7.7"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
