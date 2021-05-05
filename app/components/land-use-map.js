@@ -60,7 +60,7 @@ export default Component.extend({
         landUseLookup(10).color,
         '11',
         landUseLookup(11).color,
-        /* other */ landUseLookup(12).color
+        /* other */ landUseLookup(12).color,
       ],
       'fill-opacity': 1,
     },
@@ -106,7 +106,7 @@ export default Component.extend({
 
       if (feature) {
         const { description, address } = feature.properties;
-        const tooltipDescription = description ? description : 'Other';
+        const tooltipDescription = description || 'Other';
         e.target.getCanvas().style.cursor = 'pointer';
         this.set('mouseoverLocation', {
           x: e.point.x + 30,

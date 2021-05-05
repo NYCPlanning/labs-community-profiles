@@ -1,5 +1,5 @@
 /* eslint-env node */
-
+'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
@@ -21,7 +21,7 @@ module.exports = function(defaults) {
       includePolyfill: true,
     },
     'ember-cli-foundation-6-sass': {
-      'foundationJs': 'all',
+      foundationJs: 'all',
     },
   });
 
