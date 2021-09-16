@@ -1,5 +1,7 @@
 [build]
 command = "yarn build --environment=staging"
+environment = { NODE_VERSION = "8.11.3" }
 
 [context.master]
 command = "yarn build --environment=production"
+environment = { NODE_VERSION = "8.11.3" }
