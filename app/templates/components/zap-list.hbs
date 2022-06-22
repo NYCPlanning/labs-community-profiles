@@ -2,20 +2,6 @@
 {{#with (await projects) as |resolvedProjects|}}
   {{#if resolvedProjects}}
 
-    <h6>Noticed Applications</h6>
-    {{#if resolvedProjects.noticed.length}}
-      <ul class="no-bullet xlarge-2-column">
-        {{#each resolvedProjects.noticed as |project|}}
-          <li class="list-item-padded">
-            <a href = "https://zap.planning.nyc.gov/projects/{{project.dcp_name}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{if project.dcp_projectname project.dcp_projectname "No Name"}}</strong></a>
-            <small class="list--link-meta">{{project.applicant}} | {{project.dcp_ulurp_nonulurp}}</small>
-          </li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <p class="text-center" style="padding: 60px 0;">No noticed applications.</p>
-    {{/if}}
-
     <h6>Filed Applications</h6>
     {{#if resolvedProjects.filed.length}}
       <ul class="no-bullet xlarge-2-column">
