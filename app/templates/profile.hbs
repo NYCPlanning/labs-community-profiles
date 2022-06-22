@@ -43,13 +43,18 @@
                 </div>
                 <div class="cell small-12 large-4 text-center cell-divider--population">
                   <span class="lead">
-                    {{numeral-format d.pop_acs '0.0a'}}
+                    {{#if d.shared_puma}}
+                      N/A
+                    {{else}}
+                      {{numeral-format d.pop_acs '0.0a'}}
+                    {{/if}}
                   </span>
+                  <small class="stat-footer">2014-2018 Estimate {{info-tooltip tip="American Community Survey 5-year Estimates. Population estimate is N/A for districts that share a PUMA; data cannot be reliably disaggregated."}}</small>
                 </div>
               </div>
             </div>
 
-            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=(acs-cd-tooltip d)}}</strong></h4>
+            <h4 class="subsection-header"><strong>Population by Age {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
             <div class="callout">
               {{age-pyramid data=agePopDist}}
             </div>
@@ -77,7 +82,7 @@
               </div>
               <div class="cell large-6 xlarge-8">
 
-                <h4 class="subsection-header"><strong>Foreign-Born Population {{info-tooltip tip=(acs-cd-tooltip d)}}</strong></h4>
+                <h4 class="subsection-header"><strong>Foreign-Born Population {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
                 <div class="callout text-center">
                   <span class="stat">
                     {{numeral-format d.pct_foreign_born '0.0'}}%
@@ -88,7 +93,7 @@
               </div>
               <div class="cell xlarge-10">
 
-                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=(acs-cd-tooltip d)}}</strong></h4>
+                <h4 class="subsection-header"><strong>Race &amp; Hispanic Origin {{info-tooltip tip=(acs-puma-cd-tooltip d)}}</strong></h4>
                 <div class="callout">
                   {{horizontal-bar data=racialProfile height=150 barLabel=false xMax=100}}
                 </div>
@@ -127,7 +132,7 @@
           {{#data.indicator class="indicator" name='Age Under 18'
                             column='under18_rate'
                             moe='moe_under18_rate'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.under18_rate
                             boro_stat=d.under18_rate_boro
@@ -137,7 +142,7 @@
           {{#data.indicator class="indicator" name='Age 65 & Over'
                             column='over65_rate'
                             moe='moe_over65_rate'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.over65_rate
                             boro_stat=d.over65_rate_boro
@@ -147,7 +152,7 @@
           {{#data.indicator class="indicator" name='Rent Burden'
                             column='pct_hh_rent_burd'
                             moe='moe_hh_rent_burd'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.pct_hh_rent_burd
                             boro_stat=d.pct_hh_rent_burd_boro
@@ -164,7 +169,7 @@
           {{#data.indicator class="indicator" name='Mean Commute to Work'
                             column='mean_commute'
                             moe='moe_mean_commute'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             cd_stat=d.mean_commute
                             boro_stat=d.mean_commute_boro
                             city_stat=d.mean_commute_nyc}}
@@ -191,7 +196,7 @@
           {{#data.indicator class="indicator" name='Educational Attainment'
                             column='pct_bach_deg'
                             moe='moe_bach_deg'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.pct_bach_deg
                             boro_stat=d.pct_bach_deg_boro
@@ -201,7 +206,7 @@
           {{#data.indicator class="indicator" name='Limited English Proficiency'
                             column='lep_rate'
                             moe='moe_lep_rate'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.lep_rate
                             boro_stat=d.lep_rate_boro
@@ -211,7 +216,7 @@
           {{#data.indicator class="indicator" name='Unemployment'
                             column='unemployment'
                             moe='moe_unemployment'
-                            tip=(acs-cd-tooltip d)
+                            tip=(acs-puma-cd-tooltip d)
                             unit='%'
                             cd_stat=d.unemployment
                             boro_stat=d.unemployment_boro
@@ -221,12 +226,12 @@
           {{#data.indicator class="indicator" name='NYCgov Poverty Measure'
                             column='poverty_rate'
                             moe='moe_poverty_rate'
-                            tip='NYCgov Poverty Rate, 2014-2018 5-year average by Public Use Microdata Areas (PUMAs), which are approximations of NYC Community Districts. This NYC-specific poverty measure is adjusted for the City’s high cost of housing and includes the value of anti-poverty programs (e.g. SNAP, housing assistance) as family resources. Accounts for certain costs (e.g. medical, commuting, childcare). Historically produces a higher, more realistic measure of poverty than the official U.S. measure.'
+                            tip='NYCgov Poverty Rate, 2012-2016 5-year average. This NYC-specific poverty measure is adjusted for the City’s high cost of housing and includes the value of anti-poverty programs (e.g. SNAP, housing assistance) as family resources. Accounts for certain costs (e.g. medical, commuting, childcare). Historically produces a higher, more realistic measure of poverty than the official U.S. measure.'
                             unit='%'
                             cd_stat=d.poverty_rate
                             boro_stat=d.poverty_rate_boro
                             city_stat=d.poverty_rate_nyc}}
-            of residents have incomes below the <a href="http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page" target="_blank">NYCgov poverty threshold</a>. Compare to <a href="https://www1.nyc.gov/assets/planning/download/office/planning-level/nyc-population/acs/econ_2018_acs5yr_puma.xlsx" target="_blank">federal poverty&nbsp;rate</a>.
+            of residents have incomes below the <a href="http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page" target="_blank">NYCgov poverty threshold</a>. Compare to <a href="https://www1.nyc.gov/assets/planning/download/office/data-maps/nyc-population/acs/econ_2016acs5yr_puma.xlsx?r=1" target="_blank">federal poverty&nbsp;rate</a>.
           {{/data.indicator}}
         {{/key-indicators}}
 
@@ -508,11 +513,12 @@
               </ul>
             </div>
 
-            <h4 class="subsection-header"><strong>Additional Census Data</strong></h4>
+            <h4 class="subsection-header"><strong>Additional Census Data {{info-tooltip tip="Census data are available at the community district level, while American Community Survey data are available at the Public Use Microdata Area (PUMA) level. PUMAs are approximations of community districts, and some PUMAs include two districts. See the CD/PUMA Comparison Map for more information."}}</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
-                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/">{{fa-icon "external-link"}} <strong>NYC Population Factfinder</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="https://www1.nyc.gov/site/planning/planning-level/nyc-population/american-community-survey.page">{{fa-icon "external-link"}} <strong>American Community Survey (ACS) Data</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/">{{fa-icon "external-link"}} <strong>NYC Census FactFinder</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/american-community-survey.page">{{fa-icon "external-link"}} <strong>American Community Survey (ACS) Data</strong></a></li>
                 <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/census-2010.page">{{fa-icon "external-link"}} <strong>Decennial Census Data</strong></a></li>
               </ul>
             </div>
