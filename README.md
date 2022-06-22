@@ -33,9 +33,7 @@ You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/) (with NPM)
-  - This installation was tested using Node v12.22.1
 - [Ember CLI](https://ember-cli.com/)
-- [Yarn](https://yarnpkg.com/)
 
 ## Local development
 
