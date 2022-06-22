@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const tooltipText = {
   acs: {
     communityDistrict(cd_short_title) {
