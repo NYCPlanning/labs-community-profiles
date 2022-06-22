@@ -96,8 +96,6 @@ A Proxy API that pulls data for a community district using ZAP's odata API, crea
 Add `dokku` remote: `git remote add dokku dokku@{dokkudomain}:communityprofiles`
 Deploy with dokku: `git push dokku master`
 
-NOTE: When making updates in the app that are dependent on a data update, be sure to check the Data Update Playbook for further instructions. Read through this update process before running the labs-layers-api python script or promoting changes to develop and production. 
-
 ## Contact us
 
 You can find us on Twitter at [@nycplanninglabs](https://twitter.com/nycplanninglabs), or comment on issues and we'll follow up as soon as we can. If you'd like to send an email, use [labs_dl@planning.nyc.gov](mailto:labs_dl@planning.nyc.gov)
