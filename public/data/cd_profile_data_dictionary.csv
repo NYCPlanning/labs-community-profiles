@@ -1,0 +1,184 @@
+Field Name,Description,Source
+borocd,Unique ID number for each community district,
+cd_full_title,"Full name of district, e.g., Manhattan Community District 1",
+cd_short_title,"e.g., Manhattan CD 1",
+shared_puma,"Indicates whether the CD shares a PUMA with another CD. If true, CD shares a PUMA. If false, one PUMA roughly matches this CD.",US Census 2010
+shared_puma_cd,"If CD shares a PUMA with another, identifies the other CD in that PUMA",US Census 2010
+puma,Public Use Microdata Area (PUMA) that roughly matches the Community District,US Census 2010
+acres,"Area of CD in acres, calculated from CD boundary",
+area_sqmi,"Area of CD in square miles, calculated from CD boundary",
+pop_2000,"Total population, 2000",US Census 2000
+pop_2010,"Total population, 2010",US Census 2010
+pop_change_00_10,Population change from 2000-2010,"US Census 2000, 2010"
+pop_acs,"Total population of PUMA that roughly matches CD. For CDs that share a PUMA with another CD (BX1/BX2, BX3/BX6, MN1/MN2, MN4/MN5), the population estimate cannot be reliably disaggregated to individual districts.",American Community Survey 2012-2016 5-year estimates
+poverty_rate,"The NYCgov poverty rate, which is a poverty measurement specific to New York City. The NYCgov poverty threshold is based on national expenditures on food, clothing, shelter and utilities adjusted for the high cost of housing in New York City. The income side of the measure includes the value of anti-poverty programs such as SNAP, housing assistance, and the earned income tax credit among others as family resources while accounting for medical spending and the costs of commuting and childcare for workers. The NYCgov poverty measure is a historically higher, but more realistic, measure of poverty than the official U.S. measure. That measure does not account for local costs of living, or the value of most anti-poverty benefits.  For more information about the NYCgov Poverty measure see http://www1.nyc.gov/site/opportunity/poverty-in-nyc/poverty-measure.page.","American Community Survey 2012-2016 5-year estimates, Mayor's Office for Economic Opportunity"
+moe_poverty_rate,Margin of error for corresponding data,"American Community Survey 2012-2016 5-year estimates, Mayor's Office for Economic Opportunity"
+poverty_rate_boro,The NYCgov poverty rate for the CD's borough,"American Community Survey 2012-2016 5-year estimates, Mayor's Office for Economic Opportunity"
+poverty_rate_nyc,The NYCgov poverty rate for all of New York City,"American Community Survey 2012-2016 5-year estimates, Mayor's Office for Economic Opportunity"
+pct_bach_deg,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
+moe_bach_deg,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_bach_deg_boro,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_bach_deg_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_bach_deg_nyc,Percentage of residents 25 years or older that have earned a bachelor's degree or higher in NYC,American Community Survey 2012-2016 5-year estimates
+moe_bach_deg_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+unemployment,Percentage of the civilian labor force that is unemployed in the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
+moe_unemployment,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+unemployment_boro,Percentage of the civilian labor force that is unemployed in the CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_unemployment_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+unemployment_nyc,Percentage of the civilian labor force that is unemployed in NYC,American Community Survey 2012-2016 5-year estimates
+moe_unemnployment,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+mean_commute,Mean commute time to work for residents of the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
+moe_mean_commute,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+mean_commute_boro,Mean commute time to work for residents of the CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_mean_commute_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+mean_commute_nyc,Mean commute time to work for residents of NYC,American Community Survey 2012-2016 5-year estimates
+moe_mean_commute_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_hh_rent_burd,Percentage of households that spend 35% or more of their income on rent in the PUMA that CD roughly matches,American Community Survey 2012-2016 5-year estimates
+moe_hh_rent_burd,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_hh_rent_burd_boro,Percentage of households that spend 35% or more of their income on rent in CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_hh_rent_burd_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_hh_rent_burd_nyc,Percentage of households that spend 35% or more of their income on rent in NYC,American Community Survey 2012-2016 5-year estimates
+moe_hh_rent_burd_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+pct_clean_strts,"Percentage of streets rated acceptably clean in the CD. Street cleanliness is affected by the rate and amount of littering, the degree of compliance with alternate side parking regulations, and the incidence of Health Administrative Code violations. ","NYC Department of Sanitation, 2018"
+pct_clean_strts_boro,Percentage of streets rated acceptably clean in the CD's borough,"NYC Department of Sanitation, 2018"
+pct_clean_strts_nyc,Percentage of streets rated acceptably clean in NYC,"NYC Department of Sanitation, 2018"
+crime_per_1000,"Rate of seven major felonies, as defined by NYPD, reported in the CD in 2016 per 1,000 residents","NYPD Complaint Data for 2016, accessed through NYC OpenData; Population from American Community Survey 2011-2015 5-year estimates"
+crime_per_1000_boro,"Rate of seven major felonies, as defined by NYPD, reported in the CD's borough in 2016 per 1,000 residents","NYPD Complaint Data for 2016, accessed through NYC OpenData; Population from American Community Survey 2011-2015 5-year estimates"
+crime_per_1000_nyc,"Rate of seven major felonies, as defined by NYPD, reported in NYC in 2016 per 1,000 residents","NYPD Complaint Data for 2016, accessed through NYC OpenData; Population from American Community Survey 2011-2015 5-year estimates"
+crime_count,"Number of reports for seven major felonies, as defined by NYPD in CD in 2017","NYPD Complaint Data for 2017, accessed through NYC OpenData"
+crime_count_boro,"Number of reports for seven major felonies, as defined by NYPD in CD's borough in 2017","NYPD Complaint Data for 2017, accessed through NYC OpenData"
+crime_count_nyc,"Number of reports for seven major felonies, as defined by NYPD in NYC borough in 2017","NYPD Complaint Data for 2017, accessed through NYC OpenData"
+count_parks,"The number of flagship parks, community parks, state parks, and city-state parks in the CD","NYC Department of City Planning Facilities Database, 2017"
+count_hosp_clinic,"The number urgent care hospitals, diagnostic and treatment centers, and school-based health facilities in the CD","NYC Department of City Planning Facilities Database, 2017"
+count_libraries,The number of public libraries in the CD,"NYC Department of City Planning Facilities Database, 2017"
+count_public_schools,"The number of public elementary, middle, high, and special education schools in the CD. These schools may serve multiple CDs.","NYC Department of City Planning Facilities Database, 2017"
+pct_served_parks,"The percentage of residents of the CD within walking distance of a park or open space. Walking distance is defined as 1/4 mile for parks less than 6 acres, and 1/2 mile for larger parks and pools.","NYC Department of Parks and Recreation, 2016"
+lots_res_1_2_family_bldg,Number of lots in CD with 1-2 family residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_res_multifamily_walkup,Number of lots in CD with multifamily walk-up residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_res_multifamily_elevator,Number of lots in CD with multifamily elevator residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_mixed_use,Number of lots in CD with mixed commercial and residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_commercial_office,Number of lots in CD with commercial office buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_industrial_manufacturing,Number of lots in CD with industrial/manufacturing buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_transportation_utility,Number of lots in CD primarily used for transportation or utility purposes,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_public_facility_institution,Number of lots in CD with public facilities or institutions as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_open_space,Number of lots in CD primarily used as open space,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_parking,Number of lots in CD primarily used for vehicle parking,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_vacant,Number of vacant lots in CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_other_no_data,Number of lots in CD with other primary uses or no land use data,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lots_total,Total number of lots in CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___res_1_2_family_bldg,Lot area (square feet) in CD with 1-2 family residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___res_1_2_family_bldg,Percentage of lot area in CD with 1-2 family residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___res_multifamily_walkup,Lot area (square feet) in CD with multifamily walk-up residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___res_multifamily_walkup,Percentage of lot area in CD with multifamily walk-up residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___res_multifamily_elevator,Lot area (square feet) in CD with multifamily elevator residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___res_multifamily_elevator,Percentage of lot area in CD with multifamily elevator residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___mixed_use,Lot area (square feet) in CD with mixed commercial and residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___mixed_use,Percentage of lot area in CD with mixed commercial and residential buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___commercial_office,Lot area (square feet) in CD with commercial office buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___commercial_office,Percentage of lot area in CD with commercial office buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___industrial_manufacturing,Lot area (square feet) in CD with industrial/manufacturing buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___industrial_manufacturing,Percentage of lot area in CD with industrial/manufacturing buildings as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___transportation_utility,Lot area (square feet) in CD primarily used for transportation or utility purposes,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___transportation_utility,Percentage of lot area in CD primarily used for transportation or utility purposes,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___public_facility_institution,Lot area (square feet) in CD with public facilities or institutions as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___public_facility_institution,Percentage of lot area in CD with public facilities or institutions as the primary land use,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___open_space,Lot area (open space) in CD primarily used as open space,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___open_space,Lot area (open space) in CD primarily used as open space,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___parking,Lot area (square feet) in CD primarily used for vehicle parking,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___parking,Percentage of lot area in CD primarily used for vehicle parking,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___vacant,Lot area (square feet) of vacant lots in CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___vacant,Percentage of lot area of vacant lots in CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+lot_area___other_no_data,Lot area (square feet) in CD with other primary uses or no land use data,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+pct_lot_area___other_no_data,Percentage of lot area in CD with other primary uses or no land use data,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+total_lot_area,Total lot area (square feet) in CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v3
+cd_son_fy2018,URL for CD's Statement of Community District Needs and Community Board Budget Requests for Fiscal Year 2018,NYC Department of City Planning
+son_issue_1,Most pressing issue identified by the community board in the Statement of Community District Needs and Community Board Budget Requests for Fiscal Year 2018,NYC Department of City Planning
+son_issue_2,Second most pressing issue identified by the community board in the Statement of Community District Needs and Community Board Budget Requests for Fiscal Year 2018,NYC Department of City Planning
+son_issue_3,Third most pressing issue identified by the community board in the Statement of Community District Needs and Community Board Budget Requests for Fiscal Year 2018,NYC Department of City Planning
+neighborhoods,Neighborhoods that are partially or completely within the CD. Neighborhood names and boundaries are not officially designated.,NYC Department of City Planning
+acs_tooltip,An explanation of the PUMA that roughly matches the CD or combination of CDs.,US Census 2010
+pct_foreign_born,"Percentage of residents of the CD who were not U.S. citizens at birth. This includes naturalized U.S. citizens, lawful permanent residents, temporary migrants, humanitarian migrants, and unauthorized migrants.",American Community Survey 2012-2016 5-year estimates
+moe_foreign_born,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+lep_rate,Percentage of residents that self-identify as having limited English proficiency in the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+moe_lep_rate,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+lep_rate_boro,Percentage of residents that self-identify as having limited English proficiency in the CD's borough ,American Community Survey 2012-2016 5-year estimates
+moe_lep_rate_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+lep_rate_nyc,Percentage of residents that self-identify as having limited English proficiency in NYC ,American Community Survey 2012-2016 5-year estimates
+moe_lep_rate_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+under18_rate,Percentage of residents under the age of 18 in the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+moe_under18_rate,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+under18_rate_boro,Percentage of residents under the age of 18 in the CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_under18_rate_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+under18_rate_nyc,Percentage of residents under the age of 18 in NYC,American Community Survey 2012-2016 5-year estimates
+moe_under18_rate_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+over65_rate,Percentage of residents ages 65 and over in the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+moe_over65_rate,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+over65_rate_boro,Percentage of residents ages 65 and over in the CD's borough,American Community Survey 2012-2016 5-year estimates
+moe_over65_rate_boro,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+over65_rate_nyc,Percentage of residents ages 65 and over in NYC,American Community Survey 2012-2016 5-year estimates
+moe_over65_rate_nyc,Margin of error for corresponding data,American Community Survey 2012-2016 5-year estimates
+male_under_5,Male population under the age of 5,American Community Survey 2012-2016 5-year estimates
+female_under_5,Female population under the age of 5,American Community Survey 2012-2016 5-year estimates
+male_5_9,Male population ages 5 to 9,American Community Survey 2012-2016 5-year estimates
+female_5_9,Female population ages 5 to 9,American Community Survey 2012-2016 5-year estimates
+male_10_14,Male population ages 10 to 14,American Community Survey 2012-2016 5-year estimates
+female_10_14,Female population ages 10 to 14,American Community Survey 2012-2016 5-year estimates
+male_15_19,Male population ages 15 to 19,American Community Survey 2012-2016 5-year estimates
+female_15_19,Female population ages 15 to 19,American Community Survey 2012-2016 5-year estimates
+male_20_24,Male population ages 20 to 24,American Community Survey 2012-2016 5-year estimates
+female_20_24,Female population ages 20 to 24,American Community Survey 2012-2016 5-year estimates
+male_25_29,Male population ages 25 to 29,American Community Survey 2012-2016 5-year estimates
+female_25_29,Female population ages 25 to 29,American Community Survey 2012-2016 5-year estimates
+male_30_34,Male population ages 30 to 34,American Community Survey 2012-2016 5-year estimates
+female_30_34,Female population ages 30 to 34,American Community Survey 2012-2016 5-year estimates
+male_35_39,Male population ages 35 to 39,American Community Survey 2012-2016 5-year estimates
+female_35_39,Female population ages 35 to 39,American Community Survey 2012-2016 5-year estimates
+male_40_44,Male population ages 40 to 44,American Community Survey 2012-2016 5-year estimates
+female_40_44,Female population ages 40 to 44,American Community Survey 2012-2016 5-year estimates
+male_45_49,Male population ages 45 to 49,American Community Survey 2012-2016 5-year estimates
+female_45_49,Female population ages 45 to 49,American Community Survey 2012-2016 5-year estimates
+male_50_54,Male population ages 50 to 54,American Community Survey 2012-2016 5-year estimates
+female_50_54,Female population ages 50 to 54,American Community Survey 2012-2016 5-year estimates
+male_55_59,Male population ages 55 to 59,American Community Survey 2012-2016 5-year estimates
+female_55_59,Female population ages 55 to 59,American Community Survey 2012-2016 5-year estimates
+male_60_64,Male population ages 60 to 64,American Community Survey 2012-2016 5-year estimates
+female_60_64,Female population ages 60 to 64,American Community Survey 2012-2016 5-year estimates
+male_65_69,Male population ages 65 to 69,American Community Survey 2012-2016 5-year estimates
+female_65_69,Female population ages 65 to 69,American Community Survey 2012-2016 5-year estimates
+male_70_74,Male population ages 70 to 74,American Community Survey 2012-2016 5-year estimates
+female_70_74,Female population ages 70 to 74,American Community Survey 2012-2016 5-year estimates
+male_75_79,Male population ages 75 to 79,American Community Survey 2012-2016 5-year estimates
+female_75_79,Female population ages 75 to 79,American Community Survey 2012-2016 5-year estimates
+male_80_84,Male population ages 80 to 84,American Community Survey 2012-2016 5-year estimates
+female_80_84,Female population ages 80 to 84,American Community Survey 2012-2016 5-year estimates
+male_85_over,Male population age 85 and over,American Community Survey 2012-2016 5-year estimates
+female_85_over,Female population age 85 and over,American Community Survey 2012-2016 5-year estimates
+pct_white_nh,Percentage of the population that identifies as White and  not Hispanic for the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+pct_black_nh,Percentage of the population that identifies as Black and not Hispanic for the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+pct_asian_nh,Percentage of the population that identifies as Asian and not Hispanic for the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+pct_other_nh,Percentage of the population that identifies as American Indian or Alaska Native; Native Hawaiian or Other Pacific Islander; another race or more than one race; and not Hispanic in the PUMA that roughly matches the CD,American Community Survey 2012-2016 5-year estimates
+pct_hispanic,"Percentage of the population that identifies as Hispanic, regardless of racial identification, in the PUMA that roughly matches the CD",American Community Survey 2012-2016 5-year estimates
+fp_100_pop,Population of the CD that lives within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,US Census 2010
+fp_500_pop,Population (2010) of the CD that lives within the 2050s 1% annual chance floodplain*,US Census 2010
+fp_100_area,Total lot area within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain. Provided in square miles. Lot area includes all total land area less roads and other mapped streets.,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_500_area,Total lot area within the  2050s 1% annual chance floodplain*. Provided in square miles. Lot area includes all total land area less roads and other mapped streets.,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_100_bldg,Number of buildings in the CD that are within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+cd_tot_bldgs,Total number of buildings in the CD,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_100_resunits,Number of residential housing units in the CD that are within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+cd_tot_resunits,Total number of residential housing units in the CD ,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_100_openspace,Total parkland and open space area (square miles) within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_500_openspace,Total parkland and open space area (square miles) within the 2050s 1% annual chance floodplain*,NYC Department of City Planning Primary Land Use Tax Lot Output (PLUTO) 16v2
+fp_100_mhhi,Median household income within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,American Community Survey 2011-2015 5-year estimates
+fp_500_mhhi,Median household income within the 2050s 1% annual chance floodplain*,American Community Survey 2011-2015 5-year estimates
+fp_100_ownerocc,Percentage of total occupied household units that are owner-occupied within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain,American Community Survey 2011-2015 5-year estimates
+fp_500_ownerocc,Percentage of total occupied household units that are owner-occupied  within the 2050s 1% annual chance floodplain*,American Community Survey 2011-2015 5-year estimates
+fp_100_permortg,Percentage of owner-occupied units with a mortgage within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain. Mortgage refers to all forms of debt where the property is pledged as security for repayment of the debt. Mortgage status is an important determinant in the floodplain as any property with a federally-insured mortgage must carry a federal flood insurance policy.,American Community Survey 2011-2015 5-year estimates
+fp_500_permortg,Percentage of owner-occupied household units with a mortgage within the 2050s 1% annual chance floodplain*. Mortgage refers to all forms of debt where the property is pledged as security for repayment of the debt. Mortgage status is an important determinant in the floodplain as any property with a federally-insured mortgage must carry a federal flood insurance policy.,American Community Survey 2011-2015 5-year estimates
+fp_100_rent_burden,Percentage of renter-occupied household units considered cost-burdened within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain. Renter-occupied households are characterized as cost-burdened if 30% or more of household income is spent on housing costs.,American Community Survey 2011-2015 5-year estimates
+fp_500_rent_burden,"Percentage of renter-occupied units considered cost-burdened, within the  2050s 1% annual chance floodplain*. Renter-occupied households are characterized as cost-burdened if 30% or more of household income is spent on housing costs.",American Community Survey 2011-2015 5-year estimates
+fp_100_cost_burden,Percentage of owner-occupied household units considered cost-burdened within the 2015 Preliminary Flood Insurance Rate Maps (PFIRM) 1% annual chance floodplain. Owner-occupied households are characterized as cost-burdened if 30% or more of household income is spent on housing costs.,American Community Survey 2011-2015 5-year estimates
+fp_500_cost_burden,"Percentage of owner-occupied units considered cost-burdened, within the  2050s 1% annual chance floodplain*. Owner-occupied households are characterized as cost-burdened if 30% or more of household income is spent on housing costs.",American Community Survey 2011-2015 5-year estimates
+cb_website,Community board's website,
+cb_email,Community board's primary email address,
+,,
+,"*Note on future floodplain determination: The 2050s 1% annual chance floodplain projections are derived from the New York City Panel on Climate Change (NPCC) 90th percentile projections for Sea Level Rise. For more information, please visit ""Building the Knowledge Base for Climate Resiliency: New York City Panel on Climate Change 2015 Report,"" January 2015, http://onlinelibrary.wiley.com/doi/10.1111/nyas.2015.1336.issue-1/issuetoc",
