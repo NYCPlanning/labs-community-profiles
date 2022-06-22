@@ -38,7 +38,7 @@ You will need the following things properly installed on your computer.
 ## Local development
 
 - Clone this repo `git clone https://github.com/NYCPlanning/labs-community-profiles.git`
-- Install Dependencies `yarn`
+- Install Dependencies `npm install`
 - Start the server `ember s`
 - Point your browser to `http://localhost:4200`
 
