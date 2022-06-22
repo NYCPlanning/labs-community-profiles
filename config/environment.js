@@ -1,5 +1,5 @@
 /* eslint-env node */
-'use strict';
+
 
 module.exports = function(environment) {
   const ENV = {
@@ -42,8 +42,8 @@ module.exports = function(environment) {
     'mapbox-gl': {
       accessToken: '',
       map: {
-        style: 'https://layers-api.planninglabs.nyc/v1/base/style.json',
-      },
+        style: 'https://layers-api.planninglabs.nyc/v1/base/style.json'
+      }
     },
     APP: {
       // Here you can pass flags/options to your application instance

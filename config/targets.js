@@ -1,6 +1,4 @@
 /* eslint-env node */
-'use strict';
-
 module.exports = {
   browsers: [
     'ie 9',
