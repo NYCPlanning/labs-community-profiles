@@ -9,13 +9,13 @@ import carto from '../utils/carto';
 const facdbTable = 'dcp_facilities';
 
 const colorsArray = [
-  ['Education, Child Welfare, and Youth', '#f7ca00'],
-  ['Parks, Gardens, and Historical Sites', '#4CAF50'],
-  ['Libraries and Cultural Programs', '#73E5F4'],
-  ['Public Safety, Emergency Services, and Administration of Justice', '#2979FF'],
-  ['Health and Human Services', '#BA68C8'],
-  ['Core Infrastructure and Transportation', '#8D8EAA'],
-  ['Administration of Government', '#CBCBD6'],
+  ['EDUCATION, CHILD WELFARE, AND YOUTH', '#f7ca00'],
+  ['PARKS, GARDENS, AND HISTORICAL SITES', '#4CAF50'],
+  ['LIBRARIES AND CULTURAL PROGRAMS', '#73E5F4'],
+  ['PUBLIC SAFETY, EMERGENCY SERVICES, AND ADMINISTRATION OF JUSTICE', '#2979FF'],
+  ['HEALTH AND HUMAN SERVICES', '#BA68C8'],
+  ['CORE INFRASTRUCTURE AND TRANSPORTATION', '#8D8EAA'],
+  ['ADMINISTRATION OF GOVERNMENT', '#CBCBD6'],
 ];
 
 const SQL = `
