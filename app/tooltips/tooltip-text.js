@@ -1,4 +1,4 @@
-export const tooltipText = {
+const tooltipText = {
   acs: {
     puma(puma) {
       return `American Community Survey 2014-2018 5-Year Estimates for PUMA ${puma}, `;
@@ -19,3 +19,5 @@ export const tooltipText = {
     },
   },
 };
+
+export default tooltipText;

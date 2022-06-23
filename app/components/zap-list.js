@@ -21,7 +21,7 @@ export default Component.extend({
             const applicant = project.attributes.applicants.split(';')[0];
             project.attributes.applicant = applicant; // eslint-disable-line
           } else {
-            project.attributes.applicant = 'Unknown Applicant'
+            project.attributes.applicant = 'Unknown Applicant';
           }
         });
 
