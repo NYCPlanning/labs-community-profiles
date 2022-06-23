@@ -1,5 +1,5 @@
 import { helper } from '@ember/component/helper';
-import { tooltipText } from '../tooltips/tooltip-text';
+import tooltipText from '../tooltips/tooltip-text';
 
 export function buildTooltip(data) {
   const {

@@ -13,6 +13,6 @@ export default Component.extend({
   actions: {
     handleSiteMessageToggle() {
       this.set('open', !this.get('open'));
-    }
+    },
   },
-})
+});
