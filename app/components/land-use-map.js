@@ -106,8 +106,7 @@ export default Component.extend({
 
       if (feature) {
         const { description, address } = feature.properties;
-        /* eslint-disable-next-line no-unneeded-ternary */
-        const tooltipDescription = description ? description : 'Other';
+        const tooltipDescription = description || 'Other';
         e.target.getCanvas().style.cursor = 'pointer';
         this.set('mouseoverLocation', {
           x: e.point.x + 30,
