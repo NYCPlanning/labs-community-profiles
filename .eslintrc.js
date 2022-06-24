@@ -30,7 +30,6 @@ module.exports = {
     'camelcase': 0,
     'max-len': 0,
     'no-param-reassign': 0,
-    'strict': 0,
   },
   overrides: [
     // node files
