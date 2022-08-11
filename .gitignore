@@ -18,7 +18,6 @@ yarn-error.log
 testem.log
 .DS_Store
 public/.DS_Store
-.husky/_/husky.sh
 
 # ember-try
 .node_modules.ember-try/
