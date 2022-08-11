@@ -46,6 +46,8 @@ module.exports = function(environment) {
         style: 'https://layers-api.planninglabs.nyc/v1/base/style.json',
       },
     },
+    ZAP_STAGING_API: process.env.ZAP_API_STAGING_URL,
+    ZAP_PRODUCTION_API: process.env.ZAP_API_PRODUCTION_URL,
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
