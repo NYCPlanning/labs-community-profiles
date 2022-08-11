@@ -1,43 +1,47 @@
 import { computed } from '@ember/object'; // eslint-disable-line
 import Component from '@ember/component';
 import fetch from 'fetch'; // eslint-disable-line
+import ENV from 'labs-community-portal/config/environment';
 
 export default Component.extend({
   district: null,
 
   projects: computed('district', function() {
-    const zapAcronym = this.get('district.zapAcronym');
+    try {
+      const zapAcronym = this.get('district.zapAcronym');
 
-    const URL = `https://zap-api-production.herokuapp.com/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Noticed&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
+      const zapApi = ENV.environment === 'development' ? ENV.ZAP_STAGING_API : ENV.ZAP_PRODUCTION_API;
 
-    return fetch(URL)
-      .then(res => res.json())
-      .then((res) => {
-        // get the data object, return object with arrays of projects grouped by dcp_publicstatus_simp
-        const projects = res.data;
+      console.log('environment', ENV);
+      console.log('ZAP API URL:');
+      console.log(ENV.ZAP_STAGING_API ? `found dev: ${ENV.ZAP_STAGING_API}` : 'not found');
+      console.log(ENV.ZAP_PRODUCTION_API ? `found prod: ${ENV.ZAP_PRODUCTION_API}` : 'not found');
 
-        projects.forEach((project) => {
-          if (project.attributes.applicants) {
-            const applicant = project.attributes.applicants.split(';')[0];
-            project.attributes.applicant = applicant; // eslint-disable-line
-          } else {
-            project.attributes.applicant = 'Unknown Applicant';
-          }
+      const URL = `${zapApi}/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
+
+      return fetch(URL)
+        .then(res => res.json())
+        .then((res) => {
+          // get the data object, return object with arrays of projects grouped by dcp_publicstatus_simp
+          const projects = res.data;
+
+          projects.forEach((project) => {
+            if (project.attributes.applicants) {
+              const applicant = project.attributes.applicants.split(';')[0];
+              project.attributes.applicant = applicant; // eslint-disable-line
+            } else {
+              project.attributes.applicant = 'Unknown Applicant';
+            }
+          });
+
+          return {
+            filed: projects.filter(d => d.attributes.dcp_publicstatus_simp === 'Filed'),
+            inPublicReview: projects.filter(d => d.attributes.dcp_publicstatus_simp === 'In Public Review'),
+          };
         });
-
-        const projectsUnderscored = projects.map(project => ({
-          dcp_publicstatus: project.attributes['dcp-publicstatus'],
-          dcp_name: project.attributes['dcp-name'],
-          dcp_projectname: project.attributes['dcp-projectname'],
-          dcp_ulurp_nonulurp: project.attributes['dcp-ulurp-nonulurp'],
-          applicant: project.attributes.applicant,
-        }));
-
-        return {
-          noticed: projectsUnderscored.filter(d => d.dcp_publicstatus === 'Noticed'),
-          filed: projectsUnderscored.filter(d => d.dcp_publicstatus === 'Filed'),
-          inPublicReview: projectsUnderscored.filter(d => d.dcp_publicstatus === 'In Public Review'),
-        };
-      });
+    } catch (e) {
+      console.log('error in the computed property of projects on sap-list.js', e);
+      throw e;
+    }
   }),
 });
