@@ -19,9 +19,6 @@ testem.log
 .DS_Store
 public/.DS_Store
 .husky/_/husky.sh
-.env
-**./DS.Store
-.eslintcache
 
 # ember-try
 .node_modules.ember-try/

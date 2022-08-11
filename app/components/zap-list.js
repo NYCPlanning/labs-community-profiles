@@ -12,11 +12,6 @@ export default Component.extend({
 
       const zapApi = ENV.environment === 'development' ? ENV.ZAP_STAGING_API : ENV.ZAP_PRODUCTION_API;
 
-      console.log('environment', ENV);
-      console.log('ZAP API URL:');
-      console.log(ENV.ZAP_STAGING_API ? `found dev: ${ENV.ZAP_STAGING_API}` : 'not found');
-      console.log(ENV.ZAP_PRODUCTION_API ? `found prod: ${ENV.ZAP_PRODUCTION_API}` : 'not found');
-
       const URL = `${zapApi}/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
 
       return fetch(URL)
