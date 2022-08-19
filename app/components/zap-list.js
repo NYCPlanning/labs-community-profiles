@@ -9,10 +9,25 @@ export default Component.extend({
   projects: computed('district', function() {
     try {
       const zapAcronym = this.get('district.zapAcronym');
-
+      /* eslint-disable-next-line no-unused-vars */
       const zapApi = ENV.environment === 'production' ? ENV.ZAP_PRODUCTION_API : ENV.ZAP_STAGING_API;
 
-      const URL = `${zapApi}/projects?community-districts[]=${zapAcronym}&dcp_publicstatus[]=Filed&dcp_publicstatus[]=In Public Review&page=1`;
+      const URL = `https://zap-api-production.herokuapp.com/projects?community-districts[]=${zapAcronym}`;
+
+      fetch(URL)
+        .then(res => res.json())
+        .then((res) => {
+          console.log('response', res);
+          // get the data object, return object with arrays of projects grouped by dcp_publicstatus_simp
+          const projects = res.data;
+          console.log('response data', res.data);
+
+          const filed = projects.filter(d => d.attributes['dcp-publicstatus'] === 'Filed');
+          const inPublicReview = projects.filter(d => d.attributes['dcp-publicstatus'] === 'In Public Review');
+
+          console.log('filed', filed);
+          console.log('inPublicReview', inPublicReview);
+        });
 
       return fetch(URL)
         .then(res => res.json())
@@ -20,18 +35,20 @@ export default Component.extend({
           // get the data object, return object with arrays of projects grouped by dcp_publicstatus_simp
           const projects = res.data;
 
-          projects.forEach((project) => {
-            if (project.attributes.applicants) {
-              const applicant = project.attributes.applicants.split(';')[0];
-              project.attributes.applicant = applicant; // eslint-disable-line
-            } else {
-              project.attributes.applicant = 'Unknown Applicant';
-            }
-          });
+          if (projects) {
+            projects.forEach((project) => {
+              if (project.attributes.applicants) {
+                const applicant = project.attributes.applicants.split(';')[0];
+                project.attributes.applicant = applicant; // eslint-disable-line
+              } else {
+                project.attributes.applicant = 'Unknown Applicant';
+              }
+            });
+          }
 
           return {
-            filed: projects.filter(d => d.attributes.dcp_publicstatus_simp === 'Filed'),
-            inPublicReview: projects.filter(d => d.attributes.dcp_publicstatus_simp === 'In Public Review'),
+            filed: projects.filter(d => d.attributes['dcp-publicstatus'] === 'Filed'),
+            inPublicReview: projects.filter(d => d.attributes['dcp-publicstatus'] === 'In Public Review'),
           };
         });
     } catch (e) {
