@@ -6,11 +6,11 @@ import numeral from 'numeral';
 import neighborhoodsCrosswalk from '../utils/nabesCrosswalk';
 
 const acronymCrosswalk = {
-  Bronx: 'BX',
-  Brooklyn: 'BK',
-  Manhattan: 'MN',
-  Queens: 'QN',
-  'Staten Island': 'SI',
+  Bronx: 'X',
+  Brooklyn: 'K',
+  Manhattan: 'M',
+  Queens: 'Q',
+  'Staten Island': 'R',
 };
 
 export default DS.Model.extend({
