@@ -5,10 +5,10 @@ command = "yarn build --environment=staging"
 command = "yarn build --environment=production"
 
 [context.develop]
-ZAP_API_STAGING_URL = "https://zap-api-staging.herokuapp.com"
+ZAP_API_URL = "https://zap-api-staging.herokuapp.com"
 
 [context.staging]
-ZAP_API_STAGING_URL = "https://zap-api-staging.herokuapp.com"
+ZAP_API_URL = "https://zap-api-staging.herokuapp.com"
 
 [context.production]
-ZAP_API_PRODUCTION_URL = "https://zap-api-production.herokuapp.com"
+ZAP_API_URL = "https://zap-api-production.herokuapp.com"
