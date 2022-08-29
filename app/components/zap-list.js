@@ -10,24 +10,9 @@ export default Component.extend({
     try {
       const zapAcronym = this.get('district.zapAcronym');
       /* eslint-disable-next-line no-unused-vars */
-      const zapApi = ENV.environment === 'production' ? ENV.ZAP_PRODUCTION_API : ENV.ZAP_STAGING_API;
+      const zapApi = ENV.ZAP_API;
 
-      const URL = `https://zap-api-production.herokuapp.com/projects?community-districts[]=${zapAcronym}`;
-
-      fetch(URL)
-        .then(res => res.json())
-        .then((res) => {
-          console.log('response', res);
-          // get the data object, return object with arrays of projects grouped by dcp_publicstatus_simp
-          const projects = res.data;
-          console.log('response data', res.data);
-
-          const filed = projects.filter(d => d.attributes['dcp-publicstatus'] === 'Filed');
-          const inPublicReview = projects.filter(d => d.attributes['dcp-publicstatus'] === 'In Public Review');
-
-          console.log('filed', filed);
-          console.log('inPublicReview', inPublicReview);
-        });
+      const URL = `${zapApi}/projects?community-districts[]=${zapAcronym}`;
 
       return fetch(URL)
         .then(res => res.json())
