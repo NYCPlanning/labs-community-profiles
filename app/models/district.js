@@ -49,7 +49,7 @@ export default DS.Model.extend({
     return `${acronym}`;
   }),
   boroAcronymLowerCase: computed('boro', function() {
-    const acronym = acronymCrosswalk[this.get('boro')].toLowerCase();
+    const acronym = resourcesAcronymCrosswalk[this.get('boro')].toLowerCase();
     return `${acronym}`;
   }),
   healthProfileLink: computed('boro', function() {
