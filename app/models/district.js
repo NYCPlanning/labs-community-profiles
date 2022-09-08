@@ -13,6 +13,14 @@ const acronymCrosswalk = {
   'Staten Island': 'R',
 };
 
+const resourcesAcronymCrosswalk = {
+  Bronx: 'BX',
+  Brooklyn: 'BK',
+  Manhattan: 'MN',
+  Queens: 'QN',
+  'Staten Island': 'SI',
+};
+
 export default DS.Model.extend({
   borocd: DS.attr('number'),
   boro: DS.attr('string'),
@@ -28,6 +36,11 @@ export default DS.Model.extend({
   }),
   borocdAcronymLowerCase: computed('boro', function() {
     const acronym = acronymCrosswalk[this.get('boro')].toLowerCase();
+    const cd = numeral(this.get('cd')).format('00');
+    return `${acronym}${cd}`;
+  }),
+  resourcesBoroCdAcronymLowerCase: computed('boro', function() {
+    const acronym = resourcesAcronymCrosswalk[this.get('boro')].toLowerCase();
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
