@@ -25,7 +25,7 @@ export default DS.Model.extend({
   borocd: DS.attr('number'),
   boro: DS.attr('string'),
   borocdAcronym: computed('boro', function() {
-    const acronym = acronymCrosswalk[this.get('boro')];
+    const acronym = resourcesAcronymCrosswalk[this.get('boro')];
     const cd = numeral(this.get('cd')).format('00');
     return `${acronym}${cd}`;
   }),
