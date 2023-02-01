@@ -37,7 +37,7 @@ export default Component.extend({
           };
         });
     } catch (e) {
-      console.log('error in the computed property of projects on zap-list.js', e);
+      console.log('error in the computed property of projects on zap-list.js', e); // eslint-disable-line
       throw e;
     }
   }),

@@ -18,6 +18,16 @@ module.exports = function(environment) {
           sendHitTask: environment !== 'development',
         },
       },
+      {
+        name: 'GoogleAnalyticsFour',
+        environments: ['development', 'production'],
+        config: {
+          id: 'G-69C5MVX6WW',
+          options: {
+            debug_mode: environment === 'development',
+          },
+        },
+      },
     ],
     contentSecurityPolicy: {
       'default-src': "'none'",
