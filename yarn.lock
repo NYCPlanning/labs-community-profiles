@@ -7080,9 +7080,10 @@ ember-maybe-in-element@^0.2.0:
   dependencies:
     ember-cli-babel "^7.1.0"
 
-"ember-metrics@https://github.com/adopted-ember-addons/ember-metrics.git#e984d1f869b16e1ea9b9a53846c5675a4a6fea46":
-  version "2.0.0-beta.1"
-  resolved "https://github.com/adopted-ember-addons/ember-metrics.git#e984d1f869b16e1ea9b9a53846c5675a4a6fea46"
+ember-metrics@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/ember-metrics/-/ember-metrics-2.0.0-beta.2.tgz#f621e11386c61ba1b117748ef34b887dab8ad644"
+  integrity sha512-vKPVfY4IIO5KszCsExUkxwqUgnuiUpvacNhzudms4JKZy0zeoU5tyXscPngW8vpqcGF6q8ZbaNTxw1OIVKd+xw==
   dependencies:
     broccoli-funnel "^3.0.2"
     ember-cli-babel "^7.26.6"
