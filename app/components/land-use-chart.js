@@ -69,7 +69,7 @@ const LandUseChart = Component.extend(ResizeAware, {
       pct_lot_area_res_multifamily_walkup,
       pct_lot_area_transportation_utility,
       pct_lot_area_vacant
-    FROM community_district_profiles
+    FROM community_district_profiles_v202303
     WHERE borocd = '${borocd}'
     `;
 
@@ -130,12 +130,12 @@ const LandUseChart = Component.extend(ResizeAware, {
 
     data.then((rawData) => {
       this.get('communityProfilesData').then((communityProfilesData) => {
-        // NAME of lot area percent field on community_district_profiles dataset
+        // NAME of lot area percent field on community_district_profiles_v202303 dataset
         function landUsePercentField(plutoData) {
           return landUseLookup(plutoData.landuse).community_profiles_percent_field;
         }
 
-        // VALUE of lot area percent field pulled from community_district_profiles dataset
+        // VALUE of lot area percent field pulled from community_district_profiles_v202303 dataset
         function lotAreaPercent(plutoData) {
           const percentField = landUsePercentField(plutoData);
           const percentValue = communityProfilesData[0][percentField];
