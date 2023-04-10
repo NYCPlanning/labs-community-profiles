@@ -83,8 +83,7 @@
     "node-fetch": "^1.7.2"
   },
   "engines": {
-    "node": "^12.22.1",
-    "npm": "6.14.12"
+    "node": "14.*"
   },
   "private": true,
   "dependencies": {
