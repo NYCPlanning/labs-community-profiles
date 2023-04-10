@@ -3,8 +3,7 @@ import { module, test } from 'qunit';
 
 module('Unit | Utility | carto');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  const result = carto();
-  assert.ok(result);
+test('it makes a call to getVectorTileTemplate', async function(assert) {
+  const result = await carto.getVectorTileTemplate(['mockQuery']);
+  assert.ok(result === 'https://planninglabs.carto.com/api/v1/map/undefined/{z}/{x}/{y}.mvt');
 });

@@ -3,8 +3,12 @@ import { module, test } from 'qunit';
 
 module('Unit | Utility | to geojson');
 
-// Replace this with your real tests.
 test('it works', function(assert) {
-  const result = toGeojson();
+  // TODO: Replace hacked object with full district mock
+  const mockDistricts = [{
+    geometry: 'POINT(0,0)',
+    get: () => this.geometry,
+  }];
+  const result = toGeojson(mockDistricts);
   assert.ok(result);
 });
