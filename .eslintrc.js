@@ -3,19 +3,22 @@ module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
   plugins: [
-    'ember'
+    'ember',
   ],
   extends: [
-    'airbnb-base'
+    'airbnb-base',
   ],
   env: {
     browser: true,
   },
-  globals:{
-    '$': true,
+  globals: {
+    $: true,
     d3: true,
   },
   rules: {
@@ -27,7 +30,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'prefer-arrow-callback': 0,
     'no-underscore-dangle': 0,
-    'camelcase': 0,
+    camelcase: 0,
     'max-len': 0,
     'no-param-reassign': 0,
   },
@@ -35,19 +38,21 @@ module.exports = {
     // node files
     {
       files: [
+        '.template-lintrc.js',
+        'ember-cli-build.js',
         'testem.js',
         'ember-cli-build.js',
         'config/**/*.js',
-        'lib/*/index.js'
+        'lib/*/index.js',
       ],
       parserOptions: {
         sourceType: 'script',
-        ecmaVersion: 2015
+        ecmaVersion: 2015,
       },
       env: {
         browser: false,
-        node: true
-      }
-    }
-  ]
+        node: true,
+      },
+    },
+  ],
 };

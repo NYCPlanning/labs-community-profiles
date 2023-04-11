@@ -1,4 +1,4 @@
-import computed from 'ember-computed-decorators';
+import { computed } from '@ember/object';
 import Component from '@ember/component'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import carto from '../utils/carto';
@@ -14,10 +14,9 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
   loading: false,
   borocd: '',
 
-  @computed('borocd', 'type', 'mode')
-  sql(borocd, type, mode) {
-    const modePrefix = mode === '100-yr' ? '1' : '5';
-    const typeAbbrev = type === 'buildings' ? 'bt' : 'du';
+  sql: computed('borocd', 'type', 'mode', function() {
+    const modePrefix = this.get('mode') === '100-yr' ? '1' : '5';
+    const typeAbbrev = this.get('type') === 'buildings' ? 'bt' : 'du';
     return `
       SELECT
         ${typeAbbrev}${modePrefix}01 AS "1",
@@ -32,12 +31,11 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
         ${typeAbbrev}${modePrefix}10 AS "10",
         ${typeAbbrev}${modePrefix}11 AS "11"
       FROM planninglabs.cd_floodplains
-      WHERE borocd = ${borocd}
+      WHERE borocd = ${this.get('borocd')}
     `;
-  },
+  }),
 
-  @computed('sql', 'borocd')
-  data() {
+  data: computed('sql', 'borocd', function() {
     const sql = this.get('sql');
     return carto.SQL(sql)
       .then((rawData) => { // eslint-disable-line
@@ -59,7 +57,7 @@ const BuildingTypeChart = Component.extend(ResizeAware, {
             };
           });
       });
-  },
+  }),
 });
 
 export default BuildingTypeChart;

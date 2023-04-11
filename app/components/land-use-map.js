@@ -1,7 +1,7 @@
 import { inject as service } from '@ember/service'; // eslint-disable-line
 import Component from '@ember/component';
 import mapboxgl from 'mapbox-gl'; // eslint-disable-line
-import { computed } from 'ember-decorators/object';
+import { computed } from '@ember/object';
 import carto from '../utils/carto';
 import landUseLookup from '../utils/land-use-lookup';
 
@@ -21,7 +21,7 @@ export default Component.extend({
     duration: 0,
   },
 
-  vectorSource: Ember.computed('landuseTemplate', function () { // eslint-disable-line
+  vectorSource: computed('landuseTemplate', async function () { // eslint-disable-line
     return carto.getVectorTileTemplate([SQL])
       .then(landuseTemplate => ({
         type: 'vector',
@@ -73,13 +73,12 @@ export default Component.extend({
     maxzoom: 14,
   },
 
-  @computed('mapState.currentlySelected.geometry')
-  cdSelectedSource() {
+  cdSelectedSource: computed('mapState.currentlySelected.geometry', function() {
     return {
       type: 'geojson',
       data: this.get('mapState.currentlySelected.geometry'),
     };
-  },
+  }),
 
   cdSelectedLayer: {
     id: 'cd-line',
