@@ -1,5 +1,5 @@
 import { next } from '@ember/runloop'; // eslint-disable-line
-import computed from 'ember-computed-decorators';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service'; // eslint-disable-line
 import Controller from '@ember/controller'; // eslint-disable-line
 import { range } from 'd3-array';
@@ -10,14 +10,12 @@ export default Controller.extend({
   metrics: service(),
   queryParams: ['section'],
 
-  @computed('model')
-  noSON() {
+  noSON: computed('model', function () {
     const d = this.get('model.dataprofile');
     return d.son_issue_1.length === 0 && d.son_issue_2.length === 0 && d.son_issue_3.length === 0;
-  },
+  }),
 
-  @computed('model')
-  racialProfile() {
+  racialProfile: computed('model', function() {
     const d = this.get('d');
     const profile = [
       { value_pct: d.pct_white_nh / 100, value: d.pct_white_nh, group: 'White (Non-Hispanic)' },
@@ -26,24 +24,21 @@ export default Controller.extend({
       { value_pct: d.pct_other_nh / 100, value: d.pct_other_nh, group: 'Other Race (Non-Hispanic)' },
       { value_pct: d.pct_hispanic / 100, value: d.pct_hispanic, group: 'Hispanic (of any race)' }];
     return profile;
-  },
+  }),
 
-  @computed('model')
-  inFloodplain(model) {
-    const { fp_100_bldg, fp_500_bldg } = model.dataprofile; // eslint-disable-line
+  inFloodplain: computed('model', function() {
+    const { fp_100_bldg, fp_500_bldg } = this.get('model.dataprofile'); // eslint-disable-line
     return fp_100_bldg !== 0 || fp_500_bldg !== 0; // eslint-disable-line
-  },
+  }),
 
-  @computed('model')
-  popDensity() {
+  popDensity: computed('model', function() {
     const d = this.get('d');
     const { pop_2010, area_sqmi } = d; // eslint-disable-line
 
     return pop_2010 / area_sqmi; // eslint-disable-line
-  },
+  }),
 
-  @computed('model')
-  agePopDist() {
+  agePopDist: computed('model', function() {
     const d = this.get('d');
     const groups = range(4, 85, 5).reduce(
       (newArr, curr, i, arr) => {
@@ -59,7 +54,7 @@ export default Controller.extend({
     return groups.map(group => ({
       group, male: d[`male_${group}`], female: d[`female_${group}`],
     }));
-  },
+  }),
 
   columns: [
     'poverty_rate',
@@ -83,25 +78,22 @@ export default Controller.extend({
     'moe_over65_rate',
   ],
 
-  @computed('model')
-  dataprofileColumns() {
+  dataprofileColumns: computed('model', function() {
     return Object.keys(this.get('model.dataprofile'));
-  },
+  }),
 
-  @computed('dataprofileColumns')
-  dataprofileDownload() {
+  dataprofileDownload: computed('dataprofileColumns', function() {
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
     return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles_v202303&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
-  },
+  }),
 
   section: '',
 
-  @computed('model')
-  d() {
+  d: computed('model', function() {
     return this.get('model.dataprofile');
-  },
+  }),
 
   actions: {
     handleAfterScroll(target) {
