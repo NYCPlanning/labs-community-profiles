@@ -18,4 +18,6 @@ install:
   - npm install
 
 script:
-  - npm test
+  - yarn lint:hbs
+  - yarn lint:js
+  - yarn test

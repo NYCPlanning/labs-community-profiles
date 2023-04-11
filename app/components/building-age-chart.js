@@ -1,6 +1,5 @@
-import computed from 'ember-computed-decorators';
+import { computed } from '@ember/object';
 import Component from '@ember/component'; // eslint-disable-line
-import fetch from 'fetch'; // eslint-disable-line
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import carto from '../utils/carto';
 
@@ -9,9 +8,8 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
 
-  @computed('borocd', 'mode')
-  sql(borocd, mode) {
-    const modePrefix = mode === '100-yr' ? '1' : '5';
+  sql: computed('borocd', 'mode', function() {
+    const modePrefix = this.get('mode') === '100-yr' ? '1' : '5';
     return `
       SELECT
         yb${modePrefix}01 AS "Pre-1961",
@@ -19,12 +17,11 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
         yb${modePrefix}03 AS "1983-2012",
         yb${modePrefix}04 AS "2013-2017"
       FROM planninglabs.cd_floodplains
-      WHERE borocd = ${borocd}
+      WHERE borocd = ${this.get('borocd')}
     `;
-  },
+  }),
 
-  @computed('sql', 'borocd')
-  data() {
+  data: computed('sql', 'borocd', async function() {
     const sql = this.get('sql');
     return carto.SQL(sql, 'json')
       .then((rawData) => {
@@ -45,7 +42,7 @@ const BuildingAgeChart = Component.extend(ResizeAware, {
             };
           });
       });
-  },
+  }),
 });
 
 export default BuildingAgeChart;

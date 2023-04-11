@@ -1,4 +1,4 @@
-import computed from 'ember-computed-decorators';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import ResizeAware from 'ember-resize/mixins/resize-aware'; // eslint-disable-line
 import carto from '../utils/carto';
@@ -8,9 +8,9 @@ const LandUseChart = Component.extend(ResizeAware, {
   classNames: ['relative'],
   borocd: '',
 
-  @computed('borocd', 'mode')
-  sql(borocd, mode) {
-    const modePrefix = mode === '100-yr' ? '1' : '5';
+  sql: computed('borocd', 'mode', function() {
+    const borocd = this.get('borocd');
+    const modePrefix = this.get('mode') === '100-yr' ? '1' : '5';
 
     return `
       SELECT
@@ -20,10 +20,9 @@ const LandUseChart = Component.extend(ResizeAware, {
       FROM planninglabs.cd_floodplains
       WHERE borocd = ${borocd}
     `;
-  },
+  }),
 
-  @computed('sql', 'borocd')
-  data() {
+  data: computed('sql', 'borocd', async function() {
     const sql = this.get('sql');
     return carto.SQL(sql, 'json')
       .then((rawData) => {
@@ -44,7 +43,7 @@ const LandUseChart = Component.extend(ResizeAware, {
             };
           });
       });
-  },
+  }),
 });
 
 export default LandUseChart;
