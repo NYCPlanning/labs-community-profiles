@@ -4,17 +4,16 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: 'module',
-    ecmaFeatures: {
-      legacyDecorators: true,
-    },
   },
   plugins: [
     'ember',
   ],
   extends: [
+    'eslint:recommended',
     'airbnb-base',
+    'plugin:ember-best-practices/recommended',
   ],
   env: {
     browser: true,
