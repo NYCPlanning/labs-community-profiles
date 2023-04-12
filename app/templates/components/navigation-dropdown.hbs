@@ -1,10 +1,11 @@
 <PowerSelect 
   @options={{options}} 
   @selected={{selected}} 
+  @searchEnabled={{true}}
   @searchField="name" 
   @placeholder={{placeholder}} 
   @onChange={{onchange}} 
   @matcher={{matcher}} 
-  @onInput={{action 'handleSearch'}} as |district|>
+  @onInput={{action handleSearch}} as |district|>
   <strong class="district">{{district.boro}} {{district.cd}}</strong> <small class="neighborhoods">{{district.neighborhoods}}</small>
 </PowerSelect>
