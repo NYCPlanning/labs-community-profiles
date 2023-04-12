@@ -34,6 +34,8 @@ module.exports = {
     camelcase: 0,
     'max-len': 0,
     'no-param-reassign': 0,
+    'ember/no-jquery': 'warn',
+    'ember-best-practices/no-global-jquery': 'warn',
   },
   overrides: [
     // node files
@@ -50,7 +52,10 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script',
-        ecmaVersion: 2015,
+        ecmaVersion: 2018,
+        ecmaFeatures: {
+          experimentalObjectRestSpread: true,
+        },
       },
       env: {
         browser: false,
