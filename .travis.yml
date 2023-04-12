@@ -9,6 +9,10 @@ cache:
   directories:
     - $HOME/.npm
 
+branches:
+  only:
+    - master
+
 before_install:
   - npm config set spin false
   - npm install -g phantomjs-prebuilt
