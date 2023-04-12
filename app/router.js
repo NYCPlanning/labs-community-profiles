@@ -2,9 +2,9 @@ import { get } from '@ember/object'; // eslint-disable-line
 import { scheduleOnce } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 import EmberRouter from '@ember/routing/router';
-import config from './config/environment'; // eslint-disable-line
+import config from 'labs-community-portal/config/environment';
 
-export default class Router extends EmberRouter.extend {
+export default class Router extends EmberRouter {
   @service metrics;
 
   location= config.locationType;
