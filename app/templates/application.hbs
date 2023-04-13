@@ -9,6 +9,7 @@
         {{source.layer layer=cdFillLayer before='highway_name_other'}}
         {{source.layer layer=cdLineLayer before='highway_name_other'}}
         {{source.layer layer=cdSelectedLayer before='highway_name_other'}}
+        {{source.layer layer=cdHoveredLayer before='highway_name_other'}}
       {{/map.source}}
 
       {{#map.source sourceId='cdLabel' source=cdLabelSource as |source|}}
@@ -16,11 +17,6 @@
         {{source.layer layer=cdBoroLabelLayer before='highway_name_other'}}
       {{/map.source}}
 
-      {{#if mapState.currentlyHovered}}
-        {{#map.source sourceId='cd-hovered' source=cdHoveredSource as |source|}}
-          {{source.layer layer=cdHoveredLayer before='highway_name_other'}}
-        {{/map.source}}
-      {{/if}}
 
       {{map.call 'fitBounds' mapState.bounds}}
       {{map.on 'click' (action 'handleClick')}}

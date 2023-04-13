@@ -28,13 +28,6 @@ export default Controller.extend({
     data: '/data/cd_label.geojson',
   },
 
-  cdHoveredSource: computed('mapState.currentlyHovered', function () {
-    return {
-      type: 'geojson',
-      data: this.get('mapState.currentlyHovered'),
-    };
-  }),
-
   cdCurrentAddressSource: computed('mapState.currentAddress.geometry', function () {
     return {
       type: 'geojson',
@@ -135,10 +128,15 @@ export default Controller.extend({
   cdHoveredLayer: {
     id: 'cd-hovered',
     type: 'fill',
-    source: 'cd-hovered',
+    source: 'cds',
     paint: {
       'fill-color': '#cdcdcd',
-      'fill-opacity': 0.5,
+      'fill-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hovered'], false],
+        0.5,
+        0.0,
+      ],
     },
   },
 
@@ -185,18 +183,41 @@ export default Controller.extend({
     handleMousemove(e) {
       const map = e.target;
       const mapState = this.get('mapState');
-      const { currentlyHovered } = mapState;
-      const firstCD = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
-      if (firstCD) {
-        if (isCdLayer(firstCD.layer.source)) {
-          const { borocd } = firstCD.properties;
-          const prevBorocd = currentlyHovered ? currentlyHovered.properties.borocd : null;
-          if (!currentlyHovered || (borocd !== prevBorocd)) {
-            mapState.set('currentlyHovered', firstCD);
+      const { currentlyHovered: previouslyHovered } = mapState;
+      const currentlyHovered = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
+      const prevBorocd = previouslyHovered ? previouslyHovered.properties.borocd : null;
+
+      const mapInstance = this.get('mapState.mapInstance');
+
+      if (currentlyHovered) {
+        if (isCdLayer(currentlyHovered.layer.source)) {
+          const { borocd } = currentlyHovered.properties;
+          if (!prevBorocd || (borocd !== prevBorocd)) {
+            mapState.set('currentlyHovered', currentlyHovered);
+            mapInstance.setFeatureState({
+              source: 'cds', id: borocd,
+            }, {
+              hovered: true,
+            });
+          }
+
+          if (prevBorocd && (borocd !== prevBorocd)) {
+            mapInstance.setFeatureState({
+              source: 'cds', id: prevBorocd,
+            }, {
+              hovered: false,
+            });
           }
           map.getCanvas().style.cursor = 'pointer';
         }
       } else {
+        if (prevBorocd) {
+          mapInstance.setFeatureState({
+            source: 'cds', id: prevBorocd,
+          }, {
+            hovered: false,
+          });
+        }
         this.set('mouseoverLocation', null);
         mapState.set('currentlyHovered', null);
         map.getCanvas().style.cursor = '';
@@ -205,6 +226,16 @@ export default Controller.extend({
 
     handleMouseout() {
       const mapState = this.get('mapState');
+      const { currentlyHovered } = mapState;
+      const borocd = currentlyHovered ? currentlyHovered.properties.borocd : null;
+      if (borocd) {
+        mapState.mapInstance.setFeatureState({
+          source: 'cds', id: borocd,
+        },
+        {
+          hovered: false,
+        });
+      }
       mapState.set('currentlyHovered', null);
     },
 
