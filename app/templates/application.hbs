@@ -8,6 +8,7 @@
       {{#map.source sourceId='cds' source=cdSource as |source|}}
         {{source.layer layer=cdFillLayer before='highway_name_other'}}
         {{source.layer layer=cdLineLayer before='highway_name_other'}}
+        {{source.layer layer=cdSelectedLayer before='highway_name_other'}}
       {{/map.source}}
 
       {{#map.source sourceId='cdLabel' source=cdLabelSource as |source|}}
@@ -25,18 +26,8 @@
       {{map.on 'click' (action 'handleClick')}}
       {{map.on 'mousemove' (action 'handleMousemove')}}
       {{map.on 'mouseout' (action 'handleMouseout')}}
-      {{#if mapState.currentlySelected}}
-        {{#map.source sourceId='currentlySelected' source=cdSelectedSource as |source|}}
-          {{source.layer layer=cdSelectedLayer before='highway_name_other'}}
-        {{/map.source}}
-      {{/if}}
+      {{#if mapState.currentAddress}} {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}} {{source.layer layer=cdPointLayer before='highway_name_other'}} {{/map.source}} {{/if}} {{/mapbox-gl}}
 
-      {{#if mapState.currentAddress}}
-        {{#map.source sourceId='currentAddress' source=cdCurrentAddressSource as |source|}}
-          {{source.layer layer=cdPointLayer before='highway_name_other'}}
-        {{/map.source}}
-      {{/if}}
-    {{/mapbox-gl}}
     <div id="cd-search" class="hide-for-print">
       {{navigation-dropdown
           model=model

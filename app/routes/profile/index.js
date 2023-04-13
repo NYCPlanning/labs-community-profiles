@@ -11,9 +11,24 @@ export default Route.extend({
   },
   afterModel(district) {
     const mapState = this.get('mapState');
+    const previouslySelectedBorocd = mapState.get('currentlySelected.borocd');
+    const mapInstance = mapState.get('mapInstance');
 
     // seeing async issues - putting inside run loop to stagger
     next(this, () => {
+      if (mapInstance) {
+        if (previouslySelectedBorocd) {
+          mapInstance.setFeatureState(
+            { source: 'cds', id: previouslySelectedBorocd },
+            { selected: false },
+          );
+        }
+
+        mapInstance.setFeatureState(
+          { source: 'cds', id: district.borocd },
+          { selected: true },
+        );
+      }
       mapState.set('currentlySelected', district);
     });
   },

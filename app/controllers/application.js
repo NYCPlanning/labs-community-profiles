@@ -19,6 +19,7 @@ export default Controller.extend({
     return {
       type: 'geojson',
       data: this.get('geojson'),
+      promoteId: 'borocd',
     };
   }),
 
@@ -26,13 +27,6 @@ export default Controller.extend({
     type: 'geojson',
     data: '/data/cd_label.geojson',
   },
-
-  cdSelectedSource: computed('mapState.currentlySelected.geometry', function () {
-    return {
-      type: 'geojson',
-      data: this.get('mapState.currentlySelected.geometry'),
-    };
-  }),
 
   cdHoveredSource: computed('mapState.currentlyHovered', function () {
     return {
@@ -89,12 +83,17 @@ export default Controller.extend({
   },
 
   cdSelectedLayer: {
-    id: 'cd-selected',
+    id: 'cd-selected-fill',
     type: 'fill',
-    source: 'currentlySelected',
+    source: 'cds',
     paint: {
       'fill-color': '#ae561f',
-      'fill-opacity': 0.2,
+      'fill-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'selected'], false],
+        0.2,
+        0.0,
+      ],
       'fill-outline-color': '#ae561f',
     },
   },
@@ -188,7 +187,6 @@ export default Controller.extend({
       const mapState = this.get('mapState');
       const { currentlyHovered } = mapState;
       const firstCD = map.queryRenderedFeatures(e.point, { layers: ['cd-fill'] })[0];
-
       if (firstCD) {
         if (isCdLayer(firstCD.layer.source)) {
           const { borocd } = firstCD.properties;
@@ -216,6 +214,17 @@ export default Controller.extend({
 
       const mapState = this.get('mapState');
       mapState.set('mapInstance', map);
+
+      map.on('idle', () => {
+        const selectedBorocd = mapState.get('currentlySelected.borocd');
+        if (selectedBorocd) {
+          map.setFeatureState({
+            source: 'cds', id: selectedBorocd,
+          }, {
+            selected: true,
+          });
+        }
+      });
     },
   },
 });
