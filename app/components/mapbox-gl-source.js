@@ -24,7 +24,17 @@ export default Component.extend({
 
   willDestroy() {
     this._super(...arguments); // eslint-disable-line
+    const { sourceId } = getProperties(this, 'sourceId');
+    const sourceLayers = this.map.getStyle().layers.filter(layer => layer.source === sourceId);
+    console.log('sourceId', sourceId);
 
-    this.map.removeSource(get(this, 'sourceId'));
+    sourceLayers.forEach((layer) => {
+      const layerId = layer.id;
+      console.log('each layer', layerId);
+      if (this.map.getLayer(layerId)) {
+        this.map.removeLayer(layerId);
+      }
+    });
+    if (this.map.getSource(sourceId)) this.map.removeSource(get(this, 'sourceId'));
   },
 });
