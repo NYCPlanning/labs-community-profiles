@@ -5,7 +5,7 @@ import EmberRouter from '@ember/routing/router';
 import config from 'labs-community-portal/config/environment';
 
 export default class Router extends EmberRouter {
-  @service metrics;
+  @service() metrics;
 
   location= config.locationType;
 
