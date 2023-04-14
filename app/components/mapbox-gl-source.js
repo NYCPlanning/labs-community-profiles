@@ -1,7 +1,8 @@
 // extends ember-mapbox-gl's source component to have an API that is more like mapbox.addSource()
+import { scheduleOnce } from '@ember/runloop';
 import Component from '@ember/component'; // eslint-disable-line
 
-import { getProperties, get } from '@ember/object';
+import { getProperties } from '@ember/object';
 
 export default Component.extend({
   map: null,
@@ -24,7 +25,7 @@ export default Component.extend({
 
   willDestroy() {
     this._super(...arguments); // eslint-disable-line
-
-    this.map.removeSource(get(this, 'sourceId'));
+    const { sourceId } = this;
+    scheduleOnce('afterRender', this.map, this.map.removeSource, sourceId);
   },
 });
