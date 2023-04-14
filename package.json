@@ -96,7 +96,7 @@
     "qunit": "^2.16.0"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "ember": {
     "edition": "octane"
@@ -114,7 +114,8 @@
     "numeral": "^2.0.6"
   },
   "resolutions": {
-    "handlebars": "4.7.7"
+    "handlebars": "4.7.7",
+    "node-sass": "^7.0.0"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix"

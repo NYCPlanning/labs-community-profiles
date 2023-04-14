@@ -8,9 +8,11 @@ import { defaultMatcher } from 'ember-power-select/utils/group-utils';
 
 const DEBOUNCE_MS = 200;
 
-export default class extends Component{
+export default class extends Component {
   @service() store;
+
   searchTerms= '';
+
   placeholder= 'Search';
 
   @computed('model', 'addresses', 'searchTerms')
@@ -36,17 +38,18 @@ export default class extends Component{
 
   @(task(
     function* (terms) {
-    if (isBlank(terms)) { return []; }
+      if (isBlank(terms)) { return []; }
 
-    yield timeout(DEBOUNCE_MS);
-    yield this.set('searchTerms', terms);
+      yield timeout(DEBOUNCE_MS);
+      yield this.set('searchTerms', terms);
 
-    return null;
-  }).restartable())
+      return null;
+    },
+  ).restartable())
   debounceTerms;
 
   matcher(value, searchTerm) {
-    if (get(value, 'constructor.modelName') === 'address') {
+    if (this.get(value, 'constructor.modelName') === 'address') {
       return true;
     }
 
@@ -55,6 +58,6 @@ export default class extends Component{
 
   @action
   handleSearch(terms) {
-      this.get('debounceTerms').perform(terms);
+    this.get('debounceTerms').perform(terms);
   }
-};
+}
