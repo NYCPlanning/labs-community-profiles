@@ -31,7 +31,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
-    "@nycplanning/ember": "^2.1.0",
+    "@nycplanning/ember": "^2.1.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-clean-css": "^1.1.0",
