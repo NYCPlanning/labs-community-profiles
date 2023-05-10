@@ -4,6 +4,13 @@
 
 module.exports = function(environment) {
   const ENV = {
+    fontawesome: {
+      icons: {
+        'free-regular-svg-icons': 'all',
+        'free-solid-svg-icons': 'all',
+      },
+    },
+
     metricsAdapters: [
       {
         name: 'GoogleAnalytics',
