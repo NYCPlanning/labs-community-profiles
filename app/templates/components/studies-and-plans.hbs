@@ -1,7 +1,7 @@
 <ul class="no-bullet">
   {{#each (await studies) as |study|}}
     <li class="list-item-padded">
-      <a href = "{{study.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{study.name}}</strong></a>
+      <a href = "{{study.url}}"><FaIcon @icon="external-link-alt" />&nbsp;<strong>{{study.name}}</strong></a>
     </li>
   {{else}}
     <li class="list-item-padded">

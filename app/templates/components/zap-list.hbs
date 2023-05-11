@@ -7,7 +7,7 @@
       <ul class="no-bullet xlarge-2-column">
         {{#each resolvedProjects.filed as |project|}}
           <li class="list-item-padded">
-            <a href = "https://zap.planning.nyc.gov/projects/{{project.attributes.dcp-name}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{if project.attributes.dcp-projectname project.attributes.dcp-projectname "No Name"}}</strong></a>
+            <a href = "https://zap.planning.nyc.gov/projects/{{project.attributes.dcp-name}}" target="_blank"><FaIcon @icon="external-link-alt" />&nbsp;<strong>{{if project.attributes.dcp-projectname project.attributes.dcp-projectname "No Name"}}</strong></a>
             <small class="list--link-meta">{{project.attributes.applicant}} | {{project.attributes.dcp_ulurp_nonulurp}}</small>
           </li>
         {{/each}}
@@ -21,7 +21,7 @@
       <ul class="no-bullet xlarge-2-column">
         {{#each resolvedProjects.inPublicReview as |project|}}
           <li class="list-item-padded">
-            <a href = "https://zap.planning.nyc.gov/projects/{{project.attributes.dcp-name}}" target="_blank">{{fa-icon "external-link"}}&nbsp;<strong>{{if project.attributes.dcp-projectname project.attributes.dcp-projectname "No Name"}}</strong></a>
+            <a href = "https://zap.planning.nyc.gov/projects/{{project.attributes.dcp-name}}" target="_blank"><FaIcon @icon="external-link-alt" />&nbsp;<strong>{{if project.attributes.dcp-projectname project.attributes.dcp-projectname "No Name"}}</strong></a>
             <small class="list--link-meta">{{project.attributes.applicant}} | {{project.attributes.dcp_ulurp_nonulurp}}</small>
           </li>
         {{/each}}
