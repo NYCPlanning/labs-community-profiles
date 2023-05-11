@@ -2,7 +2,7 @@
 {{#each (await plans) as |plan|}}
   <li class="list-item-padded">
     {{#if plan.url}}
-      <a href = "{{plan.url}}">{{fa-icon "external-link"}}&nbsp;<strong>{{plan.name}}</strong></a>
+      <a href = "{{plan.url}}"><FaIcon @icon="external-link-alt" />&nbsp;<strong>{{plan.name}}</strong></a>
     {{else}}
       <strong>{{plan.name}}</strong>
     {{/if}}
