@@ -108,7 +108,7 @@
       <section class="page-section">
         <a id="indicators" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#indicators'>{{fa-icon "bar-chart"}} Indicators</a>
+          <a href='#indicators'><FaIcon @icon="chart-bar" /> Indicators</a>
         </h3>
 
         <div class="grid-x grid-padding-x align-bottom">
@@ -240,7 +240,7 @@
       <section class="page-section">
         <a id="built-environment" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#built-environment'>{{fa-icon "building"}} Built Environment</a>
+          <a href='#built-environment'><FaIcon @icon="building" /> Built Environment</a>
         </h3>
         <p class="section-header-description">This section offers a survey of the land uses that currently exist in each district, the zoning that will guide its development, and the public facilities that serve its residents. To find out more about land use and zoning in New York City, visit <a href="http://maps.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA" target="_blank">ZoLa</a> or download the full Primary Land Use Tax Lot Output (PLUTO) and MapPLUTO <a href="https://www1.nyc.gov/site/planning/data-maps/open-data.page" target="_blank">datasets</a>. For more detailed information on New York City’s public facilities, visit the <a href="http://capitalplanning.nyc/facilities" target="_blank">NYC Facilities Explorer</a>.</p>
 
@@ -268,7 +268,7 @@
                 borocd=model.borocd
               }}
               <hr/>
-              <p class="text-center">Learn more about zoning and land use in <a href="http://maps.nyc.gov/zola/" target="_blank">{{fa-icon "external-link"}}&nbsp;ZoLa</a></p>
+              <p class="text-center">Learn more about zoning and land use in <a href="http://maps.nyc.gov/zola/" target="_blank"><FaIcon @icon="external-link-alt" />&nbsp;ZoLa</a></p>
             </div>
           </div>
         </div>
@@ -282,25 +282,25 @@
         <div class="grid-x grid-padding-x">
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
-              <span class="stat"><span class="dark-gray">{{fa-icon "graduation-cap"}}</span>&nbsp;{{d.count_public_schools}}</span><br>
+              <span class="stat"><span class="dark-gray"><FaIcon @icon="graduation-cap" /></span>&nbsp;{{d.count_public_schools}}</span><br>
               Public Schools {{info-tooltip tip='Public elementary, middle, high, and special education schools. Public schools identified may serve multiple community districts.'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
-              <span class="stat"><span class="dark-gray">{{fa-icon "book"}}</span>&nbsp;{{d.count_libraries}}</span><br>
+              <span class="stat"><span class="dark-gray"><FaIcon @icon="book" /></span>&nbsp;{{d.count_libraries}}</span><br>
               Public Libraries {{info-tooltip tip='All public libraries'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
-              <span class="stat"><span class="dark-gray">{{fa-icon "hospital-o"}}</span>&nbsp;{{d.count_hosp_clinic}}</span><br>
+              <span class="stat"><span class="dark-gray"><FaIcon @icon="hospital" /></span>&nbsp;{{d.count_hosp_clinic}}</span><br>
               Hospitals and Clinics {{info-tooltip tip='Urgent care hospitals, diagnostic and treatment centers, and school-based health facilities'}}
             </div>
           </div>
           <div class="cell medium-3 large-6 xlarge-3">
             <div class="callout text-center">
-              <span class="stat"><span class="dark-gray">{{fa-icon "tree"}}</span>&nbsp;{{d.count_parks}}</span><br>
+              <span class="stat"><span class="dark-gray"><FaIcon @icon="tree" /></span>&nbsp;{{d.count_parks}}</span><br>
               Parks {{info-tooltip tip='Flagship parks, community parks, state parks, and city-state parks'}}
             </div>
           </div>
@@ -310,7 +310,7 @@
       <section class="page-section">
         <a id="floodplain" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#floodplain'>{{fa-icon "tint"}} Floodplain</a>
+          <a href='#floodplain'><FaIcon @icon="tint" /> Floodplain</a>
         </h3>
         {{#if inFloodplain}}
         <div class="grid-x grid-padding-x">
@@ -390,7 +390,7 @@
                   </tbody>
                 </table>
               </div>
-              <p class="text-center no-margin">Learn more with the <a href="http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5" target="_blank">{{fa-icon "external-link"}} NYC Flood Hazard Mapper</a></p>
+              <p class="text-center no-margin">Learn more with the <a href="http://dcp.maps.arcgis.com/apps/webappviewer/index.html?id=1c37d271fba14163bbb520517153d6d5" target="_blank"><FaIcon @icon="external-link-alt" /> NYC Flood Hazard Mapper</a></p>
               <p class="floodplain-data-info">2010 Census population is calculated by identifying census blocks with centroids in the floodplain. American Community Survey (ACS) characteristics are calculated by, first, identifying census blocks with centroids in the floodplain, and then using ACS data for census block groups with constituent blocks that fall in the floodplain. Users should note that ACS data are derived from a survey and are subject to sampling variability. Grayed values are not statistically reliable (<a href="https://www.census.gov/programs-surveys/acs/guidance.html" target="_blank">guidance on ACS data</a>).</p>
             </div>
           </div>
@@ -408,7 +408,7 @@
       <section class="page-section">
         <a id="community-board" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#community-board'>{{fa-icon "group"}} Community Board Perspectives</a>
+          <a href='#community-board'><FaIcon @icon="users" />&nbsp;Community Board Perspectives</a>
         </h3>
         <p class="section-header-description">Community boards are liaisons between district residents and City government, charged with advocating for their districts’ unique priorities in collaboration with city agencies. To learn more about the issues affecting your district, view the most recent Statement of Community District Needs. Want to get involved? Visit your community board’s website or email them directly.</p>
 
@@ -418,9 +418,9 @@
             <h4 class="subsection-header"><strong>{{model.boro}} Community Board&nbsp;{{model.cd}}</strong></h4>
             <p>
               <a class="button small hollow expanded {{if model.dataprofile.cb_website '' 'disabled'}}" href="{{add-http model.dataprofile.cb_website}}" target="_blank">
-                {{fa-icon "external-link"}}&nbsp;<strong>website</strong>
+                <FaIcon @icon="external-link-alt" />&nbsp;<strong>website</strong>
               </a>
-              <a class="button small hollow expanded {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}">{{fa-icon "envelope"}}&nbsp;<strong>email</strong></a>
+              <a class="button small hollow expanded {{if model.dataprofile.cb_email '' 'disabled'}}" href="mailto:{{model.dataprofile.cb_email}}"><FaIcon @icon="envelope" />&nbsp;<strong>email</strong></a>
             </p>
 
           </div>
@@ -455,7 +455,7 @@
       <section class="page-section">
         <a id="projects" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#projects'>{{fa-icon "calendar"}} Projects</a>
+          <a href='#projects'><FaIcon @icon="calendar" /> Projects</a>
         </h3>
         <p class="section-header-description">The following section contains information on active and completed land use plans and proposals, ongoing or concluded neighborhood studies, and community-based plans for each district. Click on an application below to view more details, or visit the <a href="https://zap.planning.nyc.gov" target="_blank">ZAP website</a> to learn more about the land use application process. Learn more about community-based planning by visiting our <a href="http://www1.nyc.gov/site/planning/community/community-based-planning.page" target="_blank">website</a>.</p>
 
@@ -481,12 +481,12 @@
 
             <h4 class="subsection-header"><strong>City Planning Commission Decisions {{info-tooltip tip="City Planning Commission (CPC) Reports are the official records of actions taken by the CPC"}}</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded" target="_blank" href="http://a030-cpc.nyc.gov/html/cpc/index.aspx?boro_link={{model.boroAcronymLowerCase}}&cd_link={{model.cd}}">{{fa-icon "external-link"}} <strong>{{model.boro}} Community District {{model.cd}} CPC Reports</strong></a>
+              <a class="button small hollow expanded" target="_blank" href="http://a030-cpc.nyc.gov/html/cpc/index.aspx?boro_link={{model.boroAcronymLowerCase}}&cd_link={{model.cd}}"><FaIcon @icon="external-link-alt" /> <strong>{{model.boro}} Community District {{model.cd}} CPC Reports</strong></a>
             </div>
 
             <h4 class="subsection-header"><strong>Building Information &amp; Permits {{info-tooltip tip="NYC Department of Buildings Building Information Search"}}</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded no-margin" href="http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp" target="_blank">{{fa-icon "external-link"}} <strong>Search BISweb</strong></a>
+              <a class="button small hollow expanded no-margin" href="http://a810-bisweb.nyc.gov/bisweb/bispi00.jsp" target="_blank"><FaIcon @icon="external-link-alt" /> <strong>Search BISweb</strong></a>
             </div>
           </div>
         </div>
@@ -496,7 +496,7 @@
       <section class="page-section">
         <a id="resources" class="offset-anchor"></a>
         <h3 class="section-header">
-          <a href='#resources'>{{fa-icon "files-o"}} Resources</a>
+          <a href='#resources'><FaIcon @icon="file" /> Resources</a>
         </h3>
         <p class="section-header-description">This section provides helpful planning resources like reference maps, additional Census data, and links to other community profiles. A one-page summary version of each district’s profile is available as a PDF. The data referenced in these interactive profiles are available for download.</p>
 
@@ -505,46 +505,46 @@
             <h4 class="subsection-header"><strong>Reference Maps</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
-                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/landuse/{{model.resourcesBoroCdAcronymLowerCase}}_landuse.pdf">{{fa-icon "file-pdf-o"}} <strong>CD Land Use</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/boroughlanduse/{{model.boroAcronymLowerCase}}_landuseprofile.pdf">{{fa-icon "file-pdf-o"}} <strong>Borough Land Use</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/censustracts/{{model.resourcesBoroCdAcronymLowerCase}}_censustracts.pdf">{{fa-icon "file-pdf-o"}} <strong>Census Tracts</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/basemaps/{{model.resourcesBoroCdAcronymLowerCase}}_basemap.pdf">{{fa-icon "file-pdf-o"}} <strong>Basemaps</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/politicaldistricts/{{model.boroAcronymLowerCase}}_politicaldistricts.pdf">{{fa-icon "file-pdf-o"}} <strong>Political Districts</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/landuse/{{model.resourcesBoroCdAcronymLowerCase}}_landuse.pdf"><FaIcon @icon="file-pdf" /> <strong>CD Land Use</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/boroughlanduse/{{model.boroAcronymLowerCase}}_landuseprofile.pdf"><FaIcon @icon="file-pdf" /> <strong>Borough Land Use</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/censustracts/{{model.resourcesBoroCdAcronymLowerCase}}_censustracts.pdf"><FaIcon @icon="file-pdf" /> <strong>Census Tracts</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/basemaps/{{model.resourcesBoroCdAcronymLowerCase}}_basemap.pdf"><FaIcon @icon="file-pdf" /> <strong>Basemaps</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/politicaldistricts/{{model.boroAcronymLowerCase}}_politicaldistricts.pdf"><FaIcon @icon="file-pdf" /> <strong>Political Districts</strong></a></li>
               </ul>
             </div>
 
             <h4 class="subsection-header"><strong>Additional Census Data {{info-tooltip tip="Census data are available at the community district level, while American Community Survey data are available at the Public Use Microdata Area (PUMA) level. PUMAs are approximations of community districts, and some PUMAs include two districts. See the CD/PUMA Comparison Map for more information."}}</strong></h4>
             <div class="callout">
               <ul class="no-bullet">
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf">{{fa-icon "file-pdf-o"}} <strong>CD/PUMA Comparison Map</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/">{{fa-icon "external-link"}} <strong>NYC Census FactFinder</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/american-community-survey.page">{{fa-icon "external-link"}} <strong>American Community Survey (ACS) Data</strong></a></li>
-                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/census-2010.page">{{fa-icon "external-link"}} <strong>Decennial Census Data</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/assets/planning/download/pdf/data-maps/nyc-population/census2010/puma_cd_map.pdf"><FaIcon @icon="file-pdf" /> <strong>CD/PUMA Comparison Map</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://maps.nyc.gov/census/"><FaIcon @icon="external-link-alt" /> <strong>NYC Census FactFinder</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/american-community-survey.page"><FaIcon @icon="external-link-alt" /> <strong>American Community Survey (ACS) Data</strong></a></li>
+                <li class="list-item-padded"><a target="_blank" href="http://www1.nyc.gov/site/planning/data-maps/nyc-population/census-2010.page"><FaIcon @icon="external-link-alt" /> <strong>Decennial Census Data</strong></a></li>
               </ul>
             </div>
           </div>
           <div class="cell medium-3 xlarge-4">
             <h4 class="subsection-header"><strong>New York City Community Health Profile {{info-tooltip tip="The New York City Community Health Profiles illustrate how neighborhood social and economic conditions influence health outcomes in each community district."}}</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded" target="_blank" href="{{model.healthProfileLink}}">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Health Profile</strong></a>
+              <a class="button small hollow expanded" target="_blank" href="{{model.healthProfileLink}}"><FaIcon @icon="file-pdf" /> <strong>{{model.boro}} Community District {{model.cd}} Health Profile</strong></a>
             </div>
             <h4 class="subsection-header"><strong>Summary Community District Profile {{info-tooltip tip="Download a one-page PDF version of this community district profile designed for printing."}}</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded" target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/static-profiles/{{model.resourcesBoroCdAcronymLowerCase}}_profile.pdf">{{fa-icon "file-pdf-o"}} <strong>{{model.boro}} Community District {{model.cd}} Summary Profile</strong></a>
+              <a class="button small hollow expanded" target="_blank" href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/NYCPlanning/labs-cd-files/master/static-profiles/{{model.resourcesBoroCdAcronymLowerCase}}_profile.pdf"><FaIcon @icon="file-pdf" /> <strong>{{model.boro}} Community District {{model.cd}} Summary Profile</strong></a>
             </div>
           </div>
           <div class="cell medium-5 xlarge-4">
             <h4 class="subsection-header"><strong>Download the Data</strong></h4>
             <div class="callout">
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_demo_age_gender.csv">{{fa-icon "download"}}&nbsp;<strong>Demographic: Age &#38;
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_demo_age_gender.csv"><FaIcon @icon="download" />&nbsp;<strong>Demographic: Age &#38;
  Gender</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_demo_race_economics.csv">{{fa-icon "download"}}&nbsp;<strong>Demographic: Other Indicators</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_built_environment.csv">{{fa-icon "download"}}&nbsp;<strong>Built Environment: Land Use, Facilities, etc.</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_floodplain.csv">{{fa-icon "download"}}&nbsp;<strong>Floodplain Indicators</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_administrative.csv">{{fa-icon "download"}}&nbsp;<strong>Community District Info</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/boro_cd_attributes.csv">{{fa-icon "download"}}&nbsp;<strong>Borough Indicators</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/city_cd_attributes.csv">{{fa-icon "download"}}&nbsp;<strong>Citywide Indicators</strong> <small>(CSV)</small></a>
-              <a class="button small hollow expanded" href="/data/cd_profile_datadictionary.csv">{{fa-icon "download"}}&nbsp;<strong>Data Dictionary</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_demo_race_economics.csv"><FaIcon @icon="download" />&nbsp;<strong>Demographic: Other Indicators</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_built_environment.csv"><FaIcon @icon="download" />&nbsp;<strong>Built Environment: Land Use, Facilities, etc.</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_floodplain.csv"><FaIcon @icon="download" />&nbsp;<strong>Floodplain Indicators</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/cd_administrative.csv"><FaIcon @icon="download" />&nbsp;<strong>Community District Info</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/boro_cd_attributes.csv"><FaIcon @icon="download" />&nbsp;<strong>Borough Indicators</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="https://edm-publishing.nyc3.digitaloceanspaces.com/db-community-profiles/latest/output/city_cd_attributes.csv"><FaIcon @icon="download" />&nbsp;<strong>Citywide Indicators</strong> <small>(CSV)</small></a>
+              <a class="button small hollow expanded" href="/data/cd_profile_datadictionary.csv"><FaIcon @icon="download" />&nbsp;<strong>Data Dictionary</strong> <small>(CSV)</small></a>
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ module.exports = function(environment) {
       icons: {
         'free-regular-svg-icons': 'all',
         'free-solid-svg-icons': 'all',
+        'free-brands-svg-icons': ['github'],
       },
     },
 
