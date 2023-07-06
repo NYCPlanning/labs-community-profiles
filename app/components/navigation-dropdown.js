@@ -48,8 +48,8 @@ export default class extends Component {
   ).restartable())
   debounceTerms;
 
-  matcher(value, searchTerm) {
-    if (this.get(value, 'constructor.modelName') === 'address') {
+  static matcher(value, searchTerm) {
+    if (get(value, 'constructor.modelName') === 'address') {
       return true;
     }
 
