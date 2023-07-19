@@ -18,9 +18,8 @@ export default class Router extends EmberRouter {
 
   _trackPage() {
     scheduleOnce('afterRender', this, () => {
-      const page = this.get('url');
+      const page = this.get('currentURL') || this.get('url');
       const title = this.getWithDefault('currentRouteName', 'unknown');
-
       get(this, 'metrics').trackPage({ page, title });
     });
   }
