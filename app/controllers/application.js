@@ -181,6 +181,10 @@ export default Controller.extend({
         eventAction: 'Click',
         eventLabel: `${boro} ${cd}`,
         eventValue: borocd,
+        category: 'Navigation Map',
+        action: 'Click',
+        label: `${boro} ${cd}`,
+        value: borocd,
       });
     },
     handleMousemove(e) {

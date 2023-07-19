@@ -26,6 +26,10 @@ export default Route.extend(SetMapBounds, {
         eventAction: 'Click',
         eventLabel: `${boro} ${borocd % 100}`,
         eventValue: borocd,
+        category: 'Navigation Dropdown',
+        action: 'Click',
+        label: `${boro} ${borocd % 100}`,
+        value: borocd,
       });
 
       const modelName = district.get('constructor.modelName');
