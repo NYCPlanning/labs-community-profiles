@@ -183,7 +183,7 @@ export default Controller.extend({
         eventValue: borocd,
         category: 'Navigation Map',
         action: 'Click',
-        label: `${boro} ${cd}`,
+        name: `${boro} ${cd}`,
         value: borocd,
       });
     },
