@@ -105,5 +105,16 @@ export default Controller.extend({
         });
       });
     },
+    trackAnchorLink(anchor) {
+      const metrics = this.get('metrics');
+      metrics.trackEvent({
+        eventCategory: 'Anchor Link',
+        eventAction: 'Click',
+        eventLabel: `${anchor}`,
+        category: 'Anchor Link',
+        action: 'Click',
+        name: `${anchor}`,
+      });
+    },
   },
 });

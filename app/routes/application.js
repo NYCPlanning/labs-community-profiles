@@ -28,7 +28,7 @@ export default Route.extend(SetMapBounds, {
         eventValue: borocd,
         category: 'Navigation Dropdown',
         action: 'Click',
-        label: `${boro} ${borocd % 100}`,
+        name: `${boro} ${borocd % 100}`,
         value: borocd,
       });
 
