@@ -14,6 +14,14 @@ module.exports = function(environment) {
 
     metricsAdapters: [
       {
+        name: 'MatomoTagManager',
+        environments: ['development', 'production', 'test', 'staging'],
+        config: {
+          matomoUrl: 'matomo.planninglabs.nyc',
+          containerId: 'aXgWxtkC',
+        },
+      },
+      {
         name: 'GoogleAnalytics',
         environments: ['development', 'production'],
         config: {
