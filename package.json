@@ -63,7 +63,7 @@
     "ember-load-initializers": "^2.1.2",
     "ember-mapbox-gl": "^1.2.1",
     "ember-math-helpers": "^2.2.3",
-    "ember-metrics": "^2.0.0-beta.2",
+    "dcp-ember-metrics": "https://github.com/dhochbaum-dcp/dcp-ember-metrics",
     "ember-page-title": "^6.2.2",
     "ember-power-select": "^5.0.4",
     "ember-qunit": "^5.1.5",
