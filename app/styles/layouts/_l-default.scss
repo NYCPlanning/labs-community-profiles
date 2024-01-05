@@ -11,35 +11,6 @@ html, body {
   overflow-x: hidden;
 }
 
-.info-banner {
-  background-color: #2C7A7B;
-  color: white;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $body-font-family;
-  flex-direction: column;
-  padding: 1rem;
-
-  @include breakpoint(large) {
-    flex-direction: row;
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-
-  a {
-    color: white;
-    font-family: $body-font-family;
-    text-decoration: underline;
-  }
-}
-
 .site-header {
   background-color: $white;
   position: relative;
@@ -91,7 +62,7 @@ html, body {
       bottom: 0;
       left: 0;
       width: 33.33333%;
-      height: calc(100vh);
+      min-height: calc(100vh - 75px);
     }
 
     @include breakpoint(xlarge) {
