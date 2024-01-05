@@ -62,7 +62,7 @@ html, body {
       bottom: 0;
       left: 0;
       width: 33.33333%;
-      height: calc(100vh);
+      min-height: calc(100vh - 75px);
     }
 
     @include breakpoint(xlarge) {
