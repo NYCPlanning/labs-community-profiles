@@ -86,7 +86,7 @@ export default Controller.extend({
     const columns = this.get('dataprofileColumns').join(',');
     const model = this.get('model');
 
-    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles_v202303&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
+    return `https://planninglabs.carto.com/api/v2/sql?format=csv&q=SELECT ${columns} FROM community_district_profiles_v202402&filename=${model.get('boro')}-${model.get('cd')}-indicators.csv`;
   }),
 
   section: '',
