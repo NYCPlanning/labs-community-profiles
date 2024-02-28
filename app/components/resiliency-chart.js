@@ -30,7 +30,7 @@ export default RankingChart.extend({
         WHEN LEFT(borocd::text, 1) = '5' THEN 'Staten Island ' || borocd %25 100
       END as boro_district,
       borocd
-      FROM community_district_profiles_v202303`;
+      FROM community_district_profiles_v202402`;
   }),
 
   data: computed('sql', async function() {
