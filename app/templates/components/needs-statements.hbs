@@ -8,5 +8,8 @@
   {{#unless showAll}}
     <button class="button small hollow no-margin" onclick={{action 'toggleList'}}><strong>Show All Needs Statements</strong></button>
   {{/unless}}
+    <a href="https://docs.google.com/viewer?url=https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master//Community_District_Needs_Glossary.pdf" target="_blank">
+      <button class="button small hollow no-margin"><FaIcon @icon="file-pdf" />&nbsp;<strong>Glossary</strong></button>
+    </a>
 </div>
 {{yield}}
