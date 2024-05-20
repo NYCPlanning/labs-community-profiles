@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import fetch from 'fetch';
 
 const statementsPath = 'https://api.github.com/repos/NYCPlanning/labs-cd-needs-statements/git/trees/master?recursive=1';
-const download = 'https://docs.google.com/viewer?url=https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master/';
+const download = 'https://github.com/NYCPlanning/labs-cd-needs-statements/raw/master/';
 
 function stripDirectory(string) {
   const loc = string.lastIndexOf('/');
