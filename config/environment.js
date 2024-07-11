@@ -17,8 +17,8 @@ module.exports = function(environment) {
         name: 'MatomoTagManager',
         environments: ['development', 'production', 'test', 'staging'],
         config: {
-          matomoUrl: 'matomo.planninglabs.nyc',
-          containerId: 'aXgWxtkC',
+          matomoUrl: 'nycplanning.matomo.cloud',
+          containerId: 'bssTxW2v',
         },
       },
       {
