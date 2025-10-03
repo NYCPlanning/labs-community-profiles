@@ -52,14 +52,7 @@ export default DS.Model.extend({
     const acronym = resourcesAcronymCrosswalk[this.get('boro')].toLowerCase();
     return `${acronym}`;
   }),
-  healthProfileLink: computed('boro', function() {
-    const boroAcronymLowerCase = this.get('boroAcronymLowerCase');
-    let cd = this.get('cd');
-    if (boroAcronymLowerCase === 'si' || boroAcronymLowerCase === 'qn') {
-      cd = numeral(cd).format('00');
-    }
-    return `https://www1.nyc.gov/assets/doh/downloads/pdf/data/2015chp-${boroAcronymLowerCase}${cd}.pdf`;
-  }),
+  healthProfileLink: 'https://a816-health.nyc.gov/hdi/profiles/',
   cd: DS.attr('string'),
   geometry: DS.attr(),
   bounds: computed('geometry', function() {
