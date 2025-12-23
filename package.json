@@ -88,7 +88,7 @@
     "eslint-plugin-qunit": "^6.2.0",
     "foundation-sites": "^6.4.3",
     "husky": "^6.0.0",
-    "jquery": "3.4.0",
+    "jquery": "3.5.0",
     "leaflet": "^1.9.3",
     "lint-staged": ">=10",
     "loader.js": "^4.7.0",
